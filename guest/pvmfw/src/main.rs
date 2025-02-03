@@ -54,11 +54,11 @@ fn main<'a>(
     untrusted_fdt: &mut Fdt,
     signed_kernel: &[u8],
     ramdisk: Option<&[u8]>,
-    current_bcc_handover: &[u8],
+    current_bcc_handover: Option<&[u8]>,
     mut debug_policy: Option<&[u8]>,
     vm_dtbo: Option<&mut [u8]>,
     vm_ref_dt: Option<&[u8]>,
-) -> Result<(&'a [u8], bool), RebootReason> {
+) -> Result<(Option<&'a [u8]>, bool), RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", untrusted_fdt.as_ptr());
     debug!("Signed kernel: {:?} ({:#x} bytes)", signed_kernel.as_ptr(), signed_kernel.len());
@@ -68,6 +68,40 @@ fn main<'a>(
     } else {
         debug!("Ramdisk: None");
     }
+
+    let kaslr_seed = u64::from_ne_bytes(rand::random_array().map_err(|e| {
+        error!("Failed to generated guest KASLR seed: {e}");
+        RebootReason::InternalError
+    })?);
+
+    let Some(current_bcc_handover) = current_bcc_handover else {
+        let guest_page_size = SIZE_4KB;
+        let hyp_page_size = hypervisor_backends::get_granule_size();
+        let _ = sanitize_device_tree(untrusted_fdt, vm_dtbo, vm_ref_dt,
+                                     guest_page_size, hyp_page_size)?;
+        let fdt = untrusted_fdt; // DT has now been sanitized.
+        modify_for_next_stage(
+            fdt,
+            None, // No BCC
+            true, // new instance
+            true, // strict boot
+            None, // No debug policy
+            false,// Non debuggable
+            kaslr_seed,
+            )
+            .map_err(|e| {
+                error!("Failed to configure device tree: {e}");
+                RebootReason::InternalError
+            })?;
+        // TODO: Remove allocating a dummy next state BCC.
+        let dummy_next_bcc = heap::aligned_boxed_slice(guest_page_size, guest_page_size).ok_or_else(|| {
+            error!("Failed to allocate the next-stage BCC");
+            RebootReason::InternalError
+        })?;
+        let dummy_next_bcc = Box::leak(dummy_next_bcc);
+        info!("Starting payload...");
+        return Ok((Some(dummy_next_bcc), false)) // No next bcc and non debuggable
+    };
 
     let bcc_handover = bcc_handover_parse(current_bcc_handover).map_err(|e| {
         error!("Invalid BCC Handover: {e:?}");
@@ -165,14 +199,10 @@ fn main<'a>(
         })?;
     flush(next_bcc);
 
-    let kaslr_seed = u64::from_ne_bytes(rand::random_array().map_err(|e| {
-        error!("Failed to generated guest KASLR seed: {e}");
-        RebootReason::InternalError
-    })?);
     let strict_boot = true;
     modify_for_next_stage(
         fdt,
-        next_bcc,
+        Some(next_bcc),
         new_instance,
         strict_boot,
         debug_policy,
@@ -185,7 +215,7 @@ fn main<'a>(
     })?;
 
     info!("Starting payload...");
-    Ok((next_bcc, debuggable))
+    Ok((Some(next_bcc), debuggable))
 }
 
 // Get the "salt" which is one of the input for DICE derivation.

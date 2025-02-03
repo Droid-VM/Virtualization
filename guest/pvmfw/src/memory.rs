@@ -117,7 +117,7 @@ impl<'a> MemorySlices<'a> {
         Ok(Self { fdt: untrusted_fdt, kernel, ramdisk, dice_chain })
     }
 
-    pub fn add_dice_chain(&mut self, dice_chain: &'a [u8]) {
-        self.dice_chain = Some(dice_chain)
+    pub fn set_dice_chain(&mut self, dice_chain: Option<&'a [u8]>) {
+        self.dice_chain = dice_chain
     }
 }

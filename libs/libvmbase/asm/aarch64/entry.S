@@ -167,6 +167,8 @@ entry:
 	adr_l x30, __bionic_tls
 	msr tpidr_el0, x30
 
+	/* Copy boot flags from x16 as the 4th argument to rust_entry */
+	mov x3, x16
 	/* Call into Rust code. */
 	bl rust_entry
 

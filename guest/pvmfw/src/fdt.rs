@@ -1375,7 +1375,7 @@ fn patch_device_tree(fdt: &mut Fdt, info: &DeviceTreeInfo) -> Result<(), RebootR
 /// Modifies the input DT according to the fields of the configuration.
 pub fn modify_for_next_stage(
     fdt: &mut Fdt,
-    bcc: &[u8],
+    bcc: Option<&[u8]>,
     new_instance: bool,
     strict_boot: bool,
     debug_policy: Option<&[u8]>,
@@ -1397,7 +1397,7 @@ pub fn modify_for_next_stage(
         fdt.unpack()?;
     }
 
-    patch_dice_node(fdt, bcc.as_ptr() as usize, bcc.len())?;
+    patch_dice_node(fdt, bcc)?;
 
     if let Some(mut chosen) = fdt.chosen_mut()? {
         empty_or_delete_prop(&mut chosen, c"avf,strict-boot", strict_boot)?;
@@ -1416,15 +1416,18 @@ pub fn modify_for_next_stage(
 }
 
 /// Patch the "google,open-dice"-compatible reserved-memory node to point to the bcc range
-fn patch_dice_node(fdt: &mut Fdt, addr: usize, size: usize) -> libfdt::Result<()> {
+fn patch_dice_node(fdt: &mut Fdt, bcc: Option<&[u8]>) -> libfdt::Result<()> {
     // We reject DTs with missing reserved-memory node as validation should have checked that the
     // "swiotlb" subnode (compatible = "restricted-dma-pool") was present.
     let node = fdt.node_mut(c"/reserved-memory")?.ok_or(libfdt::FdtError::NotFound)?;
 
     let mut node = node.next_compatible(c"google,open-dice")?.ok_or(FdtError::NotFound)?;
-
-    let addr: u64 = addr.try_into().unwrap();
-    let size: u64 = size.try_into().unwrap();
+    let Some(bcc) = bcc else {
+        node.nop()?;
+        return Ok(());
+    };
+    let addr: u64 = bcc.as_ptr() as u64;
+    let size: u64 = bcc.len().try_into().unwrap();
     node.setprop_inplace(c"reg", [addr.to_be_bytes(), size.to_be_bytes()].as_flattened())
 }
 
