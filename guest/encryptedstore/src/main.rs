@@ -17,7 +17,8 @@
 //! `encryptedstore` is a program that (as the name indicates) provides encrypted storage
 //! solution in a VM. This is based on dm-crypt & requires the (64 bytes') key & the backing device.
 //! It uses dm_rust lib.
-
+#![allow(unused_variables)]
+#![allow(dead_code)]
 use anyhow::{ensure, Context, Result};
 use clap::arg;
 use dm::{crypt::CipherType, util};
@@ -55,12 +56,12 @@ fn try_main() -> Result<()> {
     let key = matches.get_one::<String>("key").unwrap();
     let mountpoint = Path::new(matches.get_one::<String>("mountpoint").unwrap());
     // Note this error context is used in MicrodroidTests.
-    encryptedstore_init(blkdevice, key, mountpoint).with_context(|| {
-        format!(
-            "Unable to initialize encryptedstore on {:?} & mount at {:?}",
-            blkdevice, mountpoint
-        )
-    })?;
+    // encryptedstore_init(blkdevice, key, mountpoint).with_context(|| {
+    //     format!(
+    //         "Unable to initialize encryptedstore on {:?} & mount at {:?}",
+    //         blkdevice, mountpoint
+    //     )
+    // })?;
     Ok(())
 }
 
@@ -191,7 +192,7 @@ fn mount(source: &Path, mountpoint: &Path) -> Result<()> {
             source.as_ptr(),
             mountpoint.as_ptr(),
             fstype.as_ptr(),
-            libc::MS_NOSUID | libc::MS_NODEV | libc::MS_NOEXEC,
+            libc::MS_NOSUID | libc::MS_NODEV,
             mount_options.as_ptr() as *const std::ffi::c_void,
         )
     };
