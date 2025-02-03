@@ -52,6 +52,24 @@
       "parentUuid": "eb42326c_86267198",
       "revId": "c18a9b3b5f24c41e35cf95562a2c1bbc59de543e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f52113a5_90056d00",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-03T23:12:38Z",
+      "side": 1,
+      "message": "\u003e  I was using some crude method like extracting the \"fd\" as a raw fd from the /proc/self/fd and opening the file using the raw fd.\n\nThat\u0027s basically what `base::open_file_or_duplicate` does + some sanity checks. I\u0027ll change `--file-backed-mapping` to use that function to open the file",
+      "parentUuid": "3d6200db_e2e5291f",
+      "revId": "c18a9b3b5f24c41e35cf95562a2c1bbc59de543e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
