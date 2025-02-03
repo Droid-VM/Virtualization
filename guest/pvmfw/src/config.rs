@@ -141,6 +141,7 @@ impl Entry {
 
 #[derive(Default)]
 pub struct Entries<'a> {
+    //TODO: Convert BCC to optional.
     pub bcc: &'a mut [u8],
     pub debug_policy: Option<&'a [u8]>,
     pub vm_dtbo: Option<&'a mut [u8]>,
@@ -269,6 +270,7 @@ impl<'a> Config<'a> {
                 entry_size,
             );
         }
+        //TODO: relax this check to make BCC optional.
         // Ensures that BCC exists.
         ranges[Entry::Bcc as usize].ok_or(Error::MissingEntry(Entry::Bcc))?;
 
@@ -295,6 +297,7 @@ impl<'a> Config<'a> {
         }
         let [bcc, debug_policy, vm_dtbo, vm_ref_dt] = entries;
 
+        //TODO: Remove this check to return None when BCC is absent.
         // The platform BCC has always been required.
         let bcc = bcc.unwrap();
 

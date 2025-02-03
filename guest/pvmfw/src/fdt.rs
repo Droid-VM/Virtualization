@@ -1300,7 +1300,7 @@ fn patch_device_tree(fdt: &mut Fdt, info: &DeviceTreeInfo) -> Result<(), RebootR
 /// Modifies the input DT according to the fields of the configuration.
 pub fn modify_for_next_stage(
     fdt: &mut Fdt,
-    bcc: &[u8],
+    bcc: Option<&[u8]>,
     new_instance: bool,
     strict_boot: bool,
     debug_policy: Option<&[u8]>,
@@ -1322,7 +1322,14 @@ pub fn modify_for_next_stage(
         fdt.unpack()?;
     }
 
-    patch_dice_node(fdt, bcc.as_ptr() as usize, bcc.len())?;
+    if let Some(bcc) = bcc {
+        patch_dice_node(fdt, bcc.as_ptr() as usize, bcc.len())?;
+    } else {
+        // Delete dice reserve mem node
+        let node = fdt.node_mut(c"/reserved-memory")?.ok_or(libfdt::FdtError::NotFound)?;
+        let node = node.next_compatible(c"google,open-dice")?.ok_or(FdtError::NotFound)?;
+        node.nop()?;
+    }
 
     if let Some(mut chosen) = fdt.chosen_mut()? {
         empty_or_delete_prop(&mut chosen, c"avf,strict-boot", strict_boot)?;
