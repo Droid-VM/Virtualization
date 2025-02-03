@@ -46,6 +46,30 @@
       },
       "revId": "3f586b904a8adcad5529539cfb7a1ebc5512ff76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d21a41a_bd5165e7",
+        "filename": "guest/pvmfw/avb/src/ops.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-03T13:18:47Z",
+      "side": 1,
+      "message": "NM, I thought you intended to pass a boolean to skip key verification. However, it seems you mainly want to reorder the existing verification steps. In that case, could we store the key here and perform the comparison later, avoiding the need to re-parse vbmeta?\n\n```\npub(crate) struct Ops\u003c\u0027a\u003e {\n    payload: \u0026\u0027a Payload\u003c\u0027a\u003e,\n    vbmeta_public_key: Option\u003cVec\u003cu8\u003e\u003e\n}\n\n...\nfn validate_vbmeta_public_key(\n        \u0026mut self,\n        public_key: \u0026[u8],\n        _public_key_metadata: Option\u003c\u0026[u8]\u003e,\n    ) -\u003e IoResult\u003cbool\u003e {\n    self.vbmeta_public_key \u003d Some(public_key.to_vec());\n    Ok(true)\n}\n```\n\nAgain, I really believe we\u0027d be more efficient if we first document the entire process step-by-step and reach a consensus. It\u0027s confusing to review the code when @apronin@google.com describes one flow in the [doc](https://docs.google.com/document/d/1usKjyf11_1AodpsoStnpWGa-fe3eeafdl2YZGy8h84I/edit?usp\u003dsharing) while the cl implements another.",
+      "parentUuid": "d76df3a0_b3f36ee6",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 90
+      },
+      "revId": "3f586b904a8adcad5529539cfb7a1ebc5512ff76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
