@@ -1,0 +1,201 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdb6f137_72a05704",
+        "filename": "misc/io_storage_host.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-02-03T18:17:15Z",
+      "side": 1,
+      "message": "It might be better to move this after open() to get the exact read speed.",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 21
+      },
+      "revId": "761b861fb09a09495002151ad11575792c84df07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53da696_dcf430a1",
+        "filename": "misc/io_storage_host.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-02-03T18:17:15Z",
+      "side": 1,
+      "message": "I think it\u0027d be better to understand non-cached speed.",
+      "range": {
+        "startLine": 54,
+        "startChar": 40,
+        "endLine": 54,
+        "endChar": 48
+      },
+      "revId": "761b861fb09a09495002151ad11575792c84df07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a608d360_010d267c",
+        "filename": "misc/io_storage_host.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-02-03T18:17:15Z",
+      "side": 1,
+      "message": "4KB buffered read is not generally used for sequential reads. Plase also check the impact of different read_ahead_kb.",
+      "range": {
+        "startLine": 59,
+        "startChar": 21,
+        "endLine": 59,
+        "endChar": 26
+      },
+      "revId": "761b861fb09a09495002151ad11575792c84df07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84fca9ef_56a0a7f4",
+        "filename": "misc/io_storage_host.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-02-03T18:17:15Z",
+      "side": 1,
+      "message": "Don\u0027t do this, as this will add unnessary filesystem overheads.",
+      "range": {
+        "startLine": 90,
+        "startChar": 44,
+        "endLine": 90,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c4e4ff12_1d88fc23",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "misc/io_storage_host.cpp",
+              "range": {
+                "startLine": 90,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "761b861fb09a09495002151ad11575792c84df07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a39dfcd1_f64bb2f9",
+        "filename": "misc/io_storage_host.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-02-03T18:17:15Z",
+      "side": 1,
+      "message": "The goal is to measure the speed of buffered writes, right?",
+      "range": {
+        "startLine": 91,
+        "startChar": 40,
+        "endLine": 91,
+        "endChar": 58
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8def607b_f33b2e88",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "misc/io_storage_host.cpp",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "    unique_fd fd(open(filename.c_str(), O_CREAT | O_WRONLY | O_SYNC, 00666));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "761b861fb09a09495002151ad11575792c84df07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c625583_9ac80878",
+        "filename": "misc/io_storage_host.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-02-03T18:17:15Z",
+      "side": 1,
+      "message": "Note, the speed varies per storage vendor and density.",
+      "range": {
+        "startLine": 100,
+        "startChar": 21,
+        "endLine": 100,
+        "endChar": 53
+      },
+      "revId": "761b861fb09a09495002151ad11575792c84df07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1b9a66b_316d3ae4",
+        "filename": "misc/io_storage_host.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-02-03T18:17:15Z",
+      "side": 1,
+      "message": "is this same as fsync()?",
+      "range": {
+        "startLine": 107,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 10
+      },
+      "revId": "761b861fb09a09495002151ad11575792c84df07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
