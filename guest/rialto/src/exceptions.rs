@@ -17,9 +17,7 @@
 use vmbase::{
     exceptions::{handle_permission_fault, handle_translation_fault},
     exceptions::{ArmException, Esr, HandleExceptionError},
-    logger,
-    power::reboot,
-    read_sysreg,
+    logger, read_sysreg,
 };
 
 fn handle_exception(exception: &ArmException) -> Result<(), HandleExceptionError> {
@@ -41,8 +39,7 @@ extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
 
     let exception = ArmException::from_el1_regs();
     if let Err(e) = handle_exception(&exception) {
-        exception.print("sync_exception_current", e, elr);
-        reboot()
+        exception.print_and_reboot("sync_exception_current", e, elr);
     }
 }
 

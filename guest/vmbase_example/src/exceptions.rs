@@ -14,17 +14,15 @@
 
 //! Exception handlers.
 
-use vmbase::{exceptions::ArmException, power::reboot, read_sysreg};
+use vmbase::{exceptions::ArmException, read_sysreg};
 
 #[no_mangle]
 extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
-    // The synchronous exception handler must not panic, as doing so could deadlock.
-    ArmException::from_el1_regs().print(
+    ArmException::from_el1_regs().print_and_reboot(
         "sync_exception_current",
         "Unexpected synchronous exception",
         elr,
     );
-    reboot();
 }
 
 #[no_mangle]

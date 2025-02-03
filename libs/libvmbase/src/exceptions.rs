@@ -15,13 +15,14 @@
 //! Helper functions and structs for exception handlers.
 
 use crate::{
-    eprintln,
+    console::{emergency_console, DEFAULT_EMERGENCY_CONSOLE_INDEX},
     layout::UART_PAGE_ADDR,
     memory::{page_4kb_of, MemoryTrackerError, MEMORY},
+    power::reboot,
     read_sysreg,
 };
 use aarch64_paging::paging::VirtualAddress;
-use core::fmt;
+use core::fmt::{self, Write};
 use core::result;
 
 /// Represents an error that can occur while handling an exception.
@@ -123,14 +124,24 @@ impl ArmException {
         Self { esr, far: VirtualAddress(far) }
     }
 
-    /// Prints the details of an obj and the exception, excluding UART exceptions.
-    pub fn print<T: fmt::Display>(&self, exception_name: &str, obj: T, elr: u64) {
+    /// Prints the details of an obj and the exception, excluding UART exceptions, and then reboots.
+    ///
+    /// This uses the emergency console so can safely be called even for synchronous exceptions
+    /// without causing a deadlock.
+    pub fn print_and_reboot<T: fmt::Display>(&self, exception_name: &str, obj: T, elr: u64) -> ! {
         // Don't print to the UART if we are handling an exception it could raise.
         if !self.is_uart_exception() {
-            eprintln!("{exception_name}");
-            eprintln!("{obj}");
-            eprintln!("{}, elr={:#08x}", self, elr);
+            // SAFETY: We always reboot at the end of this method so there is no way for the
+            // original UART driver to be used after this.
+            if let Some(mut console) = unsafe { emergency_console(DEFAULT_EMERGENCY_CONSOLE_INDEX) }
+            {
+                // Ignore errors writing to emergency console, as we are about to reboot anyway.
+                _ = writeln!(console, "{exception_name}");
+                _ = writeln!(console, "{obj}");
+                _ = writeln!(console, "{}, elr={:#08x}", self, elr);
+            }
         }
+        reboot();
     }
 
     fn is_uart_exception(&self) -> bool {

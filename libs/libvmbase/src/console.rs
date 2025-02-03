@@ -75,20 +75,6 @@ pub fn writeln(n: usize, format_args: Arguments) -> fmt::Result {
     })
 }
 
-/// Reinitializes the n-th UART driver and writes a formatted string followed by a newline to it.
-///
-/// This is intended for use in situations where the UART may be in an unknown state or the global
-/// instance may be locked, such as in an exception handler or panic handler.
-pub fn ewriteln(n: usize, format_args: Arguments) {
-    let Some(addr) = ADDRESSES[n].get() else { return };
-
-    // SAFETY: addr contains the base of a mapped UART, passed in init().
-    let mut uart = unsafe { Uart::new(*addr) };
-
-    let _ = write(&mut uart, format_args);
-    let _ = uart.write_str("\n");
-}
-
 /// Prints the given formatted string to the n-th console, followed by a newline.
 ///
 /// Returns an error if the console has not yet been initialized. May deadlock if used in a
@@ -113,15 +99,21 @@ macro_rules! println {
 
 pub(crate) use println; // Make it available in this crate.
 
-/// Prints the given string followed by a newline to the console in an emergency, such as an
-/// exception handler.
+/// Reinitializes the n-th UART driver and returns it.
 ///
-/// Never panics.
-#[macro_export]
-macro_rules! eprintln {
-    ($($arg:tt)*) => ({
-        $crate::console::ewriteln($crate::console::DEFAULT_EMERGENCY_CONSOLE_INDEX, format_args!($($arg)*))
-    })
+/// This is intended for use in situations where the UART may be in an unknown state or the global
+/// instance may be locked, such as in the synchronous exception handler.
+///
+/// # Safety
+///
+/// This takes over the UART from wherever it is being used, the existing UART instance should not
+/// be used after this is called. This should only be used immediately before aborting the VM.
+pub unsafe fn emergency_console(n: usize) -> Option<Uart> {
+    let addr = ADDRESSES[n].get()?;
+
+    // SAFETY: addr contains the base of a mapped UART, passed in init(). The caller promises that
+    // no existing instance of the UART driver will be used between now and when the program exits.
+    Some(unsafe { Uart::new(*addr) })
 }
 
 #[panic_handler]
