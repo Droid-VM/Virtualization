@@ -191,7 +191,7 @@ fn mount(source: &Path, mountpoint: &Path) -> Result<()> {
             source.as_ptr(),
             mountpoint.as_ptr(),
             fstype.as_ptr(),
-            libc::MS_NOSUID | libc::MS_NODEV | libc::MS_NOEXEC,
+            libc::MS_NOSUID | libc::MS_NODEV,
             mount_options.as_ptr() as *const std::ffi::c_void,
         )
     };
