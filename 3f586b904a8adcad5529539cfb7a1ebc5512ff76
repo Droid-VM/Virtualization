@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd06d5d_6edff3e7",
+        "filename": "guest/pvmfw/avb/src/ops.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-03T11:42:43Z",
+      "side": 1,
+      "message": "I\u0027m wondering if, instead of skipping the public key validation here, we could just pass a boolean parameter directly to `Ops`. If the parameter is true, we enforce the existing public key match; otherwise, we skip this step. This would eliminate the need to re-parse the `VbMeta` after verification just to extract the public key and avoid the work of aosp/3469433.",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 90
+      },
+      "revId": "3f586b904a8adcad5529539cfb7a1ebc5512ff76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
