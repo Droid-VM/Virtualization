@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04657e0f_928dcb1f",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T22:25:43Z",
+      "side": 1,
+      "message": "i don\u0027t see how this prevents cycles. you can still have a cycle, but you\u0027ll just try to undo the cycle when the VM dies. in the meantime, if the client drops all of its refs to the `VirtualMachine`, the cycle will prevent `VirtualMachine::drop` from being called (which would normally kill the VM immediately)\n\nso, this only helps if the VM happens to shut itself down. IMO it is best to make cyclic reference bugs as obvious as possible, so we shouldn\u0027t compenstate like this, just let it leak so that it is easier to spot and have the root cause fixed",
+      "revId": "c0fdee571a3782cf4aa8f9c9cb5ab6a5ac794c8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75ffe4b7_c097b2b5",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T22:25:43Z",
+      "side": 1,
+      "message": "there are two mutexes here and they aren\u0027t locked at the same time, so you can get a race condition where you witness the vm_state as non-dead and then it becomes dead before you get the `callbacks` lock",
+      "range": {
+        "startLine": 1566,
+        "startChar": 43,
+        "endLine": 1566,
+        "endChar": 50
+      },
+      "revId": "c0fdee571a3782cf4aa8f9c9cb5ab6a5ac794c8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e72bacff_dc422b50",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T22:25:43Z",
+      "side": 1,
+      "message": "is this suppose to be negated, so that you only add the callback if it is not dead?",
+      "revId": "c0fdee571a3782cf4aa8f9c9cb5ab6a5ac794c8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
