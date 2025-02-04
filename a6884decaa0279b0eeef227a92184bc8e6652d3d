@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89248e23_b7abd24e",
+        "filename": "libs/libvmbase/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T12:07:30Z",
+      "side": 1,
+      "message": "Honestly, for now, just move the whole file under `arch::aarch64` given that these are only called from exception handlers which are planned to be moved back into `vmbase` and it isn\u0027t clear at this point how much code re-use could happen with x86.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "a6884decaa0279b0eeef227a92184bc8e6652d3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9b6aaa2_8f0df237",
+        "filename": "libs/libvmbase/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T12:07:30Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 79
+      },
+      "revId": "a6884decaa0279b0eeef227a92184bc8e6652d3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
