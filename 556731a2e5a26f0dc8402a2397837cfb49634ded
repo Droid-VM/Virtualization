@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f50c548_2b324649",
+        "filename": "libs/libvmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T19:36:18Z",
+      "side": 1,
+      "message": "IIUC, the panic message gets silenced if the code panicked while printing, right?\n\nInstead, could `panic()` also use `emergency_console()`?",
+      "range": {
+        "startLine": 122,
+        "startChar": 12,
+        "endLine": 122,
+        "endChar": 27
+      },
+      "revId": "556731a2e5a26f0dc8402a2397837cfb49634ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b76a632_f59144e2",
+        "filename": "libs/libvmbase/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T19:36:18Z",
+      "side": 1,
+      "message": "What if another sync exception gets raised between this call and the `reboot()`, effectively pre-empting us and causing another call to `emergency_console()`? Should this be treated as UB? If not, could this case be mentioned in the `# Safety` documentation of `emergency_console()`?",
+      "range": {
+        "startLine": 135,
+        "startChar": 15,
+        "endLine": 135,
+        "endChar": 58
+      },
+      "revId": "556731a2e5a26f0dc8402a2397837cfb49634ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
