@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8152587_cb41050f",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T12:30:55Z",
+      "side": 1,
+      "message": "As discussed on aosp/3475092 ([comments](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3475092/comment/8fdb1e2b_cbe0aef4/)), could this be named `init_console()` (or similar) to ensure that it isn\u0027t used for other purposes, given how early it is being called during the bring-up process (`rust_entry()`)?",
+      "range": {
+        "startLine": 95,
+        "startChar": 7,
+        "endLine": 95,
+        "endChar": 11
+      },
+      "revId": "cf01f785afb9771d38a2d9fd2626d6491799cb27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
