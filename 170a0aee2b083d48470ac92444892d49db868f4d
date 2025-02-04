@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6cb2e225_2cda9077",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T17:46:16Z",
+      "side": 1,
+      "message": "If memory sharing/unsharing isn\u0027t actually supported, are you only implementing this to provide a granule size?\n\nIs this the result of my change to `guest/pvmfw/src/fdt.rs` in aosp/3314797 (note the `TODO`)? I can address it (e.g. with a `hyp::get_granule_size()` wrapper) if the only reason for this CL is to pass `SIZE_4K` to `DeviceAssignmentInfo::parse()`?",
+      "parentUuid": "d4491cf5_0216b085",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85a046a9_30face88",
         "filename": "libs/libvmbase/src/memory/tracker.rs",
         "patchSetId": 1
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "I had to implement the get_mem_sharer() to get the expected value for gunyah here https://android.googlesource.com/platform/packages/modules/Virtualization/+/3392e34e7774696268d73733daff98ab91ca70e0/guest/pvmfw/src/fdt.rs#1168\nIf there it was modified to return a default value, then current error handling behaviour will be changed for other VMs too. After implementing the mem sharer for gunyah changed the order in if-else here to keep the same code flow. Otherwise it this cause a dynamic_shared_pool init for QTVMs.",
       "parentUuid": "082e4d1a_c10652b1",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa3c0d36_98d41a69",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T17:46:16Z",
+      "side": 1,
+      "message": "I think it makes sense to prioritize a static swiotlb, when provided. As we validate that the region is within main memory (`total`), the worst an attacker could do is force the use of a memory region that hasn\u0027t been shared as the static swiotlb, AFAICT.\n\nWould you mind turning this hunk into its own commit, as it affects all hypervisors and is atomic and independent of the support you\u0027re adding in this stack?",
+      "parentUuid": "29c3e395_1d1b86ba",
       "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
