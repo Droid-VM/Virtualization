@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fb9d737_2e1f8d0d",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-04T14:13:48Z",
+      "side": 1,
+      "message": "Is this behavior change intended?",
+      "range": {
+        "startLine": 1566,
+        "startChar": 0,
+        "endLine": 1566,
+        "endChar": 78
+      },
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "876769be_4c11e4fc",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-04T14:13:48Z",
+      "side": 1,
+      "message": "It\u0027s recommended to avoid ptr2int2ptr roundtrips. Why not use `*mut ()` here instead?",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dcf8faf_f5d2e32a",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-04T14:13:48Z",
+      "side": 1,
+      "message": "So if the upgrade fails, you don\u0027t need to call the callback?",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 45
+      },
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00f92ed8_80c7673e",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-04T14:13:48Z",
+      "side": 1,
+      "message": "Receiver is Send. That said, it isn\u0027t Sync.",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
