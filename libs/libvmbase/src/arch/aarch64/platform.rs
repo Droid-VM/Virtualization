@@ -17,6 +17,7 @@
 use crate::{
     arch::aarch64::{
         layout::{UART_ADDRESSES, UART_PAGE_ADDR},
+        rand,
         uart::Uart,
     },
     memory::{SIZE_16KB, SIZE_4KB},
@@ -100,6 +101,10 @@ pub fn init() {
     }
     // SAFETY: UART_PAGE is mapped at stage-1 (see entry.S) and was just MMIO-guarded.
     unsafe { init_all_uart(&UART_ADDRESSES) };
+
+    if let Err(e) = rand::init() {
+        panic!("Failed to initialize a source of entropy: {e}");
+    }
 }
 
 /// Return platform uart with specific index
