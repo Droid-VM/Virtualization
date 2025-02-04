@@ -146,6 +146,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc2393ec_fea0bf69",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/CpuOptions.aidl",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T20:46:06Z",
+      "side": 1,
+      "message": "what\u0027s the meaning of `matchHost \u003d false`? i guess AIDL doesn\u0027t support a \"void\" type. maybe define a parcelable with no fields?",
+      "revId": "56649816414d46d11480c21c13b518ad1d06d17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e9d50985_a13292ab",
         "filename": "android/vm/src/main.rs",
         "patchSetId": 12
