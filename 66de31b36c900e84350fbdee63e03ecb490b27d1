@@ -16,6 +16,121 @@
       "message": "Setting -1 until the patch is finalized and end to end testing is done.",
       "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea55cb6f_e4969371",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T18:06:49Z",
+      "side": 1,
+      "message": "AFAIU, this is unncessary as `MemorySlices::new()` constructs with `dice_chain` set to `None`.\n\nIf you want to be extra cautious, feel free to turn\n```\npub fn add_dice_chain(\u0026mut self, dice_chain: \u0026\u0027a [u8])\n```\ninto\n```\npub fn set_dice_chain(\u0026mut self, dice_chain: Option\u003c\u0026\u0027a [u8]\u003e)\n```\nand call it once, from here.",
+      "range": {
+        "startLine": 154,
+        "startChar": 8,
+        "endLine": 154,
+        "endChar": 33
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9165e7c3_978c6692",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T18:06:49Z",
+      "side": 1,
+      "message": "How is this not making pvmfw panic, right now?",
+      "range": {
+        "startLine": 190,
+        "startChar": 8,
+        "endLine": 190,
+        "endChar": 37
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbd72afb_6baefac9",
+        "filename": "guest/pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T18:06:49Z",
+      "side": 1,
+      "message": "take `Option\u003c\u0026[u8]\u003e` here and use this function to encapsulate removing the node?",
+      "range": {
+        "startLine": 1351,
+        "startChar": 34,
+        "endLine": 1351,
+        "endChar": 58
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e1ac3b8_daf49ed5",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T18:06:49Z",
+      "side": 1,
+      "message": "FTR: handling this is being discussed in b/393977894.",
+      "range": {
+        "startLine": 70,
+        "startChar": 3,
+        "endLine": 70,
+        "endChar": 40
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01904765_b244d38c",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T18:06:49Z",
+      "side": 1,
+      "message": "OOC, why did you need to move this? What is pvmfw receiving as `signed_kernel`, right now?",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 93
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
