@@ -70,6 +70,30 @@
       },
       "revId": "fbea4f6b906a5d16d527010088be6d3775876ebf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd15ba37_f323c758",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 2026646
+      },
+      "writtenOn": "2025-02-04T13:35:37Z",
+      "side": 1,
+      "message": "For TRNG (to not block this package of code)\ni don\u0027t have any preferance about naming,\n`arch::rand::init()` look good for me.\n\nIdealy for platform configurations and boot_params whathewer transport medium will be (ACPI/FDT/Linux Boot Header/e820) we need some form of abstraction that we are lacking. PVMFW just assume that everything is the FDT. \n\nLocating and parsing configurations are platfrom dependent.\nAnd should be implemented in libvmbase, and call form PVMFW in more data driven fasion.\n\nIn ideal world pvmfw should call something like that:\n```\nlet conf \u003d platform::get_configurations(boot_param_stucture_from_vmbase_entry)?;\nconf.sanitize(platform::expected_config_template, expected_security_data_template)?;\nlet busines_logic_output \u003d do_some_security_work(conf)?;\nlet new_boot_param \u003d conf.gen_next_boot_params(busines_logic_output)?;\nreturn new_boot_params;\n```\n\nAnd the only difference form existing pvmfw on ARM will be that pvmfw logic don\u0027t need to know what kind of configuration blob is used. Only security properties should be important to PVMFW main.\n\nBut rather that we discuses it in this unrelated CL maybe we will move this topic to PVMFW chat or BUG.",
+      "parentUuid": "d56cbd8f_3b9f28b9",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 5
+      },
+      "revId": "fbea4f6b906a5d16d527010088be6d3775876ebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
