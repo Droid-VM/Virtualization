@@ -94,6 +94,30 @@
       },
       "revId": "fbea4f6b906a5d16d527010088be6d3775876ebf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e66309f_51f07c87",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-02-04T13:39:53Z",
+      "side": 1,
+      "message": "\u003e Note that panic! doesn\u0027t use the logger (log::{warn,error,...}) but accesses the UART directly through eprintln! so that should be fine.\n\nExcatly I meant 😅\n\n\u003e I\u0027d recommend reworking the code to properly dissociate low-level bring up work of vmbase clients (rust_entry()) from high-level functional operations such as locating a DT.\n\u003e \n\u003e Note that this is more fundamental than just a function name.\n\nYeah, I understand and agree with you. \n\nOn the topic of locating the DT. Personally I think there could a quite lengthy discussion on how to provide boot parameters and hardware description to the client. While passing the arguments seems the most versatile, it would require from pvmfw and clients some amount of arch specific logic. Which could be a duplication of code considering that we will also want that in vmbase (for example for memory description). However I think should move this discussion to either ag/31541239 or b/393355988.\n\nRegardless hopefuly now the comment is addressed.",
+      "parentUuid": "d56cbd8f_3b9f28b9",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 5
+      },
+      "revId": "fbea4f6b906a5d16d527010088be6d3775876ebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
