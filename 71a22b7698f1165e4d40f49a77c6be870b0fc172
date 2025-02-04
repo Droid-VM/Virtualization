@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68670059_641e129a",
+        "filename": "libs/apkmanifest/native/apkmanifest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-04T23:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3eae63c_dc6b1526",
+      "range": {
+        "startLine": 198,
+        "startChar": 11,
+        "endLine": 198,
+        "endChar": 24
+      },
+      "revId": "71a22b7698f1165e4d40f49a77c6be870b0fc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cd6f58f_24414c66",
@@ -163,6 +187,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f3f0572_758cf545",
+        "filename": "libs/apkmanifest/native/apkmanifest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-04T23:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cd6f58f_24414c66",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 83
+      },
+      "revId": "71a22b7698f1165e4d40f49a77c6be870b0fc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee4ff207_d41dfef4",
@@ -176,6 +224,24 @@
       "writtenOn": "2025-02-04T14:23:50Z",
       "side": 1,
       "message": "Is taking the last instance of the value the accepted convention for properties? Maybe a test for that case to show what\u0027s expected?",
+      "revId": "71a22b7698f1165e4d40f49a77c6be870b0fc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f4db820_4d2cfe39",
+        "filename": "libs/apkmanifest/native/apkmanifest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-04T23:26:40Z",
+      "side": 1,
+      "message": "Good point! Added a log statetement in case multiple values of the rollback_index are found.",
+      "parentUuid": "ee4ff207_d41dfef4",
       "revId": "71a22b7698f1165e4d40f49a77c6be870b0fc172",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -203,6 +269,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a50c5ed_76929062",
+        "filename": "tests/testapk/AndroidManifestV5_relaxed_rollback_protection.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-04T23:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e9d93a5_ce303c5e",
+      "range": {
+        "startLine": 2,
+        "startChar": 22,
+        "endLine": 2,
+        "endChar": 23
+      },
+      "revId": "71a22b7698f1165e4d40f49a77c6be870b0fc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6a885ee_62b9aeb9",
@@ -216,6 +306,30 @@
       "writtenOn": "2025-02-04T14:23:50Z",
       "side": 1,
       "message": "Does the parser need to check for the application tag?",
+      "range": {
+        "startLine": 24,
+        "startChar": 3,
+        "endLine": 25,
+        "endChar": 17
+      },
+      "revId": "71a22b7698f1165e4d40f49a77c6be870b0fc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6035219_432f4185",
+        "filename": "tests/testapk/AndroidManifestV5_relaxed_rollback_protection.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-04T23:26:40Z",
+      "side": 1,
+      "message": "I dond\u0027t want to make parser even more complex (tbh, i wish there was a manfiest parser in rust that we could just reuse...). AFAIU the aapt2 tool will ensure that \u003cproperty\u003e is defined in the appropriate place (https://developer.android.com/guide/topics/manifest/property-element?_gl\u003d1*io0zmq*_up*MQ..*_ga*MTA1MzM0NTUwMS4xNzM4Njg0MDA2*_ga_6HH9YJMN9M*MTczODY4NDAwNi4xLjAuMTczODY4NDAwNi4wLjAuNTk0ODc4Njcy), so i think here we don\u0027t really care about the correctness.",
+      "parentUuid": "b6a885ee_62b9aeb9",
       "range": {
         "startLine": 24,
         "startChar": 3,
