@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33e764ee_bd5844b1",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T23:24:24Z",
+      "side": 1,
+      "message": "why add `const` everywhere?\n\nit doesn\u0027t matter much either way IMO, but this all went through API review, so it shouldn\u0027t be changed without a good reason\n\ni see that the rust code switched to using shared refs intead of exclusive refs. we don\u0027t necessarily want to make a promise about that in a stable ABI like this + the pointer qualifiers aren\u0027t directly connected to the rust ref semantics, they don\u0027t really need to match. `const*` is never good enough by itself to assume that taking a shared ref is OK",
+      "range": {
+        "startLine": 337,
+        "startChar": 30,
+        "endLine": 337,
+        "endChar": 35
+      },
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "876769be_4c11e4fc",
         "filename": "libs/libavf/src/lib.rs",
         "patchSetId": 1
@@ -66,6 +89,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40dbbf9e_a33416f8",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T23:24:24Z",
+      "side": 1,
+      "message": "IIUC, it should only fail to upgrade if `AVirtualMachine_destroy` was called before we reached this point (assuming no bugs), so it is probably reasonable to skip the callback. we should document that behavior in the header though",
+      "parentUuid": "3dcf8faf_f5d2e32a",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 45
+      },
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0adbbaad_65875f93",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T23:24:24Z",
+      "side": 1,
+      "message": "we should document the lifetime expectations in the header. i\u0027m honestly not sure what they would be at the moment. technically another process could keep this `LocalVmInstance` alive however long it wants, so `callback` and `data` need to be valid for the rest of the process\u0027s life\n\nthat sounds onerous, so we should probably tie it to sometihng else, e.g. ensure we don\u0027t use them if `AVirtualMachine_destroy` has been called (note that the `self.vm.upgrade()` check isn\u0027t enough to guarantee that)",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00f92ed8_80c7673e",
         "filename": "tests/vts/src/vts_libavf_test.rs",
         "patchSetId": 1
@@ -77,6 +141,23 @@
       "writtenOn": "2025-02-04T14:13:48Z",
       "side": 1,
       "message": "Receiver is Send. That said, it isn\u0027t Sync.",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b53d53_7d32d4d0",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T23:24:24Z",
+      "side": 1,
+      "message": "it isn\u0027t necessarily a problem, but i want to point out that this line won\u0027t ever actually be the one to delete the `Arc\u003cVmInstance\u003e`. the caller is holding a strong ref, so the earliest we\u0027ll actually dealloc is when the caller drops its ref\n\npersonally i think all the ref counting just so that we can pass `vm: *const AVirtualMachine` in here and it easier to call `AVirtualMachine_destroy` isn\u0027t adding much value. it is a loose style of memory management that we should be discouraging\n\nfor example, imagine if you write safe rust bindings for this API. you are going to want a rust type that owns the `vm: *const AVirtualMachine` and calls `AVirtualMachine_destroy` in its `Drop` implementation. it won\u0027t be able to make any use of this pointer argument, it will want to drop the existing instance of the rust type that owns it. if it wants to drop it from the callback, then it would do that by transferring ownership somehow, maybe via the `data` param",
       "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
