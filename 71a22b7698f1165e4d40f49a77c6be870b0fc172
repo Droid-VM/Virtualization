@@ -1,0 +1,206 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3eae63c_dc6b1526",
+        "filename": "libs/apkmanifest/native/apkmanifest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2025-02-04T14:23:50Z",
+      "side": 1,
+      "message": "nit: the fortune is a context that will get lost with time, worth removing the word?",
+      "range": {
+        "startLine": 198,
+        "startChar": 11,
+        "endLine": 198,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b8e42fda_96923156",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/apkmanifest/native/apkmanifest.cpp",
+              "range": {
+                "startLine": 198,
+                "startChar": 0,
+                "endLine": 199,
+                "endChar": 0
+              },
+              "replacement": "    // Now we need to parse the rest of the manifest to check if it contains the\n"
+            }
+          ]
+        }
+      ],
+      "revId": "71a22b7698f1165e4d40f49a77c6be870b0fc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cd6f58f_24414c66",
+        "filename": "libs/apkmanifest/native/apkmanifest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2025-02-04T14:23:50Z",
+      "side": 1,
+      "message": "Would it be clearer to have a structure like below rather than the intertwined state machine?\n\n```\nif (tag_name \u003d\u003d USES_PERMISSION_TAG_NAME) {\n  if (isRelaxedRollbackPermission()) {\n    info-\u003ehas_relaxed_rollback_protection_permission \u003d true;\n  }\n} else if (tag_name \u003d\u003d PROPERTY_TAG_NAME) {\n  auto rollback_index \u003d getRollbackIndexFromProperty();\n  if (rollback_index.ok()) {\n    info-\u003erollback_index \u003d *rollback_index;\n  }\n} else {\n  // Ignore\n  break;\n}\n```",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 83
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "554e52d9_aa89d5a5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/apkmanifest/native/apkmanifest.cpp",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 161,
+                "endChar": 0
+              },
+              "replacement": "struct RollbackProtectionInfo {\n    bool has_relaxed_rollback_protection_permission \u003d false;\n    std::optional\u003cuint32_t\u003e rollback_index;\n};\n"
+            },
+            {
+              "path": "libs/apkmanifest/native/apkmanifest.cpp",
+              "range": {
+                "startLine": 162,
+                "startChar": 0,
+                "endLine": 163,
+                "endChar": 0
+              },
+              "replacement": "Result\u003cRollbackProtectionInfo\u003e parseRollbackProtectionInfo(const ResXMLTree\u0026 tree) {\n    RollbackProtectionInfo info;\n"
+            },
+            {
+              "path": "libs/apkmanifest/native/apkmanifest.cpp",
+              "range": {
+                "startLine": 164,
+                "startChar": 0,
+                "endLine": 201,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/apkmanifest/native/apkmanifest.cpp",
+              "range": {
+                "startLine": 219,
+                "startChar": 0,
+                "endLine": 228,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/apkmanifest/native/apkmanifest.cpp",
+              "range": {
+                "startLine": 232,
+                "startChar": 0,
+                "endLine": 233,
+                "endChar": 0
+              },
+              "replacement": "                    size_t len;\n                    const char16_t* chars \u003d tree.getAttributeNamespace(i, \u0026len);\n"
+            },
+            {
+              "path": "libs/apkmanifest/native/apkmanifest.cpp",
+              "range": {
+                "startLine": 251,
+                "startChar": 0,
+                "endLine": 291,
+                "endChar": 0
+              },
+              "replacement": "                        if (tag_name \u003d\u003d USES_PERMISSION_TAG_NAME \u0026\u0026\n                            nameName \u003d\u003d USE_RELAXED_ROLLBACK_PROTECTION_PERMISSION_NAME) {\n                            info.has_relaxed_rollback_protection_permission \u003d true;\n                        } else if (tag_name \u003d\u003d PROPERTY_TAG_NAME \u0026\u0026\n                                   nameName \u003d\u003d ROLLBACK_INDEX_PROPERTY_NAME) {\n"
+            },
+            {
+              "path": "libs/apkmanifest/native/apkmanifest.cpp",
+              "range": {
+                "startLine": 296,
+                "startChar": 0,
+                "endLine": 298,
+                "endChar": 0
+              },
+              "replacement": "                            info.rollback_index.emplace(std::move(*value));\n"
+            },
+            {
+              "path": "libs/apkmanifest/native/apkmanifest.cpp",
+              "range": {
+                "startLine": 301,
+                "startChar": 0,
+                "endLine": 302,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/apkmanifest/native/apkmanifest.cpp",
+              "range": {
+                "startLine": 314,
+                "startChar": 0,
+                "endLine": 314,
+                "endChar": 0
+              },
+              "replacement": "\n    return info;\n}\n\n// Parse the binary manifest and extract the information we care about.\n// Everything we\u0027re interested in should be an attribute on the \u003cmanifest\u003e tag.\n// We don\u0027t care what order they come in, absent attributes will be treated as\n// the default value, and any unknown attributes (including ones not in the\n// expected namespace) will be ignored.\nResult\u003cunique_ptr\u003cApkManifestInfo\u003e\u003e parseManifest(const void* manifest, size_t size) {\n    ResXMLTree tree;\n    auto status \u003d tree.setTo(manifest, size);\n    if (status !\u003d OK) {\n        return Error() \u003c\u003c \"Failed to create XML Tree: \" \u003c\u003c statusToString(status);\n    }\n\n    OR_RETURN(findManifestElement(tree));\n\n    unique_ptr\u003cApkManifestInfo\u003e info{new ApkManifestInfo{}};\n\n    size_t count \u003d tree.getAttributeCount();\n    for (size_t i \u003d 0; i \u003c count; ++i) {\n        size_t len;\n        const char16_t* chars;\n\n        chars \u003d tree.getAttributeNamespace(i, \u0026len);\n        auto namespaceUrl \u003d chars ? u16string_view(chars, len) : u16string_view();\n\n        chars \u003d tree.getAttributeName(i, \u0026len);\n        auto attributeName \u003d chars ? u16string_view(chars, len) : u16string_view();\n\n        if (namespaceUrl.empty()) {\n            if (attributeName \u003d\u003d PACKAGE_ATTRIBUTE_NAME) {\n                auto result \u003d getStringOnlyAttribute(tree, i);\n                if (!result.ok()) return Error() \u003c\u003c \"Package name: \" \u003c\u003c result.error();\n                info-\u003epackage \u003d *result;\n            }\n        } else if (namespaceUrl \u003d\u003d ANDROID_NAMESPACE_URL) {\n            if (attributeName \u003d\u003d VERSION_CODE_ATTRIBUTE_NAME) {\n                auto result \u003d getU32Attribute(tree, i);\n                if (!result.ok()) return Error() \u003c\u003c \"Version code: \" \u003c\u003c result.error();\n                info-\u003eversion_code \u003d *result;\n            } else if (attributeName \u003d\u003d VERSION_CODE_MAJOR_ATTRIBUTE_NAME) {\n                auto result \u003d getU32Attribute(tree, i);\n                if (!result.ok()) return Error() \u003c\u003c \"Version code major: \" \u003c\u003c result.error();\n                info-\u003eversion_code_major \u003d *result;\n            }\n        }\n    }\n\n    auto rollbackProtectionInfo \u003d OR_RETURN(parseRollbackProtectionInfo(tree));\n    info-\u003ehas_relaxed_rollback_protection_permission \u003d\n            rollbackProtectionInfo.has_relaxed_rollback_protection_permission;\n    info-\u003erollback_index \u003d rollbackProtectionInfo.rollback_index;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "71a22b7698f1165e4d40f49a77c6be870b0fc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee4ff207_d41dfef4",
+        "filename": "libs/apkmanifest/native/apkmanifest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2025-02-04T14:23:50Z",
+      "side": 1,
+      "message": "Is taking the last instance of the value the accepted convention for properties? Maybe a test for that case to show what\u0027s expected?",
+      "revId": "71a22b7698f1165e4d40f49a77c6be870b0fc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6a885ee_62b9aeb9",
+        "filename": "tests/testapk/AndroidManifestV5_relaxed_rollback_protection.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2025-02-04T14:23:50Z",
+      "side": 1,
+      "message": "Does the parser need to check for the application tag?",
+      "range": {
+        "startLine": 24,
+        "startChar": 3,
+        "endLine": 25,
+        "endChar": 17
+      },
+      "revId": "71a22b7698f1165e4d40f49a77c6be870b0fc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
