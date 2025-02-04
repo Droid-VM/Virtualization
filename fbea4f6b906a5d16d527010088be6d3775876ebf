@@ -22,6 +22,30 @@
       },
       "revId": "fbea4f6b906a5d16d527010088be6d3775876ebf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7362566a_c880aad7",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-02-04T12:08:02Z",
+      "side": 1,
+      "message": "\u003e Note that this moves the call to rand::init() to before the logger has been initialized so we now must remember to not log from that function (or anything it calls), which sounds challenging to maintain.\n\nYes. I was considering moving the logger initialization to platform (which actually could be usefull for keeping x86_64 on higher logging verbosity temporarily), but I realized that rand init uses `panic!` for pontential logs 😅\n\n\u003e Could platform::init() be named `init_console()` and limited to that purpose? \n\n@mazurekm@google.com in the upcoming changes moves the extraction of FDT location to `platform::init()`. On aarch64 it\u0027s basically passthrough but on x86_64 it has to extracted from `boot_params`. So either the extaction has to refactored a bit or we leave the name. Honestly I am fine either way.\n\n\u003e Then, rust_entry() could even call `arch::rand::init()` directly, ensuring that as little code as possible runs with an uninitialized stack guard?\n\nSure, I can do that.",
+      "parentUuid": "8fdb1e2b_cbe0aef4",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 5
+      },
+      "revId": "fbea4f6b906a5d16d527010088be6d3775876ebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
