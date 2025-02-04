@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb917403_559166fe",
+        "filename": "docs/mainline_module_payload.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2025-02-04T14:33:42Z",
+      "side": 1,
+      "message": "```suggestion\n`microdroid_manager` when constructing the payload node of the dice chain.\n```",
+      "range": {
+        "startLine": 30,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 38
+      },
+      "revId": "cb1fa3acdc17f0ddec6261b6ffbce7081e5d83b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "306864da_2f0c014c",
+        "filename": "guest/microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2025-02-04T14:33:42Z",
+      "side": 1,
+      "message": "Could use From if you like\n\n```suggestion\n            version: apk.rollback_index.map(u64::from).unwrap_or(apk.version_code),\n```",
+      "range": {
+        "startLine": 106,
+        "startChar": 44,
+        "endLine": 106,
+        "endChar": 56
+      },
+      "revId": "cb1fa3acdc17f0ddec6261b6ffbce7081e5d83b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07fd2cf6_0f2ecace",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2970,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2025-02-04T14:33:42Z",
+      "side": 1,
+      "message": "Does this indicate we\u0027re hitting the wrong path or that the failure that SK causes is this unknown error code?",
+      "revId": "cb1fa3acdc17f0ddec6261b6ffbce7081e5d83b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
