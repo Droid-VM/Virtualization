@@ -46,6 +46,30 @@
       },
       "revId": "045421f5304d203e39c8a73ef7e7365c97e7a0aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bde8eef_7db21345",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T19:35:42Z",
+      "side": 1,
+      "message": "IIUC, you consider the current `eprintln` to be unsound because it has side effects on \"non-emergency\" logging that are not cleary communicated in its API (as it \"just returns\"), right? And the fix to that is to replace the macro with a function clearly dedicated to \"printing-and-bailing\" (aosp/3473748), right?\n\nSo what are `ExceptionLock`s helping with? Also, can\u0027t deadlocks from `println` still happen if logging from a sync handler preempting a logging sync handler?",
+      "parentUuid": "5f2e1c0f_e58bdcce",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 65
+      },
+      "revId": "045421f5304d203e39c8a73ef7e7365c97e7a0aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
