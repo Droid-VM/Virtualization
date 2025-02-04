@@ -16,6 +16,24 @@
       "message": "i know this is an old change, but i find it surprising that we silently fallback to this mode when the caller requested `host_cpu_topology`\n\nis the idea that `get_num_cpus()` can return less than all of the CPUs, so we are running on all available CPUs? if so, should we set the affinity for them at least?",
       "revId": "aaecf65e90f8637ff1fc191bb65a6ba9a5bc9d20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5be7bd61_7ca3fc0c",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2025-02-04T20:54:35Z",
+      "side": 1,
+      "message": "The key idea behind host_cpu_topology is that the pinned vCPUs have the same capacity or \"size\" advertised to the guest as the host, so that the guest has the correct information to make scheduler decisions. The current host-topology inside crosvm is somewhat restrictive in that it requires access to all pCPUs available on the host. I think there was an idea floating around where we can extend host_cpu_topology to detect the cpus available to the process launching it. Though optimizing that type of flexibility is tricky, and it also wouldn\u0027t really be \"host_cpu_topology\" since it wouldn\u0027t reflect the entire set of CPUs, maybe it could be under a different flag? EX. if the app itself had limited cpusets, say only the small cpus. All vCPUs would share the same capacity and would effectively turn off certain features in the scheduler. It would be actually more performant to have the host scheduler schedule the vCPU threads in that case and do away with pinning, since there would be less thread migrations happening inside the guest. VCpufreq also requires pinning to correctly pass guest/host cpufreq info, so that would also break and be turned off. There are also possible permutations with only limited to little+mid and mid+big depending on the possible SoC configurations out there, it would be a difficult optimization task. I think extending the existing pinning/topology would make sense if there\u0027s vendors or a real usecase asking for it, maybe at least for now we should notify the user if it\u0027s expecting pinning when it has limited cpusets.",
+      "parentUuid": "ed63a30d_d5a9932a",
+      "revId": "aaecf65e90f8637ff1fc191bb65a6ba9a5bc9d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
