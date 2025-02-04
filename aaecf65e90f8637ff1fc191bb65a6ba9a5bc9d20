@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed63a30d_d5a9932a",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T19:36:22Z",
+      "side": 1,
+      "message": "i know this is an old change, but i find it surprising that we silently fallback to this mode when the caller requested `host_cpu_topology`\n\nis the idea that `get_num_cpus()` can return less than all of the CPUs, so we are running on all available CPUs? if so, should we set the affinity for them at least?",
+      "revId": "aaecf65e90f8637ff1fc191bb65a6ba9a5bc9d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
