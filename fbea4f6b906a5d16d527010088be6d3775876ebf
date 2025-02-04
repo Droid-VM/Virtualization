@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fdb1e2b_cbe0aef4",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T11:52:44Z",
+      "side": 1,
+      "message": "Note that this moves the call to `rand::init()` to before the logger has been initialized so we now must remember to not log from that function (or anything it calls), which sounds challenging to maintain.\n\nCould `platform::init()` be named `init_console()` and limited to that purpose? Then, `rust_entry()` could even call `arch::rand::init()` directly, ensuring that as little code as possible runs with an uninitialized stack guard?",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 5
+      },
+      "revId": "fbea4f6b906a5d16d527010088be6d3775876ebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
