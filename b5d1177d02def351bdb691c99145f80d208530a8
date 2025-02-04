@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b70c879e_c6e2f585",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2025-02-04T18:38:55Z",
+      "side": 1,
+      "message": "This hash looks like [a particular commit](https://salsa.debian.org/cloud-team/debian-cloud-images/-/tree/38da93fe) on the `master` branch. Is it only to ensure reproducible builds, or is there a deeper reason for picking this particular commit?\n\nThey don\u0027t seem to have [any \"releases\" on their repo](https://salsa.debian.org/cloud-team/debian-cloud-images/-/releases), nor are they tagging particular commits as `stable`.\n\nAlternatively, have we considered grabbing `genericcloud` images from https://cloud.debian.org/images/cloud/? They publish latest stable builds of images.",
+      "revId": "b5d1177d02def351bdb691c99145f80d208530a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
