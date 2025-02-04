@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7d6e58a_2caada91",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T23:54:28Z",
+      "side": 1,
+      "message": "should you swap the order? https://issuetracker.google.com/380912007#comment20 says \"last 2 bytes for vmid and next 4 bytes for the pas_id\"\n\nCC @quic_pheragu@quicinc.com",
+      "range": {
+        "startLine": 1044,
+        "startChar": 0,
+        "endLine": 1045,
+        "endChar": 91
+      },
+      "revId": "a3a098bb38c40a38a798355b1f99e1b341cd0863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
