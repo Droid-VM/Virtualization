@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4816fcc9_a05d7f0a",
+        "filename": "libs/libvmbase/src/console.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T19:35:56Z",
+      "side": 1,
+      "message": "Don\u0027t we get stuck in an infinite loop if `.get()` fails while called from `panic()` i.e. if we panic before having initialized the consoles? It would be nice to detect that and still `reboot` from `panic`.",
+      "range": {
+        "startLine": 70,
+        "startChar": 36,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "a4fb17cff7dd30af71d7d5511895ee9918a590fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
