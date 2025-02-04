@@ -46,6 +46,30 @@
       },
       "revId": "fbea4f6b906a5d16d527010088be6d3775876ebf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d56cbd8f_3b9f28b9",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-04T12:28:57Z",
+      "side": 1,
+      "message": "\u003e but I realized that rand init uses panic!\n\nNote that `panic!` doesn\u0027t use the logger (`log::{warn,error,...}`) but accesses the UART directly through `eprintln!` so that should be fine.\n\n\u003e in the upcoming changes moves the extraction of FDT location to `platform::init()`\n\nSo you want to locate the DT (completely unnecessary to pvmfw\u0027s bring up) before `log` has been configured or the stack guard initialized? That doesn\u0027t sound like the right order of execution to me.\n\n\u003e So either the extaction has to refactored a bit or we leave the name\n\nI\u0027d recommend reworking the code to properly dissociate low-level bring up work of `vmbase` clients (`rust_entry()`) from high-level functional operations such as locating a DT.\n\nNote that this is more fundamental than just a function name.",
+      "parentUuid": "7362566a_c880aad7",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 5
+      },
+      "revId": "fbea4f6b906a5d16d527010088be6d3775876ebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
