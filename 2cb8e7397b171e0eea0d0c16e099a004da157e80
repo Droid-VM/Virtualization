@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65f45d68_c539db65",
+        "filename": "docs/mainline_module_payload.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-05T17:24:40Z",
+      "side": 1,
+      "message": "Its not clear to me how PVMs would use `android.system.virtualmachine.ROLLBACK_INDEX` to allow rollbackable mainline modules.\n\n\nAre you expecting developers to increase `android.system.virtualmachine.ROLLBACK_INDEX` only in cases of real security fixes \u0026 PVM/MM is expected to allow only non-decreasing `ROLLBACK_INDEX`?",
+      "range": {
+        "startLine": 29,
+        "startChar": 5,
+        "endLine": 29,
+        "endChar": 59
+      },
+      "revId": "2cb8e7397b171e0eea0d0c16e099a004da157e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c068c51_e86e1d78",
+        "filename": "guest/microdroid_manager/src/dice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-05T17:24:40Z",
+      "side": 1,
+      "message": "Each DICEChain entry (single certificat in the chain) can consist of multiple SubComponent.[1]\n\nEach subcomponent descibes a unit of code (apk/apex for Microdroid) \u0026 only contain Security version at the moment.\n\n\nWith an assumption that none of these \"rollbackable mainline modules\" are part of exists pVM instances in production, I think you can extend the spec[1] to include additional version. But the more important question (see other comment) is how is the PVM expected to consume this \"version\" (apply greaterThanEqual constraint or not while creating VM\u0027s secrets?) \n[1] https://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Virtualization/dice_for_avf_guest.cddl;l\u003d31?q\u003dfile:cddl%20avf",
+      "range": {
+        "startLine": 103,
+        "startChar": 94,
+        "endLine": 104,
+        "endChar": 68
+      },
+      "revId": "2cb8e7397b171e0eea0d0c16e099a004da157e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
