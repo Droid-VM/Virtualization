@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c5ecb46_ce10deb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-02-05T21:37:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "170f35e9_31b0cb28",
+      "revId": "b9c65e71bb59831ab6f462a5571a1d2e4753541f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d6b3ef5_96b99861",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b32568a6_22a7bb36",
+        "filename": "tests/pvmfw/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-02-05T21:37:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d6b3ef5_96b99861",
+      "range": {
+        "startLine": 48,
+        "startChar": 9,
+        "endLine": 48,
+        "endChar": 23
+      },
+      "revId": "b9c65e71bb59831ab6f462a5571a1d2e4753541f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6693577e_69a546a5",
@@ -54,6 +96,30 @@
       "writtenOn": "2025-02-04T10:25:50Z",
       "side": 1,
       "message": "nit: I\u0027m not aware of guidelines for naming Soong modules but `.`-separated names are typically used for tests while \"built\" targets such as `filegroup` usually have concise and descriptive names in snake case. May I suggest \"`test_avf_bcc_dat`\"?",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 46
+      },
+      "revId": "b9c65e71bb59831ab6f462a5571a1d2e4753541f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9369414a_8ae35ebd",
+        "filename": "tests/pvmfw/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-02-05T21:37:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6693577e_69a546a5",
       "range": {
         "startLine": 64,
         "startChar": 11,
