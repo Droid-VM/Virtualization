@@ -164,6 +164,24 @@
       "parentUuid": "e700d09d_263e8baa",
       "revId": "cb1fa3acdc17f0ddec6261b6ffbce7081e5d83b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b29a920_1c113be3",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2970,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-05T14:24:57Z",
+      "side": 1,
+      "message": "Documentation of the UNKNOWN_RUNTIME_ERROR is \"There was a runtime error while running microdroid manager.\" Did you mean `STOP_REASON_MICRODROID_PAYLOAD_VERIFICATION_FAILED`?\n\nOverall, we should strive to never return the UNKNOWN_RUNTIME_ERROR, since it doesn\u0027t provide any addoitional context when looking at the dashboard.\n\nIn this case, I think that PAYLOAD_VERIFICATION_FAILED is the correct response - SK detected a downgrade and rejected the payload.\n\nIf some of the SK errors are retriable, then microdroid_manager should handle the retry, not the payload.",
+      "parentUuid": "e700d09d_263e8baa",
+      "revId": "cb1fa3acdc17f0ddec6261b6ffbce7081e5d83b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
