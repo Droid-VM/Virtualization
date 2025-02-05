@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f41a09f4_85ab65a4",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-05T09:05:17Z",
+      "side": 1,
+      "message": "The comment for this api (`isCompatibleWith`) says \"Being compatible means that the configs can be interchangeably used for the same virtual machine\" [notice symmetry in the argument].\n\nBut adding this inequality check introduces asymmetry. Should we instead:\n1. drop this check on this method and \n2. Call check for \"non decreasing\" storage size somewhere else, perhaps the caller?",
+      "range": {
+        "startLine": 636,
+        "startChar": 23,
+        "endLine": 636,
+        "endChar": 78
+      },
+      "revId": "972d4bfb32ebb00e575e629fa070e0dc88f274b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
