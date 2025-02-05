@@ -132,6 +132,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39fbf9c2_9607baac",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-05T15:45:16Z",
+      "side": 1,
+      "message": "You can unsafely implement Send/Sync for the struct that contains the pointer.",
+      "parentUuid": "bf31d545_9e7cc65c",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3dcf8faf_f5d2e32a",
         "filename": "libs/libavf/src/lib.rs",
         "patchSetId": 1
