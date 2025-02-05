@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62938d85_7a490660",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-02-05T00:25:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee32372c_3c3d3355",
+      "revId": "56649816414d46d11480c21c13b518ad1d06d17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6243f1c2_47a64d27",
@@ -65,6 +83,30 @@
       "writtenOn": "2025-02-04T20:42:45Z",
       "side": 1,
       "message": "is `cfg_if` worth its weight here?\n\n```\n#[cfg(any(target_arch \u003d \"aarch64\"))]\ncommand.arg(\"--virt-cpufreq\");\n```",
+      "range": {
+        "startLine": 1123,
+        "startChar": 0,
+        "endLine": 1127,
+        "endChar": 17
+      },
+      "revId": "56649816414d46d11480c21c13b518ad1d06d17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8c7cef0_e9026ae4",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 1127,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-02-05T00:25:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6243f1c2_47a64d27",
       "range": {
         "startLine": 1123,
         "startChar": 0,
@@ -121,6 +163,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95e2d5bd_0a90685c",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/CpuOptions.aidl",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-02-05T00:25:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cfc9356_5757dede",
+      "range": {
+        "startLine": 24,
+        "startChar": 12,
+        "endLine": 24,
+        "endChar": 20
+      },
+      "revId": "56649816414d46d11480c21c13b518ad1d06d17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66d43dbb_3998e233",
@@ -163,6 +229,48 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b755521_1f4037dd",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/CpuOptions.aidl",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-02-05T00:25:47Z",
+      "side": 1,
+      "message": "Wouldn\u0027t that result in a larger memory size than a bool?",
+      "parentUuid": "dc2393ec_fea0bf69",
+      "revId": "56649816414d46d11480c21c13b518ad1d06d17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1fab04c_fbf00ea2",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/CpuOptions.aidl",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-02-05T00:25:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66d43dbb_3998e233",
+      "range": {
+        "startLine": 27,
+        "startChar": 16,
+        "endLine": 27,
+        "endChar": 25
+      },
+      "revId": "56649816414d46d11480c21c13b518ad1d06d17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e9d50985_a13292ab",
         "filename": "android/vm/src/main.rs",
         "patchSetId": 12
@@ -186,6 +294,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d623d8b2_768473ee",
+        "filename": "android/vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-02-05T00:25:47Z",
+      "side": 1,
+      "message": "I had tried this, but mapping fails:\n\n```\nthe trait bound `std::result::Result\u003candroid_system_virtualizationservice::mangled::_7_android_6_system_21_virtualizationservice_10_CpuOptions_11_CpuTopology, std::string::String\u003e: std::str::FromStr` is not satisfied\n   --\u003e packages/modules/Virtualization/android/vm/src/main.rs:387:17\n    |\n387 |             val.parse().map_err(|_| format!(\"Invalid CPU count: {}\", s))?\n    |                 ^^^^^ the trait `std::str::FromStr` is not implemented for `Result\u003c_7_android_6_system_21_virtualizationservice_10_CpuOptions_11_CpuTopology, String\u003e`\n    |\n```",
+      "parentUuid": "e9d50985_a13292ab",
+      "range": {
+        "startLine": 387,
+        "startChar": 37,
+        "endLine": 390,
+        "endChar": 14
+      },
+      "revId": "56649816414d46d11480c21c13b518ad1d06d17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95f792e8_45d0689f",
         "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 12
@@ -197,6 +329,30 @@
       "writtenOn": "2025-02-04T20:42:45Z",
       "side": 1,
       "message": "can you use the `CPU_TOPOLOGY_ONE_CPU` / `CPU_TOPOLOGY_MATCH_HOST` constants defined in `VirtualMachineConfig`",
+      "range": {
+        "startLine": 810,
+        "startChar": 0,
+        "endLine": 811,
+        "endChar": 43
+      },
+      "revId": "56649816414d46d11480c21c13b518ad1d06d17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "405ee023_4641a001",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-02-05T00:25:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95f792e8_45d0689f",
       "range": {
         "startLine": 810,
         "startChar": 0,
