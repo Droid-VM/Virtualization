@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79c998ee_22545f4c",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-02-05T22:37:18Z",
+      "side": 1,
+      "message": "minor nit: more descriptive name? Maybe `mem` since this is memory?",
+      "range": {
+        "startLine": 827,
+        "startChar": 18,
+        "endLine": 827,
+        "endChar": 19
+      },
+      "revId": "3110e10386e8f92dd9d0d4640f48cd3743a905d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc096aa_fa523456",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-02-05T22:37:18Z",
+      "side": 1,
+      "message": "What happens if mistakenly `range_end` \u003c `range_start` is passed?\n\nOr if size is too large?\n\nAlso, what if there are too many files?\n\nFor the last 2 questions, I\u0027m guessing `memfd` would fail at creating the file so that would probably be fine, but the first question, what if it\u0027s a user error, or a swap between end/start? If the VM fails to start, that\u0027s fine then, but if the VM starts, what would be the behavior?",
+      "range": {
+        "startLine": 1367,
+        "startChar": 8,
+        "endLine": 1367,
+        "endChar": 36
+      },
+      "revId": "3110e10386e8f92dd9d0d4640f48cd3743a905d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
