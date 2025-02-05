@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96a917ad_795c6608",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-05T13:12:10Z",
+      "side": 1,
+      "message": "This one need to run in topic with aosp/3465716 to avoid CI crash.",
+      "revId": "9f7fe2972f1b31912b0bcda375430d3ae092d23e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33bc3aac_27d95f31",
+        "filename": "guest/trusty/test_vm/vm/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-05T13:12:10Z",
+      "side": 1,
+      "message": "Should we rename this to `test_vm` as well?",
+      "range": {
+        "startLine": 37,
+        "startChar": 10,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "9f7fe2972f1b31912b0bcda375430d3ae092d23e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
