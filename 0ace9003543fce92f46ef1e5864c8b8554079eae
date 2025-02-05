@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f11f16d_c376ee7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-05T16:01:45Z",
+      "side": 1,
+      "message": "The spec at [1] is the extension of DICE for AVF guests (and extends `ConfigDescriptor` to contain list of `SubcomponentDescriptor`s at -71002). \n\nSecurity version in main ConfigDescriptor is set to 0 deliberately because it’s the versions in the subcomponents(which describes apk/apex) that matter.\n\n[2] is where the only \"version field of Subcomponent\" builds the security_version in respective DICE subcomponent. Note that we only use \"version\" as far as Subcomponents are concerned. Till now, there was never any need to add another version field in Sucomponents. \n\n\n\u003e we should probably have both version and security_version in subcomponents\n\nWe already have security_verison. what is the rational for introducing another version? If this patch is part of Rollbackable Mainline apex solution, can you sumarize what approach are you going with?\n\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/dice_for_avf_guest.cddl;l\u003d64\n[1.2] Also see go/vm-dice-chain\n\n\n[2] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/microdroid_manager/src/dice.rs;l\u003d94;drc\u003d0177c1d0926e807088178d34eaf980dbfc454e16",
+      "parentUuid": "77c0dac6_b3a73d26",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 47
+      },
+      "revId": "0ace9003543fce92f46ef1e5864c8b8554079eae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9320593a_97939ab3",
         "filename": "tests/testapk/AndroidManifestV6_relaxed_rollback_protection.xml",
         "patchSetId": 3
