@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75bd4e22_586dbcb3",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-05T14:33:40Z",
+      "side": 1,
+      "message": "You\u0027re very precise. Circular dependency may be intended to keep VM alive, and we\u0027d better to leak and let developers to fix early.\n\nHowever, leak isn\u0027t 100% reproduced even with hwasan (I couldn\u0027t reproduce the leak, even when T/H complaints it) and my concern is about \u0027after VM is stopped\u0027. Let me explain my problem.\n\nAssume that an app implementations callback (`app.cb`) that holds `VmInstance` (`app.cb.vm`). `virtmgr` would have matching `VmInstance` (`mgr.vm`) and callback (`mgr.vm.cb`) and returned it via `IVirtualMachine`.\n\nAfter VM is destroyed, app would like to drop callback and vm instance. However, callbacks and vm instances wouldn\u0027t be deleted from both app and virtmgr side. Here\u0027s bit more detail:\n\n  - `app.cb` is dropped after `mgr.vm.cb` is dropped, because of `IVirtualMachineCallback`\n  - `mgr.vm.cb` is dropped when `mgr.vm` is dropped.\n  - `mgr.vm` is dropped after `app.cb.vm` is dropped because of `IVirtualMachine`.\n  - `app.cb.vm` is dropped if `app.cb` is dropped \u003d\u003d\u003e cyclic dependencies)\n\nThe leak isn\u0027t obvious to notice, and makes `virtmgr` in bad state. Unregistering callback would prevent the case 100%, so I assume that it\u0027s good to have.\n\nWTYT? If you still prefer \u0027let it leak\u0027 approach, then I\u0027ll abandon this CL. I already unchained this CL from others already.",
+      "parentUuid": "98c3b3a0_a121ac38",
+      "revId": "c0fdee571a3782cf4aa8f9c9cb5ab6a5ac794c8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75ffe4b7_c097b2b5",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
@@ -72,6 +90,48 @@
       "writtenOn": "2025-02-04T22:25:43Z",
       "side": 1,
       "message": "is this suppose to be negated, so that you only add the callback if it is not dead?",
+      "revId": "c0fdee571a3782cf4aa8f9c9cb5ab6a5ac794c8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d40ec2_78c39c85",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-05T14:33:40Z",
+      "side": 1,
+      "message": "Done. Sorry, I thought that the vm_state lock is valid inside the if state.",
+      "parentUuid": "75ffe4b7_c097b2b5",
+      "range": {
+        "startLine": 1566,
+        "startChar": 43,
+        "endLine": 1566,
+        "endChar": 50
+      },
+      "revId": "c0fdee571a3782cf4aa8f9c9cb5ab6a5ac794c8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce672e2_1568fefb",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-05T14:33:40Z",
+      "side": 1,
+      "message": "Done. Sorry for the mistake. I fixed it in the wrong CL.",
+      "parentUuid": "e72bacff_dc422b50",
       "revId": "c0fdee571a3782cf4aa8f9c9cb5ab6a5ac794c8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
