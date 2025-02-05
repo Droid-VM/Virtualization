@@ -128,6 +128,24 @@
       "parentUuid": "07fd2cf6_0f2ecace",
       "revId": "cb1fa3acdc17f0ddec6261b6ffbce7081e5d83b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e700d09d_263e8baa",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2970,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-05T11:22:33Z",
+      "side": 1,
+      "message": "`STOP_REASON_MICRODROID_UNKNOWN_RUNTIME_ERROR` as per java lib documentation is for \"The microdroid failed to verify given payload APK\", so we probably cant map Secretkeeper access failures to it.\n\nIt may not be worth being very granular about errors. Just classifying to retryable errors/nonretryable errors would be better from pov of client.\n\n\n[1] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCallback.java;l\u003d55?q\u003dRUNTIME\u0026ss\u003dh%2Fgoogleplex-android%2Fplatform%2Fsuperproject%2Fmain%2F%2B%2Frefs%2Fheads%2Fmain:packages%2Fmodules%2FVirtualization%2Flibs%2Fframework-virtualization%2Fsrc%2Fandroid%2Fsystem%2Fvirtualmachine%2F",
+      "parentUuid": "ab91305f_a4d59e4c",
+      "revId": "cb1fa3acdc17f0ddec6261b6ffbce7081e5d83b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b3c7c7_9033b619",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-05T11:22:33Z",
+      "side": 1,
+      "message": "Contrary to this, status_quo - DICE chain security_version is set to the version code of the apk.\n\n\nThis patch seems to be introducing another field in Android manifest `android.system.virtualmachine.ROLLBACK_INDEX` that is now mapped to security_version field in DICE chain.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 47
+      },
+      "revId": "0ace9003543fce92f46ef1e5864c8b8554079eae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9320593a_97939ab3",
+        "filename": "tests/testapk/AndroidManifestV6_relaxed_rollback_protection.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-05T11:22:33Z",
+      "side": 1,
+      "message": "Does this introduce a new property/schema? Do we need to specify it somewhere for VM payload developers",
+      "range": {
+        "startLine": 25,
+        "startChar": 32,
+        "endLine": 25,
+        "endChar": 76
+      },
+      "revId": "0ace9003543fce92f46ef1e5864c8b8554079eae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
