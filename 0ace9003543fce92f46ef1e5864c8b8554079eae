@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38aa209a_74592374",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-05T16:07:56Z",
+      "side": 1,
+      "message": "\u003e Note that we only use \"version\" as far as Subcomponents are concerned. Till now, there was never any need to add another version field in Sucomponents\n\nRight, but with introduction of this change there is now a need to distingiush between \"version of the payload running inside the payload\" and the \"security version of the payload\".\n\n\u003e We already have security_verison. what is the rational for introducing another version? If this patch is part of Rollbackable Mainline apex solution, can you sumarize what approach are you going with?\n\nYes, this is to allow rollbackable payloads. The approach is described at docs/mainline_module_payload.md which is part of this patch.",
+      "parentUuid": "4f11f16d_c376ee7d",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 47
+      },
+      "revId": "0ace9003543fce92f46ef1e5864c8b8554079eae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9320593a_97939ab3",
