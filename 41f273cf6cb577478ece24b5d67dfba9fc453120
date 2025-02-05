@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "054c9e74_eb4c8fc5",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-05T15:43:58Z",
+      "side": 1,
+      "message": "Sorry, wrong diff in different places.",
+      "parentUuid": "3fb9d737_2e1f8d0d",
+      "range": {
+        "startLine": 1566,
+        "startChar": 0,
+        "endLine": 1566,
+        "endChar": 78
+      },
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33e764ee_bd5844b1",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45ed4a97_87b31b52",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-05T15:43:58Z",
+      "side": 1,
+      "message": "\u003e why add `const` everywhere?\n\nas you may expected, switching from `Box` to `Arc` enforced the change. (`Box::from_raw(*mut T)` vs `Arc::from_raw(*const T)`)\n\nmore comments are also inlined.\n\n\u003e it doesn\u0027t matter much either way IMO, but this all went through API review, so it shouldn\u0027t be changed without a good reason\n\nThis code hasn\u0027t been released officially yet, so this is the last chance to make such changes.\n\nI personally think that having `const` is more correct from the perspective of C code, especially when `const` actually works.",
+      "parentUuid": "33e764ee_bd5844b1",
+      "range": {
+        "startLine": 337,
+        "startChar": 30,
+        "endLine": 337,
+        "endChar": 35
+      },
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "876769be_4c11e4fc",
@@ -60,6 +108,24 @@
       "writtenOn": "2025-02-04T14:13:48Z",
       "side": 1,
       "message": "It\u0027s recommended to avoid ptr2int2ptr roundtrips. Why not use `*mut ()` here instead?",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf31d545_9e7cc65c",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-05T15:43:58Z",
+      "side": 1,
+      "message": "I did so simply because `ptr` can\u0027t be sent across the thread. `data` is originated from the FFI function, so this seemed to be the simplest workaround.\n\nCould you recommend me a more Rust way for this? It would be a great help.",
+      "parentUuid": "876769be_4c11e4fc",
       "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -135,6 +201,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c75df09c_07699551",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-05T15:43:58Z",
+      "side": 1,
+      "message": "Frederick is correct. Let me add more documentation to make it more clearer.",
+      "parentUuid": "40dbbf9e_a33416f8",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 45
+      },
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0adbbaad_65875f93",
@@ -154,6 +244,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49ea30b0_f531502c",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-05T15:43:58Z",
+      "side": 1,
+      "message": "\u003e we should document the lifetime expectations in the header. i\u0027m honestly not sure what they would be at the moment.\n\nI\u0027m terribly sorry, but why do we need to document the lifetime expectations of the callback? I thought that lifetime of callbacks quite obvious.\n\n\u003e technically another process could keep this LocalVmInstance alive however long it wants, so callback and data need to be valid for the rest of the process\u0027s life\n\nSorry again, but I can\u0027t imagine how can another process keep this `LocalVmInstance` alive. Plus, if `LocalVmInstance` alives, then callback and data would valid for free, wouldn\u0027t they? Am I missing something?\n\n\u003e that sounds onerous, so we should probably tie it to sometihng else, e.g. ensure we don\u0027t use them if AVirtualMachine_destroy has been called (note that the self.vm.upgrade() check isn\u0027t enough to guarantee that)",
+      "parentUuid": "0adbbaad_65875f93",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00f92ed8_80c7673e",
         "filename": "tests/vts/src/vts_libavf_test.rs",
         "patchSetId": 1
@@ -165,6 +273,24 @@
       "writtenOn": "2025-02-04T14:13:48Z",
       "side": 1,
       "message": "Receiver is Send. That said, it isn\u0027t Sync.",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "208da22a_05881f26",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-05T15:43:58Z",
+      "side": 1,
+      "message": "Thank you for the correction. Done",
+      "parentUuid": "00f92ed8_80c7673e",
       "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
