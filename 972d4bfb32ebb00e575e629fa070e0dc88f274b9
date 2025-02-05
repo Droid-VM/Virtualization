@@ -22,6 +22,30 @@
       },
       "revId": "972d4bfb32ebb00e575e629fa070e0dc88f274b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbc9903d_a5b6a05e",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-05T14:09:05Z",
+      "side": 1,
+      "message": "That\u0027s a good point, i forgot that isCompatibleWith is expected to be symmetrical. Moving the check into virtmgr sgtm",
+      "parentUuid": "f41a09f4_85ab65a4",
+      "range": {
+        "startLine": 636,
+        "startChar": 23,
+        "endLine": 636,
+        "endChar": 78
+      },
+      "revId": "972d4bfb32ebb00e575e629fa070e0dc88f274b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
