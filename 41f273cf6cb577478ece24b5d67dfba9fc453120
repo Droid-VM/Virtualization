@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f763607_8455fd17",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-05T18:52:07Z",
+      "side": 1,
+      "message": "In C++ (and I assume C), `*` can be implicitly converted to `const*`, but the other direction requires an explicit cast and is generally not a good idea. By analogy, casting the `*mut T` to a `*const T` in Rust seems perfectly fine, I don\u0027t think you need to ask for a `*const T` from the caller.\n\n\u003e I personally think that having `const` is more correct from the perspective of C code, especially when `const` actually works.\n\nI suppose it is subjective, but some of these ops seem \"mutating\" to me, e.g. `start` is associating the callback with the `AVirtualMachine`.\n\n\u003e This code hasn\u0027t been released officially yet, so this is the last chance to make such changes.\n\nWe are well past the API freeze and someone people are trying to build solutions on top of it already. I\u0027d agreed its worth it if we are future proofing the API, but I think keeping it `*mut` is actually better long term because it grants us more flexibilty in the implementation (ofc, we can always ignore the qualifier, they don\u0027t have a strong meaning in C).",
+      "parentUuid": "45ed4a97_87b31b52",
+      "range": {
+        "startLine": 337,
+        "startChar": 30,
+        "endLine": 337,
+        "endChar": 35
+      },
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "876769be_4c11e4fc",
         "filename": "libs/libavf/src/lib.rs",
         "patchSetId": 1
@@ -243,6 +267,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da27127_97e439fa",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-05T18:52:07Z",
+      "side": 1,
+      "message": "\u003e Sounds pretty error prone to me.\n\nMy reasoning is that the caller creates an `AVirtualMachine` and associates the callback to it. When the caller destroys the `AVirtualMachine` (i.e. deletes its handle to the VM, which is not the same as stopping the VM), it would expect the callback to be unassociated, so not calling it anymore makes sense.\n\nThe lifetime of the `LocalVmInstance` and when `on_died` is called are controlled by a separate process, so I don\u0027t think we can structure the code in a way that statically eliminates the \"VmInstance is gone\" case.",
+      "parentUuid": "c75df09c_07699551",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 45
+      },
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0adbbaad_65875f93",
@@ -274,6 +322,24 @@
       "side": 1,
       "message": "\u003e we should document the lifetime expectations in the header. i\u0027m honestly not sure what they would be at the moment.\n\nI\u0027m terribly sorry, but why do we need to document the lifetime expectations of the callback? I thought that lifetime of callbacks quite obvious.\n\n\u003e technically another process could keep this LocalVmInstance alive however long it wants, so callback and data need to be valid for the rest of the process\u0027s life\n\nSorry again, but I can\u0027t imagine how can another process keep this `LocalVmInstance` alive. Plus, if `LocalVmInstance` alives, then callback and data would valid for free, wouldn\u0027t they? Am I missing something?\n\n\u003e that sounds onerous, so we should probably tie it to sometihng else, e.g. ensure we don\u0027t use them if AVirtualMachine_destroy has been called (note that the self.vm.upgrade() check isn\u0027t enough to guarantee that)",
       "parentUuid": "0adbbaad_65875f93",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a5b1a46_ac6f57e7",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-05T18:52:07Z",
+      "side": 1,
+      "message": "\u003e Sorry again, but I can\u0027t imagine how can another process keep this `LocalVmInstance` alive. Plus, if `LocalVmInstance` alives, then callback and data would valid for free, wouldn\u0027t they? Am I missing something?\n\n`LocalVmInstance` is a binder object and we pass a strong reference of it to `virtmgr`, so as long as `virtmgr` doesn\u0027t drop that reference, the `LocalVmInstance` will not be destroyed.\n\n`callback` is just a function pointer, so it should always be valid (assuming we aren\u0027t doing something exotic like passing pointers to JIT compiled code that can be deallocated).\n\n`data` is something arbitrary passed by the caller. Its lifetime isn\u0027t connected to the `LocalVmInstance` object. For example, it might be a pointer to the stack of the caller of `AVirtualMachine_start`.\n\nThe lifetime expectation isn\u0027t obvious to me, esp since right now it seems to be \"the lifetime of the process\".",
+      "parentUuid": "49ea30b0_f531502c",
       "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
