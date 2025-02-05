@@ -22,6 +22,30 @@
       },
       "revId": "a3a098bb38c40a38a798355b1f99e1b341cd0863",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9bcae58_d2fdabb2",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 3418300
+      },
+      "writtenOn": "2025-02-05T00:07:30Z",
+      "side": 1,
+      "message": "I mean that is more for the client than crosvm. The ordering of the bytes is irrelevant once its parsed in AVF. Originally I think the idea was to pass the entire instance_id to crosvm, which is why I think she asked for that particular order",
+      "parentUuid": "b7d6e58a_2caada91",
+      "range": {
+        "startLine": 1044,
+        "startChar": 0,
+        "endLine": 1045,
+        "endChar": 91
+      },
+      "revId": "a3a098bb38c40a38a798355b1f99e1b341cd0863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
