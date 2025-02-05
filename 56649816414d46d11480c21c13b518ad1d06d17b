@@ -318,6 +318,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9e24dbe_672ab6a5",
+        "filename": "android/vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-05T01:04:43Z",
+      "side": 1,
+      "message": "it is inferring that you want to parse a string into a `Result\u003cCpuTopology\u003e`\n\nyou probably just need to wrap that expression in an `Ok`. or, use the turbofish syntax `val.parse::\u003cCpuTopology\u003e()`",
+      "parentUuid": "d623d8b2_768473ee",
+      "range": {
+        "startLine": 387,
+        "startChar": 37,
+        "endLine": 390,
+        "endChar": 14
+      },
+      "revId": "56649816414d46d11480c21c13b518ad1d06d17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95f792e8_45d0689f",
         "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 12
