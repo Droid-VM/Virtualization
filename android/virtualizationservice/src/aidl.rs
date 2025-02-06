@@ -196,6 +196,22 @@ impl VirtualizationServiceInternal {
 
         service
     }
+
+    fn try_updating_sk_state(&self, id: &[u8; 64]) -> binder::Result<()> {
+        let state = &mut *self.state.lock().unwrap();
+        if let Some(sk_state) = &mut state.sk_state {
+            let uid = get_calling_uid();
+            let user_id = multiuser_get_user_id(uid);
+            let app_id = multiuser_get_app_id(uid);
+            info!("Recording possible new owner of Secretkeeper entry={hex::encode(id)}: (user_id={user_id}, app_id={app_id},)");
+            if let Err(e) = sk_state.add_id(id, user_id, app_id) {
+                error!("Failed to update the Secretkeeper entry owner: {e:?}");
+            }
+        } else {
+            info!("ignoring update of Secretkeeper entry as no ISecretkeeper");
+        }
+        Ok(())
+    }
 }
 
 impl Interface for VirtualizationServiceInternal {}
@@ -463,16 +479,7 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             .or_service_specific_exception(-1)?;
         let uid = get_calling_uid();
         info!("Allocated a VM's instance_id: {:?}..., for uid: {:?}", &hex::encode(id)[..8], uid);
-        let state = &mut *self.state.lock().unwrap();
-        if let Some(sk_state) = &mut state.sk_state {
-            let user_id = multiuser_get_user_id(uid);
-            let app_id = multiuser_get_app_id(uid);
-            info!("Recording possible existence of state for (user_id={user_id}, app_id={app_id})");
-            if let Err(e) = sk_state.add_id(&id, user_id, app_id) {
-                error!("Failed to record the instance_id: {e:?}");
-            }
-        }
-
+        self.try_updating_sk_state(&id)?;
         Ok(id)
     }
 
@@ -496,25 +503,9 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
     }
 
     fn claimVmInstance(&self, instance_id: &[u8; 64]) -> binder::Result<()> {
-        let state = &mut *self.state.lock().unwrap();
-        if let Some(sk_state) = &mut state.sk_state {
-            let uid = get_calling_uid();
-            info!(
-                "Claiming a VM's instance_id: {:?}, for uid: {:?}",
-                hex::encode(instance_id),
-                uid
-            );
+        info!("Claiming a VM's instance_id: {:?}", hex::encode(instance_id),);
 
-            let user_id = multiuser_get_user_id(uid);
-            let app_id = multiuser_get_app_id(uid);
-            info!("Recording possible new owner of state for (user_id={user_id}, app_id={app_id})");
-            if let Err(e) = sk_state.add_id(instance_id, user_id, app_id) {
-                error!("Failed to update the instance_id owner: {e:?}");
-            }
-        } else {
-            info!("ignoring claimVmInstance() as no ISecretkeeper");
-        }
-        Ok(())
+        self.try_updating_sk_state(instance_id)
     }
 
     fn createTapInterface(&self, _iface_name_suffix: &str) -> binder::Result<ParcelFileDescriptor> {
@@ -554,6 +545,10 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         TETHERING_SERVICE.disableVmTethering()?;
 
         NETWORK_SERVICE.deleteTapInterface(tap_fd)
+    }
+
+    fn claimSecretkeeperEntry(&self, id: &[u8; 64]) -> binder::Result<()> {
+        self.try_updating_sk_state(id)
     }
 }
 
