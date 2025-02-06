@@ -39,6 +39,30 @@
       },
       "revId": "05e3c882ad688bf7912fdeda15aa2491a01f5ee9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48b358e5_316a1a4a",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-06T14:26:11Z",
+      "side": 1,
+      "message": "Yes we can if on Android 16 (sdk int 36). \n\nThat check was removed with aosp/2975435",
+      "parentUuid": "fb91f006_309b96bc",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "05e3c882ad688bf7912fdeda15aa2491a01f5ee9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
