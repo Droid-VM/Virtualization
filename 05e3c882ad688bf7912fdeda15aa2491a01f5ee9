@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b0271d8_0168e151",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-06T13:07:02Z",
+      "side": 1,
+      "message": "Hi Jiyong, thanks for working on this!",
+      "revId": "05e3c882ad688bf7912fdeda15aa2491a01f5ee9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb91f006_309b96bc",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-06T13:07:02Z",
+      "side": 1,
+      "message": "Can we call both methods on the same time? There\u0027s also the following error in b/394221791\n\njava.lang.IllegalStateException: setPayloadConfigPath and setOs may not both be called",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "05e3c882ad688bf7912fdeda15aa2491a01f5ee9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
