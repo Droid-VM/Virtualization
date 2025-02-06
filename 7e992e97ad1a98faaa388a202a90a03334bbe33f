@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "042f3493_14db0e7c",
+        "filename": "guest/pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-06T19:24:18Z",
+      "side": 1,
+      "message": "(here and elsewhere)\nThis name is consistent with deptcharge, but a bit broad. Should we change it to something like ReservedMemConfig?",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04bdd199_e230997d",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-06T19:24:18Z",
+      "side": 1,
+      "message": "Currently this test fails since all offsets inside the data portion end up being correct but we\u0027re just missing a header. The only way I can think of to detect this is to aggressively try to read too many headers and see if it succeeds.\n\nIs this something we should consider an error case or just allow fewer headers than are present to be specified?",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
