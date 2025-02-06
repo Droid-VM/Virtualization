@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9899c1d8_2944756f",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-06T23:25:43Z",
+      "side": 1,
+      "message": "Done, but called it `memoryBackingFile`",
+      "parentUuid": "79c998ee_22545f4c",
+      "range": {
+        "startLine": 827,
+        "startChar": 18,
+        "endLine": 827,
+        "endChar": 19
+      },
+      "revId": "3110e10386e8f92dd9d0d4640f48cd3743a905d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cc096aa_fa523456",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6942c36d_4936279c",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-06T23:25:43Z",
+      "side": 1,
+      "message": "\u003e What happens if mistakenly range_end \u003c range_start is passed?\n\nThey are unsigned, so it would panic or underflow. I\u0027ve changed it to use `checked_sub` and return an error.\n\n\u003e Or if size is too large?\n\ncrosvm validates that the range is a subset of guest RAM.\n\n\u003e Also, what if there are too many files?\n\nThere is no limit from AVF or crosvm\u0027s perspective.\n\n\u003e For the last 2 questions, I\u0027m guessing memfd would fail at creating the file so that would probably be fine,\n\nThe memfd is created by the client of AVF, so, at this point in the code, we are past that point.\n\n---\n\n\u003e What about returning error early in the aidl.rs or change the parameter from rangeEnd to size? seems like that nobody cares about the end of the range.\n\nUsing a size in the API is a good idea, but I don\u0027t want to change the LLNDK API at this point. It is my fault, I was planning on add a new crosvm cmdline that accept range-end and designed this to match, but then after the fact I realized that --file-backed-mapping already existed and wanted a size. FWIW, internally crosvm is basically always converting the size into a range-end before it does anything meaningful with it.\n\nI\u0027ve change this CL to convert from range-end to size inside libavf, then the rest of the AVF codebase uses only (addr, size).\n\n\u003e Not sure whether we would do the similar for the alignment.\n\ncrosvm validates the alignment",
+      "parentUuid": "0fcd0212_24085e06",
+      "range": {
+        "startLine": 1367,
+        "startChar": 8,
+        "endLine": 1367,
+        "endChar": 36
+      },
+      "revId": "3110e10386e8f92dd9d0d4640f48cd3743a905d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "075b437e_60f6df98",
@@ -96,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9387b260_7d42c6c9",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/CustomMemoryBackingFile.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-06T23:25:43Z",
+      "side": 1,
+      "message": "It isn\u0027t being validated right now. I think if the file is too small, then an access to the extra part of the mmap from userspace will result in a SIGBUS. Probably something similar happens if the guest or hypervisor does the same.\n\nAdding a length check is easy ofc, but if we want to be completely sure, we should require the memfd to be sealed so it can\u0027t be resized after the check is done.",
+      "parentUuid": "075b437e_60f6df98",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 18
+      },
+      "revId": "3110e10386e8f92dd9d0d4640f48cd3743a905d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf630284_d8071761",
         "filename": "libs/libavf/src/lib.rs",
         "patchSetId": 4
@@ -107,6 +179,30 @@
       "writtenOn": "2025-02-06T02:01:41Z",
       "side": 1,
       "message": "nit;\n\n`let file \u003d get_file_from_fd(fd).ok_or(-libc:EINVAL)?;`",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 0
+      },
+      "revId": "3110e10386e8f92dd9d0d4640f48cd3743a905d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4db131ae_16fac3f4",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-06T23:25:43Z",
+      "side": 1,
+      "message": "Doesn\u0027t work with `c_int` return type unfortunately",
+      "parentUuid": "cf630284_d8071761",
       "range": {
         "startLine": 273,
         "startChar": 0,
