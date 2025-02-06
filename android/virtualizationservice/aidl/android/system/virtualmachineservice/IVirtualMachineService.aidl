@@ -63,4 +63,7 @@ interface IVirtualMachineService {
      * that Secretkeeper is supported from Linux device tree before calling this.
      */
     ISecretkeeper getSecretkeeper();
+
+    // TODO: Consider generalizing it to something like claimRpEntry.
+    void claimSecretkeeperEntry(in byte[64] id);
 }
