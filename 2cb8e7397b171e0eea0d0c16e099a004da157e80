@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9eedf17c_d09c6a03",
+        "filename": "docs/mainline_module_payload.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-06T00:12:09Z",
+      "side": 1,
+      "message": "\u003e Its not clear to me how PVMs would use android.system.virtualmachine.ROLLBACK_INDEX to allow rollbackable mainline modules.\n\nThe feature here is to allow to deliver a Microdroid payload inside a Mainline module, not to allow loading Mainline module into a Microdroid pVM (this is a separate thing that we should handle next release).\n\n\u003e Are you expecting developers to increase android.system.virtualmachine.ROLLBACK_INDEX only in cases of real security fixes\n\nYes\n\n\u003e PVM/MM is expected to allow only non-decreasing ROLLBACK_INDEX?\n\nYes, see new test cases in MicrodroidTests.java.",
+      "parentUuid": "65f45d68_c539db65",
+      "range": {
+        "startLine": 29,
+        "startChar": 5,
+        "endLine": 29,
+        "endChar": 59
+      },
+      "revId": "2cb8e7397b171e0eea0d0c16e099a004da157e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3c068c51_e86e1d78",
         "filename": "guest/microdroid_manager/src/dice.rs",
         "patchSetId": 4
