@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0fcd0212_24085e06",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-06T02:01:41Z",
+      "side": 1,
+      "message": "What about returning error early in the `aidl.rs` or change the parameter from `rangeEnd` to `size`? seems like that nobody cares about the end of the range.\n\nNot sure whether we would do the similar for the alignment.",
+      "parentUuid": "7cc096aa_fa523456",
+      "range": {
+        "startLine": 1367,
+        "startChar": 8,
+        "endLine": 1367,
+        "endChar": 36
+      },
+      "revId": "3110e10386e8f92dd9d0d4640f48cd3743a905d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "075b437e_60f6df98",
         "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/CustomMemoryBackingFile.aidl",
         "patchSetId": 4
@@ -65,6 +89,29 @@
         "startChar": 0,
         "endLine": 35,
         "endChar": 18
+      },
+      "revId": "3110e10386e8f92dd9d0d4640f48cd3743a905d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf630284_d8071761",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-06T02:01:41Z",
+      "side": 1,
+      "message": "nit;\n\n`let file \u003d get_file_from_fd(fd).ok_or(-libc:EINVAL)?;`",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 0
       },
       "revId": "3110e10386e8f92dd9d0d4640f48cd3743a905d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
