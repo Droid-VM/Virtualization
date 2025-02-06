@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "584875e6_e623ec68",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-06T16:39:19Z",
+      "side": 1,
+      "message": "nit: Wouldn\u0027t`cfg!(llpvm_changes).then_some(instance_id)` work?",
+      "range": {
+        "startLine": 601,
+        "startChar": 29,
+        "endLine": 601,
+        "endChar": 87
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ca4ab60_158ae5a9",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-06T16:39:19Z",
+      "side": 1,
+      "message": "Given that `run_vm()` applies these `device_tree_overlays` in the order in which they are found in the vector/slice, I believe we should make sure that this one is last i.e. that its values won\u0027t get overridden by other DTBOs?",
+      "range": {
+        "startLine": 609,
+        "startChar": 12,
+        "endLine": 609,
+        "endChar": 50
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aecedc4_526bd51b",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-06T16:39:19Z",
+      "side": 1,
+      "message": "This seems to be `defer_rollback_protection`, could we DRY it?\n\nAlso, do we really need to `extract_sk_public_key_from_host_ref_dt()` when  `!defer_rollback_protection`, given that updatability is not enabled (flag), not supported, and/or not requested so why would the key be necessary?\n\nFor example, would it make sense to (in `create_vm_internal()`):\n```\nlet defer_rollback_protection \u003d cfg!(llpvm_changes)\n    \u0026\u0026 extract_want_updatable(config)\n    \u0026\u0026 is_secretkeeper_supported();\nlet secretkeeper_public_key \u003d if !defer_rollback_protection {\n    None\n} else if let Some(k) \u003d get_secretkeeper_public_key_from_hal()? {\n    Some(k)\n} else if let Some(k) \u003d get_secretkeeper_public_key_from_host_dt()? {\n    Some(k)\n} else {\n    return Err(...);\n};\n// Note: there might be a better way to write this than these if/else-if/else?\n```\n?",
+      "range": {
+        "startLine": 970,
+        "startChar": 0,
+        "endLine": 972,
+        "endChar": 56
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498c4758_c4e77344",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-06T16:39:19Z",
+      "side": 1,
+      "message": "To make sure that we don\u0027t forget to add also new properties to this check, WDYT of coupling it with the \"node adding\" logic below by using a common data structure e.g.\n```\nlet mut avf_props \u003d Vec::new();\nif let Some(v) \u003d \u0026self.trusted.secretkeeper_public_key {\n    avf_props.push((c\"secretkeeper_public_key\", v.as_slice());\n}\n// ...\nlet mut untrusted_props \u003d Vec::new();\nif self.untrusted.defer_rollback_protection {\n    untrusted_props.push((c\"defer_rollback_protection\", \u0026[]);\n}\n// ...\n```\nso that you can then\n```\nif avf_props.is_empty() \u0026\u0026 untrusted_props.is_empty() {\n    return Ok(None);\n}\n```\nand also\n```\nfor (name, value) in avf_props {\n    avb.setprop(name, value)...?;\n}\n```\n(same for `untrusted_props`) and keep it all in-sync?\n\nMaybe even encapsulate that into `{Untrusted,Trusted}DeviceTreeProperties` e.g.\n```\nimpl UntrustedDeviceTreeProperties {\n    fn get_untrusted_props(\u0026self) -\u003e Vec\u003c(\u0026Cstr, \u0026[u8])\u003e { ... }\n}\n```\nalthough not sure how easy it\u0027d be to please the borrow checker?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 76
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c4cea2d_fb3a283b",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-06T16:39:19Z",
+      "side": 1,
+      "message": "nit: isn\u0027t this `c\"/\"`?",
+      "range": {
+        "startLine": 68,
+        "startChar": 37,
+        "endLine": 68,
+        "endChar": 44
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b75cf8ff_04c78dd9",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-06T16:39:19Z",
+      "side": 1,
+      "message": "Pass the file name from the caller instead of hardcoding it deep within this struct?",
+      "range": {
+        "startLine": 107,
+        "startChar": 43,
+        "endLine": 107,
+        "endChar": 68
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13ad1a5f_c1263b39",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-06T16:39:19Z",
+      "side": 1,
+      "message": "Let\u0027s avoid the terminology \"reference DT\" on the host side.\n\nRename to `..._from_host_dt()`?",
+      "range": {
+        "startLine": 113,
+        "startChar": 14,
+        "endLine": 113,
+        "endChar": 52
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a1f86d7_4fcdba53",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-06T16:39:19Z",
+      "side": 1,
+      "message": "Why not simply directly create a `Path` to\n```\n/proc/device-tree/avf/reference/avf/secretkeeper_public_key\n```\nand read that (pseudo)file into a vector?\n\nWe could even introduce a helper function\n```\nfn read_bytes_from_file(\u0026Path) -\u003e Option\u003cVec\u003cu8\u003e\u003e\n```\nfor clarity/reusability?",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 114,
+        "endChar": 62
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
