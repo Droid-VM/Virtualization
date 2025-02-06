@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a488e9_2a21c1e0",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-06T06:20:17Z",
+      "side": 1,
+      "message": "I got the spirit -- let me remove `const` change because of all the reasons from you and it\u0027s technically outside of this CL\u0027s scope.",
+      "parentUuid": "6f763607_8455fd17",
+      "range": {
+        "startLine": 337,
+        "startChar": 30,
+        "endLine": 337,
+        "endChar": 35
+      },
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "876769be_4c11e4fc",
@@ -168,6 +192,24 @@
       "side": 1,
       "message": "You can unsafely implement Send/Sync for the struct that contains the pointer.",
       "parentUuid": "bf31d545_9e7cc65c",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19290416_b309d289",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-06T06:20:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39fbf9c2_9607baac",
       "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -344,6 +386,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c5a601c_455e5db9",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-06T06:20:17Z",
+      "side": 1,
+      "message": "Done. PTAL.",
+      "parentUuid": "8a5b1a46_ac6f57e7",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b623dc4_8a83d0d3",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-06T06:20:17Z",
+      "side": 1,
+      "message": "Done. PTAL for the doc.",
+      "parentUuid": "8a5b1a46_ac6f57e7",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00f92ed8_80c7673e",
@@ -392,6 +470,24 @@
       "writtenOn": "2025-02-04T23:24:24Z",
       "side": 1,
       "message": "it isn\u0027t necessarily a problem, but i want to point out that this line won\u0027t ever actually be the one to delete the `Arc\u003cVmInstance\u003e`. the caller is holding a strong ref, so the earliest we\u0027ll actually dealloc is when the caller drops its ref\n\npersonally i think all the ref counting just so that we can pass `vm: *const AVirtualMachine` in here and it easier to call `AVirtualMachine_destroy` isn\u0027t adding much value. it is a loose style of memory management that we should be discouraging\n\nfor example, imagine if you write safe rust bindings for this API. you are going to want a rust type that owns the `vm: *const AVirtualMachine` and calls `AVirtualMachine_destroy` in its `Drop` implementation. it won\u0027t be able to make any use of this pointer argument, it will want to drop the existing instance of the rust type that owns it. if it wants to drop it from the callback, then it would do that by transferring ownership somehow, maybe via the `data` param",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d599ab8_e3eaa101",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-06T06:20:17Z",
+      "side": 1,
+      "message": "You\u0027re very precise. But I wrote this way just to demonstrate the code pattern that is useful for native code + test whether passed `vm` is valid.\n\nIn practical Rust code, the benefit of using `vm` neglectable as you pointed out. However, the primary use case of `vm` is to distinguish callbacks, so I assume that it would be sufficient here.",
+      "parentUuid": "93b53d53_7d32d4d0",
       "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
