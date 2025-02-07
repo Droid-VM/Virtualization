@@ -204,6 +204,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13d392a7_13721f8c",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-07T00:56:35Z",
+      "side": 1,
+      "message": "If this is following the requirements of `\u0026CStr`, then this should check that _only_ the last byte is nul. I suggest using [`CStr::from_bytes_with_nul`](https://doc.rust-lang.org/std/ffi/struct.CStr.html#method.from_bytes_with_nul) and checking if it returns `Err`",
+      "parentUuid": "36ca9f2e_8ac6a0ad",
+      "range": {
+        "startLine": 68,
+        "startChar": 15,
+        "endLine": 68,
+        "endChar": 57
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6aa6da8_d3d754b2",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-07T00:56:35Z",
+      "side": 1,
+      "message": "nit: Rust uses the term `nul` for the `\\0` terminator at the end of a `CStr`. It\u0027s _technically_ distinct from `null`, the pointer with address 0. Everyone knows what \"null terminator\" or \"null byte\" means though, so nbd",
+      "range": {
+        "startLine": 68,
+        "startChar": 48,
+        "endLine": 68,
+        "endChar": 52
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ae59832_831c286d",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 7
@@ -232,6 +279,30 @@
       "writtenOn": "2025-02-06T21:23:23Z",
       "side": 1,
       "message": "This is emitting the _entire_ `buffer` for each iteration. I would instead expect it to yield the portion of the `buffer` that is specifically relevant to the current `\u0026\u0027a RMemHeader`. That way the user of the iterator doesn\u0027t need to do any offset calculations.\n\nOtherwise the iterator doesn\u0027t provide much value: it\u0027d be more clear to have `fn headers(\u0026self) -\u003e \u0026[RMemHeader]` and `fn buffer(\u0026self) -\u003e \u0026[u8]` getters and have the user `for` loop over the headers.",
+      "range": {
+        "startLine": 104,
+        "startChar": 23,
+        "endLine": 104,
+        "endChar": 38
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "981acf3e_212ed7f5",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-07T00:56:35Z",
+      "side": 1,
+      "message": "Also, if you require that the iterated elements be nul-terminated strings, then yield `\u0026CStr` instead of `\u0026[u8]`",
+      "parentUuid": "4689e779_a759e335",
       "range": {
         "startLine": 104,
         "startChar": 23,
