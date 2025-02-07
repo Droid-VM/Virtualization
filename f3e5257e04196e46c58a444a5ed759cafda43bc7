@@ -33,6 +33,24 @@
       "message": "port forwarding feature uses `bcc` which requires kernel header.. can you test if port forwarding works well with custom kernel?",
       "revId": "f3e5257e04196e46c58a444a5ed759cafda43bc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb77f93e_a16d206a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2025-02-07T00:32:32Z",
+      "side": 1,
+      "message": "Hi Jeongik,\nI checked that it does. In line 312 we also add the headers package for our kernel to FAI localdebs.",
+      "parentUuid": "73fe5503_2eaf469b",
+      "revId": "f3e5257e04196e46c58a444a5ed759cafda43bc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
