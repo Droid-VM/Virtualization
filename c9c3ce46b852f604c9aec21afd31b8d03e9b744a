@@ -39,6 +39,30 @@
       },
       "revId": "c9c3ce46b852f604c9aec21afd31b8d03e9b744a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "775abe16_bac3346b",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-07T23:39:52Z",
+      "side": 1,
+      "message": "Good point. I think closing the FD is preferrable, so I\u0027ve updated the header docs to state that ownership is transferred even on error.",
+      "parentUuid": "1f893005_62b15454",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 6
+      },
+      "revId": "c9c3ce46b852f604c9aec21afd31b8d03e9b744a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
