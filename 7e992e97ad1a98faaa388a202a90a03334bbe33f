@@ -315,6 +315,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0b00198_ff6e001f",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-02-07T09:55:14Z",
+      "side": 1,
+      "message": "I don\u0027t see any filtering of what vm receives the blobs using the vm\u0027s uuid. I believe such filtering is crucial for this functionality and I don\u0027t think we should merge this change without it.",
+      "range": {
+        "startLine": 111,
+        "startChar": 7,
+        "endLine": 111,
+        "endChar": 25
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9753dc4a_d238013e",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 7
