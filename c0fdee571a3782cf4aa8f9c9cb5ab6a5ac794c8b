@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68a46d8a_3116ff06",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-07T02:49:11Z",
+      "side": 1,
+      "message": "I\u0027m nervous this might encourage people to rely on it instead of breaking the cycle correctly, but I\u0027m OK with. I think it does make sense to drop callbacks once they are unneeded.\n\nMaybe I\u0027ll look into writing a binder cycle detector one day :)",
+      "parentUuid": "75bd4e22_586dbcb3",
+      "revId": "c0fdee571a3782cf4aa8f9c9cb5ab6a5ac794c8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75ffe4b7_c097b2b5",
