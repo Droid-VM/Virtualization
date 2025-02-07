@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13d809c6_145a507a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-07T09:23:08Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM.",
+      "revId": "c9c3ce46b852f604c9aec21afd31b8d03e9b744a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f893005_62b15454",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-07T09:23:08Z",
+      "side": 1,
+      "message": "Should you check this first so that the fd is not closed by the destructor in this error path?",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 6
+      },
+      "revId": "c9c3ce46b852f604c9aec21afd31b8d03e9b744a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
