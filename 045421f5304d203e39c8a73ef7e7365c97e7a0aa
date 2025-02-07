@@ -70,6 +70,30 @@
       },
       "revId": "045421f5304d203e39c8a73ef7e7365c97e7a0aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b36d169_a4f68241",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-02-07T12:16:14Z",
+      "side": 1,
+      "message": "I\u0027ve rebased to swap the order of this and the patch to remove `eprintln`, so that can be submitted independently. This patch now just adds the `ExceptionLock` to allow `println` and logging and so on to work from exception handlers (apart from synchronous exceptions). I think this is still worthwhile, as users of vmbase might want to do more with exceptions in future, e.g. moving to an interrupt-driven model for VirtIO.",
+      "parentUuid": "6bde8eef_7db21345",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 65
+      },
+      "revId": "045421f5304d203e39c8a73ef7e7365c97e7a0aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
