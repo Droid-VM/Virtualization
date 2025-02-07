@@ -1986,6 +1986,15 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    public void rollbackprotectedDataIsClaimed() throws Exception {
+        String time =
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+        rollbackProtectedDataOfPayload();
+        assertThat(checkLogcat("virtualizationservice::aidl: Claiming Secretkeeper entry", time))
+                .isTrue();
+    }
+
+    @Test
     @CddTest
     public void isNewInstanceTest() throws Exception {
         assumeSupportedDevice();
@@ -2110,16 +2119,14 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         final VirtualMachine vm = forceCreateNewVirtualMachine("test_vm_logcat", vmConfig);
 
         runVmTestService(TAG, vm, (service, results) -> {});
+        return checkLogcat("virtualizationmanager::aidl: (Console|Log).*executing main task", time);
+    }
 
+    private boolean checkLogcat(String logLine, String time) throws Exception {
         // only check logs printed after this test
         Process logcatProcess =
                 new ProcessBuilder()
-                        .command(
-                                "logcat",
-                                "-e",
-                                "virtualizationmanager::aidl: (Console|Log).*executing main task",
-                                "-t",
-                                time)
+                        .command("logcat", "-e", "virtualizationmanager", "-t", time)
                         .start();
         logcatProcess.waitFor();
         BufferedReader reader =
