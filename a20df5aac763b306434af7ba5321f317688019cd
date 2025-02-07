@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c2e315f_1cffbe6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-07T01:42:17Z",
+      "side": 1,
+      "message": "(not for this patch), i think we can enable min_sdk_level linter checks to ensure that if we use api that was introduced after the min_sdk_level of the apk, then the call to that api should be guarded by the sdk version check",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 39
+      },
+      "revId": "a20df5aac763b306434af7ba5321f317688019cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da9d700a_c6faac83",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-07T01:42:17Z",
+      "side": 1,
+      "message": "nit: use Build.VERSION_CODE.VANILLA_ICE_CREAM? https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/os/Build.java;l\u003d1257;drc\u003dde53d9657cd5e352984697fc130159c474e819a9",
+      "range": {
+        "startLine": 81,
+        "startChar": 37,
+        "endLine": 81,
+        "endChar": 39
+      },
+      "revId": "a20df5aac763b306434af7ba5321f317688019cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46333ab4_8eaefa5d",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-07T01:42:17Z",
+      "side": 1,
+      "message": "this is technically not correct until the current sdk is finalized, but at this point i think it\u0027s pretty safe to assume that new api level will be 36",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 42
+      },
+      "revId": "a20df5aac763b306434af7ba5321f317688019cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8503b020_1d9b5fe9",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-07T01:42:17Z",
+      "side": 1,
+      "message": "nit: use Build.VERSION_CODES.VANILLA_ICE_CREAM? https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/os/Build.java;l\u003d1257;drc\u003dde53d9657cd5e352984697fc130159c474e819a9",
+      "range": {
+        "startLine": 169,
+        "startChar": 37,
+        "endLine": 169,
+        "endChar": 39
+      },
+      "revId": "a20df5aac763b306434af7ba5321f317688019cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9e4250_12e4f46d",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-07T01:42:17Z",
+      "side": 1,
+      "message": "The API was actually added in VIC, so the check should be SDK_INT \u003e\u003d Build.VERSION_CODES.VANILLA_ICE_CREAM \u003d\u003e call api, else \u003d\u003e return false",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 303,
+        "endChar": 81
+      },
+      "revId": "a20df5aac763b306434af7ba5321f317688019cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46d49236_b4da4455",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-07T01:42:17Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 328,
+        "startChar": 3,
+        "endLine": 329,
+        "endChar": 81
+      },
+      "revId": "a20df5aac763b306434af7ba5321f317688019cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
