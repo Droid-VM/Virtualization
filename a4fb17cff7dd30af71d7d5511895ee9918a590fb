@@ -22,6 +22,30 @@
       },
       "revId": "a4fb17cff7dd30af71d7d5511895ee9918a590fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad612eac_593eb242",
+        "filename": "libs/libvmbase/src/console.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-02-07T12:06:50Z",
+      "side": 1,
+      "message": "Fixed by having `panic` use the emergency console, and also made this return an error rather than panicking.",
+      "parentUuid": "4816fcc9_a05d7f0a",
+      "range": {
+        "startLine": 70,
+        "startChar": 36,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "a4fb17cff7dd30af71d7d5511895ee9918a590fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
