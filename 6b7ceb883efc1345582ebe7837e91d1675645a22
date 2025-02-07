@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64e5dc93_c4b1327d",
+        "filename": "guest/pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1572669
+      },
+      "writtenOn": "2025-02-07T19:08:44Z",
+      "side": 1,
+      "message": "nit: rather than matching on len() and then still needing the (potentially fallible, though not really in practice) `try_into()` to get the value out of an Option, you could use the `try_into()` itself to check whether the size matches, something like:\n\n```\nif let Some(val) \u003d bytes.try_into().ok().map(u32::from_be_bytes) {\n    Some(DeviceTreeInteger::SingleCell(val))\n} else if let Some(val) \u003d bytes.try_into().ok().map(u64::from_be_bytes) {\n    Some(DeviceTreeInteger::DoubleCell(val))\n} else {\n    None\n}\n```",
+      "revId": "6b7ceb883efc1345582ebe7837e91d1675645a22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
