@@ -558,6 +558,7 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
     }
 
     fn claimSecretkeeperEntry(&self, id: &[u8; 64]) -> binder::Result<()> {
+        // There are Microdroid tests that look for this string.
         info!("Claiming Secretkeeper entry: {:?}", hex::encode(id));
         self.try_updating_sk_state(id);
         Ok(())
