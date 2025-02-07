@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df482113_472c1b12",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-07T05:41:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84d8e445_46cf7cf7",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 33
+      },
+      "revId": "de8caded0df62bd86bda434489b9d091cf6321e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c7bc072_91750558",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-30T14:54:15Z",
       "side": 1,
       "message": "If we\u0027re moving to `resizeWritablePartition` method, there would be no invocation fot  `initializeWritablePartition(..., :PartitionType::ENCRYPTEDSTORE)`, i.e., remove this partition type?",
+      "range": {
+        "startLine": 295,
+        "startChar": 12,
+        "endLine": 295,
+        "endChar": 41
+      },
+      "revId": "de8caded0df62bd86bda434489b9d091cf6321e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16e62978_a6177eba",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-07T05:41:00Z",
+      "side": 1,
+      "message": "initializeWritablePartition will still be triggered when we create the partition.",
+      "parentUuid": "2c7bc072_91750558",
       "range": {
         "startLine": 295,
         "startChar": 12,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d743db8_0c3540d3",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 17
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-07T05:41:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c274d312_fdaa5bf9",
+      "range": {
+        "startLine": 63,
+        "startChar": 67,
+        "endLine": 63,
+        "endChar": 94
+      },
+      "revId": "de8caded0df62bd86bda434489b9d091cf6321e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acac1f6f_4d32dd5f",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-01-30T14:54:15Z",
       "side": 1,
       "message": "Since this is only capable of configuring encryptedstore partition, can we rename this to `configureEncryptedstorePartition`?\n\nWe have another writable partition `ANDROID_VM_INSTANCE`, but this method is not expected to serve it.",
+      "range": {
+        "startLine": 65,
+        "startChar": 9,
+        "endLine": 65,
+        "endChar": 32
+      },
+      "revId": "de8caded0df62bd86bda434489b9d091cf6321e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee9b652b_cff8b5f4",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 17
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-07T05:41:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acac1f6f_4d32dd5f",
       "range": {
         "startLine": 65,
         "startChar": 9,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d43007b6_08994cc9",
+        "filename": "guest/encryptedstore/src/main.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-07T05:41:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7729c6a2_8e63a41b",
+      "range": {
+        "startLine": 178,
+        "startChar": 3,
+        "endLine": 178,
+        "endChar": 25
+      },
+      "revId": "de8caded0df62bd86bda434489b9d091cf6321e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b0c83ed_464bb5a4",
@@ -129,6 +249,30 @@
       "writtenOn": "2025-01-30T14:54:15Z",
       "side": 1,
       "message": "I reckon one of these commands were failing \u0026 we were ignoring the error? I filed b/393325858 to gets error logs",
+      "range": {
+        "startLine": 184,
+        "startChar": 13,
+        "endLine": 184,
+        "endChar": 41
+      },
+      "revId": "de8caded0df62bd86bda434489b9d091cf6321e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "754f66d1_e6bd825e",
+        "filename": "guest/encryptedstore/src/main.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-07T05:41:00Z",
+      "side": 1,
+      "message": "While the command now runs without errors, it doesn\u0027t indicate success even when it successfully repairs the file system. Therefore, I\u0027m disregarding the command\u0027s exit code.\n\nI would appreciate any suggestions for a more robust solution to this issue.",
+      "parentUuid": "8b0c83ed_464bb5a4",
       "range": {
         "startLine": 184,
         "startChar": 13,

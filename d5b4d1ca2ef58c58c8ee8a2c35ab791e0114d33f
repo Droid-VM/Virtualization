@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58698f28_071661db",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-07T05:41:00Z",
+      "side": 1,
+      "message": "This method can expand only the existing partition, format_as_encryptedstore will be called when partition is created.",
+      "parentUuid": "e4bea429_33de302b",
+      "range": {
+        "startLine": 307,
+        "startChar": 7,
+        "endLine": 307,
+        "endChar": 30
+      },
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68763e28_52fe23d5",
@@ -90,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13585f19_a16568db",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-07T05:41:00Z",
+      "side": 1,
+      "message": "I\u0027ve updated the method name to more accurately reflect its purpose.\n\nAdditionally, I\u0027d like to raise a concern about potentially preventing VM boot due to this failure, as the method will be called on every VM boot.\n\nI propose an approach where we allow the device to boot if the required storage is available.",
+      "parentUuid": "f14f57dc_2d62082d",
+      "range": {
+        "startLine": 315,
+        "startChar": 5,
+        "endLine": 315,
+        "endChar": 64
+      },
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bacd76d5_013be948",
         "filename": "android/vm/src/run.rs",
         "patchSetId": 18
@@ -101,6 +149,30 @@
       "writtenOn": "2025-01-30T14:54:15Z",
       "side": 1,
       "message": "`resize_partition` should be called irrespective of `!path.exists()` \u0026 `command_create_partition` (which invokes `initializeWritablePartition`) should not be called on encryptedstore img. \n...\n\nOR are you intending on calling `initializeWritablePartition` on first run \u0026 `resize_partition` on subsequent runs?",
+      "range": {
+        "startLine": 108,
+        "startChar": 11,
+        "endLine": 108,
+        "endChar": 25
+      },
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "704ff378_5c220676",
+        "filename": "android/vm/src/run.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-07T05:41:00Z",
+      "side": 1,
+      "message": "Yeah, initializeWritablePartition` will be called on first run \u0026 `resize_partition` on subsequent runs.",
+      "parentUuid": "bacd76d5_013be948",
       "range": {
         "startLine": 108,
         "startChar": 11,
