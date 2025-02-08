@@ -424,6 +424,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1592127c_85188a95",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-08T01:08:15Z",
+      "side": 1,
+      "message": "Now the doc says \"valid until callback is called\". If we go that route, we ought to make sure we call it exactly once.\n\nImagine the client heap allocates an object and passes it as `data`. Given the API contact, they\u0027d need to free the heap object as part of the `callback` implementation (technically there are more convoluted options available, but they boil down the same problem I think).\n\nIf we call `callback` multiple times, then the second call will be a use-after-free bug.\n\nIf we don\u0027t ever call `callback`, e.g. in the `self.vm.upgrade() \u003d\u003d None` case, then the heap object is leaked.",
+      "parentUuid": "7c5a601c_455e5db9",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00f92ed8_80c7673e",
         "filename": "tests/vts/src/vts_libavf_test.rs",
         "patchSetId": 1
@@ -488,6 +506,24 @@
       "side": 1,
       "message": "You\u0027re very precise. But I wrote this way just to demonstrate the code pattern that is useful for native code + test whether passed `vm` is valid.\n\nIn practical Rust code, the benefit of using `vm` neglectable as you pointed out. However, the primary use case of `vm` is to distinguish callbacks, so I assume that it would be sufficient here.",
       "parentUuid": "93b53d53_7d32d4d0",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75ad0009_e1f1fb14",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-08T01:08:15Z",
+      "side": 1,
+      "message": "I\u0027m just commenting on the API design and implementation behavior, I\u0027m not too worried about how the test is written. The usage in practice code is what\u0027s important and `data` can be used to distiguish the callbacks there.",
+      "parentUuid": "5d599ab8_e3eaa101",
       "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
