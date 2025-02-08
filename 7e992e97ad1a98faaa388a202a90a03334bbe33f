@@ -133,6 +133,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7145117d_bf76c433",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-08T00:57:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5781437d_26c320e6",
+      "range": {
+        "startLine": 42,
+        "startChar": 20,
+        "endLine": 42,
+        "endChar": 29
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bb99a34_8a6ca41f",
@@ -146,6 +170,30 @@
       "writtenOn": "2025-02-06T21:23:23Z",
       "side": 1,
       "message": "This is the only place this error is used - perhaps rename to `InputBufferSmall`?",
+      "range": {
+        "startLine": 50,
+        "startChar": 76,
+        "endLine": 50,
+        "endChar": 89
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f9df4ad_6a3e4077",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-08T00:57:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bb99a34_8a6ca41f",
       "range": {
         "startLine": 50,
         "startChar": 76,
@@ -249,6 +297,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92a64830_8a06d65c",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-08T00:57:46Z",
+      "side": 1,
+      "message": "The header format doesn\u0027t specify a size for the compat string. Hypothetically we could derive it from either the next blob offset or the end of the buffer but that assumes both of those are correct.\n\nCurrently depthcharge sends null terminated strings. Since the primary documentation will live here, I can specify it when I add the README updates.\n\nAlso, I updated this to parse the `CStr`.",
+      "parentUuid": "36ca9f2e_8ac6a0ad",
+      "range": {
+        "startLine": 68,
+        "startChar": 15,
+        "endLine": 68,
+        "endChar": 57
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ae59832_831c286d",
@@ -262,6 +334,24 @@
       "writtenOn": "2025-02-06T21:23:23Z",
       "side": 1,
       "message": "This is an unnecessary double reference (which is hinted at by the ignored lifetime). Instead, `derive(Clone, Copy)` on `ConfigHeader\u003c\u0027a\u003e` and have that be directly `IntoIterator`. Also, `hdr: ConfigHeader\u003c\u0027a\u003e`.\n\n```suggestion\nimpl\u003c\u0027a\u003e IntoIterator for ConfigHeader\u003c\u0027a\u003e {\n```",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84720ae_6bb86e22",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-08T00:57:46Z",
+      "side": 1,
+      "message": "Isn\u0027t it needed since `into_iter` takes `self` and not `\u0026self`?",
+      "parentUuid": "2ae59832_831c286d",
       "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -315,6 +405,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa5716b4_81ead44b",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-08T00:57:46Z",
+      "side": 1,
+      "message": "Updated to return just the blob, `CStr`, and uuid. since everything was validated in `ConfigHeader::new`, the panic paths should not be possible.\n\nThe blob isn\u0027t actually used as a slice though... would a `*const u8` and `usize` be better?",
+      "parentUuid": "4689e779_a759e335",
+      "range": {
+        "startLine": 104,
+        "startChar": 23,
+        "endLine": 104,
+        "endChar": 38
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0b00198_ff6e001f",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 7
@@ -326,6 +440,30 @@
       "writtenOn": "2025-02-07T09:55:14Z",
       "side": 1,
       "message": "I don\u0027t see any filtering of what vm receives the blobs using the vm\u0027s uuid. I believe such filtering is crucial for this functionality and I don\u0027t think we should merge this change without it.",
+      "range": {
+        "startLine": 111,
+        "startChar": 7,
+        "endLine": 111,
+        "endChar": 25
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad5969c1_5cda8518",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-08T00:57:46Z",
+      "side": 1,
+      "message": "The framework for getting the VM\u0027s uuid and signature isn\u0027t available yet. How about I implement a UUID check against tests andhard code it to non-matching [zero] is the real  path?",
+      "parentUuid": "b0b00198_ff6e001f",
       "range": {
         "startLine": 111,
         "startChar": 7,
@@ -353,6 +491,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1ae2ff7_58369187",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-08T00:57:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9753dc4a_d238013e",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1a91eb2_4f87cd36",
@@ -376,6 +532,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7497161_90f6885f",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-08T00:57:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1a91eb2_4f87cd36",
+      "range": {
+        "startLine": 154,
+        "startChar": 27,
+        "endLine": 154,
+        "endChar": 40
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f9c047e_18329fef",
@@ -389,6 +569,30 @@
       "writtenOn": "2025-02-06T21:23:23Z",
       "side": 1,
       "message": "This is repeated for most tests. My suggestion:\n\n- rename `make_test_data` to `make_test_pieces`\n- use something like:\n\n```\nfn make_test_data\u003cconst N: usize\u003e(hdr: TestHeader\u003cN\u003e, mut data: Vec\u003cu8\u003e) -\u003e Vec\u003cu8\u003e {\n    // reuse the `data` allocation\n    data.extend_from_slice(hdr.size.as_bytes());\n    data.extend_from_slice(hdr.hdrs.as_bytes());\n    data.rotate_right(size_of_val(\u0026hdr));\n    data\n}\n```",
+      "range": {
+        "startLine": 199,
+        "startChar": 8,
+        "endLine": 202,
+        "endChar": 32
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "522aad17_6de52105",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-08T00:57:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f9c047e_18329fef",
       "range": {
         "startLine": 199,
         "startChar": 8,
@@ -430,6 +634,24 @@
       "side": 1,
       "message": "I\u0027d check that there aren\u0027t too many headers - it\u0027s part of its self-consistency.",
       "parentUuid": "04bdd199_e230997d",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "257299ef_2b4bfece",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-08T00:57:46Z",
+      "side": 1,
+      "message": "After trying, I realized that `RMemHeader` is simple enough that there will be way to many false positives decoding the remaining data as a header. It\u0027s likely later check would fail but then it won\u0027t be clear what the acutal issue was.",
+      "parentUuid": "b0d3d95b_49d90abe",
       "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
