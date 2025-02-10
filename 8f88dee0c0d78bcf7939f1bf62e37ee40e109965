@@ -90,6 +90,30 @@
       },
       "revId": "8f88dee0c0d78bcf7939f1bf62e37ee40e109965",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40514d9c_d4aee217",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-02-10T19:52:56Z",
+      "side": 1,
+      "message": "@ccross@android.com I think it would be better to either have build system support for passing a path to cc_object as a preproccessor define (so we can use .incbin directly), or support calling clang from a genrule.",
+      "parentUuid": "ddb2dad9_1fbbcc8e",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 43
+      },
+      "revId": "8f88dee0c0d78bcf7939f1bf62e37ee40e109965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
