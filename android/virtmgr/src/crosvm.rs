@@ -35,11 +35,14 @@ use std::fs::{read_to_string, File};
 use std::io::{self, Read};
 use std::mem;
 use std::num::{NonZeroU16, NonZeroU32};
+use std::os::fd::FromRawFd;
+use std::os::fd::RawFd;
 use std::os::unix::io::{AsRawFd, OwnedFd};
 use std::os::unix::process::CommandExt;
 use std::os::unix::process::ExitStatusExt;
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitStatus};
+use std::ptr;
 use std::sync::{Arc, Condvar, Mutex, LazyLock};
 use std::time::{Duration, SystemTime};
 use std::thread::{self, JoinHandle};
@@ -139,6 +142,7 @@ pub struct CrosvmConfig {
     pub dump_dt_fd: Option<File>,
     pub enable_hypervisor_specific_auth_method: bool,
     pub instance_id: [u8; 64],
+    pub start_suspended: bool,
 }
 
 #[derive(Debug)]
@@ -791,6 +795,37 @@ impl VmInstance {
         }
         Ok(())
     }
+
+    /// Does full resume of VM.
+    pub fn resume_full(&self) -> Result<(), Error> {
+        let socket_path_cstring = path_to_cstring(&self.crosvm_control_socket_path);
+        // SAFETY: Pointer is valid for the lifetime of the call.
+        let success =
+            unsafe { crosvm_control::crosvm_client_resume_vm_full(socket_path_cstring.as_ptr()) };
+        if !success {
+            bail!("Failed to resume VM");
+        }
+        Ok(())
+    }
+
+    /// Returns a vm_fd of this VM.
+    pub fn get_vm_fd(&self) -> Result<OwnedFd, Error> {
+        let socket_path_cstring = path_to_cstring(&self.crosvm_control_socket_path);
+        let mut vm_fd: RawFd = -1;
+        let vm_fd_ptr: *mut RawFd = ptr::from_mut(&mut vm_fd);
+        // SAFETY: Pointer is valid for the lifetime of the call.
+        let success =
+            unsafe { crosvm_control::crosvm_get_vm_fd(socket_path_cstring.as_ptr(), vm_fd_ptr) };
+        if !success {
+            bail!("Failed to get vm_fd");
+        }
+        info!("[ioffe] what we got from crosvm: {:#}", vm_fd);
+        // SAFETY: pointer is valid for the lifetime of the call.
+        //let vm_fd = unsafe { OwnedFd::from_raw_fd(vm_fd) };
+        let vm_fd = unsafe { OwnedFd::from_raw_fd(nix::unistd::dup(vm_fd)?) };
+        info!("[ioffe] return vm_fd: {:#?}", vm_fd);
+        Ok(vm_fd)
+    }
 }
 
 impl Rss {
@@ -1379,6 +1414,10 @@ fn run_vm(
                 if audio_config.use_speaker { 1 } else { 0 }
             ));
         }
+    }
+
+    if cfg!(tee_services_allowlist) && config.start_suspended {
+        command.arg("--suspended");
     }
 
     print_crosvm_args(&command);

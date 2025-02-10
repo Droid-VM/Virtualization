@@ -61,6 +61,7 @@ use android_hardware_security_authgraph::aidl::android::hardware::security::auth
     Key::Key, PubKey::PubKey, SessionIdSignature::SessionIdSignature, SessionInfo::SessionInfo,
     SessionInitiationInfo::SessionInitiationInfo,
 };
+use android_hardware_virtualization_capabilities_capabilities_service::aidl::android::hardware::virtualization::capabilities::IVmCapabilitiesService::IVmCapabilitiesService;
 use anyhow::{anyhow, bail, ensure, Context, Result};
 use apkverify::{HashAlgorithm, V4Signature};
 use avflog::LogResult;
@@ -117,6 +118,9 @@ const MICRODROID_OS_NAME: &str = "microdroid";
 
 const SECRETKEEPER_IDENTIFIER: &str =
     "android.hardware.security.secretkeeper.ISecretkeeper/default";
+
+const VM_CAPABILITIES_HAL_IDENTIFIER: &str =
+    "android.hardware.virtualization.capabilities.IVmCapabilitiesService/default";
 
 const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 
@@ -647,6 +651,12 @@ impl VirtualizationService {
         *is_protected = config.protectedVm;
 
         if !config.teeServices.is_empty() {
+            if !is_vm_capabilities_hal_supported() {
+                return Err(anyhow!(
+                    "requesting access to tee services requires {VM_CAPABILITIES_HAL_IDENTIFIER}"
+                ))
+                .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION);
+            }
             check_tee_service_permission(&caller_secontext, &config.teeServices)
                 .with_log()
                 .or_binder_exception(ExceptionCode::SECURITY)?;
@@ -866,6 +876,7 @@ impl VirtualizationService {
             dump_dt_fd,
             enable_hypervisor_specific_auth_method: config.enableHypervisorSpecificAuthMethod,
             instance_id,
+            start_suspended: !config.teeServices.is_empty(),
         };
         let instance = Arc::new(
             VmInstance::new(
@@ -880,7 +891,7 @@ impl VirtualizationService {
             .or_service_specific_exception(-1)?,
         );
         state.add_vm(Arc::downgrade(&instance));
-        Ok(VirtualMachine::create(instance))
+        Ok(VirtualMachine::create(instance, config.teeServices.clone()))
     }
 }
 
@@ -1549,11 +1560,45 @@ fn check_label_for_file(file: &File, name: &str) -> Result<()> {
 #[derive(Debug)]
 struct VirtualMachine {
     instance: Arc<VmInstance>,
+    tee_services: Vec<String>,
 }
 
 impl VirtualMachine {
-    fn create(instance: Arc<VmInstance>) -> Strong<dyn IVirtualMachine::IVirtualMachine> {
-        BnVirtualMachine::new_binder(VirtualMachine { instance }, BinderFeatures::default())
+    fn create(
+        instance: Arc<VmInstance>,
+        tee_services: Vec<String>,
+    ) -> Strong<dyn IVirtualMachine::IVirtualMachine> {
+        BnVirtualMachine::new_binder(
+            VirtualMachine { instance, tee_services },
+            BinderFeatures::default(),
+        )
+    }
+
+    fn handle_tee_services(&self) -> binder::Result<()> {
+        let vm_fd = self
+            .instance
+            .get_vm_fd()
+            .with_context(|| format!("Error obtaining vm_fd of VM with CID {}", self.instance.cid))
+            .with_log()
+            .or_service_specific_exception(-1)?;
+        // TODO(ioffe): do we need to change the selinux domain of the fd?
+        info!("[ioffe] vm_fd = {:#?} filecon = {:#?}", vm_fd, getfilecon(&vm_fd));
+        let vm_caps_hal = binder::wait_for_interface::<dyn IVmCapabilitiesService>(
+            VM_CAPABILITIES_HAL_IDENTIFIER,
+        )
+        .with_context(|| format!("Error connecting to {VM_CAPABILITIES_HAL_IDENTIFIER}"))
+        .with_log()
+        .or_service_specific_exception(-1)?;
+        vm_caps_hal
+            .grantAccessToVendorTeeServices(&ParcelFileDescriptor::new(vm_fd), &self.tee_services)
+            .context("Error calling grantAccessToVendorTeeServices")
+            .with_log()
+            .or_service_specific_exception(-1)?;
+        self.instance
+            .resume_full()
+            .with_context(|| format!("Error resuming VM with CID {}", self.instance.cid))
+            .with_log()
+            .or_service_specific_exception(-1)
     }
 }
 
@@ -1589,7 +1634,12 @@ impl IVirtualMachine::IVirtualMachine for VirtualMachine {
             .start()
             .with_context(|| format!("Error starting VM with CID {}", self.instance.cid))
             .with_log()
-            .or_service_specific_exception(-1)
+            .or_service_specific_exception(-1)?;
+        if !self.tee_services.is_empty() {
+            self.handle_tee_services()
+        } else {
+            Ok(())
+        }
     }
 
     fn stop(&self) -> binder::Result<()> {
@@ -2145,6 +2195,11 @@ impl IVirtualMachineService for VirtualMachineService {
 fn is_secretkeeper_supported() -> bool {
     binder::is_declared(SECRETKEEPER_IDENTIFIER)
         .expect("Could not check for declared Secretkeeper interface")
+}
+
+fn is_vm_capabilities_hal_supported() -> bool {
+    binder::is_declared(VM_CAPABILITIES_HAL_IDENTIFIER)
+        .expect("failed to check if {VM_CAPABILITIES_HAL_IDENTIFIER} is present")
 }
 
 impl VirtualMachineService {
