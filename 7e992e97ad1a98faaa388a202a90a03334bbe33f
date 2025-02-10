@@ -358,6 +358,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ced9b10d_728d71a0",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-10T20:25:32Z",
+      "side": 1,
+      "message": "No, if you make `ConfigHeader: Copy` as I say then `into_iter` won\u0027t consume the original object, but copy it. This is true for all `Copy` types - calling a `self` method does a copy and not a move. It\u0027s like how calling `.into_iter()` on a `\u0026Vec\u003cT\u003e` yields an `impl Iterator\u003cItem \u003d \u0026T\u003e` by copying the reference (though `.iter()` is preferred when it\u0027s there).\n\nIf a type consists of just `\u0026T`, there\u0027s rarely a reason to prevent it from being `Clone` at least.",
+      "parentUuid": "b84720ae_6bb86e22",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4689e779_a759e335",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 7
@@ -417,6 +435,30 @@
       "side": 1,
       "message": "Updated to return just the blob, `CStr`, and uuid. since everything was validated in `ConfigHeader::new`, the panic paths should not be possible.\n\nThe blob isn\u0027t actually used as a slice though... would a `*const u8` and `usize` be better?",
       "parentUuid": "4689e779_a759e335",
+      "range": {
+        "startLine": 104,
+        "startChar": 23,
+        "endLine": 104,
+        "endChar": 38
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce76eb5c_bd30bec6",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-10T20:25:32Z",
+      "side": 1,
+      "message": "No, yielding unsafe types is nearly always worse than yielding safe types even if you\u0027re just going to eagerly convert to something raw. Yielding a reference proves to local code that it\u0027s valid to access for its lifetime, say, to log it, while raw pointers toss this info away and require the user to audit code to ensure the pointers remain valid as expected to do so.\n\nIf you never expect these values to be dereferenced, perhaps yield the relevant `u64` that are used instead of `*const u8`/`usize` to avoid implying it\u0027s a valid buffer to read.",
+      "parentUuid": "aa5716b4_81ead44b",
       "range": {
         "startLine": 104,
         "startChar": 23,
@@ -652,6 +694,24 @@
       "side": 1,
       "message": "After trying, I realized that `RMemHeader` is simple enough that there will be way to many false positives decoding the remaining data as a header. It\u0027s likely later check would fail but then it won\u0027t be clear what the acutal issue was.",
       "parentUuid": "b0d3d95b_49d90abe",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a1bb81a_de52dac7",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-10T20:25:32Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me why there would be additional false positives here. Checking early and logging inconsistencies could really help a future debugger.",
+      "parentUuid": "257299ef_2b4bfece",
       "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
