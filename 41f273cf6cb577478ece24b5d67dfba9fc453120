@@ -442,6 +442,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9102c5d8_c7a77d80",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-10T15:50:25Z",
+      "side": 1,
+      "message": "\u003e Imagine the client heap allocates an object and passes it as data. Given the API contact, they\u0027d need to free the heap object as part of the callback implementation (technically there are more convoluted options available, but they boil down the same problem I think).\n\nAgree.\n\n\u003e If we call callback multiple times, then the second call will be a use-after-free bug.\n\nThe callback is only called once, as VM can only be stopped once. The callback is more like the `ListenableFuture` (i.e. tells the result of async operation) \n\n\u003e If we don\u0027t ever call callback, e.g. in the self.vm.upgrade() \u003d\u003d None case, then the heap object is leaked.\n\n`vm` instance is required to be held by the VM launching app, so `self.vm.upgrade() \u003d\u003d None` shouldn\u0027t happen. If it is, then it\u0027s bug in app side, and not on us.\n\nPlus, I assume that there wouldn\u0027t be an actual issue. If `vm` isn\u0027t hold by anybody, then `virtmgr` would drop `VmInstance`. It would kill `vm` and notifying callback back to the caller.\n\nDo you prefer `unwrap()` in this case?",
+      "parentUuid": "1592127c_85188a95",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00f92ed8_80c7673e",
         "filename": "tests/vts/src/vts_libavf_test.rs",
         "patchSetId": 1
