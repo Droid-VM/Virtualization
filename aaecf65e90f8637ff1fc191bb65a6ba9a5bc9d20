@@ -34,6 +34,24 @@
       "parentUuid": "ed63a30d_d5a9932a",
       "revId": "aaecf65e90f8637ff1fc191bb65a6ba9a5bc9d20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93a3555d_c2ba55cb",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-10T21:49:02Z",
+      "side": 1,
+      "message": "Thanks for the context. I think it is OK if we only support all or nothing right now. It would be a good idea to change the fallback back to an error (maybe difficult now) or log a warning with a pointer for fixing the permissions",
+      "parentUuid": "5be7bd61_7ca3fc0c",
+      "revId": "aaecf65e90f8637ff1fc191bb65a6ba9a5bc9d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
