@@ -50,6 +50,46 @@
       "message": "Hi,\n\nShould we land this cl to minimize the impact since anyway Armelle also plans to remove this line in https://r.android.com/3465716?",
       "revId": "8f88dee0c0d78bcf7939f1bf62e37ee40e109965",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5b1ab4f_c6358159",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-10T12:34:16Z",
+      "side": 1,
+      "message": "-1 this change is only for discussion for the moment",
+      "revId": "8f88dee0c0d78bcf7939f1bf62e37ee40e109965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddb2dad9_1fbbcc8e",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-10T12:34:16Z",
+      "side": 1,
+      "message": "Hi Arve, I discussed another idea with Armelle today: embedding the binary data directly within the `.S` file, rather than using `incbin [path]`, as shown in the following diff. This approach would resolve the dependency issue, as the object file compiling would only depend on the `.S` file. However, this significantly increased the compile time (x50) when I tested it locally, probably because like this the assembler has to parse and interpret each line.\n\n```suggestion\n        \"    xxd -p $(in) | sed \u0027s/../0x\u0026\\n/g\u0027\" +\n```\n\n@armellel@google.com FYI",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 43
+      },
+      "revId": "8f88dee0c0d78bcf7939f1bf62e37ee40e109965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
