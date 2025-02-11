@@ -125,7 +125,7 @@ pub fn assert_latest_payload_verification_passes(
     let footer = extract_avb_footer(&kernel)?;
     let kernel_digest =
         hash(&[&hash(&[b"bootloader"]), &kernel[..usize::try_from(footer.original_image_size)?]]);
-    let capabilities = vec![Capability::SecretkeeperProtection];
+    let capabilities = vec![Capability::DeferredRollbackProtection];
     let initrd_digest = Some(hash(&[&hash(&[initrd_salt]), initrd]));
     let expected_boot_data = VerifiedBootData {
         debug_level: expected_debug_level,

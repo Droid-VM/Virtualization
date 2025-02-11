@@ -73,8 +73,8 @@ pub enum DebugLevel {
 /// VM Capability.
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Capability {
-    /// Secretkeeper protected secrets.
-    SecretkeeperProtection,
+    /// Guest uses a solution that protects its data from rollback attacks.
+    DeferredRollbackProtection,
     /// Trusty security VM.
     TrustySecurityVm,
     /// UEFI support for booting guest kernel.
@@ -87,7 +87,7 @@ pub enum Capability {
 impl Capability {
     const KEY: &'static str = "com.android.virt.cap";
     const TRUSTY_SECURITY_VM: &'static [u8] = b"trusty_security_vm";
-    const SECRETKEEPER_PROTECTION: &'static [u8] = b"secretkeeper_protection";
+    const DEFERRED_ROLLBACK: &'static [u8] = b"deferred_rollback";
     const SEPARATOR: u8 = b'|';
     const SUPPORTS_UEFI_BOOT: &'static [u8] = b"supports_uefi_boot";
     /// Number of supported capabilites.
@@ -105,7 +105,7 @@ impl Capability {
         for v in value.split(|b| *b == Self::SEPARATOR) {
             let cap = match v {
                 Self::TRUSTY_SECURITY_VM => Self::TrustySecurityVm,
-                Self::SECRETKEEPER_PROTECTION => Self::SecretkeeperProtection,
+                Self::DEFERRED_ROLLBACK => Self::DeferredRollbackProtection,
                 Self::SUPPORTS_UEFI_BOOT => Self::SupportsUefiBoot,
                 _ => return Err(PvmfwVerifyError::UnknownVbmetaProperty),
             };
