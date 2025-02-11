@@ -143,7 +143,8 @@ fn run_test(protected: bool, golden_dt: &str) -> Result<(), Error> {
     {
         return Err(anyhow!("failed to execute dtc"));
     }
-    let dtcompare_res = Command::new("./dtcompare")
+    let mut dtcompare_cmd = Command::new("./dtcompare");
+    dtcompare_cmd
         .arg("--dt1")
         .arg("dump_dt_golden.dtb")
         .arg("--dt2")
@@ -163,12 +164,18 @@ fn run_test(protected: bool, golden_dt: &str) -> Result<(), Error> {
         .arg("/chosen/linux,initrd-start")
         .arg("--ignore-path-value")
         .arg("/chosen/linux,initrd-end")
-        .arg("--ignore-path-value")
-        .arg("/avf/secretkeeper_public_key")
         .arg("--ignore-path")
-        .arg("/avf/name")
-        .output()
-        .context("failed to execute dtcompare")?;
+        .arg("/avf/name");
+    if get_vsr_api_level()? != -1 && get_board_api_level()? >= 202504 {
+        dtcompare_cmd.arg("--ignore-path-value").arg("/avf/secretkeeper_public_key");
+    } else {
+        dtcompare_cmd
+            .arg("--ignore-path")
+            .arg("/avf/secretkeeper_public_key")
+            .arg("--ignore-path")
+            .arg("/avf/defer-rollback-protection");
+    }
+    let dtcompare_res = dtcompare_cmd.output().context("failed to execute dtcompare")?;
     if !dtcompare_res.status.success() {
         if !Command::new("./dtc_static")
             .arg("-I")
@@ -206,4 +213,29 @@ fn run_test(protected: bool, golden_dt: &str) -> Result<(), Error> {
 fn open_payload(path: &str) -> Result<ParcelFileDescriptor, Error> {
     let file = File::open(path).with_context(|| format!("Failed to open VM image {path}"))?;
     Ok(ParcelFileDescriptor::new(file))
+}
+
+fn get_vsr_api_level() -> Result<i32, Error> {
+    let props = vec!["ro.vendor.api_level"];
+    for prop in props {
+        let res = rustutils::system_properties::read(prop)?;
+        if let Some(val) = res {
+            return val.parse::<i32>().context(format!("Failed to read {prop}"));
+        }
+    }
+    Ok(-1)
+}
+
+fn get_board_api_level() -> Result<i32, Error> {
+    let props =
+        vec!["ro.board.api_level", "ro.board.first_api_level", "ro.product.first_api_level"];
+
+    for prop in props {
+        let res = rustutils::system_properties::read(prop)?;
+        if let Some(val) = res {
+            return val.parse::<i32>().context(format!("Failed to read {}", prop));
+        }
+    }
+    // If none of the API levels are set, return current development.
+    Ok(10000)
 }
