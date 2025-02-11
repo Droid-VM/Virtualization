@@ -292,7 +292,6 @@ mod tests {
             capabilities: vec![
                 Capability::DeferredRollbackProtection,
                 Capability::TrustedWithRemoteKeys,
-                Capability::TrustySecurityVm,
             ],
             ..BASE_VB_DATA
         };

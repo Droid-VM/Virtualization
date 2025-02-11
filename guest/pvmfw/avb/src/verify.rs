@@ -75,8 +75,6 @@ pub enum DebugLevel {
 pub enum Capability {
     /// Guest uses a solution that protects its data from rollback attacks.
     DeferredRollbackProtection,
-    /// Trusty security VM.
-    TrustySecurityVm,
     /// UEFI support for booting guest kernel.
     SupportsUefiBoot,
     /// This guest may be trusted by the remote key provisioning (RKP) server.
@@ -88,7 +86,6 @@ pub enum Capability {
 
 impl Capability {
     const KEY: &'static str = "com.android.virt.cap";
-    const TRUSTY_SECURITY_VM: &'static [u8] = b"trusty_security_vm";
     const DEFERRED_ROLLBACK: &'static [u8] = b"deferred_rollback";
     const RKP_TRUSTED: &'static [u8] = b"rkp_trusted";
     const SEPARATOR: u8 = b'|';
@@ -107,7 +104,6 @@ impl Capability {
 
         for v in value.split(|b| *b == Self::SEPARATOR) {
             let cap = match v {
-                Self::TRUSTY_SECURITY_VM => Self::TrustySecurityVm,
                 Self::DEFERRED_ROLLBACK => Self::DeferredRollbackProtection,
                 Self::SUPPORTS_UEFI_BOOT => Self::SupportsUefiBoot,
                 Self::RKP_TRUSTED => Self::TrustedWithRemoteKeys,
