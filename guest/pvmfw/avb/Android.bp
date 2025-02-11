@@ -331,7 +331,7 @@ avb_add_hash_footer {
     props: [
         {
             name: "com.android.virt.cap",
-            value: "trusty_security_vm|deferred_rollback|supports_uefi_boot",
+            value: "trusty_security_vm|deferred_rollback|rkp_trusted|supports_uefi_boot",
         },
     ],
 }

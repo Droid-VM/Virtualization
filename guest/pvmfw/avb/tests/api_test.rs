@@ -69,7 +69,11 @@ fn latest_trusty_test_vm_kernel_passes_verification() -> Result<()> {
         &load_latest_trusty_test_vm_signed_kernel()?,
         salt,
         expected_rollback_index,
-        vec![Capability::DeferredRollbackProtection, Capability::TrustySecurityVm],
+        vec![
+            Capability::DeferredRollbackProtection,
+            Capability::TrustedWithRemoteKeys,
+            Capability::TrustySecurityVm,
+        ],
         None,
     )
 }
@@ -538,8 +542,9 @@ fn payload_with_all_capabilities() -> Result<()> {
     assert!(verified_boot_data.has_capability(Capability::TrustySecurityVm));
     assert!(verified_boot_data.has_capability(Capability::DeferredRollbackProtection));
     assert!(verified_boot_data.has_capability(Capability::SupportsUefiBoot));
+    assert!(verified_boot_data.has_capability(Capability::TrustedWithRemoteKeys));
     // Fail if this test doesn't actually cover all supported capabilities.
-    assert_eq!(Capability::COUNT, 3);
+    assert_eq!(Capability::COUNT, 4);
 
     Ok(())
 }
