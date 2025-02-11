@@ -270,8 +270,13 @@ mod tests {
 
     #[test]
     fn security_vm_config_descriptor_has_rkp_vm_marker() {
-        let vb_data =
-            VerifiedBootData { capabilities: vec![Capability::TrustySecurityVm], ..BASE_VB_DATA };
+        let vb_data = VerifiedBootData {
+            capabilities: vec![
+                Capability::DeferredRollbackProtection,
+                Capability::TrustySecurityVm,
+            ],
+            ..BASE_VB_DATA
+        };
         let inputs = PartialInputs::new(&vb_data).unwrap();
         let config_map = decode_config_descriptor(&inputs, Some(HASH));
 

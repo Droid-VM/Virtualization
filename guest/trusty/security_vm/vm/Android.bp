@@ -123,7 +123,7 @@ trusty_vm_avb_add_hash_footer {
     props: [
         {
             name: "com.android.virt.cap",
-            value: "trusty_security_vm",
+            value: "deferred_rollback|trusty_security_vm",
         },
     ],
     src: select(soong_config_variable("trusty_system_vm", "enabled"), {
