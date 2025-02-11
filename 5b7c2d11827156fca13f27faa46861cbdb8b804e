@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe271b7b_1bd55f3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-11T23:44:26Z",
+      "side": 1,
+      "message": "+Steven to make sure ANAPIC is OK with the API change",
+      "revId": "5b7c2d11827156fca13f27faa46861cbdb8b804e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96dcd5ac_4acb4e6f",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-11T23:44:26Z",
+      "side": 1,
+      "message": "The explanation could be better:\n\nInstead of saying we assume, I think we can say that we trust the caller of `AVirtualMachine_start` to provide a valid pointer.\n\nWhether it is valid is complex, e.g. it is only valid to use one time, as discussed in the other comment thread. We should note that we trust virtmgr to call this at most once (or, we could guarantee that locally by wrapping it in a mutex and setting it to null after the first call).\n\nWe know it isn\u0027t null because we checked on the first line of this function.",
+      "range": {
+        "startLine": 388,
+        "startChar": 19,
+        "endLine": 389,
+        "endChar": 35
+      },
+      "revId": "5b7c2d11827156fca13f27faa46861cbdb8b804e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

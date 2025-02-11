@@ -476,6 +476,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "207f7653_2002e457",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-11T23:44:26Z",
+      "side": 1,
+      "message": "I guess that means it is illegal to call `destroy` before the callback gets invoked. Or, since `destroy` implicitly kills the VM, maybe we can ensure the callback is invoked before `destroy` returns (maybe we already do?) so it isn\u0027t possible for an app to do this incorrectly.\n\nThe `unwrap` makes me happier, makes it clear we won\u0027t hit undefined behavior.",
+      "parentUuid": "6bc40c28_7c004f17",
+      "revId": "41f273cf6cb577478ece24b5d67dfba9fc453120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00f92ed8_80c7673e",
