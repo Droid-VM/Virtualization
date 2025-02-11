@@ -38,6 +38,7 @@ import com.android.tradefed.device.TestDevice;
 import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
 import com.android.tradefed.util.CommandResult;
+import com.android.tradefed.util.Pair;
 import com.android.tradefed.util.SimpleStats;
 
 import org.junit.After;
@@ -48,6 +49,7 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -123,14 +125,40 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testNoLongHypSections() throws Exception {
+        String[] hypEventsFuncs = {"hyp_enter", "hyp_exit", "func", "func_ret" };
         String[] hypEvents = {"hyp_enter", "hyp_exit"};
+        boolean hasFunc = true;
 
-        assumeTrue(
-                "Skip without hypervisor tracing",
-                KvmHypTracer.isSupported(getDevice(), hypEvents));
+        if (!KvmHypTracer.isSupported(getDevice(), hypEventsFuncs)) {
+            assumeTrue(
+                    "Skip without hypervisor tracing",
+                    KvmHypTracer.isSupported(getDevice(), hypEvents));
+            hasFunc = false;
+        }
 
-        KvmHypTracer tracer = new KvmHypTracer(getDevice(), hypEvents);
-        String result = tracer.run(COMPOSD_CMD_BIN + " test-compile");
+        String[] notrace = {
+            "*handle_trap",
+            "*pgtable_walk",
+            "*map_walker*",
+            "*phys_to_virt",
+            "*get_loaded_hyp_vcpu",
+            "*psci_mem_protect*",
+            "*_serror",
+            "*__hyp_enter",
+            "*__hyp_exit",
+            "*hyp_per_cpu_offset",
+            "*handle_host_dynamic_hcall",
+            "*hyp_page_count",
+            "*_get_page",
+            "*_put_page",
+            "*stage2_pte_prot",
+            "*stage2_force_pte",
+            "*force_pte_cb",
+            "*pte_is_counted",
+        };
+        KvmHypTracer tracer = new KvmHypTracer(getDevice(), hasFunc ? hypEventsFuncs : hypEvents);
+        String result = hasFunc ? tracer.run(COMPOSD_CMD_BIN + " test-compile", notrace, 128 << 10) :
+                                  tracer.run(COMPOSD_CMD_BIN + " test-compile");
         assertWithMessage("Failed to test compilation VM.")
                 .that(result)
                 .ignoringCase()
@@ -138,6 +166,31 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
         SimpleStats stats = tracer.getDurationStats();
         reportMetric(stats.getData(), "hyp_sections", "s");
+
+        if (hasFunc) {
+            Pair<Double, Double> sec = tracer.getMaxDurationSection();
+            List<Map.Entry<String, Double>> ordered;
+            int cpu = tracer.getMaxDurationCpu();
+            Map<String, Double> durations;
+
+            durations = tracer.getFuncDurations(sec.first, sec.second, cpu);
+
+            ordered = new ArrayList(durations.entrySet());
+            Collections.sort(ordered, Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+            CLog.i("The longest hyp section was %f seconds from %f on CPU%d",
+                   sec.second - sec.first, sec.first, cpu);
+
+            int count = 0;
+            for (Map.Entry<String, Double> entry: ordered) {
+                if (++count > 5)
+                    break;
+
+                CLog.i("%s: \t\t\t%.2f%%", entry.getKey(),
+                       entry.getValue() * 100 / (sec.second - sec.first));
+            }
+        }
+
         CLog.i("Hypervisor traces parsed successfully.");
     }
 
