@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdb04b04_1a320744",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-11T20:54:21Z",
+      "side": 1,
+      "message": "I wanted to add these tests but also don\u0027t want to delay aosp/3452838 unnecessarily because of them so using a separate CL for it.",
+      "revId": "5615b88ab4f343f630d3c21073f12c3f434253ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e34dd71_7358f7f4",
+        "filename": "guest/pvmfw/avb/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-11T20:54:21Z",
+      "side": 1,
+      "message": "`avb_add_hash_footer` rejects this empty AVB properties so how to generate this test data without needing to re-sign the image from within the test (not sure what other alternatives we have to `avb_add_hash_footer`)?",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 34
+      },
+      "revId": "5615b88ab4f343f630d3c21073f12c3f434253ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99044f7c_d28a0440",
+        "filename": "guest/pvmfw/avb/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-11T20:54:21Z",
+      "side": 1,
+      "message": "Same about NULL characters, which Soong itself rejects.",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 57
+      },
+      "revId": "5615b88ab4f343f630d3c21073f12c3f434253ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
