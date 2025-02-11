@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc85830b_96caba9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-11T07:51:28Z",
+      "side": 1,
+      "message": "Thank you for the review!",
+      "revId": "02a21a932882eb10e8eda8492ef8e239a8a38f5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7cfc8cd_2520b969",
@@ -31,6 +48,30 @@
       "writtenOn": "2025-02-11T01:21:52Z",
       "side": 1,
       "message": "nit: /system/system_ext/",
+      "range": {
+        "startLine": 428,
+        "startChar": 4,
+        "endLine": 428,
+        "endChar": 47
+      },
+      "revId": "02a21a932882eb10e8eda8492ef8e239a8a38f5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae9cba5f_6cf7a7f2",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-11T07:51:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7cfc8cd_2520b969",
       "range": {
         "startLine": 428,
         "startChar": 4,
@@ -66,6 +107,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ae82a80a_5d622ef9",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-11T07:51:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aedb4c5_98826638",
+      "range": {
+        "startLine": 430,
+        "startChar": 4,
+        "endLine": 430,
+        "endChar": 51
+      },
+      "revId": "02a21a932882eb10e8eda8492ef8e239a8a38f5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5a346d90_95f3e2fe",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 2
@@ -77,6 +142,30 @@
       "writtenOn": "2025-02-11T01:21:52Z",
       "side": 1,
       "message": "I hope if we can do it better by `readlink`, but on the other hand `readlink` requires permissions and this is definitely an improvement, so here we go.",
+      "range": {
+        "startLine": 490,
+        "startChar": 0,
+        "endLine": 493,
+        "endChar": 9
+      },
+      "revId": "02a21a932882eb10e8eda8492ef8e239a8a38f5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e55d222_d2b4b9b9",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-11T07:51:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5a346d90_95f3e2fe",
       "range": {
         "startLine": 490,
         "startChar": 0,
