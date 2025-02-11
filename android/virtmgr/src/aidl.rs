@@ -420,14 +420,42 @@ impl IGlobalVmContext for EarlyVmContext {
     }
 }
 
-fn find_partition(path: Option<&Path>) -> binder::Result<String> {
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
+enum CallingPartition {
+    Odm,
+    Product,
+    System,
+    SystemExt,
+    Vendor,
+}
+
+impl CallingPartition {
+    fn as_str(&self) -> &'static str {
+        match self {
+            CallingPartition::Odm => "odm",
+            CallingPartition::Product => "product",
+            CallingPartition::System => "system",
+            CallingPartition::SystemExt => "system_ext",
+            CallingPartition::Vendor => "vendor",
+        }
+    }
+}
+
+impl std::fmt::Display for CallingPartition {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
+    }
+}
+
+fn find_partition(path: Option<&Path>) -> binder::Result<CallingPartition> {
     let Some(path) = path else {
-        return Ok("system".to_owned());
+        return Ok(CallingPartition::System);
     };
     if path.starts_with("/system/system_ext/") {
-        return Ok("system_ext".to_owned());
-    } else if path.starts_with("/system/product/") {
-        return Ok("product".to_owned());
+        return Ok(CallingPartition::SystemExt);
+    }
+    if path.starts_with("/system/product/") {
+        return Ok(CallingPartition::Product);
     }
     let mut components = path.components();
     let Some(std::path::Component::Normal(partition)) = components.nth(1) else {
@@ -454,7 +482,17 @@ fn find_partition(path: Option<&Path>) -> binder::Result<String> {
             .or_service_specific_exception(-1)?;
     }
 
-    Ok(partition)
+    Ok(match partition.as_str() {
+        "odm" => CallingPartition::Odm,
+        "product" => CallingPartition::Product,
+        "system" => CallingPartition::System,
+        "system_ext" => CallingPartition::SystemExt,
+        "vendor" => CallingPartition::Vendor,
+        _ => {
+            return Err(anyhow!("Unknown partition {partition:?}"))
+                .or_service_specific_exception(-1)
+        }
+    })
 }
 
 impl VirtualizationService {
@@ -472,7 +510,7 @@ impl VirtualizationService {
             VirtualMachineConfig::AppConfig(config) => &config.name,
         };
         let calling_partition = find_partition(calling_exe_path)?;
-        let early_vm = find_early_vm_for_partition(&calling_partition, name)
+        let early_vm = find_early_vm_for_partition(calling_partition, name)
             .or_service_specific_exception(-1)?;
         let calling_exe_path = match calling_exe_path {
             Some(path) => path,
@@ -687,7 +725,7 @@ impl VirtualizationService {
         // Check if files for payloads and bases are NOT coming from /vendor and /odm, as they may
         // have unstable interfaces.
         // TODO(b/316431494): remove once Treble interfaces are stabilized.
-        check_partitions_for_files(config, &find_partition(CALLING_EXE_PATH.as_deref())?)
+        check_partitions_for_files(config, find_partition(CALLING_EXE_PATH.as_deref())?)
             .or_service_specific_exception(-1)?;
 
         let zero_filler_path = temporary_directory.join("zero.img");
@@ -1329,7 +1367,10 @@ fn load_app_config(
     Ok(vm_config)
 }
 
-fn check_partition_for_file(fd: &ParcelFileDescriptor, calling_partition: &str) -> Result<()> {
+fn check_partition_for_file(
+    fd: &ParcelFileDescriptor,
+    calling_partition: CallingPartition,
+) -> Result<()> {
     let path = format!("/proc/self/fd/{}", fd.as_raw_fd());
     let link = fs::read_link(&path).context(format!("can't read_link {path}"))?;
 
@@ -1340,7 +1381,8 @@ fn check_partition_for_file(fd: &ParcelFileDescriptor, calling_partition: &str) 
     }
 
     let is_fd_vendor = link.starts_with("/vendor") || link.starts_with("/odm");
-    let is_caller_vendor = calling_partition == "vendor" || calling_partition == "odm";
+    let is_caller_vendor =
+        calling_partition == CallingPartition::Vendor || calling_partition == CallingPartition::Odm;
 
     if is_fd_vendor != is_caller_vendor {
         bail!("{} can't be used for VM client in {calling_partition}", link.display());
@@ -1351,7 +1393,7 @@ fn check_partition_for_file(fd: &ParcelFileDescriptor, calling_partition: &str) 
 
 fn check_partitions_for_files(
     config: &VirtualMachineRawConfig,
-    calling_partition: &str,
+    calling_partition: CallingPartition,
 ) -> Result<()> {
     config
         .disks
@@ -2252,15 +2294,14 @@ struct EarlyVms {
     early_vm: Vec<EarlyVm>,
 }
 
-static EARLY_VMS_CACHE: LazyLock<Mutex<HashMap<String, Vec<EarlyVm>>>> =
+static EARLY_VMS_CACHE: LazyLock<Mutex<HashMap<CallingPartition, Vec<EarlyVm>>>> =
     LazyLock::new(|| Mutex::new(HashMap::new()));
 
-fn range_for_partition(partition: &str) -> Result<Range<Cid>> {
+fn range_for_partition(partition: CallingPartition) -> Range<Cid> {
     match partition {
-        "system" => Ok(100..200),
-        "system_ext" | "product" => Ok(200..300),
-        "vendor" | "odm" => Ok(300..400),
-        _ => Err(anyhow!("Early VMs are not supported for {partition}")),
+        CallingPartition::System => 100..200,
+        CallingPartition::SystemExt | CallingPartition::Product => 200..300,
+        CallingPartition::Vendor | CallingPartition::Odm => 300..400,
     }
 }
 
@@ -2295,10 +2336,10 @@ fn validate_cid_range(early_vms: &[EarlyVm], cid_range: &Range<Cid>) -> Result<(
     Ok(())
 }
 
-fn get_early_vms_in_partition(partition: &str) -> Result<Vec<EarlyVm>> {
+fn get_early_vms_in_partition(partition: CallingPartition) -> Result<Vec<EarlyVm>> {
     let mut cache = EARLY_VMS_CACHE.lock().unwrap();
 
-    if let Some(result) = cache.get(partition) {
+    if let Some(result) = cache.get(&partition) {
         return Ok(result.clone());
     }
 
@@ -2311,10 +2352,10 @@ fn get_early_vms_in_partition(partition: &str) -> Result<Vec<EarlyVm>> {
         }
     }
 
-    validate_cid_range(&early_vms, &range_for_partition(partition)?)
+    validate_cid_range(&early_vms, &range_for_partition(partition))
         .with_context(|| format!("CID validation for {partition} failed"))?;
 
-    cache.insert(partition.to_owned(), early_vms.clone());
+    cache.insert(partition, early_vms.clone());
 
     Ok(early_vms)
 }
@@ -2337,7 +2378,7 @@ fn find_early_vm<'a>(early_vms: &'a [EarlyVm], name: &str) -> Result<&'a EarlyVm
     found_vm.ok_or_else(|| anyhow!("Can't find a VM named '{name}'"))
 }
 
-fn find_early_vm_for_partition(partition: &str, name: &str) -> Result<EarlyVm> {
+fn find_early_vm_for_partition(partition: CallingPartition, name: &str) -> Result<EarlyVm> {
     let early_vms = get_early_vms_in_partition(partition)
         .with_context(|| format!("Failed to get early VMs from {partition}"))?;
 
