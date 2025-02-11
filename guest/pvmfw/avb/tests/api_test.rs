@@ -147,7 +147,7 @@ fn payload_expecting_no_initrd_passes_verification_with_service_vm_name() -> Res
         kernel_digest,
         initrd_digest: None,
         public_key: &public_key,
-        capabilities: vec![Capability::RemoteAttest],
+        capabilities: vec![],
         rollback_index: 0,
         page_size: None,
         name: Some(String::from(VerifiedBootData::RKP_VM_NAME)),
@@ -527,8 +527,8 @@ fn payload_with_multiple_capabilities() -> Result<()> {
     )
     .map_err(|e| anyhow!("Verification failed. Error: {}", e))?;
 
-    assert!(verified_boot_data.has_capability(Capability::RemoteAttest));
     assert!(verified_boot_data.has_capability(Capability::SecretkeeperProtection));
+    assert!(verified_boot_data.has_capability(Capability::SupportsUefiBoot));
     Ok(())
 }
 
@@ -542,12 +542,11 @@ fn payload_with_all_capabilities() -> Result<()> {
     )
     .map_err(|e| anyhow!("Verification failed. Error: {}", e))?;
 
-    assert!(verified_boot_data.has_capability(Capability::RemoteAttest));
     assert!(verified_boot_data.has_capability(Capability::TrustySecurityVm));
     assert!(verified_boot_data.has_capability(Capability::SecretkeeperProtection));
     assert!(verified_boot_data.has_capability(Capability::SupportsUefiBoot));
     // Fail if this test doesn't actually cover all supported capabilities.
-    assert_eq!(Capability::COUNT, 4);
+    assert_eq!(Capability::COUNT, 3);
 
     Ok(())
 }
