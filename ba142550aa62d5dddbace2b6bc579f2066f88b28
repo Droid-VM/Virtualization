@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca1db638_c3391200",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.kt",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-11T15:53:29Z",
+      "side": 1,
+      "message": "Thanks. I made it private...",
+      "parentUuid": "b3262a81_1b62bbd6",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 25
+      },
+      "revId": "ba142550aa62d5dddbace2b6bc579f2066f88b28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15db773b_7272d5aa",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-11T14:26:09Z",
       "side": 1,
       "message": "IIUC, it adds a new tab if a user removes the last tab. According to other apps which use \u0027tab\u0027 I think it would be more natural that the app finishes when the last tab is closed or hide a remove button if there is only one tab",
+      "range": {
+        "startLine": 188,
+        "startChar": 16,
+        "endLine": 190,
+        "endChar": 17
+      },
+      "revId": "ba142550aa62d5dddbace2b6bc579f2066f88b28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57f0a037_fef1e0a2",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.kt",
+        "patchSetId": 8
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-11T15:53:29Z",
+      "side": 1,
+      "message": "Good point. I made it finishes the terminal app if there is only one tab.",
+      "parentUuid": "15db773b_7272d5aa",
       "range": {
         "startLine": 188,
         "startChar": 16,
@@ -83,6 +131,30 @@
       "writtenOn": "2025-02-11T15:52:28Z",
       "side": 1,
       "message": "+1 to jeongik.\n\nAnd I assume that activeTerminalView is better to be obtained when needed -- TabLayout#getSelectedTabPosition() + TabLayout#getTabAt(int index)?",
+      "parentUuid": "ee32fc6c_b2aad5b8",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 41
+      },
+      "revId": "ba142550aa62d5dddbace2b6bc579f2066f88b28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90bb7e03_67acf9cb",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-11T15:53:29Z",
+      "side": 1,
+      "message": "That\u0027s intended. If the activeTerminalView is null, it means no termianlView is focused.\n\nAnd in the `needToShowKeys()` part, it checks if activeTerminalView !\u003d null",
       "parentUuid": "ee32fc6c_b2aad5b8",
       "range": {
         "startLine": 59,
