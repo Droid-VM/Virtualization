@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa3a09a0_8ddff5e5",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-11T15:52:28Z",
+      "side": 1,
+      "message": "+1 to jeongik.\n\nAnd I assume that activeTerminalView is better to be obtained when needed -- TabLayout#getSelectedTabPosition() + TabLayout#getTabAt(int index)?",
+      "parentUuid": "ee32fc6c_b2aad5b8",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 41
+      },
+      "revId": "ba142550aa62d5dddbace2b6bc579f2066f88b28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c51e21db_b1d592f8",
         "filename": "android/TerminalApp/res/layout/activity_headless.xml",
         "patchSetId": 8
