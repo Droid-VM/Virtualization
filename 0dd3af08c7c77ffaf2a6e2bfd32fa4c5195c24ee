@@ -1,0 +1,206 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d0357cb_cd95ccd8",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-11T18:57:18Z",
+      "side": 1,
+      "message": "```suggestion\n  headers is the data blob referenced by the these headers.\n```",
+      "range": {
+        "startLine": 258,
+        "startChar": 14,
+        "endLine": 258,
+        "endChar": 57
+      },
+      "revId": "0dd3af08c7c77ffaf2a6e2bfd32fa4c5195c24ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c3bd489_c39b8a17",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-11T18:57:18Z",
+      "side": 1,
+      "message": "nit: Syntax highlight, consider `repr(C)` to make the layout clear.\n\n```suggestion\n  ```rust\n    #[repr(C)]\n    struct ReservedMemConfigEntry\u003cconst N: usize\u003e {\n      count: u32,\n      headers: [RMemHeader; N]\n      data: [u8],\n    }\n  ```\n```",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 5
+      },
+      "revId": "0dd3af08c7c77ffaf2a6e2bfd32fa4c5195c24ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3cca0d2_f3d939d1",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-11T18:57:18Z",
+      "side": 1,
+      "message": "```suggestion\n- A reserved memory header contains a `vm_uuid` for identifying which VM should\n```",
+      "range": {
+        "startLine": 268,
+        "startChar": 39,
+        "endLine": 268,
+        "endChar": 46
+      },
+      "revId": "0dd3af08c7c77ffaf2a6e2bfd32fa4c5195c24ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a87de02e_ab8f860f",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-11T18:57:18Z",
+      "side": 1,
+      "message": "You use the term `u32` above - mirror it here for succinctness and consistency",
+      "range": {
+        "startLine": 269,
+        "startChar": 37,
+        "endLine": 269,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ff3c0e36_9b2041d2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "guest/pvmfw/README.md",
+              "range": {
+                "startLine": 269,
+                "startChar": 0,
+                "endLine": 273,
+                "endChar": 0
+              },
+              "replacement": "  be alloced access to the memory, a u32 offset from the base of the data\n  blob where this node\u0027s data blob begins, a u32 size for the data portion\n  of the blob, a u32 offset of a C string containing the name of the blob,\n  and a u32 [flags](guest/pvmfw/src/reserved_mem.rs) field\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0dd3af08c7c77ffaf2a6e2bfd32fa4c5195c24ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09f90073_6cabf5fc",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-11T18:57:18Z",
+      "side": 1,
+      "message": "`allocated` - or perhaps `granted`?",
+      "range": {
+        "startLine": 269,
+        "startChar": 5,
+        "endLine": 269,
+        "endChar": 12
+      },
+      "revId": "0dd3af08c7c77ffaf2a6e2bfd32fa4c5195c24ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c22d72d1_02867833",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-11T18:57:18Z",
+      "side": 1,
+      "message": "nit: put this link on `reserved memory header` above rather than link the file for this particular field",
+      "range": {
+        "startLine": 272,
+        "startChar": 15,
+        "endLine": 272,
+        "endChar": 55
+      },
+      "revId": "0dd3af08c7c77ffaf2a6e2bfd32fa4c5195c24ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "668c9700_95a27eec",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-11T18:57:18Z",
+      "side": 1,
+      "message": "end in period for consistency",
+      "range": {
+        "startLine": 272,
+        "startChar": 56,
+        "endLine": 272,
+        "endChar": 61
+      },
+      "revId": "0dd3af08c7c77ffaf2a6e2bfd32fa4c5195c24ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e8ed821_c3a2cc65",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-11T18:57:18Z",
+      "side": 1,
+      "message": "```suggestion\n  ```rust\n    #[repr(C)]\n    struct RMemHeader {\n        vm_uuid: [u8; 16],\n        blob_offset: u32,\n        blob_size: u32,\n        compat_offset: u32,\n        flags: u32,\n    }\n  ```\n```",
+      "range": {
+        "startLine": 274,
+        "startChar": 2,
+        "endLine": 282,
+        "endChar": 5
+      },
+      "revId": "0dd3af08c7c77ffaf2a6e2bfd32fa4c5195c24ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
