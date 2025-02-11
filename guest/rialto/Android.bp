@@ -97,6 +97,10 @@ avb_add_hash_footer {
             name: "com.android.virt.name",
             value: SERVICE_VM_NAME,
         },
+        {
+            name: "com.android.virt.cap",
+            value: "rkp_trusted",
+        },
     ],
     enabled: false,
     arch: {

@@ -458,6 +458,7 @@ that is compatible with their guest kernel. These are:
 
 - `"com.android.virt.cap"`: a `|`-separated list of "capabilities" from
   - `deferred_rollback`: pvmfw defers rollback protection to the guest
+  - `rkp_trusted`: pvmfw indicates that the RKP server can provision the guest
   - `supports_uefi_boot`: pvmfw boots the VM as a EFI payload (experimental)
 - `"com.android.virt.page_size"`: the guest page size in KiB (optional, defaults to 4)
 - `"com.android.virt.name"`: VM name used in the DICE chain (optional)
