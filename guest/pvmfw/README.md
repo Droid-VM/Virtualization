@@ -459,7 +459,6 @@ that is compatible with their guest kernel. These are:
 - `"com.android.virt.cap"`: a `|`-separated list of "capabilities" from
   - `deferred_rollback`: pvmfw defers rollback protection to the guest
   - `supports_uefi_boot`: pvmfw boots the VM as a EFI payload (experimental)
-  - `trusty_security_vm`: pvmfw skips rollback protection
 - `"com.android.virt.page_size"`: (optional) the guest page size in KiB, defaults to 4
 - `"com.android.virt.name"`: (optional) VM name, used as the
   [`component_name`][dice-comp-name] (defaults to `"vm_entry"`) in the guest
