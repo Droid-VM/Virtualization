@@ -94,10 +94,6 @@ avb_add_hash_footer {
     rollback_index: SERVICE_VM_VERSION,
     props: [
         {
-            name: "com.android.virt.cap",
-            value: "remote_attest",
-        },
-        {
             name: "com.android.virt.name",
             value: SERVICE_VM_NAME,
         },

@@ -73,8 +73,6 @@ pub enum DebugLevel {
 /// VM Capability.
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Capability {
-    /// Remote attestation.
-    RemoteAttest,
     /// Secretkeeper protected secrets.
     SecretkeeperProtection,
     /// Trusty security VM.
@@ -88,7 +86,6 @@ pub enum Capability {
 
 impl Capability {
     const KEY: &'static str = "com.android.virt.cap";
-    const REMOTE_ATTEST: &'static [u8] = b"remote_attest";
     const TRUSTY_SECURITY_VM: &'static [u8] = b"trusty_security_vm";
     const SECRETKEEPER_PROTECTION: &'static [u8] = b"secretkeeper_protection";
     const SEPARATOR: u8 = b'|';
@@ -107,7 +104,6 @@ impl Capability {
 
         for v in value.split(|b| *b == Self::SEPARATOR) {
             let cap = match v {
-                Self::REMOTE_ATTEST => Self::RemoteAttest,
                 Self::TRUSTY_SECURITY_VM => Self::TrustySecurityVm,
                 Self::SECRETKEEPER_PROTECTION => Self::SecretkeeperProtection,
                 Self::SUPPORTS_UEFI_BOOT => Self::SupportsUefiBoot,
