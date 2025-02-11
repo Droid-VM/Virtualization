@@ -48,9 +48,8 @@ pub fn perform_rollback_protection(
         // Prevent attackers from impersonating well-known images.
         perform_fixed_index_rollback_protection(verified_boot_data, fixed)?;
         Ok((false, instance_hash.unwrap(), false))
-    } else if (should_defer_rollback_protection(fdt)?
-        && verified_boot_data.has_capability(Capability::DeferredRollbackProtection))
-        || verified_boot_data.has_capability(Capability::TrustySecurityVm)
+    } else if should_defer_rollback_protection(fdt)?
+        && verified_boot_data.has_capability(Capability::DeferredRollbackProtection)
     {
         perform_deferred_rollback_protection(verified_boot_data)?;
         Ok((false, instance_hash.unwrap(), true))

@@ -70,7 +70,7 @@ fn latest_trusty_test_vm_kernel_passes_verification() -> Result<()> {
         &load_latest_trusty_test_vm_signed_kernel()?,
         salt,
         expected_rollback_index,
-        vec![Capability::TrustySecurityVm],
+        vec![Capability::DeferredRollbackProtection, Capability::TrustySecurityVm],
         None,
     )
 }
