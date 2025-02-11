@@ -234,7 +234,6 @@ mod tests {
     #[test]
     fn rkp_vm_conversion() {
         let vb_data = VerifiedBootData {
-            capabilities: vec![Capability::RemoteAttest],
             name: Some(String::from(VerifiedBootData::RKP_VM_NAME)),
             ..BASE_VB_DATA
         };
@@ -259,7 +258,6 @@ mod tests {
     #[test]
     fn rkp_vm_config_descriptor_has_rkp_vm_marker_and_component_name() {
         let vb_data = VerifiedBootData {
-            capabilities: vec![Capability::RemoteAttest],
             name: Some(String::from(VerifiedBootData::RKP_VM_NAME)),
             ..BASE_VB_DATA
         };
@@ -282,8 +280,7 @@ mod tests {
 
     #[test]
     fn config_descriptor_with_instance_hash() {
-        let vb_data =
-            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..BASE_VB_DATA };
+        let vb_data = BASE_VB_DATA;
         let inputs = PartialInputs::new(&vb_data).unwrap();
         let config_map = decode_config_descriptor(&inputs, Some(HASH));
         assert_eq!(*config_map.get(&INSTANCE_HASH_KEY).unwrap(), Value::from(HASH.as_slice()));
@@ -291,8 +288,7 @@ mod tests {
 
     #[test]
     fn config_descriptor_without_instance_hash() {
-        let vb_data =
-            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..BASE_VB_DATA };
+        let vb_data = BASE_VB_DATA;
         let inputs = PartialInputs::new(&vb_data).unwrap();
         let config_map = decode_config_descriptor(&inputs, None);
         assert!(!config_map.contains_key(&INSTANCE_HASH_KEY));
