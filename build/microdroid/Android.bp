@@ -515,7 +515,7 @@ flag_aware_avb_add_hash_footer_defaults {
             props: [
                 {
                     name: "com.android.virt.cap",
-                    value: "secretkeeper_protection",
+                    value: "deferred_rollback",
                 },
             ],
         },
@@ -531,7 +531,7 @@ flag_aware_avb_add_hash_footer_defaults {
             props: [
                 {
                     name: "com.android.virt.cap",
-                    value: "secretkeeper_protection|supports_uefi_boot",
+                    value: "deferred_rollback|supports_uefi_boot",
                 },
             ],
             conditions_default: {

@@ -81,8 +81,9 @@ entities with DICE chain that adheres to those policies can access the secrets.
 
 This allows the bootloaders to defer rollback protection to the payload. Host relays this intention
 to pVM (both pVM firmware and OS) using the property (`defer-rollback-protection`) in device tree
-node (`/avf/untrusted`). If this is set and the guest OS is capable of `SecretkeeperProtection` then
-VMs use Secretkeeper based rollback protection.
+node (`/avf/untrusted`). If this is set and the guest OS is capable of
+`DeferredRollbackProtection` then VMs use Secretkeeper based rollback
+protection.
 
 ### Note on legacy support
 

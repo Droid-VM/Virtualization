@@ -457,7 +457,7 @@ recognizes, allowing VM owners to ensure that pvmfw performs its role in a way
 that is compatible with their guest kernel. These are:
 
 - `"com.android.virt.cap"`: a `|`-separated list of "capabilities" from
-  - `secretkeeper_protection`: pvmfw defers rollback protection to the guest
+  - `deferred_rollback`: pvmfw defers rollback protection to the guest
   - `supports_uefi_boot`: pvmfw boots the VM as a EFI payload (experimental)
   - `trusty_security_vm`: pvmfw skips rollback protection
 - `"com.android.virt.page_size"`: (optional) the guest page size in KiB, defaults to 4
