@@ -354,6 +354,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "832491a2_a2bd8ec2",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.kt",
+        "patchSetId": 5
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-11T14:20:57Z",
+      "side": 1,
+      "message": "That\u0027s a good idea.",
+      "parentUuid": "b32e0b7e_b7c4115d",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 40
+      },
+      "revId": "c2b3d9df04825934fd80247dd15aaabd5bf8c5e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c8362c9_19a22f9e",
@@ -391,6 +415,30 @@
       "side": 1,
       "message": "Thanks for the suggestion. I followed it for the refactor.\n\nThe refactor includes:\n1. Use `activeTerminalView` in `ModifierKeysController` to maintain the current active terminal view and switch the `activeTerminalView` in the onfocus listener of every terminal view.\n2. Instead of accessing `terminalViews` directly, using `TerminalViewModel` to share the `terminalViews` between `MainActivity` and `TerminalTabFragment`\n3. Use a seperate button for adding new terminal tab instead of a special tab. And use `HorizontalScrollView` to make the tablayout scrollable while the add button is right after it.",
       "parentUuid": "0c8362c9_19a22f9e",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 53
+      },
+      "revId": "c2b3d9df04825934fd80247dd15aaabd5bf8c5e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36cf6ca2_84740a89",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-11T14:20:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c14a7886_cdf878b7",
       "range": {
         "startLine": 32,
         "startChar": 4,
