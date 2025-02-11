@@ -79,6 +79,8 @@ pub enum Capability {
     TrustySecurityVm,
     /// UEFI support for booting guest kernel.
     SupportsUefiBoot,
+    /// This guest may be trusted by the remote key provisioning (RKP) server.
+    TrustedWithRemoteKeys,
     /// (internal)
     #[allow(non_camel_case_types)] // TODO: Use mem::variant_count once stable.
     _VARIANT_COUNT,
@@ -88,6 +90,7 @@ impl Capability {
     const KEY: &'static str = "com.android.virt.cap";
     const TRUSTY_SECURITY_VM: &'static [u8] = b"trusty_security_vm";
     const DEFERRED_ROLLBACK: &'static [u8] = b"deferred_rollback";
+    const RKP_TRUSTED: &'static [u8] = b"rkp_trusted";
     const SEPARATOR: u8 = b'|';
     const SUPPORTS_UEFI_BOOT: &'static [u8] = b"supports_uefi_boot";
     /// Number of supported capabilites.
@@ -107,6 +110,7 @@ impl Capability {
                 Self::TRUSTY_SECURITY_VM => Self::TrustySecurityVm,
                 Self::DEFERRED_ROLLBACK => Self::DeferredRollbackProtection,
                 Self::SUPPORTS_UEFI_BOOT => Self::SupportsUefiBoot,
+                Self::RKP_TRUSTED => Self::TrustedWithRemoteKeys,
                 _ => return Err(PvmfwVerifyError::UnknownVbmetaProperty),
             };
             if res.contains(&cap) {
