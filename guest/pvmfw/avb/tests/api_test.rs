@@ -29,6 +29,9 @@ use utils::*;
 const TEST_IMG_WITH_ONE_HASHDESC_PATH: &str = "test_image_with_one_hashdesc.img";
 const TEST_IMG_WITH_NAME_PATH: &str = "test_image_with_name.img";
 const TEST_IMG_WITH_NAME_TOO_LONG_PATH: &str = "test_image_with_name_too_long.img";
+const TEST_IMG_WITH_EMPTY_NAME_PATH: &str = "test_image_with_empty_name.img";
+const TEST_IMG_WITH_NULL_TERMINATED_NAME_PATH: &str = "test_image_with_null_terminated_name.img";
+const TEST_IMG_WITH_NULL_SPLIT_NAME_PATH: &str = "test_image_with_null_split_name.img";
 const TEST_IMG_WITH_INVALID_PAGE_SIZE_PATH: &str = "test_image_with_invalid_page_size.img";
 const TEST_IMG_WITH_NEGATIVE_PAGE_SIZE_PATH: &str = "test_image_with_negative_page_size.img";
 const TEST_IMG_WITH_OVERFLOW_PAGE_SIZE_PATH: &str = "test_image_with_overflow_page_size.img";
@@ -260,6 +263,24 @@ fn kernel_has_expected_name_valid() {
 fn kernel_has_expected_name_none() {
     let kernel = fs::read(TEST_IMG_WITH_ONE_HASHDESC_PATH).unwrap();
     assert_eq!(read_name(&kernel), Ok(None));
+}
+
+#[test]
+fn kernel_has_expected_name_empty() {
+    let kernel = fs::read(TEST_IMG_WITH_EMPTY_NAME_PATH).unwrap();
+    assert_eq!(read_name(&kernel), Err(PvmfwVerifyError::InvalidVmName));
+}
+
+#[test]
+fn kernel_has_expected_name_null_terminated() {
+    let kernel = fs::read(TEST_IMG_WITH_NULL_TERMINATED_NAME_PATH).unwrap();
+    assert_eq!(read_name(&kernel), Err(PvmfwVerifyError::InvalidVmName));
+}
+
+#[test]
+fn kernel_has_expected_name_null_split() {
+    let kernel = fs::read(TEST_IMG_WITH_NULL_SPLIT_NAME_PATH).unwrap();
+    assert_eq!(read_name(&kernel), Err(PvmfwVerifyError::InvalidVmName));
 }
 
 #[test]

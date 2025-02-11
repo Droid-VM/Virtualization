@@ -39,6 +39,9 @@ rust_test {
         ":test_image_with_initrd_and_non_initrd_desc",
         ":test_image_with_name",
         ":test_image_with_name_too_long",
+        ":test_image_with_empty_name",
+        ":test_image_with_null_terminated_name",
+        ":test_image_with_null_split_name",
         ":test_image_with_invalid_page_size",
         ":test_image_with_negative_page_size",
         ":test_image_with_overflow_page_size",
@@ -148,6 +151,51 @@ avb_add_hash_footer {
         {
             name: "com.android.virt.name",
             value: "name_exceeding_the_size_limit",
+        },
+    ],
+}
+
+// TODO: Soong rejects empty props
+avb_add_hash_footer {
+    name: "test_image_with_empty_name",
+    src: ":unsigned_test_image",
+    partition_name: "boot",
+    private_key: ":pvmfw_sign_key",
+    salt: "2134",
+    props: [
+        {
+            name: "com.android.virt.name",
+            value: "",
+        },
+    ],
+}
+
+//// TODO:Soong rejects "\0" as an "invalid char escape".
+avb_add_hash_footer {
+    name: "test_image_with_null_terminated_name",
+    src: ":unsigned_test_image",
+    partition_name: "boot",
+    private_key: ":pvmfw_sign_key",
+    salt: "2134",
+    props: [
+        {
+            name: "com.android.virt.name",
+            value: "test_vm_name\0",
+        },
+    ],
+}
+
+//// TODO:Soong rejects "\0" as an "invalid char escape".
+avb_add_hash_footer {
+    name: "test_image_with_null_split_name",
+    src: ":unsigned_test_image",
+    partition_name: "boot",
+    private_key: ":pvmfw_sign_key",
+    salt: "2134",
+    props: [
+        {
+            name: "com.android.virt.name",
+            value: "name\0more",
         },
     ],
 }
