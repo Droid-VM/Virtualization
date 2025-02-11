@@ -24,9 +24,8 @@ use std::time::Duration;
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
         AssignedDevices::AssignedDevices, CpuOptions::CpuOptions,
-        CpuOptions::CpuTopology::CpuTopology, CustomMemoryBackingFile::CustomMemoryBackingFile,
-        DiskImage::DiskImage, IVirtualizationService::IVirtualizationService,
-        VirtualMachineConfig::VirtualMachineConfig,
+        CpuOptions::CpuTopology::CpuTopology, DiskImage::DiskImage,
+        IVirtualizationService::IVirtualizationService, VirtualMachineConfig::VirtualMachineConfig,
         VirtualMachineRawConfig::VirtualMachineRawConfig,
     },
     binder::{ParcelFileDescriptor, Strong},
@@ -255,35 +254,18 @@ pub unsafe extern "C" fn AVirtualMachineRawConfig_setHypervisorSpecificAuthMetho
     0
 }
 
-/// Use the specified fd as the backing memfd for a range of the guest physical memory.
+/// NOT IMPLEMENTED.
 ///
-/// # Safety
-/// `config` must be a pointer returned by `AVirtualMachineRawConfig_create`.
+/// # Returns
+/// It always returns `-ENOTSUP`.
 #[no_mangle]
-pub unsafe extern "C" fn AVirtualMachineRawConfig_addCustomMemoryBackingFile(
-    config: *mut VirtualMachineRawConfig,
-    fd: c_int,
-    range_start: u64,
-    range_end: u64,
+pub extern "C" fn AVirtualMachineRawConfig_addCustomMemoryBackingFile(
+    _config: *mut VirtualMachineRawConfig,
+    _fd: c_int,
+    _range_start: u64,
+    _range_end: u64,
 ) -> c_int {
-    // SAFETY: `config` is assumed to be a valid, non-null pointer returned by
-    // AVirtualMachineRawConfig_create. It's the only reference to the object.
-    let config = unsafe { &mut *config };
-
-    let Some(file) = get_file_from_fd(fd) else {
-        return -libc::EINVAL;
-    };
-    let Some(size) = range_end.checked_sub(range_start) else {
-        return -libc::EINVAL;
-    };
-    config.customMemoryBackingFiles.push(CustomMemoryBackingFile {
-        file: Some(ParcelFileDescriptor::new(file)),
-        // AIDL doesn't support unsigned ints, so we've got to reinterpret the bytes into a signed
-        // int.
-        rangeStart: range_start as i64,
-        size: size as i64,
-    });
-    0
+    -libc::ENOTSUP
 }
 
 /// Add device tree overlay blob
