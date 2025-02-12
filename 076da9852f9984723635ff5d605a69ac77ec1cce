@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "445e2392_ab18837e",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T09:27:28Z",
+      "side": 1,
+      "message": "Add link to RKP VM[1] here?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/docs/service_vm.md;l\u003d45;drc\u003d1afff42ab507ea58579d4b3801fad5157e6663bb",
+      "range": {
+        "startLine": 466,
+        "startChar": 35,
+        "endLine": 466,
+        "endChar": 41
+      },
+      "revId": "076da9852f9984723635ff5d605a69ac77ec1cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f41f37c9_8b4ea582",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T09:27:28Z",
+      "side": 1,
+      "message": "Public key validation is a general process that has applied to all kernels thus far. I don\u0027t understand why it needs to be tied to RKP VM marker or rollback protection mode.",
+      "range": {
+        "startLine": 98,
+        "startChar": 50,
+        "endLine": 98,
+        "endChar": 90
+      },
+      "revId": "076da9852f9984723635ff5d605a69ac77ec1cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac4f0d43_c0efed25",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T09:27:28Z",
+      "side": 1,
+      "message": "We should also check that when the name is set to RKP_VM_NAME, the function `get_fixed_rollback_protection` returns the expected index; when the name is none, that function returns None.",
+      "range": {
+        "startLine": 271,
+        "startChar": 4,
+        "endLine": 271,
+        "endChar": 5
+      },
+      "revId": "076da9852f9984723635ff5d605a69ac77ec1cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad69475_36805aa9",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T09:27:28Z",
+      "side": 1,
+      "message": "nit: This name is somehow unclear, as \"get rollback protection\" is ambiguous.  Perhaps rename it to `get_expected_fixed_rollback_index` since it returns an index.",
+      "range": {
+        "startLine": 76,
+        "startChar": 3,
+        "endLine": 76,
+        "endChar": 32
+      },
+      "revId": "076da9852f9984723635ff5d605a69ac77ec1cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
