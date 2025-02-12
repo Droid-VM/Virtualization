@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "10390fcf_99bece01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T10:29:02Z",
+      "side": 1,
+      "message": "No, the main reason for this is to be able to use the name as the (already existing) `component_name` in the DICE chain, which gets recognized by our servers in the context of remote attestation. I don\u0027t want to have 2 different (potentially conflicting) identifiers for almost the same purpose. FWIW, I would also favor the UUID format given the choice.\n\n\u003e  I think the name should follow java-like package naming scheme if readability is the reason for this\n\nGood point!\n\nAs it isn\u0027t directly blocking this CL, let\u0027s discuss it elsewhere; see b/390527025#comment11.\n\n\u003e Because multiple vendors might want to run a similarily named VM.\n\nFYI, the DICE authority would also reflect that (in theory).\n\n\u003e so if it were a reaon for 16-bytes I think it doesn\u0027t have to be\n\nAh! Good to know and thanks for pointing this out!\n\nYes, that was the reason for this limitation.\n\nThen, let\u0027s update the format (b/382493676#comment8) and I\u0027ll relax this.",
+      "parentUuid": "1d4dfdf3_1c6f6157",
+      "range": {
+        "startLine": 14,
+        "startChar": 10,
+        "endLine": 14,
+        "endChar": 46
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5586606b_d0e50c2b",
@@ -87,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39f30e21_fe2ad9a9",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T10:29:02Z",
+      "side": 1,
+      "message": "I\u0027d rather keep it this way as it\u0027s consistent with the other functions, avoids an extra indirection and the `const` wouldn\u0027t even DRY as it is only expected to be used once, here.",
+      "parentUuid": "28f637ac_8325e427",
+      "range": {
+        "startLine": 246,
+        "startChar": 56,
+        "endLine": 246,
+        "endChar": 79
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35d5b897_1af88e4e",
@@ -112,6 +160,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91b0b59e_f8c8221b",
+        "filename": "guest/pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T10:29:02Z",
+      "side": 1,
+      "message": "Good point, I tried to keep the names consistent (with the same prefix) but clarity of the check performed should definitely be preferred.",
+      "parentUuid": "35d5b897_1af88e4e",
+      "range": {
+        "startLine": 266,
+        "startChar": 3,
+        "endLine": 266,
+        "endChar": 36
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "276fd0d0_8ff103f2",
         "filename": "guest/pvmfw/avb/tests/api_test.rs",
         "patchSetId": 5
@@ -123,6 +195,30 @@
       "writtenOn": "2025-02-12T08:57:40Z",
       "side": 1,
       "message": "We can also test `kernel_with_empty_name_fails_verification` since the code also has this logic.",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 1
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dd58862_e2fcd35f",
+        "filename": "guest/pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T10:29:02Z",
+      "side": 1,
+      "message": "Yes, see aosp/3488938.",
+      "parentUuid": "276fd0d0_8ff103f2",
       "range": {
         "startLine": 269,
         "startChar": 0,
