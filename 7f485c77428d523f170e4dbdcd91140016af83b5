@@ -1,0 +1,355 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c19d8aa_77225263",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "`Bug: 382493676`",
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37c8cb8e_2f6d963e",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "`Reserved Memory`",
+      "range": {
+        "startLine": 177,
+        "startChar": 15,
+        "endLine": 177,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ff3485a5_83057e55",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "guest/pvmfw/README.md",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 178,
+                "endChar": 0
+              },
+              "replacement": "| {Fifth blob: Reserved Memory}|\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1497c3d0_86281c27",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "This should first focus on the purpose of this new entry (\"why would I use it?\") instead of how it\u0027s been implemented. In particular, the DT node is one way to communicate the region to the guest but, depending on the platform, the support might be extended to other firmware formats.\n\nI\u0027d recommend something along the lines of\n\n\u003e entry 4 if present contains potentially confidential data to be passed to specific guests, identified from their VM name. If the data is confidential, this feature should only be used with guests using a fixed rollback protection mechanism, to prevent rollback attacks from a malicious host. Data is passed as a `reserved-memory` region through the device tree, with the provided properties, at an address which is implementation defined. Multiple regions may be passed to the same guest.\n\nthen you can proceed with the actual low-level format.",
+      "range": {
+        "startLine": 254,
+        "startChar": 30,
+        "endLine": 255,
+        "endChar": 51
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ea4851_e98c526a",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "Just have this documentation in-line with the Rust snippet, as `///`?",
+      "range": {
+        "startLine": 256,
+        "startChar": 2,
+        "endLine": 258,
+        "endChar": 55
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "144bd844_d3f6e55a",
+        "filename": "guest/pvmfw/src/config.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "Please remove, this documentation only seems to be relevant to the firmware implementation of one vendor and is therefore more confusing than anything else.",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 59
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6afee7f_e4e504a3",
+        "filename": "guest/pvmfw/src/config.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "These struct fields are entries of the pvmfw configuration data; please rename to `reserved_mem` (or similar).",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 14
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52790562_c051a3a2",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "If you\u0027d like to have this as a separate file, could you add it under `guest/pvmfw/src/config/`, as it extends support for the config data, currently in `config.rs`?",
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa00a450_ac5763ae",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "Why not add a helper function that locates a (valid) `\u0026CStr` from a slice and an offset (using `from_bytes_until_nul`), guaranteed to never OOB but removing the need to do fancy offset arithmetic at the call-site?\n\nYou could then validate that\n```\nlet _ \u003d get_cstr_at(buffer, compat_offset)?;\n```\nand also re-use it for the `vm_name` (b/382493676#comment8).",
+      "range": {
+        "startLine": 58,
+        "startChar": 3,
+        "endLine": 58,
+        "endChar": 15
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d514c38e_4a0dbbb2",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "Same comment about endianness.",
+      "range": {
+        "startLine": 69,
+        "startChar": 27,
+        "endLine": 69,
+        "endChar": 30
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9295f372_a3a1021e",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "Why? This prevents the layout mentioned in b/382493676#comment2, using a string table at the end, and instead forces duplicating the `compatible` string between entries that could share it.\n\nYou could simply check that the \"blobs\" are non-overlapping and in-order (not necessary but easier to implement):\n```\nuse vmbase::util::RangeExt as _;\n```\n```\nlet mut last_blob_end \u003d 0;\nfor hdr in hdrs {\n    let limits \u003d last_blob_end..buffer.len();\n    lef offset \u003d hdr.blob_offset();\n    let blob \u003d offset..(offset + hdr.blob_size());\n    if !blob.is_within(\u0026limits) {\n        return Err(...);\n    }\n    last_blob_end \u003d blob.end;\n}\n```\nthen that all strings (`compat` and `vm_name`) are after `last_blob_end`. Note that it isn\u0027t an issue (and is actually a feature) if the string offsets point to (partially) overlapping strings.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 13
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6215d2cb_d480517d",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "Make this a `\u0026\u0027a [u8]`?",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 19
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d707437_f41816e7",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "Aren\u0027t you missing the `flags`?",
+      "range": {
+        "startLine": 128,
+        "startChar": 25,
+        "endLine": 128,
+        "endChar": 26
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba07017d_664b175e",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "At this point, why not introduce a parser\n```\nfn extract_resmem_entries(buffer: \u0026\u0027a [u8]) -\u003e Result\u003cVec\u003cConfigHeaderEntry\u003c\u0027a\u003e\u003e\u003e\n```\nand iterate through the `Vec` so that you don\u0027t need all this machinery and intermediate types (`ConfigHeader`)?",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 17
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6445d78f_a97e5a6e",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "What if the guest kernel has alignment constraints (e.g. `PAGE_SIZE`)? I thought that this change was going to copy the select blobs to dedicated distinct (guest) page-aligned regions before clearing the config data region. I agree that this implementation is faster (although missing the clearing) but am not convinced it\u0027s correct?",
+      "range": {
+        "startLine": 167,
+        "startChar": 38,
+        "endLine": 167,
+        "endChar": 74
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7011f633_8692fa05",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "Let\u0027s dedicate this file to parsing the low-level structures of the config data entry and decouple it from high-level functional logic such as modifying the DT or even locating the right entries.",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 52
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

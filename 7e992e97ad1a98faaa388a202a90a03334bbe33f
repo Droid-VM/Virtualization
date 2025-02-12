@@ -88,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "07654121_cb5bc050",
+        "filename": "guest/pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "Can we drop \"`Config`\" (\"`Entry::ReservedMem`\") to be consistent with other `Entry` variants?",
+      "parentUuid": "3dc6a6f4_3a1d988c",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5ed0eb57_8184dfca",
@@ -118,6 +136,30 @@
       "writtenOn": "2025-02-06T21:23:23Z",
       "side": 1,
       "message": "You want this data structure to have no alignment requirement, because you\u0027re converting a `\u0026[RMemHeader]` directly from possibly-unaligned bytes. `derive(Unaligned)` checks this at compile time.\n\nThe idiomatic way to do this is to dealign the integer types with `use zerocopy::byteorder::{U32, LE};` and replacing all of these `u32` fields with `U32\u003cLE\u003e` (or `zerocopy::byteorder::little_endian::U32` etc.).",
+      "range": {
+        "startLine": 21,
+        "startChar": 17,
+        "endLine": 21,
+        "endChar": 20
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e42302_9c7a8fdf",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:45:47Z",
+      "side": 1,
+      "message": "I believe making the code agnostic of the CPU endianness is particularly relevant if you expect this code to run on both AArch64 and x86_64, which use different ones, AFAIU.",
+      "parentUuid": "1d2b004c_10d0ee46",
       "range": {
         "startLine": 21,
         "startChar": 17,
