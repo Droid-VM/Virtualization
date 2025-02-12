@@ -578,6 +578,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ab1627a_b0254473",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-02-12T11:37:46Z",
+      "side": 1,
+      "message": "\u003e How about I implement a UUID check against tests andhard code it to non-matching [zero] is the real path?\n\nYeah, I think it would be a better this way.\n\nBut is there a reason that prevents from chaining this change on top of aosp/3452838?",
+      "parentUuid": "ad5969c1_5cda8518",
+      "range": {
+        "startLine": 111,
+        "startChar": 7,
+        "endLine": 111,
+        "endChar": 25
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9753dc4a_d238013e",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 7
