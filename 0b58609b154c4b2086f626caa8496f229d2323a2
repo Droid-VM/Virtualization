@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6a9c090_daef1808",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-12T00:08:39Z",
+      "side": 1,
+      "message": "I think this is OK for now. Long term we need to figure out a strategy here, otherwise people will accidentally develop system partition VMs that fail to run on older vendor API levels. Maybe these DT nodes should be opt-in when configuring the VM.",
+      "revId": "0b58609b154c4b2086f626caa8496f229d2323a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

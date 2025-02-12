@@ -34,6 +34,29 @@
       "parentUuid": "918010d5_945f2c5c",
       "revId": "3480befac61073ed9d1bf90c94f6a3a2bab288e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee9290a3_86145cbb",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-12T00:08:39Z",
+      "side": 1,
+      "message": "Can you use `rustutils::system_properties::read`?\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:system/librustutils/system_properties.rs;l\u003d217;drc\u003dc9f96900ed920afc24d1523d24f5856cfc56e245",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 1
+      },
+      "revId": "3480befac61073ed9d1bf90c94f6a3a2bab288e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
