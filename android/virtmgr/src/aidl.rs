@@ -200,6 +200,13 @@ pub fn remove_temporary_files(path: &PathBuf) -> Result<()> {
     Ok(())
 }
 
+fn rebase_path(path: &Path, new_root: &str) -> PathBuf {
+    let mut components: Vec<_> = path.components().collect();
+    components.remove(0); // Remove the old root
+    let new_path: PathBuf = components.iter().collect();
+    Path::new(new_root).join(new_path)
+}
+
 /// Implementation of `IVirtualizationService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
 pub struct VirtualizationService {
@@ -489,7 +496,7 @@ impl VirtualizationService {
         };
         let expected_exe_path = Path::new(&early_vm.path);
         if expected_exe_path != calling_exe_path
-            && Path::new("/system").join(expected_exe_path) != calling_exe_path
+            && rebase_path(expected_exe_path, "/system") != calling_exe_path
         {
             return Err(anyhow!(
                 "VM '{name}' in partition '{calling_partition}' must be created with '{}', not '{}'",
