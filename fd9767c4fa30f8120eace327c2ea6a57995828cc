@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17798c65_67995f59",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T10:03:55Z",
+      "side": 1,
+      "message": "Frankly, the connection between the RKP server\u0027s involvement and the RKP VM marker addition is not immediately clear to everyone. It\u0027s also a bit ambiguous what a RemoteKey is here. Widevine VM, for example, requires the RKP VM marker on the DICE chain but does not interact with the RKP server.\n\nAs the RKP server\u0027s involvement should not be a concern for pvmfw. Could we adopt a more explicit name, such as `need_rkpvm_marker`, so that when the capability is present, pvmfw adds the marker to the VM DICE chain?",
+      "range": {
+        "startLine": 113,
+        "startChar": 16,
+        "endLine": 113,
+        "endChar": 65
+      },
+      "revId": "fd9767c4fa30f8120eace327c2ea6a57995828cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba8d1ea4_92721bdd",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T10:03:55Z",
+      "side": 1,
+      "message": "I don\u0027t think this change is necessary up to now. The public key match is a generic step for all VMs, and Andrey also mentioned that if vbmeta signature validation is present, then the AL kernel will also use the right key to pass this generic step.\n\nIf all VMs require it, we don\u0027t need to have a specific capability to enable it conditionally.",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 192,
+        "endChar": 1
+      },
+      "revId": "fd9767c4fa30f8120eace327c2ea6a57995828cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
