@@ -210,6 +210,24 @@
       "parentUuid": "2d5d4d2a_f150c007",
       "revId": "b3dedf72c8a0c9e36d31d380d19c2a309599689b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed114760_46c49265",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-12T17:55:44Z",
+      "side": 1,
+      "message": "OK, then there are three ways I see to improve this:\n\n- A) Leave the parameter type as `\u0026[u8]`. _Clearly_ document the alignment requirement in the docstring of `parse_reserved_mem`. Rewrite the existing unit tests to construct `Vec\u003cu32\u003e` or otherwise ensure the input `\u0026[u8]` is aligned to `u32` and won\u0027t depend on the current allocator behavior.\n- B) Change the parameter type to `\u0026[u32]`. Remove the alignment error type. Change the tests to construct a `Vec\u003cu32\u003e`, likely using zerocopy to fill it in.\n- C) Leave the parameter type as `\u0026[u8]`. Switch to the unaligned zerocopy `U32` and don\u0027t enforce any alignment requirement in this code. The true alignment requirement is page alignment and not `u32` alignment, and that is better checked by the next system to handle this data. Invert the test confirming alignment is required.\n\nI still suggest Option C)",
+      "parentUuid": "a4237829_335f819d",
+      "revId": "b3dedf72c8a0c9e36d31d380d19c2a309599689b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

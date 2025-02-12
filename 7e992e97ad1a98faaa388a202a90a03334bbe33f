@@ -172,6 +172,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a036476a_877f0612",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-12T17:55:44Z",
+      "side": 1,
+      "message": "The README states `The header uses the endianness of the virtual machine`. Can that differ from the endianness of the machine running this code?",
+      "parentUuid": "d4e42302_9c7a8fdf",
+      "range": {
+        "startLine": 21,
+        "startChar": 17,
+        "endLine": 21,
+        "endChar": 20
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5781437d_26c320e6",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 7
@@ -856,6 +880,24 @@
       "side": 1,
       "message": "The only indication that a header in isolation is invalid would be if `blob_offset \u003e compat_offset`. If we keep trying to parse headers beyond what we think is the last, there\u0027s a pretty good change that the next header sized section of memory will pass that check.\n\nIf we managed to parse an additonal header, there\u0027s a good chance that the offsets won\u0027t validate correctly against the other headers. However, when that happens, how do we know what the error was? It wasn\u0027t a header after all and the correct number was specified? The number actually was correct and this header is invalid or corrupted? Both the header and the number are correct but the data blob was truncate?\n\nI any case, if too few headers specified, the app looking to use the reserved memory will run  into an error trying to find it.",
       "parentUuid": "8a1bb81a_de52dac7",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ee4e28_8427c5be",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-12T17:55:44Z",
+      "side": 1,
+      "message": "I see. Perhaps logging an inconsistency seen like that would be sufficient? I\u0027ll leave it to you.",
+      "parentUuid": "6b13f16c_411bb411",
       "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

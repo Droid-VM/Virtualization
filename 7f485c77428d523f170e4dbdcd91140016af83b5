@@ -130,6 +130,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30569862_331e60f6",
+        "filename": "guest/pvmfw/src/config.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-12T17:55:44Z",
+      "side": 1,
+      "message": "Referencing quirks of various firmware implementations in comments of generic parsing code is not uncommon - why would this be confusing and not simply ignored by those who don\u0027t know of `Depthcharge`?",
+      "parentUuid": "144bd844_d3f6e55a",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 59
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6afee7f_e4e504a3",
         "filename": "guest/pvmfw/src/config.rs",
         "patchSetId": 12
@@ -193,6 +217,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa43bc73_0a2966b5",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-12T17:55:44Z",
+      "side": 1,
+      "message": "FWIW this doesn\u0027t take into account the `expeced_len` calculation",
+      "parentUuid": "aa00a450_ac5763ae",
+      "range": {
+        "startLine": 58,
+        "startChar": 3,
+        "endLine": 58,
+        "endChar": 15
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d514c38e_4a0dbbb2",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 12
@@ -239,6 +287,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02619ce2_9adfc79c",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-12T17:55:44Z",
+      "side": 1,
+      "message": "+1, add a test ensuring that overlapping values are allowed",
+      "parentUuid": "9295f372_a3a1021e",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 13
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6215d2cb_d480517d",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 12
@@ -250,6 +322,30 @@
       "writtenOn": "2025-02-12T15:45:47Z",
       "side": 1,
       "message": "Make this a `\u0026\u0027a [u8]`?",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 19
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1bcc24a_8f6e1460",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-12T17:55:44Z",
+      "side": 1,
+      "message": "See the [discussion here](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3466214/comment/4689e779_a759e335/). If the intention is that the slice is never deferenced and it is only used as an address + size, then yielding `u64` here is more clear and avoids grouping unlike concepts. However, if loads and stores are going to be done by the underlying system this is passing to, then `appendprop_addrrange` is unsound and should be `unsafe`",
+      "parentUuid": "6215d2cb_d480517d",
       "range": {
         "startLine": 125,
         "startChar": 0,
@@ -296,6 +392,30 @@
       "writtenOn": "2025-02-12T15:45:47Z",
       "side": 1,
       "message": "At this point, why not introduce a parser\n```\nfn extract_resmem_entries(buffer: \u0026\u0027a [u8]) -\u003e Result\u003cVec\u003cConfigHeaderEntry\u003c\u0027a\u003e\u003e\u003e\n```\nand iterate through the `Vec` so that you don\u0027t need all this machinery and intermediate types (`ConfigHeader`)?",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 17
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4e85561_32ceb539",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-12T17:55:44Z",
+      "side": 1,
+      "message": "-1. Use `Iterator` or handle iteration state in local variables, rather than introduce an unnecessary allocation.",
+      "parentUuid": "ba07017d_664b175e",
       "range": {
         "startLine": 131,
         "startChar": 0,
