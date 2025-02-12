@@ -299,6 +299,30 @@
       },
       "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72aeb716_f5186cb0",
+        "filename": "guest/pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T11:18:21Z",
+      "side": 1,
+      "message": "Yes, of course, but Soong is getting in the way of implementing that test and I really don\u0027t want to delay this CL (and all that follow) because of that. If you know of a way to AVB-sign using an empty property, I\u0027ll use it and squash both in this commit. Otherwise, I\u0027ll keep treating the tests from aosp/3488938 as low priority compared to everything else.",
+      "parentUuid": "4ec9dc9c_1470a680",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 1
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
