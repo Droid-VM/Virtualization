@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90a1239b_c28058a9",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T10:22:53Z",
+      "side": 1,
+      "message": "This check is redundant, `ro.vendor.api_level` is the first vendor API level set for all chipsets[1]. Checking it alone is enough, as shown in the VM attestation tests [MicrodroidDeviceTestBase.java;l\u003d294-309](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java;l\u003d294-309;drc\u003d2cb8e7397b171e0eea0d0c16e099a004da157e80).\n\n[1] https://source.android.com/docs/core/architecture/api-flags",
+      "range": {
+        "startLine": 169,
+        "startChar": 28,
+        "endLine": 169,
+        "endChar": 59
+      },
+      "revId": "10cb12bd233a68e0256f3d7ebbb81ecfdcedf334",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66bc2aa9_6b5942a7",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T10:22:53Z",
+      "side": 1,
+      "message": "nit: You can use `anyhow::Result\u003cT\u003e` to make this more compact.",
+      "range": {
+        "startLine": 218,
+        "startChar": 26,
+        "endLine": 218,
+        "endChar": 44
+      },
+      "revId": "10cb12bd233a68e0256f3d7ebbb81ecfdcedf334",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c7b91fa_9de62741",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T10:22:53Z",
+      "side": 1,
+      "message": "Why looping here only for a single property?",
+      "range": {
+        "startLine": 220,
+        "startChar": 4,
+        "endLine": 220,
+        "endChar": 23
+      },
+      "revId": "10cb12bd233a68e0256f3d7ebbb81ecfdcedf334",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a67a40_df0478b3",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T10:22:53Z",
+      "side": 1,
+      "message": "This is not needed",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 1
+      },
+      "revId": "10cb12bd233a68e0256f3d7ebbb81ecfdcedf334",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
