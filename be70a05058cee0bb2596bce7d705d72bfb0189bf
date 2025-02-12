@@ -135,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d6ecd6b_f4580463",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T10:57:05Z",
+      "side": 1,
+      "message": "I also want to consistent with other functions actually. It is constant at [1]\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/pvmfw/avb/src/verify.rs;l\u003d85;drc\u003d9fbbaf34313185f0cd4f7bbb45878e684ebdcb4a",
+      "parentUuid": "39f30e21_fe2ad9a9",
+      "range": {
+        "startLine": 246,
+        "startChar": 56,
+        "endLine": 246,
+        "endChar": 79
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35d5b897_1af88e4e",
@@ -184,6 +208,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a6613a3_48b1b712",
+        "filename": "guest/pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T10:57:05Z",
+      "side": 1,
+      "message": "It would be easier to read if the test name could summarize the behavior it is testing as recommended in http://engdoc/eng/doc/devguide/testing/unit/best-practices?polyglot\u003drust#naming. For example:\n\n```\ntransfer_money_insufficient_funds_fails\nmultiply_two_negative_values_returns_positive_value\nmultiply_anything_with_nan_returns_nan\nvalid_input_conversion_succeeds\n```\n\nSimilarly, it would be more clear to rename the other recently added tests to align with the existing naming convention, for example:\n\n```\ntampered_kernel_fails_verification\nkernel_footer_with_vbmeta_offset_overwritten_fails_verification\n```",
+      "parentUuid": "91b0b59e_f8c8221b",
+      "range": {
+        "startLine": 266,
+        "startChar": 3,
+        "endLine": 266,
+        "endChar": 36
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "276fd0d0_8ff103f2",
         "filename": "guest/pvmfw/avb/tests/api_test.rs",
         "patchSetId": 5
@@ -219,6 +267,30 @@
       "side": 1,
       "message": "Yes, see aosp/3488938.",
       "parentUuid": "276fd0d0_8ff103f2",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 1
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ec9dc9c_1470a680",
+        "filename": "guest/pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T10:57:05Z",
+      "side": 1,
+      "message": "Thanks, though I find it beneficial to combine feature changes and their associated tests in one cl, allowing for immediate verification of the feature\u0027s correctness and adhering to a test-driven development flow.",
+      "parentUuid": "5dd58862_e2fcd35f",
       "range": {
         "startLine": 269,
         "startChar": 0,
