@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0275d284_3651e686",
+        "filename": "apex/product_packages.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2025-02-12T01:38:40Z",
+      "side": 1,
+      "message": "I don\u0027t think this is the right place to hard-code a list of targets. Also the target shouldn\u0027t include `packages/modules/Virtualization/apex/product_packages.mk` at the first place, rather than disabling just one single value `PRODUCT_AVF_ENABLED`.\n\nI suggest you to edit product mk files (e.g. gsi_car_base.mk).",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 5
+      },
+      "revId": "ef1f14aec7ac84287c5086c59a0b526304d2de5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
