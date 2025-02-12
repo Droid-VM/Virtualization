@@ -428,6 +428,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd446d35_84f0b797",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-12T23:53:55Z",
+      "side": 1,
+      "message": "FWIW you\u0027re correct that the intermediate types aren\u0027t needed - this could be written with [`iter::from_fn`](https://doc.rust-lang.org/std/iter/fn.from_fn.html) and have something like this:\n\n```rust\nfn iter_resmem_entries(buffer: \u0026\u0027a [u8]) -\u003e Result\u003cimpl Iterator\u003cItem \u003d ConfigHeaderEntry\u003c\u0027a\u003e\u003e\n```\n\nIt\u0027d be essentially the same thing except the iteration state is tracked in `move`d closure variables instead of a struct fields. Short example:\n\n```rust\npub fn evens(in_range: Range\u003cu32\u003e) -\u003e impl Iterator\u003cItem \u003d u32\u003e {\n    let mut i \u003d in_range.start.wrapping_sub(2);\n    std::iter::from_fn(move || {\n        i \u003d i.wrapping_add(2);\n        (i \u003c in_range.end).then_some(i)\n    })\n}\n```\n\nI\u0027ve no problem with some intermediate types though.",
+      "parentUuid": "e4e85561_32ceb539",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 17
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6445d78f_a97e5a6e",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 12
