@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5586606b_d0e50c2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T08:57:40Z",
+      "side": 1,
+      "message": "Thanks for working on this! The cl is mostly LGTM. Please take a look at comments and CI error.",
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e374e89_d270f6ce",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T08:57:40Z",
+      "side": 1,
+      "message": "We can get more specific here by indicating that \"The VM name will be used as the component name in the DICE certificate derived in pvmfw if provided\". It would also be helpful to link to component name in DICE [1] as well.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:external/open-dice/docs/android.md;l\u003d81;drc\u003d6d511e9533eac05d64d47fcd78ac5d881e72c3de",
+      "range": {
+        "startLine": 465,
+        "startChar": 49,
+        "endLine": 465,
+        "endChar": 61
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28f637ac_8325e427",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T08:57:40Z",
+      "side": 1,
+      "message": "nit: change to const?",
+      "range": {
+        "startLine": 246,
+        "startChar": 56,
+        "endLine": 246,
+        "endChar": 79
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35d5b897_1af88e4e",
+        "filename": "guest/pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T08:57:40Z",
+      "side": 1,
+      "message": "nit: Can we rename the method to include which behavior is exactly checked here? It would be more readable if we can tell from the title whether the test checks success and or failure. Something like `kernel_with_too_long_name_fails_verification` could be better IMO.",
+      "range": {
+        "startLine": 266,
+        "startChar": 3,
+        "endLine": 266,
+        "endChar": 36
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "276fd0d0_8ff103f2",
+        "filename": "guest/pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T08:57:40Z",
+      "side": 1,
+      "message": "We can also test `kernel_with_empty_name_fails_verification` since the code also has this logic.",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 1
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
