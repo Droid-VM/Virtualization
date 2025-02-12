@@ -22,6 +22,30 @@
       },
       "revId": "8268add50f6a91f679a73f5e349bbc4d36ebfd86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc17cd31_3d6709e7",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-12T15:49:25Z",
+      "side": 1,
+      "message": "If you want both to be the same, I\u0027d rather make the cap string longer (which I intentionally cropped, given that it isn\u0027t really intended for readability) as \"`DeferredRollback`\" really isn\u0027t what we\u0027re going for, here: it\u0027s the _protection_ that\u0027s being deferred, not the _rollback_. WDYT?",
+      "parentUuid": "15543679_8c5a1cb0",
+      "range": {
+        "startLine": 77,
+        "startChar": 20,
+        "endLine": 77,
+        "endChar": 30
+      },
+      "revId": "8268add50f6a91f679a73f5e349bbc4d36ebfd86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
