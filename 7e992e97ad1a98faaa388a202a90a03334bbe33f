@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5faa86b6_b6bf06e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-12T01:48:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2ab6477_c65d4c84",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b52f2b06_e27ddd23",
         "filename": "guest/pvmfw/src/config.rs",
         "patchSetId": 7
@@ -374,6 +392,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf908eb1_90de9393",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-12T01:48:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ced9b10d_728d71a0",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4689e779_a759e335",
@@ -459,6 +495,30 @@
       "side": 1,
       "message": "No, yielding unsafe types is nearly always worse than yielding safe types even if you\u0027re just going to eagerly convert to something raw. Yielding a reference proves to local code that it\u0027s valid to access for its lifetime, say, to log it, while raw pointers toss this info away and require the user to audit code to ensure the pointers remain valid as expected to do so.\n\nIf you never expect these values to be dereferenced, perhaps yield the relevant `u64` that are used instead of `*const u8`/`usize` to avoid implying it\u0027s a valid buffer to read.",
       "parentUuid": "aa5716b4_81ead44b",
+      "range": {
+        "startLine": 104,
+        "startChar": 23,
+        "endLine": 104,
+        "endChar": 38
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a07a27be_1cb011bb",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-12T01:48:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce76eb5c_bd30bec6",
       "range": {
         "startLine": 104,
         "startChar": 23,
@@ -712,6 +772,24 @@
       "side": 1,
       "message": "It\u0027s not clear to me why there would be additional false positives here. Checking early and logging inconsistencies could really help a future debugger.",
       "parentUuid": "257299ef_2b4bfece",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b13f16c_411bb411",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-12T01:48:04Z",
+      "side": 1,
+      "message": "The only indication that a header in isolation is invalid would be if `blob_offset \u003e compat_offset`. If we keep trying to parse headers beyond what we think is the last, there\u0027s a pretty good change that the next header sized section of memory will pass that check.\n\nIf we managed to parse an additonal header, there\u0027s a good chance that the offsets won\u0027t validate correctly against the other headers. However, when that happens, how do we know what the error was? It wasn\u0027t a header after all and the correct number was specified? The number actually was correct and this header is invalid or corrupted? Both the header and the number are correct but the data blob was truncate?\n\nI any case, if too few headers specified, the app looking to use the reserved memory will run  into an error trying to find it.",
+      "parentUuid": "8a1bb81a_de52dac7",
       "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

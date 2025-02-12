@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1797923f_48aad4aa",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-12T01:48:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65fb64fb_3a6fa961",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 5
+      },
+      "revId": "b3dedf72c8a0c9e36d31d380d19c2a309599689b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e3846f2_f46fba3e",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-10T20:25:32Z",
       "side": 1,
       "message": "Declare a new\n\n```rust\nstruct ConfigHeaderEntry\u003c\u0027a\u003e {\n    blob: \u0026\u0027a [u8],\n    compat: \u0026\u0027a CStr,\n    hdr_uuid: \u0026\u0027a [u8; 16],\n}\n```\n\nEagerly provide names when it\u0027s not obvious what each element means.",
+      "range": {
+        "startLine": 128,
+        "startChar": 16,
+        "endLine": 128,
+        "endChar": 51
+      },
+      "revId": "b3dedf72c8a0c9e36d31d380d19c2a309599689b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "785b25c1_0acc6ada",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-12T01:48:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e3846f2_f46fba3e",
       "range": {
         "startLine": 128,
         "startChar": 16,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1b6501c_5cf01fb4",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-12T01:48:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1a796c1_7910e7d0",
+      "range": {
+        "startLine": 162,
+        "startChar": 46,
+        "endLine": 162,
+        "endChar": 85
+      },
+      "revId": "b3dedf72c8a0c9e36d31d380d19c2a309599689b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5d5dc59_eee8f7af",
@@ -87,6 +159,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36d45e7a_c6ad5967",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-12T01:48:04Z",
+      "side": 1,
+      "message": "Reverted. My editor kept putting annoying highlights on tests and I gave up on getting #[cfg(test)] added to my language server config after a while.",
+      "parentUuid": "b5d5dc59_eee8f7af",
+      "revId": "b3dedf72c8a0c9e36d31d380d19c2a309599689b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d5d4d2a_f150c007",
@@ -100,6 +190,24 @@
       "writtenOn": "2025-02-10T20:25:32Z",
       "side": 1,
       "message": "Requiring the input buffer be aligned is generally an abyssmal requirement to work with, especially when not represented by the type system. Please don\u0027t do that unless you\u0027re positive it\u0027s truly unnecessary. Otherwise make the header type unaligned instead.\n\nIf it is truly necessary, then please represent this constraint in the parameter type: change `ConfigHeader::new`/`parse_reserved_mem` to accept a `\u0026[u32]` _instead_ of a `\u0026[u8]` to remove alignment as a surprise error case. I don\u0027t want a switch in default allocator behavior to make these tests flaky, as they currently all assume that `vec![u8; N]` will be aligned for `u32` - which is only coincidentally true.\n\nAnother thing that surprised me is that the memory address of the passed in slice is used, but that\u0027s not communicated in the docstring or `config` parameter name for `parse_reserved_mem`. I normally expect something labelled parsing code to function identically with the same source bytes no matter the address, but here the address matters (and not only for alignment)",
+      "revId": "b3dedf72c8a0c9e36d31d380d19c2a309599689b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4237829_335f819d",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-12T01:48:04Z",
+      "side": 1,
+      "message": "The usage is  pvmfw configutation which is defined as page aligned. There are no specified length requirements. https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/pvmfw/README.md;l\u003d110",
+      "parentUuid": "2d5d4d2a_f150c007",
       "revId": "b3dedf72c8a0c9e36d31d380d19c2a309599689b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
