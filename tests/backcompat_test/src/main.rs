@@ -202,8 +202,8 @@ fn run_test(protected: bool, golden_dt: &str) -> Result<(), Error> {
         );
         return Err(anyhow!(
             "stdout: {:?}\n stderr: {:?}",
-            dtcompare_res.stdout,
-            dtcompare_res.stderr
+            String::from_utf8_lossy(&dtcompare_res.stdout),
+            String::from_utf8_lossy(&dtcompare_res.stderr)
         ));
     }
 
