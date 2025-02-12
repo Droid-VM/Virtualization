@@ -200,6 +200,10 @@ pub fn remove_temporary_files(path: &PathBuf) -> Result<()> {
     Ok(())
 }
 
+fn append_prefix(path: &Path, prefix: &str) -> Option<PathBuf> {
+    path.strip_prefix("/").ok().map(|p| Path::new(prefix).join(p))
+}
+
 /// Implementation of `IVirtualizationService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
 pub struct VirtualizationService {
@@ -488,8 +492,8 @@ impl VirtualizationService {
             }
         };
         let expected_exe_path = Path::new(&early_vm.path);
-        if expected_exe_path != calling_exe_path
-            && Path::new("/system").join(expected_exe_path) != calling_exe_path
+        if !(expected_exe_path == calling_exe_path
+            || append_prefix(expected_exe_path, "/system").map_or(false, |p| p == calling_exe_path))
         {
             return Err(anyhow!(
                 "VM '{name}' in partition '{calling_partition}' must be created with '{}', not '{}'",
@@ -2675,6 +2679,14 @@ mod tests {
         let link_path = Path::new("/system/product/file");
         let partition = find_partition(Some(link_path)).unwrap();
         assert_eq!("product", partition);
+        Ok(())
+    }
+
+    #[test]
+    fn test_append_prefix() -> Result<()> {
+        let original_path = Path::new("/system_ext/file");
+        let new_path = append_prefix(original_path, "/system").unwrap();
+        assert_eq!(new_path, Path::new("/system/system_ext/file"));
         Ok(())
     }
 
