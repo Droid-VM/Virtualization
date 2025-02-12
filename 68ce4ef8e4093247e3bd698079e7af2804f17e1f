@@ -22,6 +22,30 @@
       },
       "revId": "68ce4ef8e4093247e3bd698079e7af2804f17e1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa11a84d_006293a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T09:45:31Z",
+      "side": 1,
+      "message": "Hi, why do we need to link the Trusty VM\u0027s deferring rollback protection check to DT?\n\nThe DT field `defer-rollback-protection` is currently a SecretKeeper-specific configuration. Trusty VM\u0027s rollback protection should remain separate, as they are independent features.\n\nIn http://b/395794671#comment5, I meant the presence of the `deferred_rollback` capability alone in the kernel\u0027s vbmeta should trigger pvmfw to skip rollback protection. SecretKeeper\u0027s existing checks in pvmfw, like DT field validation, should not interfere with the Trusty VM flow.\n\nCC @armellel@google.com",
+      "parentUuid": "f1c8a17e_5557903c",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 34
+      },
+      "revId": "68ce4ef8e4093247e3bd698079e7af2804f17e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
