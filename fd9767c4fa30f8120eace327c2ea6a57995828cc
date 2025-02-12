@@ -69,6 +69,30 @@
       },
       "revId": "fd9767c4fa30f8120eace327c2ea6a57995828cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2261a4f_29f371d1",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-12T15:41:37Z",
+      "side": 1,
+      "message": "\u003e Are you saying that pvmfw should always set the RKP VM marker in the DICE chain\n\nI was referring to the public key match code quoted in this comment, which is generic step up to now and may not need to be changed to a conditional check.",
+      "parentUuid": "f974a080_75b36f93",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 192,
+        "endChar": 1
+      },
+      "revId": "fd9767c4fa30f8120eace327c2ea6a57995828cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
