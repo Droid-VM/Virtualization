@@ -22,6 +22,30 @@
       },
       "revId": "0eece3eed09bca7f1180044647c50feaab9f2fdd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bca1e9b_450750b6",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-13T02:34:45Z",
+      "side": 1,
+      "message": "Done\n\nit was because in the next CL https://r.android.com/c/3492934 i\u0027m putting a conversion to an enum at the end of the funciton. but, now that you mention it, i can make the branch in that CL into an expression and it works out.",
+      "parentUuid": "c8e1153e_0901e977",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 454,
+        "endChar": 48
+      },
+      "revId": "0eece3eed09bca7f1180044647c50feaab9f2fdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
