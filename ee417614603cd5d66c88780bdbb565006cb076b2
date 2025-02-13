@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34ff87e5_d648a602",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-13T08:25:57Z",
+      "side": 1,
+      "message": "super-nit: Make this more compact?\n```suggestion\n    res.map(|val| val.parse::\u003ci32\u003e().context(\"Failed to read Vendor API level\"))\n        .unwrap_or(Ok(-1))\n```",
+      "range": {
+        "startLine": 220,
+        "startChar": 4,
+        "endLine": 223,
+        "endChar": 10
+      },
+      "revId": "ee417614603cd5d66c88780bdbb565006cb076b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
