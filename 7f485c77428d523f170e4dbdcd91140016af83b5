@@ -241,6 +241,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89027b56_30eff256",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-13T02:42:20Z",
+      "side": 1,
+      "message": "If we allow a separate string table and reusing strings, then we won\u0027t have a way of of deriving `expected_len`. It\u0027s coming down to deciding how prescriptive we want to be in balacing just \"does it fit within the allocated space\" versus \"is it possible anything in here isn\u0027t what was intended?\"\n\nI think we\u0027re shifting toward the former.",
+      "parentUuid": "aa43bc73_0a2966b5",
+      "range": {
+        "startLine": 58,
+        "startChar": 3,
+        "endLine": 58,
+        "endChar": 15
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d514c38e_4a0dbbb2",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 12
@@ -299,6 +323,30 @@
       "side": 1,
       "message": "+1, add a test ensuring that overlapping values are allowed",
       "parentUuid": "9295f372_a3a1021e",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 13
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae232c6e_e3b848c7",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-13T02:42:20Z",
+      "side": 1,
+      "message": "We\u0027ll need to add to the documentaiton the expecation that data comes first then all the strings. Do we have anyone on board to update deptcharge with this and the vm uuid to vm name change?",
+      "parentUuid": "02619ce2_9adfc79c",
       "range": {
         "startLine": 81,
         "startChar": 0,
@@ -463,6 +511,30 @@
       "writtenOn": "2025-02-12T15:45:47Z",
       "side": 1,
       "message": "What if the guest kernel has alignment constraints (e.g. `PAGE_SIZE`)? I thought that this change was going to copy the select blobs to dedicated distinct (guest) page-aligned regions before clearing the config data region. I agree that this implementation is faster (although missing the clearing) but am not convinced it\u0027s correct?",
+      "range": {
+        "startLine": 167,
+        "startChar": 38,
+        "endLine": 167,
+        "endChar": 74
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "597082cb_910f6d83",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-13T02:42:20Z",
+      "side": 1,
+      "message": "In trusty, I need to map the blob into a user space (within the VM) app but only the buffer is made available. So there I ended up allocating a new page and copying the size followed by the data there. I we really need to, we can copy here as well.",
+      "parentUuid": "6445d78f_a97e5a6e",
       "range": {
         "startLine": 167,
         "startChar": 38,
