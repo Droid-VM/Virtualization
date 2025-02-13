@@ -70,6 +70,30 @@
       },
       "revId": "393110637529aaf0ec4a5de1c7cffed5d0c47946",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25768d50_fac39ba2",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-13T18:30:19Z",
+      "side": 1,
+      "message": "Should we just make the sleep longer then? Or, do we need to make sure the loop exits promptly?",
+      "parentUuid": "753e8ea9_ea106cd0",
+      "range": {
+        "startLine": 631,
+        "startChar": 0,
+        "endLine": 632,
+        "endChar": 39
+      },
+      "revId": "393110637529aaf0ec4a5de1c7cffed5d0c47946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
