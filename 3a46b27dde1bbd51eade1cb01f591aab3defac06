@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a65de77_bf297f9f",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-13T23:39:52Z",
+      "side": 1,
+      "message": "Whoops, making this an error caused some issues, e.g. the test are called from `/data/`. I\u0027ve added an `Unknown` case to keep the old behavior now for.",
+      "range": {
+        "startLine": 495,
+        "startChar": 0,
+        "endLine": 498,
+        "endChar": 9
+      },
+      "revId": "3a46b27dde1bbd51eade1cb01f591aab3defac06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
