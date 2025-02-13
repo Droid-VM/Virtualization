@@ -135,6 +135,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb16fdba_bf2bf543",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-13T01:47:03Z",
+      "side": 1,
+      "message": "\u003e Do you mean the common ancester of terminalViews? In here, it\u0027s the ViewPager2.\nI can pass the ViewPager2 to the ModifierKeysControler WDYT?\n\nYes. I meant `ViewPager2`. Not 100% sure about the timing, but its measured height might be sufficient here.\n\n\u003e But actually if the termianlView is null, the needsKeysInSingleLine() check is unneccessary since the needShow will always be false\n\nThe logic isn\u0027t clear with current code structure. Could you refactor update() to change order and also inline function here? It\u0027s better to do so in another CL with lower priority.",
+      "parentUuid": "01caf901_7fe93093",
+      "range": {
+        "startLine": 120,
+        "startChar": 8,
+        "endLine": 120,
+        "endChar": 56
+      },
+      "revId": "54317a76564965352417c44a109bd2f6e2a113a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84caec74_4299de78",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
         "patchSetId": 9
@@ -170,6 +194,30 @@
       "side": 1,
       "message": "Yes, it\u0027s from the formatter. Let me remove it.\nBTW, is there any formatter or indention I can follow?",
       "parentUuid": "84caec74_4299de78",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 45
+      },
+      "revId": "54317a76564965352417c44a109bd2f6e2a113a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f833cddc_842d231a",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-13T01:47:03Z",
+      "side": 1,
+      "message": "@jeongik@google.com could you share your formatting method?\n\nI don\u0027t care about the formatting much, but colleagues having different formatting setup sounds scary.\n\n\nJust FYI, I only use what `repo upload` is doing. Here\u0027s my script that wraps formatter around it.\n\n```\npushd $(git rev-parse --show-toplevel) \u003e /dev/null\n\n${ANDROID_BUILD_TOP}/tools/repohooks/tools/google-java-format.py --fix \\\n  --google-java-format ${ANDROID_BUILD_TOP}/prebuilts/tools/common/google-java-format/google-java-format \\\n  --google-java-format-diff ${ANDROID_BUILD_TOP}/prebuilts/tools/common/google-java-format/google-java-format-diff.py\n\ngit show --name-only --format\u003d\"\" | grep -e \u0027kt$\u0027 | xargs -I{} ${ANDROID_BUILD_TOP}/external/ktfmt/ktfmt.sh --kotlinlang-style {} \\;\n\npopd \u003e /dev/null\n```",
+      "parentUuid": "3267e66a_df81b4fa",
       "range": {
         "startLine": 124,
         "startChar": 0,
