@@ -46,6 +46,30 @@
       },
       "revId": "393110637529aaf0ec4a5de1c7cffed5d0c47946",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "753e8ea9_ea106cd0",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-13T13:23:56Z",
+      "side": 1,
+      "message": "Sorry. I don\u0027t understand what you are talking about. My point is simple: gathering cpu info and gathering memory info are essentially the same task; they are gathering some stats, and they don\u0027t have to be done frequently. If we can gather memory info every 10 seconds, we could gether cpu info at the same rate, not faster, nor slower.",
+      "parentUuid": "a8c901e8_1a4b62d0",
+      "range": {
+        "startLine": 631,
+        "startChar": 0,
+        "endLine": 632,
+        "endChar": 39
+      },
+      "revId": "393110637529aaf0ec4a5de1c7cffed5d0c47946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
