@@ -628,6 +628,8 @@ impl VmInstance {
 
     fn monitor_vm_status(&self, child: Arc<SharedChild>) {
         let pid = child.id();
+        let mut cpu_info_countdown = 0;
+        let mut mem_info_countdown = 0;
 
         loop {
             {
@@ -639,21 +641,33 @@ impl VmInstance {
 
                 let mut vm_metric = self.vm_metric.lock().unwrap();
 
-                // Get CPU Information
-                match get_guest_time(pid) {
-                    Ok(guest_time) => vm_metric.cpu_guest_time = Some(guest_time),
-                    Err(e) => error!("Failed to get guest CPU time: {e:?}"),
+                // Get CPU information, with 10s interval
+                if cpu_info_countdown > 0 {
+                    cpu_info_countdown -= 1;
+                } else {
+                    match get_guest_time(pid) {
+                        Ok(guest_time) => {
+                            cpu_info_countdown = 10;
+                            vm_metric.cpu_guest_time = Some(guest_time);
+                        }
+                        Err(e) => error!("Failed to get guest CPU time: {e:?}"),
+                    }
                 }
 
-                // Get Memory Information
-                match get_rss(pid) {
-                    Ok(rss) => {
-                        vm_metric.rss = match &vm_metric.rss {
-                            Some(x) => Some(Rss::extract_max(x, &rss)),
-                            None => Some(rss),
+                // Get Memory information, with 10s interval
+                if mem_info_countdown > 0 {
+                    mem_info_countdown -= 1;
+                } else {
+                    match get_rss(pid) {
+                        Ok(rss) => {
+                            mem_info_countdown = 10;
+                            vm_metric.rss = match &vm_metric.rss {
+                                Some(x) => Some(Rss::extract_max(x, &rss)),
+                                None => Some(rss),
+                            };
                         }
+                        Err(e) => error!("Failed to get guest RSS: {}", e),
                     }
-                    Err(e) => error!("Failed to get guest RSS: {}", e),
                 }
             }
 
