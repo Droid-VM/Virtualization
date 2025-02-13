@@ -16,6 +16,23 @@
       "message": "Add rust-reviewers@system.gserviceaccount.com for Rust readability review",
       "revId": "dbe7bf23b4af57b229121f2baa38e63dc005da1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "961699b6_f6530eb6",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 2268,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-02-13T16:54:25Z",
+      "side": 1,
+      "message": "It seems a bit pointless to create an `anyhow` error only to immediatly convert it to a `Status`. Why not just use `Status::new_service_specific_error_str(-1, format!(...))` if you want a `Status`?",
+      "revId": "dbe7bf23b4af57b229121f2baa38e63dc005da1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
