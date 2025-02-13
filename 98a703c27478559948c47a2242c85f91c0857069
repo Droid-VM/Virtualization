@@ -16,6 +16,46 @@
       "message": "Hi Inseob, could you please review this cl? This fixes a bug in the previous change you reviewed that has an issue with absolute path handling.",
       "revId": "98a703c27478559948c47a2242c85f91c0857069",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37c9934b_55586b31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2025-02-13T01:47:44Z",
+      "side": 1,
+      "message": "Thank you! I forgot the behavior of join..",
+      "revId": "98a703c27478559948c47a2242c85f91c0857069",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37b1162d_7968d858",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2025-02-13T01:47:44Z",
+      "side": 1,
+      "message": "Can\u0027t we just call `join` after stripping prefix? something like:\n\n`Path::new(\"/system\").join(calling_exe_path.strip_prefix(\"/\").unwrap_or(calling_exe_path))`\n\nAnd I suggest you to get review with Rust readability.",
+      "range": {
+        "startLine": 496,
+        "startChar": 0,
+        "endLine": 496,
+        "endChar": 100
+      },
+      "revId": "98a703c27478559948c47a2242c85f91c0857069",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
