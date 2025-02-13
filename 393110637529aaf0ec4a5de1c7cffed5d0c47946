@@ -22,6 +22,30 @@
       },
       "revId": "393110637529aaf0ec4a5de1c7cffed5d0c47946",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c901e8_1a4b62d0",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2025-02-13T06:22:24Z",
+      "side": 1,
+      "message": "With using only one counter, we may call `get_rss` frequently though just gathering cpu info is not ready yet. Would you think it\u0027s better to have 2 counters?",
+      "parentUuid": "22dd0213_0351e110",
+      "range": {
+        "startLine": 631,
+        "startChar": 0,
+        "endLine": 632,
+        "endChar": 39
+      },
+      "revId": "393110637529aaf0ec4a5de1c7cffed5d0c47946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
