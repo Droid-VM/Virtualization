@@ -33,6 +33,24 @@
       "message": "It seems a bit pointless to create an `anyhow` error only to immediatly convert it to a `Status`. Why not just use `Status::new_service_specific_error_str(-1, format!(...))` if you want a `Status`?",
       "revId": "dbe7bf23b4af57b229121f2baa38e63dc005da1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfc1ee34_80f69eae",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 2268,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-14T08:20:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "961699b6_f6530eb6",
+      "revId": "dbe7bf23b4af57b229121f2baa38e63dc005da1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
