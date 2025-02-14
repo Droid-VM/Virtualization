@@ -46,6 +46,30 @@
       },
       "revId": "76b683f387e67338ff2ee3499ec7fc51c14bd433",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1972e117_5339baf6",
+        "filename": "tests/backcompat_test/goldens/dt_dump_golden.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T17:24:23Z",
+      "side": 0,
+      "message": "\u003e If [...], the test will fail\n\nI see, thanks for confirming! I\u0027ll consider this issue out of scope for this CL, though.\n\n\u003e Are there system variables/properties that can be probed to know if the device will exist?\n\nYes, see `virtmgr`\u0027s [`is_secretkeeper_supported()`](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/aidl.rs;l\u003d2155;drc\u003dcc9862fcf3a0422ec1f5ee4aed288e2309cf7b37). If you have a patch, let\u0027s rebase it on top of this CL (so that it doesn\u0027t risk getting delayed or reverted), if that works for you?",
+      "parentUuid": "98ac3954_93afe687",
+      "range": {
+        "startLine": 46,
+        "startChar": 3,
+        "endLine": 46,
+        "endChar": 29
+      },
+      "revId": "76b683f387e67338ff2ee3499ec7fc51c14bd433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
