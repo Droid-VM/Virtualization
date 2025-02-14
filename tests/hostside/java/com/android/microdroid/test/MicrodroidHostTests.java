@@ -152,6 +152,10 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         throw new AssertionError("Unsupported ABI: " + abi);
     }
 
+    private String debugLevelFull() throws Exception {
+        return DEBUG_LEVEL_FULL;
+    }
+
     private static JSONObject newPartition(String label, String path) {
         return new JSONObject(Map.of("label", label, "path", path));
     }
@@ -461,14 +465,14 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     private void ensureProtectedMicrodroidBootsSuccessfully(
-            String instanceIdPath, String instanceImgPath) throws DeviceNotAvailableException {
+            String instanceIdPath, String instanceImgPath) throws Exception {
         final String configPath = "assets/vm_config.json";
         ITestDevice microdroid = null;
         int timeout = 30000; // 30 seconds
         try {
             microdroid =
                     MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                            .debugLevel(DEBUG_LEVEL_FULL)
+                            .debugLevel(debugLevelFull())
                             .memoryMib(minMemorySize())
                             .cpuTopology("match_host")
                             .protectedVm(true)
@@ -498,7 +502,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         // Act
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel(DEBUG_LEVEL_FULL)
+                        .debugLevel(debugLevelFull())
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(true)
@@ -647,7 +651,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel(DEBUG_LEVEL_FULL)
+                        .debugLevel(debugLevelFull())
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
@@ -754,7 +758,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                                 VIRT_APEX + "bin/vm",
                                 "run-app",
                                 "--debug",
-                                debuggable ? DEBUG_LEVEL_FULL : DEBUG_LEVEL_NONE,
+                                debuggable ? debugLevelFull() : DEBUG_LEVEL_NONE,
                                 apkPath,
                                 idsigPath,
                                 instanceImgPath));
@@ -874,7 +878,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         final String configPath = "assets/vm_config_apex.json"; // path inside the APK
         ITestDevice microdroid =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel(DEBUG_LEVEL_FULL)
+                        .debugLevel(debugLevelFull())
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
@@ -1026,7 +1030,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         final String configPath = "assets/vm_config.json"; // path inside the APK
         testMicrodroidBootsWithBuilder(
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel(DEBUG_LEVEL_FULL)
+                        .debugLevel(debugLevelFull())
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
@@ -1064,7 +1068,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         final String configPath = "assets/vm_config.json";
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel(DEBUG_LEVEL_FULL)
+                        .debugLevel(debugLevelFull())
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
@@ -1178,7 +1182,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                                 "shell",
                                 VIRT_APEX + "bin/vm",
                                 "run-app",
-                                "--debug " + DEBUG_LEVEL_FULL,
+                                "--debug " + debugLevelFull(),
                                 "--console " + CONSOLE_PATH,
                                 "--payload-binary-name",
                                 "MicrodroidEmptyPayloadJniLib.so",
@@ -1360,7 +1364,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel(DEBUG_LEVEL_FULL)
+                        .debugLevel(debugLevelFull())
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
@@ -1406,7 +1410,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         final String configPath = "assets/vm_config.json";
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel(DEBUG_LEVEL_FULL)
+                        .debugLevel(debugLevelFull())
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
