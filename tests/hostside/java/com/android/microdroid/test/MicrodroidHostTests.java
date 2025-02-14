@@ -102,6 +102,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private static final String INSTANCE_ID_FILE = TEST_ROOT + "instance_id";
 
     private static final String DEBUG_LEVEL_FULL = "full --enable-earlycon";
+    private static final String DEBUG_LEVEL_FULL_LEGACY = "full";
     private static final String DEBUG_LEVEL_NONE = "none";
 
     private static final int MIN_MEM_ARM64 = 170;
@@ -153,7 +154,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     private String debugLevelFull() throws Exception {
-        return DEBUG_LEVEL_FULL;
+        if (isFeatureEnabled("com.android.kvm.DEBUGGABLE_VMS_IMPROVED")) {
+            return DEBUG_LEVEL_FULL;
+        } else {
+            return DEBUG_LEVEL_FULL_LEGACY;
+        }
     }
 
     private static JSONObject newPartition(String label, String path) {
