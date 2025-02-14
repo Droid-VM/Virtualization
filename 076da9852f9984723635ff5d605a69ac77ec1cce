@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a72de58_2c33ddd5",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T12:12:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "445e2392_ab18837e",
+      "range": {
+        "startLine": 466,
+        "startChar": 35,
+        "endLine": 466,
+        "endChar": 41
+      },
+      "revId": "076da9852f9984723635ff5d605a69ac77ec1cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f41f37c9_8b4ea582",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-12T09:27:28Z",
       "side": 1,
       "message": "Public key validation is a general process that has applied to all kernels thus far. I don\u0027t understand why it needs to be tied to RKP VM marker or rollback protection mode.",
+      "range": {
+        "startLine": 98,
+        "startChar": 50,
+        "endLine": 98,
+        "endChar": 90
+      },
+      "revId": "076da9852f9984723635ff5d605a69ac77ec1cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55d752e9_e02b50bc",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T12:12:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f41f37c9_8b4ea582",
       "range": {
         "startLine": 98,
         "startChar": 50,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1063060b_101bb08e",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T12:12:27Z",
+      "side": 1,
+      "message": "Ack; let\u0027s handle this in b/392081737.",
+      "parentUuid": "ac4f0d43_c0efed25",
+      "range": {
+        "startLine": 271,
+        "startChar": 4,
+        "endLine": 271,
+        "endChar": 5
+      },
+      "revId": "076da9852f9984723635ff5d605a69ac77ec1cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ad69475_36805aa9",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-02-12T09:27:28Z",
       "side": 1,
       "message": "nit: This name is somehow unclear, as \"get rollback protection\" is ambiguous.  Perhaps rename it to `get_expected_fixed_rollback_index` since it returns an index.",
+      "range": {
+        "startLine": 76,
+        "startChar": 3,
+        "endLine": 76,
+        "endChar": 32
+      },
+      "revId": "076da9852f9984723635ff5d605a69ac77ec1cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf432d1f_5b0259f5",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T12:12:27Z",
+      "side": 1,
+      "message": "Yes, it was mostly intended as a transient name before supporting fixed-digest (aosp/3466850), at which point the name `..._fixed_rollback_index` wouldn\u0027t apply. Given that it is unclear what the fate of that change will be, I\u0027ll rename this.",
+      "parentUuid": "9ad69475_36805aa9",
       "range": {
         "startLine": 76,
         "startChar": 3,
