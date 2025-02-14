@@ -15,9 +15,10 @@
 //! Provide functionality for handling AVF build-time feature flags.
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
-    IVirtualizationService::FEATURE_DICE_CHANGES, IVirtualizationService::FEATURE_LLPVM_CHANGES,
-    IVirtualizationService::FEATURE_MULTI_TENANT, IVirtualizationService::FEATURE_NETWORK,
-    IVirtualizationService::FEATURE_REMOTE_ATTESTATION,
+    IVirtualizationService::FEATURE_DICE_CHANGES,
+    IVirtualizationService::FEATURE_IMPROVE_DEBUGGABLE_VMS,
+    IVirtualizationService::FEATURE_LLPVM_CHANGES, IVirtualizationService::FEATURE_MULTI_TENANT,
+    IVirtualizationService::FEATURE_NETWORK, IVirtualizationService::FEATURE_REMOTE_ATTESTATION,
     IVirtualizationService::FEATURE_VENDOR_MODULES,
 };
 use log::warn;
@@ -31,6 +32,7 @@ pub fn is_feature_enabled(feature: &str) -> bool {
         FEATURE_NETWORK => cfg!(network),
         FEATURE_REMOTE_ATTESTATION => cfg!(remote_attestation),
         FEATURE_VENDOR_MODULES => cfg!(vendor_modules),
+        FEATURE_IMPROVE_DEBUGGABLE_VMS => cfg!(debuggable_vms_improvements),
         _ => {
             warn!("unknown feature {feature}");
             false

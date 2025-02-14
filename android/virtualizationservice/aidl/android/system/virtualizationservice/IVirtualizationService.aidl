@@ -23,6 +23,7 @@ import android.system.virtualizationservice.VirtualMachineDebugInfo;
 
 interface IVirtualizationService {
     const String FEATURE_DICE_CHANGES = "com.android.kvm.DICE_CHANGES";
+    const String FEATURE_IMPROVE_DEBUGGABLE_VMS = "com.android.kvm.IMPROVE_DEBUGGABLE_VMS";
     const String FEATURE_LLPVM_CHANGES = "com.android.kvm.LLPVM_CHANGES";
     const String FEATURE_MULTI_TENANT = "com.android.kvm.MULTI_TENANT";
     const String FEATURE_NETWORK = "com.android.kvm.NETWORK";
