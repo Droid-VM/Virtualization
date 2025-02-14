@@ -48,9 +48,9 @@ pub fn perform_rollback_protection(
         // Prevent attackers from impersonating well-known images.
         perform_fixed_index_rollback_protection(verified_boot_data, fixed)?;
         Ok((false, instance_hash.unwrap(), false))
-    } else if (!should_ignore_deferred_rollback_protection(fdt)?
-        && verified_boot_data.has_capability(Capability::SecretkeeperProtection))
-        || verified_boot_data.has_capability(Capability::TrustySecurityVm)
+    } else if (verified_boot_data.has_capability(Capability::SecretkeeperProtection)
+        || verified_boot_data.has_capability(Capability::TrustySecurityVm))
+        && !should_ignore_deferred_rollback_protection(fdt)?
     {
         perform_deferred_rollback_protection(verified_boot_data)?;
         Ok((false, instance_hash.unwrap(), true))
