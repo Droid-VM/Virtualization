@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef7e0095_e550890b",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-14T19:11:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "584875e6_e623ec68",
+      "range": {
+        "startLine": 601,
+        "startChar": 29,
+        "endLine": 601,
+        "endChar": 87
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ca4ab60_158ae5a9",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-06T16:39:19Z",
       "side": 1,
       "message": "Given that `run_vm()` applies these `device_tree_overlays` in the order in which they are found in the vector/slice, I believe we should make sure that this one is last i.e. that its values won\u0027t get overridden by other DTBOs?",
+      "range": {
+        "startLine": 609,
+        "startChar": 12,
+        "endLine": 609,
+        "endChar": 50
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea167d9_05be3c17",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-14T19:11:00Z",
+      "side": 1,
+      "message": "Sgtm - but if I\u0027m reading the existing code correctly, that would be a behavior change, no? As in, the current implementation adds the overlay created by `maybe_create_referenece_dt_overlay` first, so this is matching that.\n\nHappy to swap them anyway, LMK.",
+      "parentUuid": "7ca4ab60_158ae5a9",
       "range": {
         "startLine": 609,
         "startChar": 12,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4aca44a_be957315",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-14T19:11:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8aecedc4_526bd51b",
+      "range": {
+        "startLine": 970,
+        "startChar": 0,
+        "endLine": 972,
+        "endChar": 56
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "498c4758_c4e77344",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-02-06T16:39:19Z",
       "side": 1,
       "message": "To make sure that we don\u0027t forget to add also new properties to this check, WDYT of coupling it with the \"node adding\" logic below by using a common data structure e.g.\n```\nlet mut avf_props \u003d Vec::new();\nif let Some(v) \u003d \u0026self.trusted.secretkeeper_public_key {\n    avf_props.push((c\"secretkeeper_public_key\", v.as_slice());\n}\n// ...\nlet mut untrusted_props \u003d Vec::new();\nif self.untrusted.defer_rollback_protection {\n    untrusted_props.push((c\"defer_rollback_protection\", \u0026[]);\n}\n// ...\n```\nso that you can then\n```\nif avf_props.is_empty() \u0026\u0026 untrusted_props.is_empty() {\n    return Ok(None);\n}\n```\nand also\n```\nfor (name, value) in avf_props {\n    avb.setprop(name, value)...?;\n}\n```\n(same for `untrusted_props`) and keep it all in-sync?\n\nMaybe even encapsulate that into `{Untrusted,Trusted}DeviceTreeProperties` e.g.\n```\nimpl UntrustedDeviceTreeProperties {\n    fn get_untrusted_props(\u0026self) -\u003e Vec\u003c(\u0026Cstr, \u0026[u8])\u003e { ... }\n}\n```\nalthough not sure how easy it\u0027d be to please the borrow checker?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 76
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "589bb97f_63dbbb6d",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-14T19:11:00Z",
+      "side": 1,
+      "message": "Done. Yea, I\u0027m not sure how much value `get_{un}trusted_props` brings in this context. It doesn\u0027t feel like that would make it any easier to prevent someone from adding a new prop but forgetting to update the implementation that populates the Vec.  To be super robust we\u0027d probably want something closer to [patchset 3](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3473068/3), where you have some trait to implement and must define how to convert from your trat to a `(\u0026CStr, \u0026[u8])`.  But I think that might be overkill?",
+      "parentUuid": "498c4758_c4e77344",
       "range": {
         "startLine": 52,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32394cfe_4f748b7b",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-14T19:11:00Z",
+      "side": 1,
+      "message": "Doesn\u0027t compile.  Did you think this was also `\u0026CStr`? It is `\u0026[u8]`.",
+      "parentUuid": "6c4cea2d_fb3a283b",
+      "range": {
+        "startLine": 68,
+        "startChar": 37,
+        "endLine": 68,
+        "endChar": 44
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b75cf8ff_04c78dd9",
@@ -129,6 +249,30 @@
       "writtenOn": "2025-02-06T16:39:19Z",
       "side": 1,
       "message": "Pass the file name from the caller instead of hardcoding it deep within this struct?",
+      "range": {
+        "startLine": 107,
+        "startChar": 43,
+        "endLine": 107,
+        "endChar": 68
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1f7d86a_ce71f211",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-14T19:11:00Z",
+      "side": 1,
+      "message": "Done - just passed a `dt_output: \u0026PathBuf` instead of a `temporary_directory: \u0026Path`.  Is that cleaner?",
+      "parentUuid": "b75cf8ff_04c78dd9",
       "range": {
         "startLine": 107,
         "startChar": 43,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7898599_7d0fbc48",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-14T19:11:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13ad1a5f_c1263b39",
+      "range": {
+        "startLine": 113,
+        "startChar": 14,
+        "endLine": 113,
+        "endChar": 52
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a1f86d7_4fcdba53",
@@ -175,6 +343,30 @@
       "writtenOn": "2025-02-06T16:39:19Z",
       "side": 1,
       "message": "Why not simply directly create a `Path` to\n```\n/proc/device-tree/avf/reference/avf/secretkeeper_public_key\n```\nand read that (pseudo)file into a vector?\n\nWe could even introduce a helper function\n```\nfn read_bytes_from_file(\u0026Path) -\u003e Option\u003cVec\u003cu8\u003e\u003e\n```\nfor clarity/reusability?",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 114,
+        "endChar": 62
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ac5db31_01b068f6",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-14T19:11:00Z",
+      "side": 1,
+      "message": "Done, blind copy/paste from previous impl, sorry.\n\u003eWe could even introduce a helper function\nThis is the only place we read a file to bytes, so go/yagni I think.",
+      "parentUuid": "1a1f86d7_4fcdba53",
       "range": {
         "startLine": 114,
         "startChar": 4,
