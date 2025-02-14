@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cde3ac15_123ea468",
+        "filename": "tests/backcompat_test/goldens/dt_dump_golden.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T16:32:28Z",
+      "side": 0,
+      "message": "@khei@google.com, note that the presence of these properties is device-specific and depends on some firmware support. Is this handled by the tests or do they risk failing on older devices, where this property is missing?\n\nThis affects this CL as those devices will now have the property I am introducing.",
+      "range": {
+        "startLine": 46,
+        "startChar": 3,
+        "endLine": 46,
+        "endChar": 29
+      },
+      "revId": "76b683f387e67338ff2ee3499ec7fc51c14bd433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
