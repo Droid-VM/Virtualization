@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b77748e_0bb099f2",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-14T08:41:38Z",
+      "side": 1,
+      "message": "Does \"ignore-path\" indicate that the path check is completely disregarded, regardless of its existence? If so, the check if fine. It\u0027s worth noting that SecretKeeper is becoming a mandatory feature as of 202504, while it has been supported on Pixel devices since the Pixel 7 (one release prior to 202504).",
+      "range": {
+        "startLine": 173,
+        "startChar": 18,
+        "endLine": 173,
+        "endChar": 31
+      },
+      "revId": "5ccdeed443377e0b7e8195ef943d850b450ce343",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
