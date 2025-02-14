@@ -55,6 +55,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "90359b1f_6a32dd50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T12:11:52Z",
+      "side": 1,
+      "message": "This is the name of the payload itself (fixed at build time), not the name of the instance (set at runtime, could change between runs). I can prefix it with \"payload\" but naming it \"type\" or \"mode\" would be significantly more confusing, IMO. LMK what you think and we can address it in a follow-up.",
+      "parentUuid": "657bbdc3_832a1556",
+      "revId": "458cd8048897f808fefa77e1850d45d748f1b138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "baca858f_a658cb87",
         "filename": "guest/pvmfw/avb/src/verify.rs",
         "patchSetId": 1

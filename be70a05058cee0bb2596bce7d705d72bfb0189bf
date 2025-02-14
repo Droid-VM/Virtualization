@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d2165598_8d334a8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T12:11:52Z",
+      "side": 1,
+      "message": "\u003e Then, let\u0027s update the format (b/382493676#comment8) and I\u0027ll relax this.\n\nDone",
+      "parentUuid": "10390fcf_99bece01",
+      "range": {
+        "startLine": 14,
+        "startChar": 10,
+        "endLine": 14,
+        "endChar": 46
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5586606b_d0e50c2b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -78,6 +102,30 @@
       "writtenOn": "2025-02-12T08:57:40Z",
       "side": 1,
       "message": "We can get more specific here by indicating that \"The VM name will be used as the component name in the DICE certificate derived in pvmfw if provided\". It would also be helpful to link to component name in DICE [1] as well.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:external/open-dice/docs/android.md;l\u003d81;drc\u003d6d511e9533eac05d64d47fcd78ac5d881e72c3de",
+      "range": {
+        "startLine": 465,
+        "startChar": 49,
+        "endLine": 465,
+        "endChar": 61
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51cf900f_ff57ce69",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T12:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e374e89_d270f6ce",
       "range": {
         "startLine": 465,
         "startChar": 49,
@@ -230,6 +278,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "602c27b9_feaba8f4",
+        "filename": "guest/pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T12:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a6613a3_48b1b712",
+      "range": {
+        "startLine": 266,
+        "startChar": 3,
+        "endLine": 266,
+        "endChar": 36
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "276fd0d0_8ff103f2",
@@ -315,6 +387,30 @@
       "side": 1,
       "message": "Yes, of course, but Soong is getting in the way of implementing that test and I really don\u0027t want to delay this CL (and all that follow) because of that. If you know of a way to AVB-sign using an empty property, I\u0027ll use it and squash both in this commit. Otherwise, I\u0027ll keep treating the tests from aosp/3488938 as low priority compared to everything else.",
       "parentUuid": "4ec9dc9c_1470a680",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 1
+      },
+      "revId": "be70a05058cee0bb2596bce7d705d72bfb0189bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9b3d63e_a2a1e0e6",
+        "filename": "guest/pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T12:11:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "72aeb716_f5186cb0",
       "range": {
         "startLine": 269,
         "startChar": 0,
