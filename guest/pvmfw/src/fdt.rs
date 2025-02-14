@@ -178,9 +178,9 @@ pub fn read_instance_id(fdt: &Fdt) -> libfdt::Result<Option<&[u8]>> {
     read_avf_untrusted_prop(fdt, c"instance-id")
 }
 
-/// Read /avf/untrusted/defer-rollback-protection, if present.
-pub fn read_defer_rollback_protection(fdt: &Fdt) -> libfdt::Result<Option<&[u8]>> {
-    read_avf_untrusted_prop(fdt, c"defer-rollback-protection")
+/// Read /avf/untrusted/ignore-deferred-rollback-protection, if present.
+pub fn read_ignore_deferred_rollback_protection(fdt: &Fdt) -> libfdt::Result<Option<&[u8]>> {
+    read_avf_untrusted_prop(fdt, c"ignore-deferred-rollback-protection")
 }
 
 fn read_avf_untrusted_prop<'a>(fdt: &'a Fdt, prop: &CStr) -> libfdt::Result<Option<&'a [u8]>> {

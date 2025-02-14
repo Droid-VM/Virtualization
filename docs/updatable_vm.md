@@ -79,10 +79,10 @@ Secretkeeper HAL then introduced the capability of storing secrets in a TA such 
 the secret ( for ex. VM) while storing it, includes a corresponding sealing policy such that only
 entities with DICE chain that adheres to those policies can access the secrets.
 
-This allows the bootloaders to defer rollback protection to the payload. Host relays this intention
-to pVM (both pVM firmware and OS) using the property (`defer-rollback-protection`) in device tree
-node (`/avf/untrusted`). If this is set and the guest OS is capable of `SecretkeeperProtection` then
-VMs use Secretkeeper based rollback protection.
+This allows the bootloaders to defer rollback protection to the payload.  If the guest OS is capable
+of `SecretkeeperProtection` then VMs use Secretkeeper based rollback protection, unless the host
+disables it using the property (`ignore-deferred-rollback-protection`) in device tree node
+(`/avf/untrusted`).
 
 ### Note on legacy support
 

@@ -43,7 +43,6 @@
 		secretkeeper_public_key = [a4 01 01 03 27 20 06 21 58 20 de c2 79 41 b5 2a d8 1e eb dd 8a c5 a0 2f e4 56 12 42 5e b5 a4 c6 6a 8c 32 81 65 75 1c 6e b2 87];
 
 		untrusted {
-			defer-rollback-protection;
 			instance-id = <0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00>;
 		};
 	};

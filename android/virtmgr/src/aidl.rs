@@ -995,10 +995,12 @@ fn maybe_create_reference_dt_overlay(
     if cfg!(llpvm_changes) {
         untrusted_props.push((c"instance-id", &instance_id[..]));
         let want_updatable = extract_want_updatable(config);
-        if want_updatable && is_secretkeeper_supported() {
-            // Let guest know that it can defer rollback protection to Secretkeeper by setting
-            // an empty property in untrusted node in DT. This enables Updatable VMs.
-            untrusted_props.push((c"defer-rollback-protection", &[]));
+        if !want_updatable {
+            // Let pvmfw use the default rollback protection mechanism.
+        } else if !is_secretkeeper_supported() {
+            // Force pvmfw to use the default rollback protection mechanism.
+            untrusted_props.push((c"ignore-deferred-rollback-protection", &[]));
+        } else {
             let sk: Strong<dyn ISecretkeeper> =
                 binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?;
             if sk.getInterfaceVersion()? >= 2 {
