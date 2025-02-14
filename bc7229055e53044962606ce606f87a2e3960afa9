@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46174457_c35ba119",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-14T14:56:44Z",
+      "side": 1,
+      "message": "This will still break when you try to run MicrodroidHostTestCases.GTS on previous desert releases (where --enable-earlycon) is not supported.\n\nThe proper way to do this will be:\n\n1. Add new API setEnableEarlycon() API to MicrodroidBuilder (https://cs.android.com/android/platform/superproject/main/+/main:tools/tradefederation/core/src/com/android/tradefed/device/TestDevice.java;l\u003d3281;drc\u003d27a1a79c08440def953b4754ee3fb7fad33901fb)\n2. In our test only use that API when both of the following conditions are satisfied:\n  * DUT has sdk_level \u003e\u003d 36 (this is the first release when --enable-earlycon flag) was introduced;\n  * isFeatureEnabled(\"com.android.kvm.DEBUGGABLE_VMS_IMPROVED\") returns true.",
+      "range": {
+        "startLine": 156,
+        "startChar": 3,
+        "endLine": 162,
+        "endChar": 5
+      },
+      "revId": "bc7229055e53044962606ce606f87a2e3960afa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
