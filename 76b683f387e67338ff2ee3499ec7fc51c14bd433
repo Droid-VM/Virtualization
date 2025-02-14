@@ -22,6 +22,30 @@
       },
       "revId": "76b683f387e67338ff2ee3499ec7fc51c14bd433",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98ac3954_93afe687",
+        "filename": "tests/backcompat_test/goldens/dt_dump_golden.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-02-14T17:19:50Z",
+      "side": 0,
+      "message": "If the property exists in 1 of the trees (regardless of whether it\u0027s the golden DT or the booted VM DT), but not the other, and the property is not ignored, the test will fail.\n\nAre there system variables/properties that can be probed to know if the device will exist? If so, we can modify the test to `ignore-path` accordingly",
+      "parentUuid": "cde3ac15_123ea468",
+      "range": {
+        "startLine": 46,
+        "startChar": 3,
+        "endLine": 46,
+        "endChar": 29
+      },
+      "revId": "76b683f387e67338ff2ee3499ec7fc51c14bd433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
