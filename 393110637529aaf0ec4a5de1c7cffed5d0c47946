@@ -94,6 +94,30 @@
       },
       "revId": "393110637529aaf0ec4a5de1c7cffed5d0c47946",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2888c579_6d080d2d",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2025-02-14T04:00:16Z",
+      "side": 1,
+      "message": "\u003e If we can gather memory info every 10 seconds, we could gether cpu info at the same rate, not faster, nor slower.\n\nIt can be different rate either it failed to gather either one of CPU or memory information. I thought that they should be gathered with long frequency, but should try more frequently if it failed to gather that information. But anyway this is not a important thing, I would follow yours.\n\n\u003e Should we just make the sleep longer then? Or, do we need to make sure the loop exits promptly?\n\nIMO, the only way we can do is just sleep longer. The purpose of this loop is to gather CPU \u0026 memory metrics for the VM\u0027s lifetime, and report it when VM is exited.",
+      "parentUuid": "25768d50_fac39ba2",
+      "range": {
+        "startLine": 631,
+        "startChar": 0,
+        "endLine": 632,
+        "endChar": 39
+      },
+      "revId": "393110637529aaf0ec4a5de1c7cffed5d0c47946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
