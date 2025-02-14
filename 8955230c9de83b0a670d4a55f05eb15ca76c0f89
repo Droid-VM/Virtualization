@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "570e3567_2aa18f0e",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T20:14:55Z",
+      "side": 1,
+      "message": "Yes and it shouldn\u0027t have any effect on well-behaved code but following aosp/3409460, I\u0027d rather be safe. Feel free to add a comment explaining that this DTBO should have priority over any other.",
+      "parentUuid": "aea167d9_05be3c17",
+      "range": {
+        "startLine": 609,
+        "startChar": 12,
+        "endLine": 609,
+        "endChar": 50
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8aecedc4_526bd51b",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 11
@@ -236,6 +260,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6fc9ea7_99377895",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T20:14:55Z",
+      "side": 1,
+      "message": "Argh, you\u0027re right!",
+      "parentUuid": "32394cfe_4f748b7b",
+      "range": {
+        "startLine": 68,
+        "startChar": 37,
+        "endLine": 68,
+        "endChar": 44
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b75cf8ff_04c78dd9",
@@ -273,6 +321,30 @@
       "side": 1,
       "message": "Done - just passed a `dt_output: \u0026PathBuf` instead of a `temporary_directory: \u0026Path`.  Is that cleaner?",
       "parentUuid": "b75cf8ff_04c78dd9",
+      "range": {
+        "startLine": 107,
+        "startChar": 43,
+        "endLine": 107,
+        "endChar": 68
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf819fe8_357d8d00",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T20:14:55Z",
+      "side": 1,
+      "message": "Yes, thanks!",
+      "parentUuid": "e1f7d86a_ce71f211",
       "range": {
         "startLine": 107,
         "startChar": 43,
@@ -367,6 +439,30 @@
       "side": 1,
       "message": "Done, blind copy/paste from previous impl, sorry.\n\u003eWe could even introduce a helper function\nThis is the only place we read a file to bytes, so go/yagni I think.",
       "parentUuid": "1a1f86d7_4fcdba53",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 114,
+        "endChar": 62
+      },
+      "revId": "8955230c9de83b0a670d4a55f05eb15ca76c0f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41e6dd96_390ce29e",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T20:14:55Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "1ac5db31_01b068f6",
       "range": {
         "startLine": 114,
         "startChar": 4,

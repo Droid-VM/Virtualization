@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8bbe147_38e0cd8c",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T20:14:55Z",
+      "side": 0,
+      "message": "Careful that you are modifying these names:\n\n- `\"instance-id\"` -\u003e `\"instance_id\"`\n- `\"defer-rollback-protection\"` -\u003e `\"defer_rollback_protection\"`\n\n!",
+      "range": {
+        "startLine": 988,
+        "startChar": 0,
+        "endLine": 993,
+        "endChar": 70
+      },
+      "revId": "2ed2ed8475a6c32bd0bca426a6248018f5be04a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

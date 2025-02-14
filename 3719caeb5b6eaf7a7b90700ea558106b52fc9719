@@ -16,6 +16,144 @@
       "message": "Sorry for the delay! Was in a team summit all this week. Replying now, will add tests next week.",
       "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0873dfd5_aed3efdc",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T20:14:55Z",
+      "side": 1,
+      "message": "Should this actually have been\n```\ncfg!(llpvm_changes).then(|| extract_instance_id(config))\n```\nso that the `instance_id` change is actually properly guarded by the flag?",
+      "range": {
+        "startLine": 588,
+        "startChar": 26,
+        "endLine": 588,
+        "endChar": 53
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "066b8296_9889a104",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T20:14:55Z",
+      "side": 1,
+      "message": "Sorry for the inconvenience but do you mind delaying this CL until aosp/3494756 gets merged, as it\u0027s somewhat urgent?",
+      "range": {
+        "startLine": 589,
+        "startChar": 12,
+        "endLine": 589,
+        "endChar": 37
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0003e9ed_70ca8606",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T20:14:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure what this does but should it be `-1`?",
+      "range": {
+        "startLine": 599,
+        "startChar": 39,
+        "endLine": 599,
+        "endChar": 40
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42782fb4_db846344",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T20:14:55Z",
+      "side": 1,
+      "message": "I don\u0027t think we should have this kind of policy so deep in the implementation. I\u0027d keep this class as simple as possible and do whatever the caller requested i.e.\n```\nif let Some(instance_id) \u003d instance_id {\n    untrusted_props.push(...);\n}\nif defer_rollback_protection {\n    untrusted_props.push(...);\n}\n```\n(no `match` ignoring one property if the other is missing).",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 57
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f31993af_4ed1ca75",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T20:14:55Z",
+      "side": 1,
+      "message": "nit: should this function be next to `extract_sk_public_key_from_hal()`?\n\nOr should we just have one `extract_sk_public_key()`, similar to `extract_want_updatable()` and `extract_vendor_hashtree_digest()`?",
+      "range": {
+        "startLine": 122,
+        "startChar": 14,
+        "endLine": 122,
+        "endChar": 48
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa59d91d_7df865a2",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-14T20:14:55Z",
+      "side": 1,
+      "message": "Not sure how this is usually done but do we really need to both log here and return an error (which I\u0027m hoping gets logged at some point up the callstack)?",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 77
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
