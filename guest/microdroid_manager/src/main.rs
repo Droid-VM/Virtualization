@@ -73,7 +73,8 @@ const DEBUG_MICRODROID_NO_VERIFIED_BOOT: &str =
     "/proc/device-tree/virtualization/guest/debug-microdroid,no-verified-boot";
 const SECRETKEEPER_KEY: &str = "/proc/device-tree/avf/secretkeeper_public_key";
 const INSTANCE_ID_PATH: &str = "/proc/device-tree/avf/untrusted/instance-id";
-const DEFER_ROLLBACK_PROTECTION: &str = "/proc/device-tree/avf/untrusted/defer-rollback-protection";
+const IGNORE_DEFERRED_ROLLBACK_PROTECTION: &str =
+    "/proc/device-tree/avf/untrusted/ignore-deferred-rollback-protection";
 
 const ENCRYPTEDSTORE_BIN: &str = "/system/bin/encryptedstore";
 const ZIPFUSE_BIN: &str = "/system/bin/zipfuse";
@@ -166,7 +167,7 @@ fn get_instance_id() -> Result<Option<[u8; ID_SIZE]>> {
 }
 
 fn should_defer_rollback_protection() -> bool {
-    Path::new(DEFER_ROLLBACK_PROTECTION).exists()
+    !Path::new(IGNORE_DEFERRED_ROLLBACK_PROTECTION).exists()
 }
 
 fn main() -> Result<()> {

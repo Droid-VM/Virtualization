@@ -16,7 +16,7 @@
 
 use crate::dice::PartialInputs;
 use crate::entry::RebootReason;
-use crate::fdt::read_defer_rollback_protection;
+use crate::fdt::read_ignore_deferred_rollback_protection;
 use crate::instance::EntryBody;
 use crate::instance::Error as InstanceError;
 use crate::instance::{get_recorded_entry, record_instance_entry};
@@ -48,7 +48,7 @@ pub fn perform_rollback_protection(
         // Prevent attackers from impersonating well-known images.
         perform_fixed_index_rollback_protection(verified_boot_data, fixed)?;
         Ok((false, instance_hash.unwrap(), false))
-    } else if (should_defer_rollback_protection(fdt)?
+    } else if (!should_ignore_deferred_rollback_protection(fdt)?
         && verified_boot_data.has_capability(Capability::SecretkeeperProtection))
         || verified_boot_data.has_capability(Capability::TrustySecurityVm)
     {
@@ -160,12 +160,12 @@ fn ensure_dice_measurements_match_entry(
     }
 }
 
-fn should_defer_rollback_protection(fdt: &Fdt) -> Result<bool, RebootReason> {
-    let defer_rbp = read_defer_rollback_protection(fdt).map_err(|e| {
-        error!("Failed to get defer-rollback-protection property in DT: {e}");
+fn should_ignore_deferred_rollback_protection(fdt: &Fdt) -> Result<bool, RebootReason> {
+    let ignore = read_ignore_deferred_rollback_protection(fdt).map_err(|e| {
+        error!("Error while reading ignore-deferred-rollback-protection: {e}");
         RebootReason::InvalidFdt
     })?;
-    Ok(defer_rbp.is_some())
+    Ok(ignore.is_some())
 }
 
 /// Set up PCI bus and VirtIO-blk device containing the instance.img partition.

@@ -201,8 +201,8 @@ For Microdroid and other AVF guests, some special DT entries are defined:
 - the `/chosen/avf,strict-boot` flag, always set for protected VMs and can be
   used by guests to enable extra validation;
 
-- the `/avf/untrusted/defer-rollback-protection` flag controls [deferred
-  rollback protection] on devices and for guests which support it;
+- the `/avf/untrusted/ignore-deferred-rollback-protection` flag disables
+  [deferred rollback protection] on devices that don't support support it;
 
 - the host-allocated `/avf/untrusted/instance-id` is used to assign a unique
   identifier to the VM instance & is used for differentiating VM secrets as well
