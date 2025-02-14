@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "251b1599_c9e3d0a3",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-14T09:16:08Z",
+      "side": 1,
+      "message": "`allocateInstanceId` is [invoked](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachine.java;l\u003d551;drc\u003dcf9784a5605096c247eb8206061d755bc302a41d) by the underlying Java API during VM creation. Specifically, when a VM is created like [this](http://google3/java/com/google/android/libraries/abuse/hades/moirai/pvm/LocalVirtualMachineInitializer.kt;l\u003d43;rcl\u003d611251547), the VM config builder [sets up](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachine.java;l\u003d441;drc\u003da60b8c1f6f5539de4c8f464c1eaa11242ffb8729) a file path for the instance ID. Subsequently, `allocateInstanceId` is invoked to populate this file with a randomly generated ID.\n\nGiven that these VMs (e.g., [TARTARUS_VM](//java/com/google/android/libraries/abuse/hades/moirai/pvm:virtual_machine_initializer)) are created via the system API, I\u0027m not sure they were placed in the vendor partition, thus I\u0027m concerned that this validation check might inadvertently prevent them from running. wdyt?",
+      "range": {
+        "startLine": 616,
+        "startChar": 39,
+        "endLine": 616,
+        "endChar": 87
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
