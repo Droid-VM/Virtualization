@@ -108,6 +108,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8e1d67b4_c943df3b",
+        "filename": "guest/pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-15T02:02:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07654121_cb5bc050",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5ed0eb57_8184dfca",
         "filename": "guest/pvmfw/src/fdt.rs",
         "patchSetId": 7
@@ -922,6 +940,24 @@
       "side": 1,
       "message": "I see. Perhaps logging an inconsistency seen like that would be sufficient? I\u0027ll leave it to you.",
       "parentUuid": "6b13f16c_411bb411",
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "079e6ad0_d1d9c38b",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-15T02:02:13Z",
+      "side": 1,
+      "message": "After the latest updates, we now can\u0027t really tell if we have the wrong number of headers in either direction apart from some other offset failing. Not sure there\u0027s anything to do here now.",
+      "parentUuid": "05ee4e28_8427c5be",
       "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

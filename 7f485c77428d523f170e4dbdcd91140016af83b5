@@ -175,6 +175,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faacddca_5bac5455",
+        "filename": "guest/pvmfw/src/config.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-15T02:02:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6afee7f_e4e504a3",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 14
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52790562_c051a3a2",
@@ -188,6 +212,24 @@
       "writtenOn": "2025-02-12T15:45:47Z",
       "side": 1,
       "message": "If you\u0027d like to have this as a separate file, could you add it under `guest/pvmfw/src/config/`, as it extends support for the config data, currently in `config.rs`?",
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea63e7aa_1553c1db",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-15T02:02:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52790562_c051a3a2",
       "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -277,6 +319,30 @@
       "side": 1,
       "message": "Right, I do think the former is what is actually important to check. Padding data and overlapping fields should be allowed. However, it should stil reject it when the header references bytes that are outside the original input blob, including as part of a `CStr`.\n\nThat fn would be something like\n\n```\nbuffer.get(compat_offset..)\n  .and_then(|tail| CStr::from_bytes_until_nul(tail).ok())\n  .ok_or(Error::InvalidCStr)\n```\n\nIt\u0027s up to you whether that\u0027s complex enough for a helper function - I\u0027m unsure.",
       "parentUuid": "89027b56_30eff256",
+      "range": {
+        "startLine": 58,
+        "startChar": 3,
+        "endLine": 58,
+        "endChar": 15
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdab7a17_b0734947",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-15T02:02:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89c6d7e6_162d7bfd",
       "range": {
         "startLine": 58,
         "startChar": 3,
@@ -429,6 +495,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b20a4b6_51115b75",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-15T02:02:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "757cdb71_ddc97401",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 13
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6215d2cb_d480517d",
@@ -489,6 +579,30 @@
       "writtenOn": "2025-02-12T15:45:47Z",
       "side": 1,
       "message": "Aren\u0027t you missing the `flags`?",
+      "range": {
+        "startLine": 128,
+        "startChar": 25,
+        "endLine": 128,
+        "endChar": 26
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4772243_2ed4ba04",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-15T02:02:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d707437_f41816e7",
       "range": {
         "startLine": 128,
         "startChar": 25,
