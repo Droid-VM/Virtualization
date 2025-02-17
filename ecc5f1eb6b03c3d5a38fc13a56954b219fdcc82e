@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b056e836_19fe258e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-17T05:15:56Z",
+      "side": 1,
+      "message": "requestPermission is called from onResume() to ensure notification is allowed. Here\u0027s a corner case.\n\n  - step 1) user accepted permission\n  - step 2) open settings while terminal app is running, and disable notification.\n  - step 3) resume terminal app.\n  \n`onCreate()` may not be called for the context switch, so terminal app may be running without notification.",
+      "range": {
+        "startLine": 7,
+        "startChar": 29,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "ecc5f1eb6b03c3d5a38fc13a56954b219fdcc82e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1cac39_69061134",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-17T05:15:56Z",
+      "side": 1,
+      "message": "this shouldn\u0027t happen unless there\u0027s a onPause() exists the middle. could you elaborate detail?",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "ecc5f1eb6b03c3d5a38fc13a56954b219fdcc82e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
