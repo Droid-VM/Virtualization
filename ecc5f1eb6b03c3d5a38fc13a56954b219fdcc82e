@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3863dd4_1ab4442d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-17T07:46:58Z",
+      "side": 1,
+      "message": "\u003e \u003e requestPermission is called from onResume() to ensure notification is allowed.\n\n\u003e hmm, notification permission is an optional permission for now, isn\u0027t it? Even for now, the app is running without the permission if a user clicks \u0027don\u0027t allow\u0027 in notification(i think it\u0027s a kind of inconsitency between the back button and don\u0027t allow)\n\nIf we\u0027re OK with no notification, then we only need to ask it once when installation and no more. Isn\u0027t it? Would service be running as foreground service if and runs indefinitely even when the notification is diabled? (bard said no, and I don\u0027t remember the ansewr)",
+      "parentUuid": "1edcf9b6_335c080b",
+      "range": {
+        "startLine": 7,
+        "startChar": 29,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "ecc5f1eb6b03c3d5a38fc13a56954b219fdcc82e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc1cac39_69061134",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "It was actaully from both MainActivity\u0027s onResume and InstallerActivity\u0027s onResume. But the problem is in that case, the dialog is nested.. which might be permissioncontroller\u0027s bug, though.",
       "parentUuid": "bc1cac39_69061134",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "ecc5f1eb6b03c3d5a38fc13a56954b219fdcc82e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98f3d54a_39d7d5a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-02-17T07:46:58Z",
+      "side": 1,
+      "message": "I agree that permission controller has a bug, and we need a workaround here. can we dismiss the dialog in on pause?",
+      "parentUuid": "c28f1c41_f3ec64b6",
       "range": {
         "startLine": 9,
         "startChar": 3,
