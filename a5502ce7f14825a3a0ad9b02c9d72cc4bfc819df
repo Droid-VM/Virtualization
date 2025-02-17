@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "716d2d3a_52bf25a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-17T09:45:42Z",
+      "side": 1,
+      "message": "This is causing test failure on x86:\n```\nvirtmgr : virtualizationmanager::crosvm: Failure info: Failed to create VM secrets\nvirtmgr : \nvirtmgr : Caused by:\nvirtmgr :     Missing instance_id\n```\nbut `get_instance_id()` in `microdroid_manager` says:\n```\n// TODO(b/325094712): x86 support for Device tree in nested guest is limited/broken/\n// untested. So instance_id will not be present in cuttlefish.\n```\nso I\u0027m surprised this isn\u0027t WAI.\n\nI\u0027m also not sure if Sk is supported on x86 (I _thought_ we had some emulated version?) and/or if it is relevant to this failure.\n\nI\u0027ll look more into this once I get some time later today/tomorrow, as I am about to travel. Any help appreciated.",
+      "revId": "a5502ce7f14825a3a0ad9b02c9d72cc4bfc819df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
