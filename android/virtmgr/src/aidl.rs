@@ -658,6 +658,10 @@ impl VirtualizationService {
         *is_protected = config.protectedVm;
 
         if !config.teeServices.is_empty() {
+            if !config.protectedVm {
+                return Err(anyhow!("only protected VMs can request tee services"))
+                    .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION);
+            }
             // TODO(ioffe): only pVMs should be able to request access to teeServices.
             check_tee_service_permission(&caller_secontext, &config.teeServices)
                 .with_log()
