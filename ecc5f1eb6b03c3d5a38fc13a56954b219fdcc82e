@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1edcf9b6_335c080b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-02-17T06:08:18Z",
+      "side": 1,
+      "message": "\u003e requestPermission is called from onResume() to ensure notification is allowed. \n\nhmm, notification permission is an optional permission for now, isn\u0027t it? Even for now, the app is running without the permission if a user clicks \u0027don\u0027t allow\u0027 in notification(i think it\u0027s a kind of inconsitency between the back button and don\u0027t allow)\n\n\u003e onCreate() may not be called for the context switch, so terminal app may be running without notification.\n\nApp process terminates when permission revoked, so pop-up shows again in that case.",
+      "parentUuid": "b056e836_19fe258e",
+      "range": {
+        "startLine": 7,
+        "startChar": 29,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "ecc5f1eb6b03c3d5a38fc13a56954b219fdcc82e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc1cac39_69061134",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-17T05:15:56Z",
       "side": 1,
       "message": "this shouldn\u0027t happen unless there\u0027s a onPause() exists the middle. could you elaborate detail?",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "ecc5f1eb6b03c3d5a38fc13a56954b219fdcc82e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c28f1c41_f3ec64b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-02-17T06:08:18Z",
+      "side": 1,
+      "message": "It was actaully from both MainActivity\u0027s onResume and InstallerActivity\u0027s onResume. But the problem is in that case, the dialog is nested.. which might be permissioncontroller\u0027s bug, though.",
+      "parentUuid": "bc1cac39_69061134",
       "range": {
         "startLine": 9,
         "startChar": 3,
