@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c1f3e87_b0ea921e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-02-17T15:13:18Z",
+      "side": 1,
+      "message": "\u003e If we\u0027re OK with no notification, then we only need to ask it once when installation and no more. Isn\u0027t it?\n\nActually, it asks at least twice, installation and main activity until a user clicks don\u0027t allow more than twice.\n\n\u003e Would service be running as foreground service if and runs indefinitely even when the notification is diabled? (bard said no, and I don\u0027t remember the ansewr)\n\nthe service can be running as a foreground service regardless of notification permission, and foreground service is killed when main activity is finished.",
+      "parentUuid": "e3863dd4_1ab4442d",
+      "range": {
+        "startLine": 7,
+        "startChar": 29,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "ecc5f1eb6b03c3d5a38fc13a56954b219fdcc82e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc1cac39_69061134",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "I agree that permission controller has a bug, and we need a workaround here. can we dismiss the dialog in on pause?",
       "parentUuid": "c28f1c41_f3ec64b6",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "ecc5f1eb6b03c3d5a38fc13a56954b219fdcc82e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25343bc7_efbde14b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-02-17T15:13:18Z",
+      "side": 1,
+      "message": "\u003e can we dismiss the dialog in on pause?\n\ni am not sure if there is an API, but if we can do in MainActivity.onStop(), it looks like what we want, i guess..",
+      "parentUuid": "98f3d54a_39d7d5a4",
       "range": {
         "startLine": 9,
         "startChar": 3,
