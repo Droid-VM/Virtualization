@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "155bc134_ccbf6858",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-17T15:08:20Z",
+      "side": 1,
+      "message": "So the `instance_id` gets passed unconditionally to `CrosvmConfig` (where it is *not* optional) [here](https://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/aidl.rs;l\u003d903;drc\u003d78dd87a809e1f22f265c4411233ff616713a798c).  Should that have been different from the start?",
+      "parentUuid": "0873dfd5_aed3efdc",
+      "range": {
+        "startLine": 588,
+        "startChar": 26,
+        "endLine": 588,
+        "endChar": 53
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "066b8296_9889a104",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 13
@@ -54,6 +78,30 @@
       "writtenOn": "2025-02-14T20:14:55Z",
       "side": 1,
       "message": "Sorry for the inconvenience but do you mind delaying this CL until aosp/3494756 gets merged, as it\u0027s somewhat urgent?",
+      "range": {
+        "startLine": 589,
+        "startChar": 12,
+        "endLine": 589,
+        "endChar": 37
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1f02f7c_04c636b0",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-17T15:08:20Z",
+      "side": 1,
+      "message": "Sure no worries - rebased.",
+      "parentUuid": "066b8296_9889a104",
       "range": {
         "startLine": 589,
         "startChar": 12,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b010a43_2a45a877",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-17T15:08:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0003e9ed_70ca8606",
+      "range": {
+        "startLine": 599,
+        "startChar": 39,
+        "endLine": 599,
+        "endChar": 40
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42782fb4_db846344",
@@ -100,6 +172,30 @@
       "writtenOn": "2025-02-14T20:14:55Z",
       "side": 1,
       "message": "I don\u0027t think we should have this kind of policy so deep in the implementation. I\u0027d keep this class as simple as possible and do whatever the caller requested i.e.\n```\nif let Some(instance_id) \u003d instance_id {\n    untrusted_props.push(...);\n}\nif defer_rollback_protection {\n    untrusted_props.push(...);\n}\n```\n(no `match` ignoring one property if the other is missing).",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 57
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03ab5314_8da0b8d9",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-17T15:08:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42782fb4_db846344",
       "range": {
         "startLine": 69,
         "startChar": 0,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e19ac9e_daccadf6",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-17T15:08:20Z",
+      "side": 1,
+      "message": "I had one `extract_` combining the two before, but it was less readable because it didn\u0027t delegate to two separate helpers. LMK WYT of the latest version.",
+      "parentUuid": "f31993af_4ed1ca75",
+      "range": {
+        "startLine": 122,
+        "startChar": 14,
+        "endLine": 122,
+        "endChar": 48
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa59d91d_7df865a2",
@@ -146,6 +266,30 @@
       "writtenOn": "2025-02-14T20:14:55Z",
       "side": 1,
       "message": "Not sure how this is usually done but do we really need to both log here and return an error (which I\u0027m hoping gets logged at some point up the callstack)?",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 77
+      },
+      "revId": "3719caeb5b6eaf7a7b90700ea558106b52fc9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dbd108e_a0767f37",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-02-17T15:08:20Z",
+      "side": 1,
+      "message": "Took inspiration from the prior code, but in that case it `warn`ed and returned a `None`. Removed.",
+      "parentUuid": "aa59d91d_7df865a2",
       "range": {
         "startLine": 125,
         "startChar": 0,
