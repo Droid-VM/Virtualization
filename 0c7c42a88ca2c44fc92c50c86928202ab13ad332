@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8ae320d_09fb8044",
+        "filename": "guest/microdroid_manager/src/main.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-18T17:29:50Z",
+      "side": 1,
+      "message": "Please add a comment explaining why we need to wait for apexes to be mounted",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 55
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d5ebadf_23caa3d9",
+        "filename": "guest/microdroid_manager/src/main.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-18T17:29:50Z",
+      "side": 1,
+      "message": "This changes the boot sequence a bit, but i think it should be fine... Adding Jiyong to take a look as well",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 430,
+        "endChar": 0
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b2a9dbb_fd17c6ce",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 1937,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-18T17:29:50Z",
+      "side": 1,
+      "message": "This will break javadoc because checkIncrementalCompatibility is not part of the @SystemApi surface.\n\nI think we should keep the mention of isCompatibleWith function (and do the corresponding check inside the setConfig function). On top of that lets mention that changing the size of the encrypted storage is an irrevirseable operation",
+      "range": {
+        "startLine": 1936,
+        "startChar": 0,
+        "endLine": 1937,
+        "endChar": 30
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9018a07e_ad575ede",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-18T17:29:50Z",
+      "side": 1,
+      "message": "please also handle the error case",
+      "range": {
+        "startLine": 245,
+        "startChar": 10,
+        "endLine": 245,
+        "endChar": 23
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
