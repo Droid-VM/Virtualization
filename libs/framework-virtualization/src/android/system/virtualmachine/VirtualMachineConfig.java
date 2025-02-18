@@ -624,7 +624,6 @@ public final class VirtualMachineConfig {
      * that would alter the identity of the VM (e.g. using a different payload or changing the debug
      * mode) are considered incompatible.
      *
-     * @see VirtualMachine#setConfig
      * @hide
      */
     @SystemApi
