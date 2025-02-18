@@ -142,6 +142,8 @@ pub struct CrosvmConfig {
     pub instance_id: [u8; 64],
     // (memfd, guest address, size)
     pub custom_memory_backing_files: Vec<(OwnedFd, u64, u64)>,
+    // TODO(ioffe): temporary name, find a better one.
+    pub enable_guest_ffa: bool,
 }
 
 #[derive(Debug)]
@@ -1402,6 +1404,11 @@ fn run_vm(
                 if audio_config.use_speaker { 1 } else { 0 }
             ));
         }
+    }
+
+    if config.enable_guest_ffa {
+        // TODO(ioffe): this flag most likely will be renamed as well.
+        command.arg("--guest-ffa");
     }
 
     print_crosvm_args(&command);

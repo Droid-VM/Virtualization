@@ -151,8 +151,9 @@ static CALLING_EXE_PATH: LazyLock<Option<PathBuf>> = LazyLock::new(|| {
     }
 });
 
-// TODO(ioffe): add service for guest-ffa.
-const KNOWN_TEE_SERVICES: [&str; 0] = [];
+// TODO(ioffe): temporary name, come up with a better one.
+const GUEST_FFA_TEE_SERVICE: &str = "guest_ffa_tee_service";
+const KNOWN_TEE_SERVICES: [&str; 1] = [GUEST_FFA_TEE_SERVICE];
 
 fn check_known_tee_service(tee_service: &str) -> binder::Result<()> {
     if !KNOWN_TEE_SERVICES.contains(&tee_service) {
@@ -685,12 +686,6 @@ impl VirtualizationService {
                 .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION);
         }
 
-        // TODO(ioffe): remove this check in a follow-up patch.
-        if !system_tee_services.is_empty() {
-            return Err(anyhow!("support for system tee services is coming soon!"))
-                .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION);
-        }
-
         let kernel = maybe_clone_file(&config.kernel)?;
         let initrd = maybe_clone_file(&config.initrd)?;
 
@@ -861,6 +856,9 @@ impl VirtualizationService {
             })
             .collect::<binder::Result<_>>()?;
 
+        // TODO(ioffe): temporary name, find a better one.
+        let enable_guest_ffa = system_tee_services.iter().any(|s| s == GUEST_FFA_TEE_SERVICE);
+
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
@@ -906,6 +904,7 @@ impl VirtualizationService {
             enable_hypervisor_specific_auth_method: config.enableHypervisorSpecificAuthMethod,
             instance_id,
             custom_memory_backing_files,
+            enable_guest_ffa,
         };
         let instance = Arc::new(
             VmInstance::new(
