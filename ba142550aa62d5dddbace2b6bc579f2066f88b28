@@ -192,6 +192,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11ebd72b_37eed08b",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-18T12:02:42Z",
+      "side": 1,
+      "message": "Oh I know your point. I think in the perspective of user behavior. That is guaranteed. The steps is:\n1. TerminalView1 is focused\n2. User taps new tab and TerminalView1 is unfocused\n3. Tab changes\n4. User taps TerminalView2 and focus on it.\n\nSo I think the focus of TerminalView2 will always after TerminalView1",
+      "parentUuid": "95158f30_d21a4641",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 41
+      },
+      "revId": "ba142550aa62d5dddbace2b6bc579f2066f88b28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c51e21db_b1d592f8",
         "filename": "android/TerminalApp/res/layout/activity_headless.xml",
         "patchSetId": 8

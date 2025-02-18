@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed0940f0_4bb074b7",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-18T12:02:42Z",
+      "side": 1,
+      "message": "That\u0027s a good idea.",
+      "parentUuid": "a6e3fc3c_e7e1afed",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 105,
+        "endChar": 25
+      },
+      "revId": "8289d88b987a16809f6b036013246b32d39ce896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9217aa72_85c66951",
@@ -55,6 +79,30 @@
       "writtenOn": "2025-02-13T01:47:03Z",
       "side": 1,
       "message": "Please fix this WARNING reported by AndroidLint: [Orientation] No orientation specified, and the default is horizontal. This is a common source of bugs when children are added dynamically.\n\nAnalyzer Description: Reports AndroidLint warnings.\nOwner: colefaust@google.com\n\n[Orientation] No orientation specified, and the default is horizontal. This is a common source of bugs when children are added dynamically.\n\n        \u003cLinearLayout\n         ~~~~~~~~~~~~\n\nThe default orientation of a `LinearLayout` is horizontal. It\u0027s pretty easy to believe that the layout is vertical, add multiple children to it, and wonder why only the first child is visible (when the subsequent children are off screen to the right). This lint rule helps pinpoint this issue by warning whenever a `LinearLayout` is used with an implicit orientation and multiple children.\n\nIt also checks for empty LinearLayouts without an `orientation` attribute that also defines an `id` attribute. This catches the scenarios where children will be added to the `LinearLayout` dynamically. \n\nSuppression and local reproduction steps: go/ayeaye-android-lint\n\nThis warning was found on the git_main branch",
+      "range": {
+        "startLine": 89,
+        "startChar": 6,
+        "endLine": 89,
+        "endChar": 17
+      },
+      "revId": "8289d88b987a16809f6b036013246b32d39ce896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27fc414f_61fbc098",
+        "filename": "android/TerminalApp/res/layout/activity_headless.xml",
+        "patchSetId": 11
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-18T12:02:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9217aa72_85c66951",
       "range": {
         "startLine": 89,
         "startChar": 6,
@@ -88,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e7c1b72_d56bd4fd",
+        "filename": "android/TerminalApp/res/layout/fragment_terminal_tab.xml",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-18T12:02:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4699230b_7f75b295",
+      "range": {
+        "startLine": 37,
+        "startChar": 5,
+        "endLine": 37,
+        "endChar": 17
+      },
+      "revId": "8289d88b987a16809f6b036013246b32d39ce896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d7c06ba_70aa2258",
@@ -101,6 +173,30 @@
       "writtenOn": "2025-02-13T01:47:03Z",
       "side": 1,
       "message": "LinearLayout looks better fit, as Lint complaints here.",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 9
+      },
+      "revId": "8289d88b987a16809f6b036013246b32d39ce896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09bd7725_f38868de",
+        "filename": "android/TerminalApp/res/layout/tabitem_terminal.xml",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-18T12:02:42Z",
+      "side": 1,
+      "message": "I want to make the title left and the close button right so RelativeLayout is must have.\nI resolced the Lint by adding toStartOf",
+      "parentUuid": "2d7c06ba_70aa2258",
       "range": {
         "startLine": 31,
         "startChar": 4,

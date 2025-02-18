@@ -159,6 +159,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0866a86_da88714c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-18T12:02:42Z",
+      "side": 1,
+      "message": "Thanks, let me just check if activeTerminalView is null in `update()` and assume it is non-null in `needToShowKeys()` and `needsKeysInSingleLine()`.\n\nAnd made `needToShowKeys()`inline.",
+      "parentUuid": "bb16fdba_bf2bf543",
+      "range": {
+        "startLine": 120,
+        "startChar": 8,
+        "endLine": 120,
+        "endChar": 56
+      },
+      "revId": "54317a76564965352417c44a109bd2f6e2a113a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84caec74_4299de78",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
         "patchSetId": 9
@@ -242,6 +266,30 @@
       "side": 1,
       "message": "I set up kotlin formatter like below as repo upload hook(please refer to `PREUPLOAD.cfg`)\n```\n[Tool Paths]\nktfmt \u003d ${REPO_ROOT}/external/ktfmt/ktfmt.sh\n\n[Builtin Hooks Options]\nktfmt \u003d --kotlinlang-style\n```",
       "parentUuid": "f833cddc_842d231a",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 45
+      },
+      "revId": "54317a76564965352417c44a109bd2f6e2a113a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef631277_89656a58",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-02-18T12:02:42Z",
+      "side": 1,
+      "message": "Thanks for sharing!!",
+      "parentUuid": "cbe8a8ff_48a0e736",
       "range": {
         "startLine": 124,
         "startChar": 0,
