@@ -22,6 +22,30 @@
       },
       "revId": "bc7229055e53044962606ce606f87a2e3960afa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "753a0b7c_81c0b421",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-18T16:32:22Z",
+      "side": 1,
+      "message": "Okay, I\u0027ll see if I get some bandwidth to work on this (currently travelling) but please take it over if you can, as you seem to have the necessary background \u0026 the change doesn\u0027t sound too large?\n\n\u003e on previous desert releases (where --enable-earlycon) is not supported\n\nFor my understanding, isn\u0027t this exactly what `isFeatureEnabled` for i.e. run `vm check-feature \u003c...\u003e` and check what the DUT supports? Or do you mean that it will break because those older devices don\u0027t even support `vm check-feature`?",
+      "parentUuid": "46174457_c35ba119",
+      "range": {
+        "startLine": 156,
+        "startChar": 3,
+        "endLine": 162,
+        "endChar": 5
+      },
+      "revId": "bc7229055e53044962606ce606f87a2e3960afa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
