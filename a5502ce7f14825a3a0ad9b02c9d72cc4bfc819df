@@ -16,6 +16,24 @@
       "message": "This is causing test failure on x86:\n```\nvirtmgr : virtualizationmanager::crosvm: Failure info: Failed to create VM secrets\nvirtmgr : \nvirtmgr : Caused by:\nvirtmgr :     Missing instance_id\n```\nbut `get_instance_id()` in `microdroid_manager` says:\n```\n// TODO(b/325094712): x86 support for Device tree in nested guest is limited/broken/\n// untested. So instance_id will not be present in cuttlefish.\n```\nso I\u0027m surprised this isn\u0027t WAI.\n\nI\u0027m also not sure if Sk is supported on x86 (I _thought_ we had some emulated version?) and/or if it is relevant to this failure.\n\nI\u0027ll look more into this once I get some time later today/tomorrow, as I am about to travel. Any help appreciated.",
       "revId": "a5502ce7f14825a3a0ad9b02c9d72cc4bfc819df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7596e31_395e8103",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-18T16:46:02Z",
+      "side": 1,
+      "message": "Thinking about this, I believe it might be caused by `defer-rollback-protection` having previously been intentionally left unset for x86 (without even trying to detect Sk), which now requires explicitly setting `ignore-...` (which is a good thing, IMO).\n\nIt isn\u0027t clear why `microdroid_manager` is blindly performing deferred RBP based on the DT property, instead of detecting the availability of Sk and deciding accordingly, which would address this issue and make the overall code more robust. I\u0027ll also look into that, but probably as a follow-up.",
+      "parentUuid": "716d2d3a_52bf25a4",
+      "revId": "a5502ce7f14825a3a0ad9b02c9d72cc4bfc819df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
