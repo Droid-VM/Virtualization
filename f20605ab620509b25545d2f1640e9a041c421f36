@@ -69,6 +69,30 @@
       },
       "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4341362d_91b6f5a0",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-02-18T21:09:11Z",
+      "side": 1,
+      "message": "Actually the change in the other file will force all the allocated instance IDs to be prefixed with 0xFFFFFFF, regardeless of whether it is vendor or not. Given that only vendor instance IDs need this prefix, would it be possible to limit the enforcement to just those IDs?",
+      "parentUuid": "dabf3efb_82811026",
+      "range": {
+        "startLine": 616,
+        "startChar": 39,
+        "endLine": 616,
+        "endChar": 87
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
