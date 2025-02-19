@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46a82874_fe678966",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-19T16:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6c75600_ea6316d2",
+      "range": {
+        "startLine": 306,
+        "startChar": 7,
+        "endLine": 306,
+        "endChar": 34
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e91c0534_0b0ad3e4",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-19T08:51:11Z",
       "side": 1,
       "message": "why not \u003e\u003d ?",
+      "range": {
+        "startLine": 322,
+        "startChar": 22,
+        "endLine": 322,
+        "endChar": 23
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c374eb5_dd8f6395",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-19T16:58:49Z",
+      "side": 1,
+      "message": "The image_size and required_size being equal is a very common scenario for this method. It will be called every time the VM reboots, regardless of whether the configuration has been updated.",
+      "parentUuid": "e91c0534_0b0ad3e4",
       "range": {
         "startLine": 322,
         "startChar": 22,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cbf5ce1_60ddec13",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-19T16:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f566ff0_b441306e",
+      "range": {
+        "startLine": 324,
+        "startChar": 31,
+        "endLine": 324,
+        "endChar": 52
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9516904b_f52138b2",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-02-19T08:51:11Z",
       "side": 1,
       "message": "else {",
+      "range": {
+        "startLine": 327,
+        "startChar": 8,
+        "endLine": 329,
+        "endChar": 39
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64513092_717b0150",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-19T16:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9516904b_f52138b2",
       "range": {
         "startLine": 327,
         "startChar": 8,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a204a54_32ca7b91",
+        "filename": "android/vm/src/run.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-19T16:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1968d3a1_1af587c0",
+      "range": {
+        "startLine": 379,
+        "startChar": 10,
+        "endLine": 379,
+        "endChar": 22
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8ae320d_09fb8044",
@@ -129,6 +249,30 @@
       "writtenOn": "2025-02-18T17:29:50Z",
       "side": 1,
       "message": "Please add a comment explaining why we need to wait for apexes to be mounted",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 55
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c110870a_580dff1b",
+        "filename": "guest/microdroid_manager/src/main.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-19T16:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8ae320d_09fb8044",
       "range": {
         "startLine": 408,
         "startChar": 0,
@@ -209,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6868954_0f6b229f",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 1937,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-19T16:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b2a9dbb_fd17c6ce",
+      "range": {
+        "startLine": 1936,
+        "startChar": 0,
+        "endLine": 1937,
+        "endChar": 30
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9018a07e_ad575ede",
@@ -222,6 +390,30 @@
       "writtenOn": "2025-02-18T17:29:50Z",
       "side": 1,
       "message": "please also handle the error case",
+      "range": {
+        "startLine": 245,
+        "startChar": 10,
+        "endLine": 245,
+        "endChar": 23
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab039727_6bdd6cfd",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1975310
+      },
+      "writtenOn": "2025-02-19T16:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9018a07e_ad575ede",
       "range": {
         "startLine": 245,
         "startChar": 10,
