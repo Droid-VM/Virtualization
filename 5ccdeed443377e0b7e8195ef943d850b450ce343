@@ -22,6 +22,30 @@
       },
       "revId": "5ccdeed443377e0b7e8195ef943d850b450ce343",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "853b87ac_ef347d91",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-02-19T21:22:57Z",
+      "side": 1,
+      "message": "\u003e Does \"ignore-path\" indicate that the path check is completely disregarded, regardless of its existence?\n\nCorrect.\n\n\u003e It\u0027s worth noting that SecretKeeper is becoming a mandatory feature as of 202504, while it has been supported on Pixel devices since the Pixel 7 (one release prior to 202504).\n\nAck.\n\nModified the code to take into account chipsets qualifying for freeze vs those that don\u0027t.",
+      "parentUuid": "4b77748e_0bb099f2",
+      "range": {
+        "startLine": 173,
+        "startChar": 18,
+        "endLine": 173,
+        "endChar": 31
+      },
+      "revId": "5ccdeed443377e0b7e8195ef943d850b450ce343",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
