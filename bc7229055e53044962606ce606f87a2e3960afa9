@@ -46,6 +46,30 @@
       },
       "revId": "bc7229055e53044962606ce606f87a2e3960afa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dad7d471_39d66c4a",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-19T13:21:21Z",
+      "side": 1,
+      "message": "\u003e Or do you mean that it will break because those older devices don\u0027t even support vm check-feature?\n\nYep. Essentially the vm check-feature is our way of answering the \"does this build have this trunk stable flag enabled?\" question. \n\nAlso, i think that isFeatureEnabled implementation (https://cs.android.com/android/platform/superproject/+/android15-qpr1-release:packages/modules/Virtualization/tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java;l\u003d246-250;drc\u003dfa6cc092912b0f886d156e614736111359f5ae62) has a bug - if you call it on older release that doesn\u0027t have check-feature-enabled command, it will fail with the error along the lines of \"no command check-feature-enabled\". The code will grep for the existence of the \"enabled\" in the output, and hapily tell you that feature is enabled :D",
+      "parentUuid": "753a0b7c_81c0b421",
+      "range": {
+        "startLine": 156,
+        "startChar": 3,
+        "endLine": 162,
+        "endChar": 5
+      },
+      "revId": "bc7229055e53044962606ce606f87a2e3960afa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
