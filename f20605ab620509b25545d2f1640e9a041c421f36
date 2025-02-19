@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4befde1_579c97fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-19T16:48:40Z",
+      "side": 1,
+      "message": "Yes. Going to make sure there is some consensus here and then I\u0027ll update the CL to fix docs",
+      "parentUuid": "6baf3339_88934107",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 68
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "251b1599_c9e3d0a3",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 2
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Actually the change in the other file will force all the allocated instance IDs to be prefixed with 0xFFFFFFF, regardeless of whether it is vendor or not. Given that only vendor instance IDs need this prefix, would it be possible to limit the enforcement to just those IDs?",
       "parentUuid": "dabf3efb_82811026",
+      "range": {
+        "startLine": 616,
+        "startChar": 39,
+        "endLine": 616,
+        "endChar": 87
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e661fe20_4008368c",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-19T16:48:40Z",
+      "side": 1,
+      "message": "\u003e Actually the change in the other file will force all the allocated instance IDs to be prefixed with 0xFFFFFFF, regardeless of whether it is vendor or not.\n\nThe allocated IDs are prefixed with 0x77777777 to ensure they don\u0027t collide with vendor IDs. Right now vendor code cannot access the allocation API (even indirectly), so those are always going to be non-vendor.\n\n\u003e Given that only vendor instance IDs need this prefix, would it be possible to limit the enforcement to just those IDs?\n\nThe validation here only applies to vendor callers.",
+      "parentUuid": "4341362d_91b6f5a0",
       "range": {
         "startLine": 616,
         "startChar": 39,
