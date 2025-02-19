@@ -3,6 +3,121 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6c75600_ea6316d2",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-19T08:51:11Z",
+      "side": 1,
+      "message": "just `extendEncryptedStorage` because if this returns `Ok(...)` you are sure that the storage was extended.",
+      "range": {
+        "startLine": 306,
+        "startChar": 7,
+        "endLine": 306,
+        "endChar": 34
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e91c0534_0b0ad3e4",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-19T08:51:11Z",
+      "side": 1,
+      "message": "why not \u003e\u003d ?",
+      "range": {
+        "startLine": 322,
+        "startChar": 22,
+        "endLine": 322,
+        "endChar": 23
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f566ff0_b441306e",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-19T08:51:11Z",
+      "side": 1,
+      "message": "this is used for calling non-existing aidl methods. i think illegal_argument fits better here.",
+      "range": {
+        "startLine": 324,
+        "startChar": 31,
+        "endLine": 324,
+        "endChar": 52
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9516904b_f52138b2",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-19T08:51:11Z",
+      "side": 1,
+      "message": "else {",
+      "range": {
+        "startLine": 327,
+        "startChar": 8,
+        "endLine": 329,
+        "endChar": 39
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1968d3a1_1af587c0",
+        "filename": "android/vm/src/run.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-19T08:51:11Z",
+      "side": 1,
+      "message": "can this be u64 so that we don\u0027t even call this if size is not specified?",
+      "range": {
+        "startLine": 379,
+        "startChar": 10,
+        "endLine": 379,
+        "endChar": 22
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8ae320d_09fb8044",
         "filename": "guest/microdroid_manager/src/main.rs",
         "patchSetId": 33
@@ -37,6 +152,30 @@
       "writtenOn": "2025-02-18T17:29:50Z",
       "side": 1,
       "message": "This changes the boot sequence a bit, but i think it should be fine... Adding Jiyong to take a look as well",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 430,
+        "endChar": 0
+      },
+      "revId": "0c7c42a88ca2c44fc92c50c86928202ab13ad332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3638782_f903b3ca",
+        "filename": "guest/microdroid_manager/src/main.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-19T08:51:11Z",
+      "side": 1,
+      "message": "yes this is fine",
+      "parentUuid": "9d5ebadf_23caa3d9",
       "range": {
         "startLine": 430,
         "startChar": 0,
