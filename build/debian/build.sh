@@ -344,6 +344,11 @@ generate_output_package() {
 	losetup -d "${loop}"
 
 	cp ${vm_config} vm_config.json
+	# TODO(b/363985291): remove this when ballooning is supported on generic kernel
+	if [[ "$use_custom_kernel" != 1 ]] && [[ "$arch" == "aarch64" ]]; then
+		sed -i 's/"auto_memory_balloon": true/"auto_memory_balloon": false/g' vm_config.json
+	fi
+
 	sed -i "s/{root_part_guid}/$(sfdisk --part-uuid $raw_disk_image $root_partition_num)/g" vm_config.json
 	if [[ "$arch" == "x86_64" ]]; then
 		sed -i "s/{bios_part_guid}/$(sfdisk --part-uuid $raw_disk_image $bios_partition_num)/g" vm_config.json
