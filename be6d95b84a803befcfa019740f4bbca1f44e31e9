@@ -16,6 +16,29 @@
       "message": "Hi Jiyong, PTAL",
       "revId": "be6d95b84a803befcfa019740f4bbca1f44e31e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b26fd68_fe930115",
+        "filename": "android/virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-19T01:44:23Z",
+      "side": 1,
+      "message": "style:\n\n```\nif is_remote_provisioning_hal_declared()? {\n  Ok(remote_provisioning::is_remote_attestation_supported())\n} else {\n  warn!(\"...\");\n  Ok(false)\n}\n```",
+      "range": {
+        "startLine": 415,
+        "startChar": 0,
+        "endLine": 420,
+        "endChar": 70
+      },
+      "revId": "be6d95b84a803befcfa019740f4bbca1f44e31e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
