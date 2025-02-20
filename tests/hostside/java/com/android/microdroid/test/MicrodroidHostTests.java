@@ -79,6 +79,7 @@ import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -117,18 +118,66 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
     }
 
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     public static List<Object[]> params() {
         List<Object[]> ret = new ArrayList<>();
         for (Object[] osKey : osVersions()) {
             ret.add(new Object[] {true /* protectedVm */, osKey[0]});
             ret.add(new Object[] {false /* protectedVm */, osKey[0]});
+||||||| BASE
+    @Parameterized.Parameters(name = "protectedVm={0},gki={1}")
+    public static Collection<Object[]> params() {
+        List<Object[]> ret = new ArrayList<>();
+        ret.add(new Object[] {true /* protectedVm */, null /* use microdroid kernel */});
+        ret.add(new Object[] {false /* protectedVm */, null /* use microdroid kernel */});
+        // TODO(b/302465542): run only the latest GKI on presubmit to reduce running time
+        for (String gki : SUPPORTED_GKI_VERSIONS) {
+            ret.add(new Object[] {true /* protectedVm */, gki});
+            ret.add(new Object[] {false /* protectedVm */, gki});
+=======
+    // This map is needed because the parameterizer `DeviceParameterizedRunner` doesn't support "-"
+    // in test names. The key is the test name, while the value is the actual kernel version.
+    private static HashMap<String, String> sGkiVersions = new HashMap<>();
+
+    private static void initGkiVersions() {
+        if (!sGkiVersions.isEmpty()) {
+            return;
+        }
+        sGkiVersions.put("null", null); /* use microdroid kernel */
+        // TODO(b/302465542): run only the latest GKI on presubmit to reduce running time
+        for (String gki : SUPPORTED_GKI_VERSIONS) {
+            String key = gki.split("-")[0];
+            assertThat(sGkiVersions.containsKey(key)).isFalse();
+            sGkiVersions.put(key, gki);
+        }
+    }
+
+    public static List<Object[]> params() {
+        List<Object[]> ret = new ArrayList<>();
+        for (Object[] gki : gkiVersions()) {
+            ret.add(new Object[] {true /* protectedVm */, gki[0]});
+            ret.add(new Object[] {false /* protectedVm */, gki[0]});
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         }
         return ret;
     }
 
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     public static List<Object[]> osVersions() {
         return SUPPORTED_OSES.keySet().stream()
                 .map(osKey -> new Object[] {osKey})
+||||||| BASE
+    @Parameterized.Parameter(0)
+    public boolean mProtectedVm;
+
+    @Parameterized.Parameter(1)
+    public String mGki;
+=======
+    public static List<Object[]> gkiVersions() {
+        initGkiVersions();
+        return sGkiVersions.keySet().stream()
+                .map(gki -> new Object[] {gki})
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                 .collect(Collectors.toList());
     }
 
@@ -291,10 +340,20 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
             Map<String, File> keyOverrides,
             boolean isProtected,
             boolean updateBootconfigs,
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
             String os)
+||||||| BASE
+=======
+            String gki)
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
             throws Exception {
         CommandRunner android = new CommandRunner(getDevice());
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         os = SUPPORTED_OSES.get(os);
+||||||| BASE
+=======
+        gki = sGkiVersions.get(gki);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
 
         File virtApexDir = FileUtil.createTempDir("virt_apex");
 
@@ -346,6 +405,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         //   - its idsig
 
         // Load etc/microdroid.json
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
+||||||| BASE
+=======
+        final String os = (gki == null) ? "microdroid" : "microdroid_gki-" + gki;
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         File microdroidConfigFile = new File(virtApexEtcDir, os + ".json");
         JSONObject config = new JSONObject(FileUtil.readStringFromFile(microdroidConfigFile));
 
@@ -411,6 +475,9 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         "--log " + LOG_PATH,
                         "--name " + "microdroid", // to still be seen as microdroid vm
                         configPath);
+        if (gki != null) {
+            args.add("--gki " + gki);
+        }
 
         PipedInputStream pis = new PipedInputStream();
         Process process = createRunUtil().runCmdInBackground(args, new PipedOutputStream(pis));
@@ -423,8 +490,15 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @VsrTest(requirements = {"VSR-7.1-001.007"})
     public void UpgradedPackageIsAcceptedWithSecretkeeper() throws Exception {
         // Preconditions
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         assumeVmTypeSupported("microdroid", true); // Non-protected VMs may not support upgrades
         ensureUpdatableVmSupported();
+||||||| BASE
+=======
+        assumeVmTypeSupported(true);
+        assumeUpdatableVmSupported();
+
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         getDevice().uninstallPackage(PACKAGE_NAME);
         getDevice().installPackage(findTestFile(APK_NAME), /* reinstall= */ true);
         ensureProtectedMicrodroidBootsSuccessfully(INSTANCE_ID_FILE, INSTANCE_IMG);
@@ -442,7 +516,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @VsrTest(requirements = {"VSR-7.1-001.007"})
     public void DowngradedPackageIsRejectedProtectedVm() throws Exception {
         // Preconditions: Rollback protection is provided only for protected VM.
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         assumeVmTypeSupported("microdroid", true);
+||||||| BASE
+=======
+        assumeVmTypeSupported(true);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
 
         // Install the upgraded version (v6)
         getDevice().uninstallPackage(PACKAGE_NAME);
@@ -489,10 +568,25 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Parameters(method = "osVersions")
     @TestCaseName("{method}_os_{0}")
     @GmsTest(requirements = {"GMS-3-7.1-010"})
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     public void protectedVmRunsPvmfw(String os) throws Exception {
+||||||| BASE
+    public void protectedVmRunsPvmfw() throws Exception {
+=======
+    @Parameters(method = "gkiVersions")
+    @TestCaseName("{method}_gki_{0}")
+    public void protectedVmRunsPvmfw(String gki) throws Exception {
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         // Arrange
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, true);
+||||||| BASE
+        assumeProtectedVm();
+=======
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(true);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         final String configPath = "assets/vm_config_apex.json";
 
         // Act
@@ -502,8 +596,14 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(true)
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                         .os(SUPPORTED_OSES.get(os))
                         .name("protected_vm_runs_pvmfw")
+||||||| BASE
+                        .gki(mGki)
+=======
+                        .gki(sGkiVersions.get(gki))
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                         .build(getAndroidDevice());
 
         // Assert
@@ -519,13 +619,30 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @Parameters(method = "osVersions")
     @TestCaseName("{method}_os_{0}")
+||||||| BASE
+=======
+    @Parameters(method = "gkiVersions")
+    @TestCaseName("{method}_gki_{0}")
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
     @GmsTest(requirements = {"GMS-3-7.1-003", "GMS-3-7.1-010"})
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     public void protectedVmWithImageSignedWithDifferentKeyFailsToVerifyPayload(String os)
             throws Exception {
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, true);
+||||||| BASE
+    public void protectedVmWithImageSignedWithDifferentKeyFailsToVerifyPayload() throws Exception {
+        // Arrange
+        assumeProtectedVm();
+=======
+    public void protectedVmWithImageSignedWithDifferentKeyFailsToVerifyPayload(String gki)
+            throws Exception {
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(true);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         File key = findTestFile("test.com.android.virt.pem");
 
         // Act
@@ -535,7 +652,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         /* keyOverrides= */ Map.of(),
                         /* isProtected= */ true,
                         /* updateBootconfigs= */ true,
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                         os);
+||||||| BASE
+=======
+                        gki);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
 
         // Assert
         vmInfo.mProcess.waitFor(5L, TimeUnit.SECONDS);
@@ -548,13 +670,30 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @Parameters(method = "osVersions")
     @TestCaseName("{method}_os_{0}")
+||||||| BASE
+=======
+    @Parameters(method = "gkiVersions")
+    @TestCaseName("{method}_gki_{0}")
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
     @GmsTest(requirements = {"GMS-3-7.1-003", "GMS-3-7.1-010"})
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey(String os)
+||||||| BASE
+    public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey()
+=======
+    public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey(String gki)
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
             throws Exception {
         // Preconditions
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         assumeKernelSupported(os);
+||||||| BASE
+=======
+        assumeKernelSupported(gki);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
 
         File key = findTestFile("test.com.android.virt.pem");
         Map<String, File> keyOverrides = Map.of();
@@ -564,7 +703,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         keyOverrides,
                         /* isProtected= */ false,
                         /* updateBootconfigs= */ true,
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                         os);
+||||||| BASE
+=======
+                        gki);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         assertThatEventually(
                 100000,
                 () ->
@@ -576,12 +720,29 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @Parameters(method = "osVersions")
     @TestCaseName("{method}_os_{0}")
+||||||| BASE
+=======
+    @Parameters(method = "gkiVersions")
+    @TestCaseName("{method}_gki_{0}")
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
     @GmsTest(requirements = {"GMS-3-7.1-006"})
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig(String os) throws Exception {
+||||||| BASE
+    public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig() throws Exception {
+=======
+    public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig(String gki) throws Exception {
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         // protectedVmWithImageSignedWithDifferentKeyRunsPvmfw() is the protected case.
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         assumeKernelSupported(os);
+||||||| BASE
+=======
+        assumeKernelSupported(gki);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
 
         // Sign everything with key1 except vbmeta
         File key = findTestFile("test.com.android.virt.pem");
@@ -592,7 +753,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         Map.of(),
                         /* isProtected= */ false,
                         /* updateBootconfigs= */ false,
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                         os);
+||||||| BASE
+=======
+                        gki);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         // Wait so that init can print errors to console (time in cuttlefish >> in real device)
         assertThatEventually(
                 100000,
@@ -640,7 +806,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     private boolean isTombstoneGeneratedWithCmd(
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
             boolean protectedVm, String os, String configPath, String... crashCommand)
+||||||| BASE
+=======
+            boolean protectedVm, String gki, String configPath, String... crashCommand)
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
             throws Exception {
         CommandRunner android = new CommandRunner(getDevice());
         String testStartTime = android.runWithTimeout(1000, "date", "'+%Y-%m-%d %H:%M:%S.%N'");
@@ -651,7 +822,13 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                         .os(SUPPORTED_OSES.get(os))
+||||||| BASE
+                        .gki(mGki)
+=======
+                        .gki(sGkiVersions.get(gki))
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                         .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         mMicrodroidDevice.enableAdbRoot();
@@ -668,18 +845,33 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     @Parameters(method = "params")
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
     public void testTombstonesAreGeneratedUponUserspaceCrash(boolean protectedVm, String os)
             throws Exception {
         // Preconditions
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
+||||||| BASE
+=======
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+    public void testTombstonesAreGeneratedUponUserspaceCrash(boolean protectedVm, String gki)
+            throws Exception {
+        // Preconditions
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
         assertThat(
                         isTombstoneGeneratedWithCmd(
                                 protectedVm,
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                                 os,
+||||||| BASE
+=======
+                                gki,
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                                 "assets/vm_config.json",
                                 "kill",
                                 "-SIGSEGV",
@@ -689,18 +881,33 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     @Parameters(method = "params")
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
     public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash(
             boolean protectedVm, String os) throws Exception {
         // Preconditions
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
+||||||| BASE
+=======
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+    public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash(
+            boolean protectedVm, String gki) throws Exception {
+        // Preconditions
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
         assertThat(
                         isTombstoneGeneratedWithCmd(
                                 protectedVm,
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                                 os,
+||||||| BASE
+=======
+                                gki,
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                                 "assets/vm_config_no_tombstone.json",
                                 "kill",
                                 "-SIGSEGV",
@@ -710,13 +917,28 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     @Parameters(method = "params")
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
+||||||| BASE
+=======
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
     @Ignore("b/341087884") // TODO(b/341087884): fix & re-enable
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     public void testTombstonesAreGeneratedUponKernelCrash(boolean protectedVm, String os)
             throws Exception {
         // Preconditions
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
+||||||| BASE
+    public void testTombstonesAreGeneratedUponKernelCrash() throws Exception {
+=======
+    public void testTombstonesAreGeneratedUponKernelCrash(boolean protectedVm, String gki)
+            throws Exception {
+        // Preconditions
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         assumeFalse("Cuttlefish is not supported", isCuttlefish());
         assumeFalse("Skipping test because ramdump is disabled on user build", isUserBuild());
 
@@ -724,7 +946,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assertThat(
                         isTombstoneGeneratedWithCmd(
                                 protectedVm,
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                                 os,
+||||||| BASE
+=======
+                                gki,
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                                 "assets/vm_config.json",
                                 "echo",
                                 "c",
@@ -734,12 +961,22 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     private boolean isTombstoneGeneratedWithVmRunApp(
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
             boolean protectedVm, String os, boolean debuggable, String... additionalArgs)
+||||||| BASE
+=======
+            boolean protectedVm, String gki, boolean debuggable, String... additionalArgs)
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
             throws Exception {
         // we can't use microdroid builder as it wants ADB connection (debuggable)
         CommandRunner android = new CommandRunner(getDevice());
         String testStartTime = android.runWithTimeout(1000, "date", "'+%Y-%m-%d %H:%M:%S.%N'");
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         os = SUPPORTED_OSES.get(os);
+||||||| BASE
+=======
+        gki = sGkiVersions.get(gki);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
 
         android.run("rm", "-rf", TEST_ROOT + "*");
         android.run("mkdir", "-p", TEST_ROOT + "*");
@@ -766,8 +1003,20 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         if (protectedVm) {
             cmd.add("--protected");
         }
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         cmd.add("--os");
         cmd.add(os);
+||||||| BASE
+        if (mGki != null) {
+            cmd.add("--gki");
+            cmd.add(mGki);
+        }
+=======
+        if (gki != null) {
+            cmd.add("--gki");
+            cmd.add(gki);
+        }
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         Collections.addAll(cmd, additionalArgs);
 
         android.run(cmd.toArray(new String[0]));
@@ -775,10 +1024,21 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     private boolean isTombstoneGeneratedWithCrashPayload(
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
             boolean protectedVm, String os, boolean debuggable) throws Exception {
+||||||| BASE
+            throws Exception {
+=======
+            boolean protectedVm, String gki, boolean debuggable) throws Exception {
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         return isTombstoneGeneratedWithVmRunApp(
                 protectedVm,
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                 os,
+||||||| BASE
+=======
+                gki,
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                 debuggable,
                 "--payload-binary-name",
                 "MicrodroidCrashNativeLib.so");
@@ -786,77 +1046,161 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     @Parameters(method = "params")
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
     public void testTombstonesAreGeneratedWithCrashPayload(boolean protectedVm, String os)
+||||||| BASE
+=======
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+    public void testTombstonesAreGeneratedWithCrashPayload(boolean protectedVm, String gki)
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
             throws Exception {
         // Preconditions
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
 
         // Act
         assertThat(isTombstoneGeneratedWithCrashPayload(protectedVm, os, /* debuggable= */ true))
+||||||| BASE
+        assertThat(isTombstoneGeneratedWithCrashPayload(mProtectedVm, /* debuggable= */ true))
+=======
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+
+        // Act
+        assertThat(isTombstoneGeneratedWithCrashPayload(protectedVm, gki, /* debuggable= */ true))
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                 .isTrue();
     }
 
     @Test
     @Parameters(method = "params")
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
     public void testTombstonesAreNotGeneratedWithCrashPayloadWhenNonDebuggable(
             boolean protectedVm, String os) throws Exception {
+||||||| BASE
+=======
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+    public void testTombstonesAreNotGeneratedWithCrashPayloadWhenNonDebuggable(
+            boolean protectedVm, String gki) throws Exception {
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         // Preconditions
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
 
         // Act
         assertThat(isTombstoneGeneratedWithCrashPayload(protectedVm, os, /* debuggable= */ false))
+||||||| BASE
+        assertThat(isTombstoneGeneratedWithCrashPayload(mProtectedVm, /* debuggable= */ false))
+=======
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+
+        // Act
+        assertThat(isTombstoneGeneratedWithCrashPayload(protectedVm, gki, /* debuggable= */ false))
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                 .isFalse();
     }
 
     private boolean isTombstoneGeneratedWithCrashConfig(
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
             boolean protectedVm, String os, boolean debuggable) throws Exception {
+||||||| BASE
+            throws Exception {
+=======
+            boolean protectedVm, String gki, boolean debuggable) throws Exception {
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         return isTombstoneGeneratedWithVmRunApp(
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                 protectedVm, os, debuggable, "--config-path", "assets/vm_config_crash.json");
+||||||| BASE
+                protectedVm, debuggable, "--config-path", "assets/vm_config_crash.json");
+=======
+                protectedVm, gki, debuggable, "--config-path", "assets/vm_config_crash.json");
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
     }
 
     @Test
     @Parameters(method = "params")
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
     public void testTombstonesAreGeneratedWithCrashConfig(boolean protectedVm, String os)
+||||||| BASE
+=======
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+    public void testTombstonesAreGeneratedWithCrashConfig(boolean protectedVm, String gki)
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
             throws Exception {
         // Preconditions
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
 
         // Act
         assertThat(isTombstoneGeneratedWithCrashConfig(protectedVm, os, /* debuggable= */ true))
+||||||| BASE
+        assertThat(isTombstoneGeneratedWithCrashConfig(mProtectedVm, /* debuggable= */ true))
+=======
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+
+        // Act
+        assertThat(isTombstoneGeneratedWithCrashConfig(protectedVm, gki, /* debuggable= */ true))
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                 .isTrue();
     }
 
     @Test
     @Parameters(method = "params")
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
     public void testTombstonesAreNotGeneratedWithCrashConfigWhenNonDebuggable(
             boolean protectedVm, String os) throws Exception {
+||||||| BASE
+=======
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+    public void testTombstonesAreNotGeneratedWithCrashConfigWhenNonDebuggable(
+            boolean protectedVm, String gki) throws Exception {
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
         assertThat(isTombstoneGeneratedWithCrashConfig(protectedVm, os, /* debuggable= */ false))
+||||||| BASE
+        assertThat(isTombstoneGeneratedWithCrashConfig(mProtectedVm, /* debuggable= */ false))
+=======
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+        assertThat(isTombstoneGeneratedWithCrashConfig(protectedVm, gki, /* debuggable= */ false))
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                 .isFalse();
     }
 
     @Test
     @Parameters(method = "params")
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
     public void testTelemetryPushedAtoms(boolean protectedVm, String os) throws Exception {
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
+||||||| BASE
+=======
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+    public void testTelemetryPushedAtoms(boolean protectedVm, String gki) throws Exception {
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         // Reset statsd config and report before the test
         ConfigUtils.removeConfig(getDevice());
         ReportUtils.clearReports(getDevice());
@@ -878,8 +1222,14 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                         .os(SUPPORTED_OSES.get(os))
                         .name("test_telemetry_pushed_atoms")
+||||||| BASE
+                        .gki(mGki)
+=======
+                        .gki(sGkiVersions.get(gki))
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                         .build(device);
         microdroid.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         device.shutdownMicrodroid(microdroid);
@@ -1015,13 +1365,26 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     @Parameters(method = "params")
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
+||||||| BASE
+=======
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
     @CddTest
     @GmsTest(requirements = {"GMS-3-7.1-001.002"})
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     public void testMicrodroidBoots(boolean protectedVm, String os) throws Exception {
         // Preconditions
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
+||||||| BASE
+=======
+    public void testMicrodroidBoots(boolean protectedVm, String gki) throws Exception {
+        // Preconditions
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
 
         final String configPath = "assets/vm_config.json"; // path inside the APK
         testMicrodroidBootsWithBuilder(
@@ -1030,11 +1393,18 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                         .name("test_microdroid_boots")
                         .os(SUPPORTED_OSES.get(os)));
+||||||| BASE
+                        .gki(mGki));
+=======
+                        .gki(sGkiVersions.get(gki)));
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
     }
 
     @Test
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     public void testMicrodroidRamUsage_protectedVm_true_os_microdroid() throws Exception {
         checkMicrodroidRamUsage(/* protectedVm= */ true, /* os= */ "microdroid");
     }
@@ -1060,6 +1430,15 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         // Preconditions
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
+||||||| BASE
+=======
+    @Parameters(method = "params")
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+    public void testMicrodroidRamUsage(boolean protectedVm, String gki) throws Exception {
+        // Preconditions
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
 
         final String configPath = "assets/vm_config.json";
         mMicrodroidDevice =
@@ -1068,8 +1447,14 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                         .os(SUPPORTED_OSES.get(os))
                         .name("test_microdroid_ram_usage")
+||||||| BASE
+                        .gki(mGki)
+=======
+                        .gki(sGkiVersions.get(gki))
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                         .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         mMicrodroidDevice.enableAdbRoot();
@@ -1318,10 +1703,22 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Parameters(method = "params")
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
     @CddTest
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     public void testDeviceAssignment(boolean protectedVm, String os) throws Exception {
         // Preconditions
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
+||||||| BASE
+    public void testDeviceAssignment() throws Exception {
+        // Check for preconditions
+=======
+    @Parameters(method = "params")
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+    public void testDeviceAssignment(boolean protectedVm, String gki) throws Exception {
+        // Preconditions
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
         assumeVfioPlatformSupported();
 
         List<AssignableDevice> devices = getAssignableDevices();
@@ -1331,7 +1728,13 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         // Try assign devices one by one
         for (AssignableDevice device : devices) {
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
             launchWithDeviceAssignment(device.node, protectedVm, os);
+||||||| BASE
+            launchWithDeviceAssignment(device.node);
+=======
+            launchWithDeviceAssignment(device.node, protectedVm, gki);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
 
             String dtPath =
                     new CommandRunner(mMicrodroidDevice)
@@ -1353,7 +1756,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
     }
 
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     private void launchWithDeviceAssignment(String device, boolean protectedVm, String os)
+||||||| BASE
+=======
+    private void launchWithDeviceAssignment(String device, boolean protectedVm, String gki)
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
             throws Exception {
         Objects.requireNonNull(device);
         final String configPath = "assets/vm_config.json";
@@ -1364,7 +1772,13 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                         .os(SUPPORTED_OSES.get(os))
+||||||| BASE
+                        .gki(mGki)
+=======
+                        .gki(sGkiVersions.get(gki))
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                         .addAssignableDevice(device)
                         .build(getAndroidDevice());
 
@@ -1383,11 +1797,20 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     @Parameters(method = "params")
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
     public void testHugePages(boolean protectedVm, String os) throws Exception {
         // Preconditions
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
+||||||| BASE
+=======
+    @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
+    public void testHugePages(boolean protectedVm, String gki) throws Exception {
+        // Preconditions
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
 
         ITestDevice device = getDevice();
         boolean disableRoot = !device.isAdbRoot();
@@ -1410,7 +1833,13 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
                         .os(SUPPORTED_OSES.get(os))
+||||||| BASE
+                        .gki(mGki)
+=======
+                        .gki(sGkiVersions.get(gki))
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
                         .hugePages(true)
                         .name("test_huge_pages")
                         .build(getAndroidDevice());
@@ -1484,10 +1913,27 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         return runUtil;
     }
 
+<<<<<<< HEAD   (b89acf Merge "Enable speaker and microphone" into main)
     private void assumeArm64Supported() throws Exception {
         CommandRunner android = new CommandRunner(getDevice());
         String abi = android.run("getprop", "ro.product.cpu.abi");
         assertThat(abi).isNotEmpty();
         assumeTrue("Skipping test as the architecture is not supported", abi.startsWith("arm64"));
+||||||| BASE
+=======
+    private void assumeKernelSupported(String gki) throws Exception {
+        String gkiVersion = sGkiVersions.get(gki);
+        if (gkiVersion != null) {
+            assumeTrue(
+                    "Skipping test as the GKI is not supported: " + gkiVersion,
+                    getSupportedGKIVersions().contains(gkiVersion));
+        }
+    }
+
+    private void assumeVmTypeSupported(boolean protectedVm) throws Exception {
+        assumeTrue(
+                "Microdroid is not supported for specific VM protection type",
+                getAndroidDevice().supportsMicrodroid(protectedVm));
+>>>>>>> BRANCH (306180 Migrate to tradefed test Parameterizer)
     }
 }
