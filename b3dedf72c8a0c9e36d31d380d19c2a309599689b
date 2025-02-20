@@ -246,6 +246,24 @@
       "parentUuid": "ed114760_46c49265",
       "revId": "b3dedf72c8a0c9e36d31d380d19c2a309599689b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f5b070_01dede37",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-20T20:56:01Z",
+      "side": 1,
+      "message": "Can you re-add the dealignment test, except now ensuring that it accepts dealigned bytes?",
+      "parentUuid": "28bc1a28_a9c6b9ec",
+      "revId": "b3dedf72c8a0c9e36d31d380d19c2a309599689b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
