@@ -1392,6 +1392,26 @@ public class VirtualMachine implements AutoCloseable {
         }
     }
 
+    /** @hide */
+    public void setMemoryBalloonByPercent(int percent) {
+        if (percent < 0 || percent > 100) {
+            Log.e(TAG, String.format("Invalid percent value: %d", percent));
+            return;
+        }
+        synchronized (mLock) {
+            try {
+                if (mVirtualMachine != null && mVirtualMachine.memoryBalloonEnabled()) {
+                    long bytes = mConfig.getMemoryBytes();
+                    mVirtualMachine.setMemoryBalloon(bytes * percent / 100);
+                }
+            } catch (RemoteException e) {
+                Log.w(TAG, "Cannot setMemoryBalloon", e);
+            } catch (ServiceSpecificException e) {
+                Log.w(TAG, "Crosvm failed to setMemoryBalloon", e);
+            }
+        }
+    }
+
     private boolean writeEventsToSock(ParcelFileDescriptor sock, List<InputEvent> evtList) {
         ByteBuffer byteBuffer =
                 ByteBuffer.allocate(8 /* (type: u16 + code: u16 + value: i32) */ * evtList.size());

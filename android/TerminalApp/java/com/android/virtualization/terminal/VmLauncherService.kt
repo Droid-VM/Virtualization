@@ -41,7 +41,6 @@ import android.widget.Toast
 import com.android.system.virtualmachine.flags.Flags.terminalGuiSupport
 import com.android.virtualization.terminal.MainActivity.Companion.TAG
 import com.android.virtualization.terminal.Runner.Companion.create
-import com.android.virtualization.terminal.VmLauncherService.VmLauncherServiceCallback
 import io.grpc.Grpc
 import io.grpc.InsecureServerCredentials
 import io.grpc.Metadata
@@ -62,6 +61,12 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class VmLauncherService : Service() {
+    inner class VmLauncherServiceBinder : android.os.Binder() {
+        fun getService(): VmLauncherService = this@VmLauncherService
+    }
+
+    private val binder = VmLauncherServiceBinder()
+
     // TODO: using lateinit for some fields to avoid null
     private var executorService: ExecutorService? = null
     private var virtualMachine: VirtualMachine? = null
@@ -79,7 +84,35 @@ class VmLauncherService : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder? {
-        return null
+        return binder
+    }
+
+    /**
+     * Processes application lifecycle events and adjusts the virtual machine's
+     * memory balloon accordingly.
+     *
+     * @param event The application lifecycle event.
+     */
+    fun processAppLifeCycleEvent(event: String) {
+        when (event) {
+            // When the app starts, reset the memory balloon to 0%.
+            // This gives the app maximum available memory.
+            APP_ON_START -> {
+                if (virtualMachine != null) {
+                    virtualMachine?.setMemoryBalloonByPercent(0)
+                }
+            }
+            APP_ON_STOP -> {
+                // When the app stops, inflate the memory balloon to 50%.
+                // This allows the system to reclaim memory while the app is in the background.
+                if (virtualMachine != null) {
+                    virtualMachine?.setMemoryBalloonByPercent(50)
+                }
+            }
+            else -> {
+                Log.e(TAG, "unrecognized lifecycle event: $event")
+            }
+        }
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
@@ -340,6 +373,8 @@ class VmLauncherService : Service() {
         const val EXTRA_DISPLAY_INFO = "EXTRA_DISPLAY_INFO"
         const val ACTION_STOP_VM_LAUNCHER_SERVICE: String =
             "android.virtualization.STOP_VM_LAUNCHER_SERVICE"
+        const val APP_ON_START: String = "APP_ON_START"
+        const val APP_ON_STOP: String = "APP_ON_STOP"
 
         private const val RESULT_START = 0
         private const val RESULT_STOP = 1
