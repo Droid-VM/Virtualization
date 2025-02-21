@@ -19,6 +19,7 @@ import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
@@ -39,6 +40,8 @@ import android.system.virtualmachine.VirtualMachineException
 import android.util.Log
 import android.widget.Toast
 import com.android.system.virtualmachine.flags.Flags.terminalGuiSupport
+import com.android.virtualization.terminal.Application.Companion.APP_ENTER_BACKGROUND_EVENT
+import com.android.virtualization.terminal.Application.Companion.APP_ENTER_FOREGROUND_EVENT
 import com.android.virtualization.terminal.MainActivity.Companion.TAG
 import com.android.virtualization.terminal.Runner.Companion.create
 import com.android.virtualization.terminal.VmLauncherService.VmLauncherServiceCallback
@@ -62,6 +65,12 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class VmLauncherService : Service() {
+    inner class VmLauncherServiceBinder : android.os.Binder() {
+        fun getService(): VmLauncherService = this@VmLauncherService
+    }
+
+    private val binder = VmLauncherServiceBinder()
+
     // TODO: using lateinit for some fields to avoid null
     private var executorService: ExecutorService? = null
     private var virtualMachine: VirtualMachine? = null
@@ -69,6 +78,27 @@ class VmLauncherService : Service() {
     private var server: Server? = null
     private var debianService: DebianServiceImpl? = null
     private var portNotifier: PortNotifier? = null
+    private var backgroundReceiver =
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                Log.d(TAG, "yuan: service received event")
+                when (intent?.action) {
+                    APP_ENTER_BACKGROUND_EVENT -> {
+                        Log.d(TAG, "yuan: service entered background")
+                        //                        if (virtualMachine != null) {
+                        //                            val ballonSize =
+                        // virtualMachine!!.getMemoryBalloon();
+                        //
+                        // virtualMachine!!.setMemoryBalloon(ballonSize/2);
+                        //                        }
+                    }
+                    APP_ENTER_FOREGROUND_EVENT -> {
+                        Log.d(TAG, "yuan: service entered foreground")
+                        //                        virtualMachine!!.setMemoryBalloon(0);
+                    }
+                }
+            }
+        }
 
     interface VmLauncherServiceCallback {
         fun onVmStart()
@@ -79,7 +109,30 @@ class VmLauncherService : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder? {
-        return null
+        return binder
+    }
+
+    fun processCommand(command: String) {
+        // Handle command from the activity/app
+        Log.d(TAG, "yuan: Service received command: $command")
+        // Perform service tasks here.
+        when (command) {
+            APP_ON_START -> {
+                Log.d(TAG, "yuan: defalte balloon to 0")
+                if (virtualMachine != null) {
+                    val balloonSize = virtualMachine?.setMemoryBalloonByPercent(0)
+                }
+            }
+            APP_ON_STOP -> {
+                Log.d(TAG, "yuan: inflate balloon to 50%")
+                if (virtualMachine != null) {
+                    virtualMachine?.setMemoryBalloonByPercent(50)
+                }
+            }
+            else -> {
+                Log.e(TAG, "yuan: unrecognized command")
+            }
+        }
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
@@ -94,7 +147,11 @@ class VmLauncherService : Service() {
                 stopSelf()
             }
             return START_NOT_STICKY
+        } else if (intent.action == APP_ENTER_FOREGROUND_EVENT) {
+            Log.d(TAG, "yuan: start command app enter foreground")
+            return START_NOT_STICKY
         }
+
         if (virtualMachine != null) {
             Log.d(TAG, "VM instance is already started")
             return START_NOT_STICKY
@@ -340,6 +397,8 @@ class VmLauncherService : Service() {
         const val EXTRA_DISPLAY_INFO = "EXTRA_DISPLAY_INFO"
         const val ACTION_STOP_VM_LAUNCHER_SERVICE: String =
             "android.virtualization.STOP_VM_LAUNCHER_SERVICE"
+        const val APP_ON_START: String = "APP_ON_START"
+        const val APP_ON_STOP: String = "APP_ON_STOP"
 
         private const val RESULT_START = 0
         private const val RESULT_STOP = 1

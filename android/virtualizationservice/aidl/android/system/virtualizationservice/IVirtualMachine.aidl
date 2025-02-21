@@ -49,6 +49,7 @@ interface IVirtualMachine {
     void stop();
 
     /** Access to the VM's memory balloon. */
+    boolean memoryBalloonEnabled();
     long getMemoryBalloon();
     void setMemoryBalloon(long num_bytes);
 
