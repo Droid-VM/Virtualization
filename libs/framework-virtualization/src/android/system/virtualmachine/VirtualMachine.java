@@ -1376,6 +1376,7 @@ public class VirtualMachine implements AutoCloseable {
 
     /** @hide */
     public void setMemoryBalloon(long bytes) {
+
         if (mMemoryManagementCallbacks != null) {
             Log.d(TAG, "Auto balloon enabled in setMemoryBalloon");
             return;
@@ -1390,6 +1391,30 @@ public class VirtualMachine implements AutoCloseable {
                 Log.w(TAG, "Cannot setMemoryBalloon", e);
             }
         }
+    }
+
+    /** @hide */
+    public boolean setMemoryBalloonByPercent(int percent) {
+
+        if (percent < 0 || percent > 100) {
+            return false;
+        }
+        synchronized (mLock) {
+            try {
+                if (mVirtualMachine != null && mVirtualMachine.memoryBalloonEnabled()) {
+                    long bytes = mConfig.getMemoryBytes();
+                    mVirtualMachine.setMemoryBalloon(bytes * percent / 100);
+                    return true;
+                }
+            } catch (RemoteException e) {
+                Log.w(TAG, "Cannot setMemoryBalloon", e);
+                return false;
+            } catch (ServiceSpecificException e) {
+                Log.w(TAG, "yuan: crosvm failed to setMemoryBalloon", e);
+                return false;
+            }
+        }
+        return false;
     }
 
     private boolean writeEventsToSock(ParcelFileDescriptor sock, List<InputEvent> evtList) {
