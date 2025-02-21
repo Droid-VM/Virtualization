@@ -62,6 +62,12 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class VmLauncherService : Service() {
+    inner class VmLauncherServiceBinder : android.os.Binder() {
+        fun getService(): VmLauncherService = this@VmLauncherService
+    }
+
+    private val binder = VmLauncherServiceBinder()
+
     // TODO: using lateinit for some fields to avoid null
     private var executorService: ExecutorService? = null
     private var virtualMachine: VirtualMachine? = null
@@ -79,7 +85,30 @@ class VmLauncherService : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder? {
-        return null
+        return binder
+    }
+
+    fun processCommand(command: String) {
+        // Handle command from the activity/app
+        Log.d(TAG, "yuan: Service received command: $command")
+        // Perform service tasks here.
+        when (command) {
+            APP_ON_START -> {
+                Log.d(TAG, "yuan: defalte balloon to 0")
+                if (virtualMachine != null) {
+                    val balloonSize = virtualMachine?.setMemoryBalloonByPercent(0)
+                }
+            }
+            APP_ON_STOP -> {
+                Log.d(TAG, "yuan: inflate balloon to 50%")
+                if (virtualMachine != null) {
+                    virtualMachine?.setMemoryBalloonByPercent(50)
+                }
+            }
+            else -> {
+                Log.e(TAG, "yuan: unrecognized command")
+            }
+        }
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
@@ -95,6 +124,7 @@ class VmLauncherService : Service() {
             }
             return START_NOT_STICKY
         }
+
         if (virtualMachine != null) {
             Log.d(TAG, "VM instance is already started")
             return START_NOT_STICKY
@@ -340,6 +370,8 @@ class VmLauncherService : Service() {
         const val EXTRA_DISPLAY_INFO = "EXTRA_DISPLAY_INFO"
         const val ACTION_STOP_VM_LAUNCHER_SERVICE: String =
             "android.virtualization.STOP_VM_LAUNCHER_SERVICE"
+        const val APP_ON_START: String = "APP_ON_START"
+        const val APP_ON_STOP: String = "APP_ON_STOP"
 
         private const val RESULT_START = 0
         private const val RESULT_STOP = 1
