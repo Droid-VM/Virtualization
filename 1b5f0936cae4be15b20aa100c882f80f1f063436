@@ -34,6 +34,29 @@
       "parentUuid": "c920b0da_62df0f8e",
       "revId": "1b5f0936cae4be15b20aa100c882f80f1f063436",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b37536c4_d99d0f6e",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 39
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-21T14:52:03Z",
+      "side": 1,
+      "message": "This method looks very similar to the isCompatibleWith one. Do we need both of them? Won\u0027t `if !oldConfig.isCompatbileWith(newconfig) || oldConfig.getEncryptedStorageBytes() \u003e newConfig.getEncryptedStorageByes` inside setConfig should be enough?",
+      "range": {
+        "startLine": 2259,
+        "startChar": 4,
+        "endLine": 2276,
+        "endChar": 5
+      },
+      "revId": "1b5f0936cae4be15b20aa100c882f80f1f063436",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
