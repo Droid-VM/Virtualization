@@ -412,12 +412,8 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
     }
 
     fn isRemoteAttestationSupported(&self) -> binder::Result<bool> {
-        if is_remote_provisioning_hal_declared()? {
-            Ok(remote_provisioning::is_remote_attestation_supported())
-        } else {
-            warn!("AVF IRemotelyProvisionedComponent HAL is not declared");
-            Ok(false)
-        }
+        Ok(is_remote_provisioning_hal_declared()?
+            && remote_provisioning::is_remote_attestation_supported())
     }
 
     fn getAssignableDevices(&self) -> binder::Result<Vec<AssignableDevice>> {
