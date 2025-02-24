@@ -122,6 +122,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e36885e_61fe6fd2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-24T23:22:52Z",
+      "side": 1,
+      "message": "\u003e raw connection data and ports shouldn\u0027t be part of the API surface\n\nMaybe right, but we needed this for the cases where binder is unavailable or not a trivial option; think about passing a big blob across VMs or the rialto (service vm) case.",
+      "parentUuid": "733a565e_d715571b",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 30
+      },
+      "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ff0a8d0_56720174",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-24T23:22:52Z",
+      "side": 1,
+      "message": "yeah, eventually. but we have use cases today. (rialto)",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 50
+      },
+      "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02a26f87_ac7cc256",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -163,6 +210,23 @@
         "endLine": 32,
         "endChar": 55
       },
+      "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a656ab2e_99f326da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-24T23:22:52Z",
+      "side": 1,
+      "message": "as long as this stays private, I feel with this.",
       "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
