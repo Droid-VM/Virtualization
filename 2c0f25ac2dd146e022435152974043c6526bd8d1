@@ -70,6 +70,30 @@
       },
       "revId": "2c0f25ac2dd146e022435152974043c6526bd8d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3e01eb1_90be2aa9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-24T23:33:40Z",
+      "side": 1,
+      "message": "What Jiyong is talking about is exactly the API you are adding Devin (or needs to be). I did link your doc in Jiyong\u0027s design doc.\n\nAlso, you can see on the child CL discussion, I don\u0027t like this API, but it\u0027s the simplest thing we already have, and how libbinder_rpc_unstable is already used. So, it\u0027s not opening up much more, it\u0027s what we would need for the Android 16 peformance issue.",
+      "parentUuid": "0b0b2c8b_55eefbc3",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "2c0f25ac2dd146e022435152974043c6526bd8d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
