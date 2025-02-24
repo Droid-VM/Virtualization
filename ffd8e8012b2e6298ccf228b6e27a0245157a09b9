@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b33e4707_dd6a2d16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-24T22:58:11Z",
+      "side": 1,
+      "message": "\u003e The composition of this API and the other API is here already, and the logic is already here (this CL just refactors that logic)\n\nIn the current shape, I don\u0027t understand how the API is going to be used. Can you add a test showing how this API is intended to be used? \n\n\u003e review on the APIs which were frozen as SystemApi on top of the library I insisted be called \u0027_unstable\u0027.\n\nI don\u0027t understand this argument. Having @SystemApi wrap around untable binder apis is a practice android follows for years.\n\n\u003e Let\u0027s check the performance on this, but I\u0027d like to keep it here for simplicity for now\n\n\"It\u0027s simple to add it here\" is not the rationale we use to add new stable APIs. The API needs to be easy to use for the callers. Right now, I don\u0027t see how it can be easily used to your use case (app A owns a VM and manages its lifecycle, while app B is the one that directly communicates with the VM). A test should help clarify this.",
+      "parentUuid": "3abcf391_fe64a857",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 30
+      },
+      "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02a26f87_ac7cc256",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
