@@ -1575,6 +1575,12 @@ public class VirtualMachine implements AutoCloseable {
                                 ? createVirtualMachineConfigForRawFrom(vmConfig)
                                 : createVirtualMachineConfigForAppFrom(vmConfig, service);
 
+                if (vmConfig.isEncryptedStorageEnabled()) {
+                    service.setEncryptedStorageSize(
+                        ParcelFileDescriptor.open(mEncryptedStoreFilePath, MODE_READ_WRITE),
+                        vmConfig.getEncryptedStorageBytes());
+                }
+
                 mVirtualMachine =
                         service.createVm(
                                 vmConfigParcel, consoleOutFd, consoleInFd, mLogWriter, null);
@@ -1928,8 +1934,10 @@ public class VirtualMachine implements AutoCloseable {
      * application to run on the virtual machine, etc.)
      *
      * <p>The new config must be {@linkplain VirtualMachineConfig#isCompatibleWith compatible with}
-     * the existing config.
+     * or incremental to the existing config.
      *
+     * <p>NOTE: Modification of the encrypted storage size is restricted to expansion only and is an
+     * irreversible operation.
      * <p>NOTE: This method may block and should not be called on the main thread.
      *
      * @return the old config
@@ -1944,7 +1952,8 @@ public class VirtualMachine implements AutoCloseable {
             throws VirtualMachineException {
         synchronized (mLock) {
             VirtualMachineConfig oldConfig = mConfig;
-            if (!oldConfig.isCompatibleWith(newConfig)) {
+            if (!oldConfig.isCompatibleWith(newConfig)
+                    && !checkIncrementalCompatibility(oldConfig, newConfig)) {
                 throw new VirtualMachineException("incompatible config");
             }
             checkStopped();
@@ -2245,6 +2254,25 @@ public class VirtualMachine implements AutoCloseable {
         } catch (IOException e) {
             throw new VirtualMachineException("failed to transfer encryptedstore image", e);
         }
+    }
+
+    /** Returns true if the new config is incrementally compatible to the existing config. */
+    private boolean checkIncrementalCompatibility(
+        @NonNull VirtualMachineConfig oldConfig,
+        @NonNull VirtualMachineConfig newConfig) {
+        if (oldConfig == newConfig) {
+            return true;
+        }
+        return oldConfig.getDebugLevel() == newConfig.getDebugLevel()
+                && oldConfig.isProtectedVm() == newConfig.isProtectedVm()
+                && oldConfig.getEncryptedStorageBytes() <= newConfig.getEncryptedStorageBytes()
+                && oldConfig.isVmOutputCaptured() == newConfig.isVmOutputCaptured()
+                && oldConfig.isVmConsoleInputSupported() == newConfig.isVmConsoleInputSupported()
+                && oldConfig.isConnectVmConsole() == newConfig.isConnectVmConsole()
+                && oldConfig.getPayloadConfigPath() == newConfig.getPayloadConfigPath()
+                && oldConfig.getPayloadBinaryName() == newConfig.getPayloadBinaryName()
+                && oldConfig.getOs() == newConfig.getOs()
+                && oldConfig.getExtraApks() == newConfig.getExtraApks();
     }
 
     /** Map the raw AIDL (& binder) callbacks to what the client expects. */
