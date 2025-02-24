@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "733a565e_d715571b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-24T23:12:09Z",
+      "side": 1,
+      "message": "The tests call connectToVsockServer, which uses this API. I think you know how the callers of the API could be split into two processes, and the client could own both a handle to the direct connection as well as to the process which owns the VM if it wants to have both lifetimes. The underlying APIs here are from David\u0027s design and used elsewhere in AVF, have you not seen these before?\n\n\u003e I don\u0027t understand this argument. Having @SystemApi wrap around untable binder apis is a practice android follows for years.\n\nThe point is, raw connection data and ports shouldn\u0027t be part of the API surface. This is too low level, and we need Android to maintain these. It\u0027s not the APIs themselves which needs wrapped, but fundamentally the operations there are the wrong layer for us to maintain in the longterm.\n\n---\n\nAnyway, we need to get the data for what % of the current perf problem is from this, but if the API needs to be more clear, let\u0027s talk about that bit, and resolve it. This doesn\u0027t need to be merged until we have that perf win locked in. Please help improve perf there.",
+      "parentUuid": "b33e4707_dd6a2d16",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 30
+      },
+      "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02a26f87_ac7cc256",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
