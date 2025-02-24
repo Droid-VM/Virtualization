@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dc1d178_5e304f3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-02-24T10:17:28Z",
+      "side": 1,
+      "message": "The change was created with:\n```\n./build/kernel/gki/download_from_ci  --update-microdroid -b 378675550 13109490       \nrm \u0027guest/kernel/android15-6.6/arm64/16k/System.map\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/16k/kernel-6.6\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/16k/kernel-6.6-gz\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/16k/kernel-6.6-lz4\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/16k/kernel_version.mk\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/16k/prebuilt-info.txt\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/System.map\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/kernel-6.6\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/kernel-6.6-gz\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/kernel-6.6-lz4\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/kernel_version.mk\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/prebuilt-info.txt\u0027\nerror: pathspec \u0027Android.bp\u0027 did not match any file(s) known to git\nUpdated 6 paths from 6047c3166\nerror: pathspec \u0027microdroid-gki\u0027 did not match any file(s) known to git\nDownloading Image to /trunk/src/main/packages/modules/Virtualization/guest/kernel/android15-6.6/arm64\nDownloading System.map to /trunk/src/main/packages/modules/Virtualization/guest/kernel/android15-6.6/arm64\nDownloading gki-info.txt to /trunk/src/main/packages/modules/Virtualization/guest/kernel/android15-6.6/arm64\nCompressed 12103688 bytes into 5844261 bytes \u003d\u003d\u003e 48.28%                        \nrm \u0027guest/kernel/android15-6.6/arm64/16k/System.map\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/16k/kernel-6.6\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/16k/kernel-6.6-gz\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/16k/kernel-6.6-lz4\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/16k/kernel_version.mk\u0027\nrm \u0027guest/kernel/android15-6.6/arm64/16k/prebuilt-info.txt\u0027\nerror: pathspec \u0027Android.bp\u0027 did not match any file(s) known to git\nerror: pathspec \u002716k\u0027 did not match any file(s) known to git\nerror: pathspec \u0027microdroid-gki\u0027 did not match any file(s) known to git\nDownloading Image to /trunk/src/main/packages/modules/Virtualization/guest/kernel/android15-6.6/arm64/16k\nDownloading System.map to /trunk/src/main/packages/modules/Virtualization/guest/kernel/android15-6.6/arm64/16k\nDownloading gki-info.txt to /trunk/src/main/packages/modules/Virtualization/guest/kernel/android15-6.6/arm64/16k\nCompressed 12455944 bytes into 5843300 bytes \u003d\u003d\u003e 46.91%                        \nrm \u0027guest/kernel/android15-6.6/x86_64/System.map\u0027\nrm \u0027guest/kernel/android15-6.6/x86_64/kernel-6.6\u0027\nrm \u0027guest/kernel/android15-6.6/x86_64/kernel_version.mk\u0027\nrm \u0027guest/kernel/android15-6.6/x86_64/prebuilt-info.txt\u0027\nerror: pathspec \u0027Android.bp\u0027 did not match any file(s) known to git\nerror: pathspec \u002716k\u0027 did not match any file(s) known to git\nerror: pathspec \u0027microdroid-gki\u0027 did not match any file(s) known to git\nDownloading bzImage to /trunk/src/main/packages/modules/Virtualization/guest/kernel/android15-6.6/x86_64\nDownloading System.map to /trunk/src/main/packages/modules/Virtualization/guest/kernel/android15-6.6/x86_64\nDownloading gki-info.txt to /trunk/src/main/packages/modules/Virtualization/guest/kernel/android15-6.6/x86_64\n[microdroid-kernel-bump 2ed892c96] Update kernel to builds 13109490\n 16 files changed, 159911 insertions(+), 159545 deletions(-)\n```\n\nAnd was created to include aosp/3501797, aosp/3501798 aosp/3501799 changes.",
+      "revId": "5a0cb4b54dc399b1ba31dfc63d09b8f8dc7fd473",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
