@@ -167,6 +167,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cd08116_d9ad42c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-24T23:35:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ff0a8d0_56720174",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 50
+      },
+      "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02a26f87_ac7cc256",
@@ -227,6 +251,24 @@
       "writtenOn": "2025-02-24T23:22:52Z",
       "side": 1,
       "message": "as long as this stays private, I feel with this.",
+      "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d564aee4_4d758a7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-24T23:35:47Z",
+      "side": 1,
+      "message": "Yeah, this CL itself is a refactor, it doesn\u0027t change any behavior, except it makes the part of the API we need to expose public. There is no reason why we shouldn\u0027t export it in the current architecture though. The current API is a composition of two things, and it forces us to have extra hops. We need to open it up so AVF clients don\u0027t need two hops.",
+      "parentUuid": "a656ab2e_99f326da",
       "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
