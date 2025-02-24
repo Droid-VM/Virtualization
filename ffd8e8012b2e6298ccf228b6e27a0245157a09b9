@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae0f0354_836dedc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-24T22:46:56Z",
+      "side": 1,
+      "message": "The composition of this API and the other API is here already, and the logic is already here (this CL just refactors that logic). The PFD used should be the one from here only, and we can own the protocol here in an AVF-specific way. There is no other API which exposes vsock other than here.\n\nThe APIs planned to added to core binder are higher level than this, and I ultimately want to deprecate these APIs which are built on libbinder_rpc_unstable, but yeah, they are already here, as I was never added to review on the APIs which were frozen as SystemApi on top of the library I insisted be called \u0027_unstable\u0027.\n\nLet\u0027s check the performance on this, but I\u0027d like to keep it here for simplicity for now. If you want, we could also rename them to make it more clear it\u0027s vsock-specific.",
+      "parentUuid": "a9359740_5d03e9a9",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 30
+      },
+      "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02a26f87_ac7cc256",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-24T22:37:32Z",
       "side": 1,
       "message": "Have you verified that this patch improves the performance?",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 32,
+        "endChar": 55
+      },
+      "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fdbe8c2_e6987fca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-24T22:46:56Z",
+      "side": 1,
+      "message": "No, this API would need to be used to avoid two hops. I created this CL so it could be tested. However, it should be obvious, doing a direct connection, rather than two hops, will improve performance of anyone using this.",
+      "parentUuid": "02a26f87_ac7cc256",
       "range": {
         "startLine": 32,
         "startChar": 6,
