@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9359740_5d03e9a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-24T22:37:32Z",
+      "side": 1,
+      "message": "As i mentioned in the chat. I don\u0027t think that this is the right place for this API. There is nothing VM specific in this API - it provides a way to convert a vsock connection into an IBinder object -  this to me sounds more like an API on Binder.java",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 30
+      },
+      "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a26f87_ac7cc256",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-02-24T22:37:32Z",
+      "side": 1,
+      "message": "Have you verified that this patch improves the performance?",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 32,
+        "endChar": 55
+      },
+      "revId": "ffd8e8012b2e6298ccf228b6e27a0245157a09b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
