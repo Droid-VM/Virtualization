@@ -50,6 +50,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b289e4d_1e8e2168",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-25T12:46:31Z",
+      "side": 1,
+      "message": "If by collision, you mean ensuring 2 different app owners do not have the same instance-id, I think that would require checking a central db for all existing entries and I\u0027m actually not sure we need need to do that?\n\nFor randomly picked instance-id, we can rely on randomness across large size (previously 64 bytes \u0026 now 60) to ensure no collision.\nFor others, if we can ensure the instance-id are in correct range, we can trust the client to pick a unique instance-id?\n\nAlthough I do like the idea of continuing the bookkeeping of these caller claimed static `instance-Id`. Perhaps the caller(libavf) calls `IVirtualizationService::claimVmInstance`?  This will record the instance-id in a central db for maintenance purposes.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 69
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "251b1599_c9e3d0a3",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 2
@@ -162,6 +185,53 @@
         "startChar": 39,
         "endLine": 616,
         "endChar": 87
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28fe9f2c_18c670af",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-25T12:46:31Z",
+      "side": 1,
+      "message": "I\u0027m slightly concerned about an already created VM (say system owned Tartarus VM in Android 15), which got allocated instance-id with first bytes 0xFFFFFFFF (and the probability of the is 1/2^32).\n\nThat will continue to run in Android 16 with the old allocated instance-id. So that VM technically will be using the \"wrongly\" allocated instance-id but that will not pose any problem till some vendor-owned app wants to use that exact same instance-id as the static id. I think we can ignore this particular problem as the probability of that happening is (1/2^60)",
+      "parentUuid": "3fdf12f4_557544cb",
+      "range": {
+        "startLine": 616,
+        "startChar": 39,
+        "endLine": 616,
+        "endChar": 87
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd171c5e_be396f0d",
+        "filename": "android/virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-25T12:46:31Z",
+      "side": 1,
+      "message": "FWIU, you are suggesting: \n\n1) AVF reserved range (allocation is random atm) - Proposed to start with 0x77777777, irrespective of the caller (vendor/system).\n2) Reserved for static instance-id owned by vendor like partititon - Proposed to start with 0xFFFFFFFF\n3) [By extension] Reserved for static instance-id owned by system like partititon- Start with 0x00000000\n4) Rest reserved for unspecified purposed which can be used in future.\n\nIf so, LGTM at this patch set.\n\nThere is another set of id (payload-id) derived currently from instance-id used to acces Secretkeeper for entries in Microdroid. We need to account for these in terms of collision \u0026 I\u0027m wondering if we can use 4. Shifting the discussion to b/364629416 as that is out of scope of this patch",
+      "range": {
+        "startLine": 466,
+        "startChar": 8,
+        "endLine": 466,
+        "endChar": 25
       },
       "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
