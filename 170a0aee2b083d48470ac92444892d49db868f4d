@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b79e4b67_e89100a1",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-02-25T18:06:46Z",
+      "side": 1,
+      "message": "@ptosi@google.com, Yes, this was implemeted only for getting granule size and pass it to DeviceAssignmentInfo::parse().",
+      "parentUuid": "6cb2e225_2cda9077",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85a046a9_30face88",
         "filename": "libs/libvmbase/src/memory/tracker.rs",
         "patchSetId": 1
