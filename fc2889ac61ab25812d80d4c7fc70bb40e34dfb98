@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5193be9c_ad51155b",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-02-25T18:19:12Z",
+      "side": 1,
+      "message": "@ptosi@google.com, With this patch, before coming here, we have ensured that iommu property is present in the physical node. So iommus must be present in crosvm generated DT as well. After apply overlay in crosvm, this shouldn\u0027t be missing, isn\u0027t it?",
+      "revId": "fc2889ac61ab25812d80d4c7fc70bb40e34dfb98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
