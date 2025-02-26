@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4e10817_e911fc2a",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-02-26T17:20:23Z",
+      "side": 1,
+      "message": "How about the crate::main() returning a dummy next state bcc, even if there is no BCC from previous stage? No need modifications in remaining boot flow. Guest will anyway cannot see the region as the dice reserve mem node is removed when there is not input BCC from previous stage.",
+      "parentUuid": "ea55cb6f_e4969371",
+      "range": {
+        "startLine": 154,
+        "startChar": 8,
+        "endLine": 154,
+        "endChar": 33
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9165e7c3_978c6692",
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31a51435_c0f84f5c",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-02-26T17:20:23Z",
+      "side": 1,
+      "message": "Could you pls check the dummy next stage bcc approach mentioned in the comments?",
+      "parentUuid": "9165e7c3_978c6692",
+      "range": {
+        "startLine": 190,
+        "startChar": 8,
+        "endLine": 190,
+        "endChar": 37
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dbd72afb_6baefac9",
         "filename": "guest/pvmfw/src/fdt.rs",
         "patchSetId": 1
@@ -77,6 +125,30 @@
       "writtenOn": "2025-02-04T18:06:49Z",
       "side": 1,
       "message": "take `Option\u003c\u0026[u8]\u003e` here and use this function to encapsulate removing the node?",
+      "range": {
+        "startLine": 1351,
+        "startChar": 34,
+        "endLine": 1351,
+        "endChar": 58
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0398c324_5cf00cdd",
+        "filename": "guest/pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-02-26T17:20:23Z",
+      "side": 1,
+      "message": "Implemented in next patch.",
+      "parentUuid": "dbd72afb_6baefac9",
       "range": {
         "startLine": 1351,
         "startChar": 34,
@@ -123,6 +195,30 @@
       "writtenOn": "2025-02-04T18:06:49Z",
       "side": 1,
       "message": "OOC, why did you need to move this? What is pvmfw receiving as `signed_kernel`, right now?",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 93
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac9385c3_2753ff0d",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-02-26T17:20:23Z",
+      "side": 1,
+      "message": "pre-pvmfw auths the payload and pass it to pvmfw without any signing meta data. I can keep the print as it. It anyways give debug log about kernel load addr and size.",
+      "parentUuid": "01904765_b244d38c",
       "range": {
         "startLine": 95,
         "startChar": 4,

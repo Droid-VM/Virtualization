@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3ac92dd_87a65672",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-02-26T17:20:23Z",
+      "side": 1,
+      "message": "How about allocating a dummy next stage bcc and return here? So no changes required in the remaining boot flow. guest kernel is anyway not going to get the dummy bcc as the dice reserve mem node is deleted in modify_for_next_state().",
+      "revId": "3ed210fdaa4d14070df9e4a8fa5be383d5a8e270",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
