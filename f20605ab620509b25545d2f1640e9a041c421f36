@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc5facce_b19bb40e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-26T00:02:42Z",
+      "side": 1,
+      "message": "\u003e I think that would require checking a central db for all existing entries and I\u0027m actually not sure we need need to do that?\n\nMaybe it is OK to not validate it via a cental DB, I\u0027m just saying we that we haven\u0027t agreed on what the solution is.\n\n\u003e For others, if we can ensure the instance-id are in correct range, we can trust the client to pick a unique instance-id?\n\nEnsuring that is the tricky part. This CL only ensures it for vendor callers.",
+      "parentUuid": "9b289e4d_1e8e2168",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 69
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "251b1599_c9e3d0a3",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 2
@@ -216,6 +240,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "68eee790_f03aa8f4",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-26T00:02:42Z",
+      "side": 1,
+      "message": "I agree.\n\nnit: it is `1/2^60` per \"roll\" of the dice and there there are billions of android devices (I know we don\u0027t have these VMs on all of them yet...) so there are a lot of rolls. It is still extremely unlikely even then if I did the calculation right.\n\n```\n$ python3\n\u003e\u003e\u003e (1 - (1 / decimal.Decimal(2)**60))**7_000_000_000_000\nDecimal(\u00270.9999939284862657141184497706\u0027)\n```",
+      "parentUuid": "28fe9f2c_18c670af",
+      "range": {
+        "startLine": 616,
+        "startChar": 39,
+        "endLine": 616,
+        "endChar": 87
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dd171c5e_be396f0d",
         "filename": "android/virtualizationservice/src/aidl.rs",
         "patchSetId": 2
@@ -227,6 +275,30 @@
       "writtenOn": "2025-02-25T12:46:31Z",
       "side": 1,
       "message": "FWIU, you are suggesting: \n\n1) AVF reserved range (allocation is random atm) - Proposed to start with 0x77777777, irrespective of the caller (vendor/system).\n2) Reserved for static instance-id owned by vendor like partititon - Proposed to start with 0xFFFFFFFF\n3) [By extension] Reserved for static instance-id owned by system like partititon- Start with 0x00000000\n4) Rest reserved for unspecified purposed which can be used in future.\n\nIf so, LGTM at this patch set.\n\nThere is another set of id (payload-id) derived currently from instance-id used to acces Secretkeeper for entries in Microdroid. We need to account for these in terms of collision \u0026 I\u0027m wondering if we can use 4. Shifting the discussion to b/364629416 as that is out of scope of this patch",
+      "range": {
+        "startLine": 466,
+        "startChar": 8,
+        "endLine": 466,
+        "endChar": 25
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af6b25dd_a9608199",
+        "filename": "android/virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-26T00:02:42Z",
+      "side": 1,
+      "message": "Yes, but I\u0027m only suggesting (1) and (2) in this CL.\n\n\u003e 1) AVF reserved range (allocation is random atm) - Proposed to start with 0x77777777, irrespective of the caller (vendor/system).\n\nThis code isn\u0027t accessible by vendor yet (they *have* to use static IDs), so we could decide to use a different prefix for allocated vendor IDs later.\n\n\u003e 3) [By extension] Reserved for static instance-id owned by system like partititon- Start with 0x00000000\n\nThat\u0027s OK with me, but it might be smart to avoid all zeros.",
+      "parentUuid": "dd171c5e_be396f0d",
       "range": {
         "startLine": 466,
         "startChar": 8,
