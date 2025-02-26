@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e80a29ad_b22acb5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-26T11:45:29Z",
+      "side": 1,
+      "message": "\u003e Ensuring that is the tricky part. This CL only ensures it for vendor callers\n\nHow about having the caller ensure that. For vendor callers, if libavf is the only entry point, perhaps we can introduce the check here[1].\n\nFor system callers, I would think the situation is trickier with the lack of uniform entrypoint(they can use RawConfig). \n\n[1] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/libavf/src/lib.rs;l\u003d102",
+      "parentUuid": "cc5facce_b19bb40e",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 69
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "251b1599_c9e3d0a3",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 2
@@ -262,6 +286,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "607ea432_197804dc",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-26T11:45:29Z",
+      "side": 1,
+      "message": "How about?\n```\nlet vendor_like \u003d matches!(calling_partition, CallingPartition::Vendor | CallingPartition::Odm);\n\n(vendor_like \u0026\u0026 !instance_id.starts_with(INSTANCE_ID_VENDOR_PREFIX)) ||\n(!vendor_like \u0026\u0026 instance_id.starts_with(INSTANCE_ID_VENDOR_PREFIX))\n{\n   // err\n}\n```\n\nThis will ensure no other partiiton can claim from vendor reserved range either",
+      "range": {
+        "startLine": 616,
+        "startChar": 8,
+        "endLine": 617,
+        "endChar": 66
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dd171c5e_be396f0d",
@@ -299,6 +346,30 @@
       "side": 1,
       "message": "Yes, but I\u0027m only suggesting (1) and (2) in this CL.\n\n\u003e 1) AVF reserved range (allocation is random atm) - Proposed to start with 0x77777777, irrespective of the caller (vendor/system).\n\nThis code isn\u0027t accessible by vendor yet (they *have* to use static IDs), so we could decide to use a different prefix for allocated vendor IDs later.\n\n\u003e 3) [By extension] Reserved for static instance-id owned by system like partititon- Start with 0x00000000\n\nThat\u0027s OK with me, but it might be smart to avoid all zeros.",
       "parentUuid": "dd171c5e_be396f0d",
+      "range": {
+        "startLine": 466,
+        "startChar": 8,
+        "endLine": 466,
+        "endChar": 25
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9effb903_8619dc9a",
+        "filename": "android/virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-26T11:45:29Z",
+      "side": 1,
+      "message": "Ack. Additonally, if (in future) vendor clients need to use [1] the random instace_id (AVF reserved range), the current proposed check in android/virtmgr/src/aidl.rs will need to be reworked, which is okay.",
+      "parentUuid": "af6b25dd_a9608199",
       "range": {
         "startLine": 466,
         "startChar": 8,
