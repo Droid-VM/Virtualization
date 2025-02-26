@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10053b86_ed6fd2cd",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-26T19:20:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37c8cb8e_2f6d963e",
+      "range": {
+        "startLine": 177,
+        "startChar": 15,
+        "endLine": 177,
+        "endChar": 31
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1497c3d0_86281c27",
@@ -82,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98878f58_a3f63921",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-26T19:20:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1497c3d0_86281c27",
+      "range": {
+        "startLine": 254,
+        "startChar": 30,
+        "endLine": 255,
+        "endChar": 51
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88ea4851_e98c526a",
@@ -95,6 +143,30 @@
       "writtenOn": "2025-02-12T15:45:47Z",
       "side": 1,
       "message": "Just have this documentation in-line with the Rust snippet, as `///`?",
+      "range": {
+        "startLine": 256,
+        "startChar": 2,
+        "endLine": 258,
+        "endChar": 55
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13cfcce7_0aff3b10",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-26T19:20:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88ea4851_e98c526a",
       "range": {
         "startLine": 256,
         "startChar": 2,
@@ -744,6 +816,30 @@
       "writtenOn": "2025-02-12T15:45:47Z",
       "side": 1,
       "message": "Let\u0027s dedicate this file to parsing the low-level structures of the config data entry and decouple it from high-level functional logic such as modifying the DT or even locating the right entries.",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 52
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "366bf6de_19c2b519",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-26T19:20:12Z",
+      "side": 1,
+      "message": "The way tests are built makes separating this and still testing it at best very awkard since files are built at their own libraries in tests, but each file is part of the larger library in the product build.",
+      "parentUuid": "7011f633_8692fa05",
       "range": {
         "startLine": 157,
         "startChar": 0,
