@@ -22,7 +22,7 @@ use log::error;
 use log::warn;
 use log::LevelFilter;
 use vmbase::{
-    configure_heap, console_writeln, limit_stack_size, main,
+    configure_heap, console_writeln, limit_stack_size, main, generate_image_header,
     memory::{
         map_image_footer, unshare_all_memory, unshare_all_mmio_except_uart, unshare_uart,
         MemoryTrackerError, SIZE_128KB, SIZE_4KB,
@@ -66,6 +66,7 @@ impl RebootReason {
     }
 }
 
+generate_image_header!();
 main!(start);
 configure_heap!(SIZE_128KB);
 limit_stack_size!(SIZE_4KB * 12);
