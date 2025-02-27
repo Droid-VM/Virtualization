@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b19bd1c4_db0a88a3",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-27T18:41:07Z",
+      "side": 1,
+      "message": "This leaks memory every time it\u0027s called.\n\nA) Why? I thought `ptr` didn\u0027t have to be a readable address as we\u0027d discussed.\nB) That should be more clearly documented and is extremely surprising behavior for a function called \"parse\". If you\u0027re going to require the source memory be `\u0027static`, then require the input be `\u0027static` and adjust tests accordingly. (You would need to do something like `TEST_ALLOC` in our GSC firmware which yields `\u0026\u0027static [u8]`)",
+      "range": {
+        "startLine": 154,
+        "startChar": 7,
+        "endLine": 154,
+        "endChar": 25
+      },
+      "revId": "729d78286fdbb83e4cf5b8d903571c0a8bcb3b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "894a7483_43f31ce7",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-02-27T18:41:07Z",
+      "side": 1,
+      "message": "This is a postcondition, not a precondition. It shouldn\u0027t be listed here.",
+      "range": {
+        "startLine": 169,
+        "startChar": 53,
+        "endLine": 169,
+        "endChar": 82
+      },
+      "revId": "729d78286fdbb83e4cf5b8d903571c0a8bcb3b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
