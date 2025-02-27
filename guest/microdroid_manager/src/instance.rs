@@ -201,6 +201,10 @@ impl InstanceDisk {
         Ok(())
     }
 
+    pub fn has_microdroid_header(&mut self) -> bool {
+        matches!(self.locate_microdroid_header(), Ok((Some(_header), _offset)))
+    }
+
     /// Read header at `header_offset` and parse it into a `PartitionHeader`.
     fn read_header_at(&mut self, header_offset: u64) -> Result<PartitionHeader> {
         assert!(
