@@ -118,15 +118,14 @@ impl VmSecret {
             .map_err(|e| anyhow!("Failed to build a sealing_policy: {e}"))?;
         let session = SkVmSession::new(vm_service, &explicit_dice, policy)?;
         let mut skp_secret = Zeroizing::new([0u8; SECRET_SIZE]);
-        if let Some(secret) = session.get_secret(id)? {
-            *skp_secret = secret;
-            *state = VmInstanceState::PreviouslySeen;
-        } else {
-            log::warn!("No entry found in Secretkeeper for this VM instance, creating new secret.");
-            *skp_secret = rand::random();
-            session.store_secret(id, skp_secret.clone())?;
-            *state = VmInstanceState::NewlyCreated;
-        }
+        get_or_create_sk_secret(&session, id, &mut skp_secret, state).or_else(|e| {
+            log::info!(
+                "get_or_create_sk_secret failed with {e:?}. Refreshing connection & retrying!"
+            );
+            // TODO: Backoff!
+            session.refresh()?;
+            get_or_create_sk_secret(&session, id, &mut skp_secret, state)
+        })?;
         Ok(Self::V2 {
             instance_id: id,
             dice_artifacts: explicit_dice,
@@ -283,8 +282,6 @@ pub(crate) struct SkVmSession {
     sealing_policy: Vec<u8>,
 }
 
-// TODO(b/378911776): This get_secret/store_secret fails on expired session.
-// Introduce retry after refreshing the session
 impl SkVmSession {
     fn new(
         vm_service: &Strong<dyn IVirtualMachineService>,
@@ -365,4 +362,22 @@ fn get_secretkeeper_service(
                 "Failed to get Secretkeeper: {e:?}"
             ))
         })?)
+}
+
+fn get_or_create_sk_secret(
+    session: &SkVmSession,
+    id: [u8; ID_SIZE],
+    skp_secret: &mut Zeroizing<[u8; SECRET_SIZE]>,
+    state: &mut VmInstanceState,
+) -> Result<()> {
+    if let Some(secret) = session.get_secret(id)? {
+        **skp_secret = secret;
+        *state = VmInstanceState::PreviouslySeen;
+    } else {
+        log::warn!("No entry found in Secretkeeper for this VM instance, creating new secret.");
+        **skp_secret = rand::random();
+        session.store_secret(id, skp_secret.clone())?;
+        *state = VmInstanceState::NewlyCreated;
+    }
+    Ok(())
 }
