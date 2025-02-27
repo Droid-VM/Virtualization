@@ -518,7 +518,13 @@ fn is_strict_boot() -> bool {
 }
 
 fn is_new_instance_legacy() -> bool {
-    Path::new(AVF_NEW_INSTANCE).exists()
+    if is_strict_boot() {
+        return Path::new(AVF_NEW_INSTANCE).exists()
+    }
+    match InstanceDisk::new().context("Failed to load instance.img") {
+        Ok(mut instance) => instance.has_microdroid_header(),
+        Err(_) => false,
+    }
 }
 
 fn is_verified_boot() -> bool {
