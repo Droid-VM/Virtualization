@@ -935,6 +935,19 @@ impl VirtualizationService {
             })
             .collect::<binder::Result<_>>()?;
 
+        let memory_reclaim_supported =
+            system_properties::read_bool("hypervisor.memory_reclaim.supported", false)
+                .unwrap_or(false);
+
+        if config.balloon && !memory_reclaim_supported {
+            warn!(
+                "Memory balloon not enabled: system property
+                hypervisor.memory_reclaim.supported is not set or false"
+            );
+        }
+
+        let balloon = config.balloon && memory_reclaim_supported;
+
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
@@ -974,7 +987,7 @@ impl VirtualizationService {
             boost_uclamp: config.boostUclamp,
             gpu_config,
             audio_config,
-            balloon: config.balloon,
+            balloon,
             usb_config,
             dump_dt_fd,
             enable_hypervisor_specific_auth_method: config.enableHypervisorSpecificAuthMethod,
@@ -1728,6 +1741,10 @@ impl IVirtualMachine::IVirtualMachine for VirtualMachine {
             .with_context(|| format!("Error stopping VM with CID {}", self.instance.cid))
             .with_log()
             .or_service_specific_exception(-1)
+    }
+
+    fn isMemoryBalloonEnabled(&self) -> binder::Result<bool> {
+        Ok(self.instance.balloon_enabled)
     }
 
     fn getMemoryBalloon(&self) -> binder::Result<i64> {
