@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fc0ac95_00413a98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-27T00:44:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c19d8aa_77225263",
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37c8cb8e_2f6d963e",
@@ -793,6 +811,30 @@
       "side": 1,
       "message": "In trusty, I need to map the blob into a user space (within the VM) app but only the buffer is made available. So there I ended up allocating a new page and copying the size followed by the data there. I we really need to, we can copy here as well.",
       "parentUuid": "6445d78f_a97e5a6e",
+      "range": {
+        "startLine": 167,
+        "startChar": 38,
+        "endLine": 167,
+        "endChar": 74
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3427dab_eb64f419",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-02-27T00:44:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "597082cb_910f6d83",
       "range": {
         "startLine": 167,
         "startChar": 38,
