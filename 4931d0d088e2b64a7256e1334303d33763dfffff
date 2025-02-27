@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f8b4aac_a6c1b13e",
+        "filename": "guest/microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-02-27T12:48:30Z",
+      "side": 1,
+      "message": "This will be false as long as Microdorid manager has not written to instance.img which happens on the first boot when payload is verified. Beyond that point, it will be true. (See [1] on different operations on instance.img)\n\nSo any invocation of the method `is_new_instance_legacy` after payload is verified will return true which will be incorrect.\n\nTracking the calls... `verify_payload_with_instance_img` is called before `is_new_instance_legacy`, which means with status quo, we will be getting incorrect result. Did the test pass successfully in the current patchset?\n\nIt might be an idea to store the result of `is_new_instance_legacy` in a variable before `verify_payload_with_instance_img` \u0026 using that instead for legacy case here[2]\n\n[1] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/microdroid_manager/src/main.rs;l\u003d291-295?q\u003dguest%2Fmicrodroid_manager%2Fsrc%2Fmain.rs\n\n[2] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/microdroid_manager/src/main.rs;l\u003d356?q\u003dguest%2Fmicrodroid_manager%2Fsrc%2Fmain.rs\n\n--------\nBtw, when Microdroid manager verifies the payload it either:\n\n1) Writes down the verified data in instance img -- this happens on first boot of the VM\n\n2) Read the data from the instance img \u0026 ensures it matches the verified payload -- this happens in all later reboots of the VM",
+      "range": {
+        "startLine": 525,
+        "startChar": 28,
+        "endLine": 525,
+        "endChar": 58
+      },
+      "revId": "4931d0d088e2b64a7256e1334303d33763dfffff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
