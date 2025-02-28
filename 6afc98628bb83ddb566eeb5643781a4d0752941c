@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01bb31dc_aa50e253",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-02-28T11:11:21Z",
+      "side": 1,
+      "message": "(this is a very tiny nit, but) can you remove the changes `isMemoryBalloonEnabled()` from this CL?\nIn general, the word \"and\" in a commit message is often a sign that the \"one commit, one change\" principle isn\u0027t being followed, which isn\u0027t ideal.\n\nThe advantage of keeping commits small is that it makes it easier for reviewers to verify the correctness of the code. \nIn this case, I, a reviewer, need to check that the existing logic hasn\u0027t been broken by the introduction of `balloon_enabled` and the addition of the if-statements. From this perspective, the addition of `isMemoryBalloonEnabled()` is not so related.\n\nTo be honest, I don\u0027t feel strongly that the addition of `isMemoryBalloonEnabled()` should be done in a separate CL, as it\u0027s a simple, private getter function.",
+      "range": {
+        "startLine": 7,
+        "startChar": 32,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "6afc98628bb83ddb566eeb5643781a4d0752941c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
