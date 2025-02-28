@@ -245,12 +245,14 @@ fn verify_payload_with_instance_img(
     metadata: &Metadata,
     dice: &DiceDriver,
 ) -> Result<MicrodroidData> {
+    info!("shraddha verify_payload_with_instance_img");
+
     let mut instance = InstanceDisk::new().context("Failed to load instance.img")?;
     let saved_data = instance.read_microdroid_data(dice).context("Failed to read identity data")?;
 
     if is_strict_boot() {
         // Provisioning must happen on the first boot and never again.
-        if is_new_instance_legacy() {
+        if is_new_instance_legacy(dice) {
             ensure!(
                 saved_data.is_none(),
                 MicrodroidError::PayloadInvalidConfig(
@@ -336,7 +338,7 @@ fn try_run_payload(
 
     // To minimize the exposure to untrusted data, derive dice profile as soon as possible.
     info!("DICE derivation for payload");
-    let dice_artifacts = dice_derivation(dice, &instance_data, &payload_metadata)?;
+    let dice_artifacts = dice_derivation(&dice, &instance_data, &payload_metadata)?;
     let mut state = VmInstanceState::Unknown;
     let vm_secret = VmSecret::new(dice_artifacts, service, &mut state)
         .context("Failed to create VM secrets")?;
@@ -353,7 +355,8 @@ fn try_run_payload(
                 "VmInstanceState is Unknown whilst guest is expected to use V2 based secrets.
                 This should've never happened"
             );
-            is_new_instance_legacy()
+            info!("shraddha try_run_payload unkown state");
+            is_new_instance_legacy(&dice)
         }
     };
 
@@ -517,8 +520,31 @@ fn is_strict_boot() -> bool {
     Path::new(AVF_STRICT_BOOT).exists()
 }
 
-fn is_new_instance_legacy() -> bool {
-    Path::new(AVF_NEW_INSTANCE).exists()
+fn is_new_instance_legacy(dice: &DiceDriver) -> bool {
+    info!("shraddha is_new_instance_legacy");
+    if is_strict_boot() {
+        return Path::new(AVF_NEW_INSTANCE).exists();
+    }
+    info!("shraddha non-strict boot");
+    match InstanceDisk::new().context("Failed to load instance.img") {
+        Ok(mut instance) => {
+            match instance.read_microdroid_data(dice).context("Failed to read identity data")
+            {
+                Ok(saved_data) => {
+                    info!("shraddha is_new_instance_legacy saved_data: {}", saved_data.is_none());
+                    saved_data.is_none()
+                },
+                Err(_) => {
+                    info!("shraddha InstanceDisk failed to read identity data");
+                    false
+                },
+            }
+        }
+        Err(_) => {
+            info!("shraddha InstanceDisk failed to load");
+            false
+        },
+    }
 }
 
 fn is_verified_boot() -> bool {

@@ -25,7 +25,7 @@ use std::iter::once;
 
 /// Perform an open DICE derivation for the payload.
 pub fn dice_derivation(
-    dice: DiceDriver,
+    dice: &DiceDriver,
     instance_data: &MicrodroidData,
     payload_metadata: &PayloadMetadata,
 ) -> Result<OwnedDiceArtifacts> {

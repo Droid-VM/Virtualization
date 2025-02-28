@@ -129,7 +129,7 @@ impl DiceDriver<'_> {
 
     /// Derives a new dice chain.
     pub fn derive(
-        self,
+        &self,
         code_hash: Hash,
         config_desc: &[u8],
         authority_hash: Hash,
