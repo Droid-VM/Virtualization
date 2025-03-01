@@ -45,6 +45,53 @@
       },
       "revId": "6afc98628bb83ddb566eeb5643781a4d0752941c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40ece850_72737df5",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-01T00:18:11Z",
+      "side": 1,
+      "message": "we had a chat on this and he let me know that it is orthogonal to this.",
+      "parentUuid": "44c3a1ac_f59de427",
+      "range": {
+        "startLine": 900,
+        "startChar": 52,
+        "endLine": 900,
+        "endChar": 87
+      },
+      "revId": "6afc98628bb83ddb566eeb5643781a4d0752941c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67f311ff_3407e73e",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-01T00:18:11Z",
+      "side": 1,
+      "message": "Do you want to leave a log for the case of config.balloon \u0026\u0026 !hypervisor.memory_reclaim.supported so that the user knows that the ask was rejected?",
+      "range": {
+        "startLine": 902,
+        "startChar": 12,
+        "endLine": 902,
+        "endChar": 14
+      },
+      "revId": "6afc98628bb83ddb566eeb5643781a4d0752941c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
