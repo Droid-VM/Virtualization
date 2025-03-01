@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21a43a9d_f14c8767",
+        "filename": "android/vm_demo_native/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-01T01:11:01Z",
+      "side": 1,
+      "message": "paramDeleteFd ?",
+      "range": {
+        "startLine": 348,
+        "startChar": 29,
+        "endLine": 348,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "06657563_f516451b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/vm_demo_native/main.cpp",
+              "range": {
+                "startLine": 348,
+                "startChar": 0,
+                "endLine": 349,
+                "endChar": 0
+              },
+              "replacement": "            param.release(), paramDeleteFd);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cfbf7abf08cbb8fec2e1eda8edba0cbe9bf9a41b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
