@@ -43,9 +43,12 @@ pub use dice::{
 };
 pub use error::{DiceError, Result};
 pub use ops::{
-    derive_cdi_leaf_priv, generate_certificate, hash, kdf, keypair_from_seed, sign,
-    sign_cose_sign1, sign_cose_sign1_with_cdi_leaf_priv, verify,
+    derive_cdi_leaf_priv, generate_certificate, hash, kdf, keypair_from_seed, sign, verify,
 };
+#[cfg(feature = "multialg")]
+pub use ops::{sign_cose_sign1, sign_cose_sign1_with_cdi_leaf_priv};
+#[cfg(not(feature = "multialg"))]
+pub use ops::{sign_cose_sign1, sign_cose_sign1_with_cdi_leaf_priv};
 pub use retry::{
     retry_bcc_format_config_descriptor, retry_bcc_main_flow, retry_dice_main_flow,
     retry_generate_certificate, retry_sign_cose_sign1, retry_sign_cose_sign1_with_cdi_leaf_priv,
