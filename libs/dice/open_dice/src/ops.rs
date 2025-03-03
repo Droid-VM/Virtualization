@@ -34,14 +34,7 @@ pub fn hash(input: &[u8]) -> Result<Hash> {
     check_result(
         // SAFETY: DiceHash takes a sized input buffer and writes to a constant-sized output
         // buffer. The first argument context is not used in this function.
-        unsafe {
-            DiceHash(
-                ptr::null_mut(), // context
-                input.as_ptr(),
-                input.len(),
-                output.as_mut_ptr(),
-            )
-        },
+        unsafe { DiceHash(context(), input.as_ptr(), input.len(), output.as_mut_ptr()) },
         output.len(),
     )?;
     Ok(output)
@@ -55,7 +48,7 @@ pub fn kdf(ikm: &[u8], salt: &[u8], info: &[u8], derived_key: &mut [u8]) -> Resu
         // reads the input values. The first argument context is not used in this function.
         unsafe {
             DiceKdf(
-                ptr::null_mut(), // context
+                context(),
                 derived_key.len(),
                 ikm.as_ptr(),
                 ikm.len(),
@@ -89,6 +82,40 @@ pub fn keypair_from_seed(seed: &[u8; PRIVATE_KEY_SEED_SIZE]) -> Result<(Vec<u8>,
         unsafe {
             DiceKeypairFromSeed(
                 context(),
+                principal,
+                seed.as_ptr(),
+                public_key.as_mut_ptr(),
+                private_key.as_mut_ptr(),
+            )
+        },
+        public_key.len(),
+    )?;
+    Ok((public_key, private_key))
+}
+
+/// Deterministically generates a public and private key pair from `seed` and `key_algorithm`.
+/// Since this is deterministic, `seed` is as sensitive as a private key and can
+/// be used directly as the private key.
+#[cfg(feature = "multialg")]
+pub fn keypair_from_seed_multialg(
+    seed: &[u8; PRIVATE_KEY_SEED_SIZE],
+    key_algorithm: KeyAlgorithm,
+) -> Result<(Vec<u8>, PrivateKey)> {
+    let mut public_key = vec![0u8; VM_KEY_ALGORITHM.public_key_size()];
+    let mut private_key = PrivateKey::default();
+    // This function is used with an open-dice config that uses the same algorithms for the
+    // subject and authority. Therefore, the principal is irrelevant in this context as this
+    // function only derives the key pair cryptographically without caring about which
+    // principal it is for. Hence, we arbitrarily set it to `DicePrincipal::kDicePrincipalSubject`.
+    let principal = DicePrincipal::kDicePrincipalSubject;
+    check_result(
+        // SAFETY: The function writes to the `public_key` and `private_key` within the given
+        // bounds, and only reads the `seed`.
+        // The first argument is a pointer to a valid |DiceContext_| object for multi-alg open-dice
+        // and a null pointer otherwise.
+        unsafe {
+            DiceKeypairFromSeed(
+                context(key_algorithm),
                 principal,
                 seed.as_ptr(),
                 public_key.as_mut_ptr(),
