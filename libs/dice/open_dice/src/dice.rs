@@ -340,13 +340,7 @@ pub fn derive_cdi_private_key_seed(cdi_attest: &Cdi) -> Result<PrivateKeySeed> {
     check_result(
         // SAFETY: The function writes to the buffer within the given bounds, and only reads the
         // input values. The first argument context is not used in this function.
-        unsafe {
-            DiceDeriveCdiPrivateKeySeed(
-                ptr::null_mut(), // context
-                cdi_attest.as_ptr(),
-                seed.as_mut_ptr(),
-            )
-        },
+        unsafe { DiceDeriveCdiPrivateKeySeed(context(), cdi_attest.as_ptr(), seed.as_mut_ptr()) },
         seed.0.len(),
     )?;
     Ok(seed)
@@ -360,7 +354,7 @@ pub fn derive_cdi_certificate_id(cdi_public_key: &[u8]) -> Result<DiceId> {
         // input values. The first argument context is not used in this function.
         unsafe {
             DiceDeriveCdiCertificateId(
-                ptr::null_mut(), // context
+                context(),
                 cdi_public_key.as_ptr(),
                 cdi_public_key.len(),
                 id.as_mut_ptr(),

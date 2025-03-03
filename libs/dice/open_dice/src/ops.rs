@@ -34,14 +34,7 @@ pub fn hash(input: &[u8]) -> Result<Hash> {
     check_result(
         // SAFETY: DiceHash takes a sized input buffer and writes to a constant-sized output
         // buffer. The first argument context is not used in this function.
-        unsafe {
-            DiceHash(
-                ptr::null_mut(), // context
-                input.as_ptr(),
-                input.len(),
-                output.as_mut_ptr(),
-            )
-        },
+        unsafe { DiceHash(context(), input.as_ptr(), input.len(), output.as_mut_ptr()) },
         output.len(),
     )?;
     Ok(output)
@@ -55,7 +48,7 @@ pub fn kdf(ikm: &[u8], salt: &[u8], info: &[u8], derived_key: &mut [u8]) -> Resu
         // reads the input values. The first argument context is not used in this function.
         unsafe {
             DiceKdf(
-                ptr::null_mut(), // context
+                context(),
                 derived_key.len(),
                 ikm.as_ptr(),
                 ikm.len(),
