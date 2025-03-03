@@ -165,12 +165,32 @@ const VM_DICE_CONTEXT: DiceContext_ = DiceContext_ {
     authority_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
     subject_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
 };
+#[cfg(feature = "multialg")]
+const VM_ECDSA_P256_DICE_CONTEXT: DiceContext_ = DiceContext_ {
+    authority_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP256,
+    subject_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP256,
+};
+#[cfg(feature = "multialg")]
+const VM_ECDSA_P384_DICE_CONTEXT: DiceContext_ = DiceContext_ {
+    authority_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP384,
+    subject_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP384,
+};
 
 /// Returns the pointer points to |DiceContext_| for DICE operations when `multialg`
 /// feature is enabled.
 #[cfg(feature = "multialg")]
 pub(crate) fn context() -> *mut c_void {
     &VM_DICE_CONTEXT as *const DiceContext_ as *mut c_void
+}
+
+/// Returns a pointer to a `DiceContext_` instance corresponding to the key algorithm provided.
+#[cfg(feature = "multialg")]
+pub(crate) fn context(key_algorithm: KeyAlgorithm) -> *mut c_void {
+    (match key_algorithm {
+        KeyAlgorithm::Ed25519 => &VM_DICE_CONTEXT,
+        KeyAlgorithm::EcdsaP256 => &VM_ECDSA_P256_DICE_CONTEXT,
+        KeyAlgorithm::EcdsaP384 => &VM_ECDSA_P384_DICE_CONTEXT,
+    }) as *const DiceContext_ as *mut c_void
 }
 
 /// Returns a null pointer when `multialg` feature is disabled.
@@ -340,9 +360,25 @@ pub fn derive_cdi_private_key_seed(cdi_attest: &Cdi) -> Result<PrivateKeySeed> {
     check_result(
         // SAFETY: The function writes to the buffer within the given bounds, and only reads the
         // input values. The first argument context is not used in this function.
+        unsafe { DiceDeriveCdiPrivateKeySeed(context(), cdi_attest.as_ptr(), seed.as_mut_ptr()) },
+        seed.0.len(),
+    )?;
+    Ok(seed)
+}
+
+/// Derives a CDI private key seed from a `cdi_attest` value and `key_algorithm`.
+#[cfg(feature = "multialg")]
+pub fn derive_cdi_private_key_seed_multialg(
+    cdi_attest: &Cdi,
+    key_algorithm: KeyAlgorithm,
+) -> Result<PrivateKeySeed> {
+    let mut seed = PrivateKeySeed::default();
+    check_result(
+        // SAFETY: The function writes to the buffer within the given bounds, and only reads the
+        // input values. The first argument context is not used in this function.
         unsafe {
             DiceDeriveCdiPrivateKeySeed(
-                ptr::null_mut(), // context
+                context(key_algorithm),
                 cdi_attest.as_ptr(),
                 seed.as_mut_ptr(),
             )
@@ -360,7 +396,7 @@ pub fn derive_cdi_certificate_id(cdi_public_key: &[u8]) -> Result<DiceId> {
         // input values. The first argument context is not used in this function.
         unsafe {
             DiceDeriveCdiCertificateId(
-                ptr::null_mut(), // context
+                context(),
                 cdi_public_key.as_ptr(),
                 cdi_public_key.len(),
                 id.as_mut_ptr(),
