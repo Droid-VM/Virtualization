@@ -161,6 +161,26 @@ impl From<DiceContext> for DiceContext_ {
 }
 
 #[cfg(feature = "multialg")]
+impl From<KeyAlgorithm> for DiceContext_ {
+    fn from(key_algorithm: KeyAlgorithm) -> Self {
+        match key_algorithm {
+            KeyAlgorithm::Ed25519 => Self {
+                authority_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
+                subject_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
+            },
+            KeyAlgorithm::EcdsaP256 => Self {
+                authority_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP256,
+                subject_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP256,
+            },
+            KeyAlgorithm::EcdsaP384 => Self {
+                authority_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP384,
+                subject_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP384,
+            },
+        }
+    }
+}
+
+#[cfg(feature = "multialg")]
 const VM_DICE_CONTEXT: DiceContext_ = DiceContext_ {
     authority_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
     subject_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
