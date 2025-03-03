@@ -165,12 +165,32 @@ const VM_DICE_CONTEXT: DiceContext_ = DiceContext_ {
     authority_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
     subject_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
 };
+#[cfg(feature = "multialg")]
+const ECDSA_P256_DICE_CONTEXT: DiceContext_ = DiceContext_ {
+    authority_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP256,
+    subject_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP256,
+};
+#[cfg(feature = "multialg")]
+const ECDSA_P384_DICE_CONTEXT: DiceContext_ = DiceContext_ {
+    authority_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP384,
+    subject_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmP384,
+};
 
 /// Returns the pointer points to |DiceContext_| for DICE operations when `multialg`
 /// feature is enabled.
 #[cfg(feature = "multialg")]
 pub(crate) fn context() -> *mut c_void {
     &VM_DICE_CONTEXT as *const DiceContext_ as *mut c_void
+}
+
+/// Returns a pointer to a `DiceContext_` instance corresponding to the key algorithm provided.
+#[cfg(feature = "multialg")]
+pub(crate) fn context_multialg(key_algorithm: KeyAlgorithm) -> *mut c_void {
+    (match key_algorithm {
+        KeyAlgorithm::Ed25519 => &VM_DICE_CONTEXT,
+        KeyAlgorithm::EcdsaP256 => &ECDSA_P256_DICE_CONTEXT,
+        KeyAlgorithm::EcdsaP384 => &ECDSA_P384_DICE_CONTEXT,
+    }) as *const DiceContext_ as *mut c_void
 }
 
 /// Returns a null pointer when `multialg` feature is disabled.
