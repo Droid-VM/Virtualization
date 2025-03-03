@@ -17,10 +17,11 @@
 //! main DICE functions depend on.
 
 use crate::dice::{
-    context, derive_cdi_private_key_seed, DiceArtifacts, Hash, InputValues, PrivateKey, HASH_SIZE,
-    PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE, VM_KEY_ALGORITHM,
+    context, context_multialg, derive_cdi_private_key_seed, DiceArtifacts, Hash, InputValues,
+    PrivateKey, HASH_SIZE, PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE, VM_KEY_ALGORITHM,
 };
 use crate::error::{check_result, DiceError, Result};
+use crate::KeyAlgorithm;
 use alloc::{vec, vec::Vec};
 use open_dice_cbor_bindgen::{
     DiceCoseSignAndEncodeSign1, DiceGenerateCertificate, DiceHash, DiceKdf, DiceKeypairFromSeed,
@@ -100,6 +101,40 @@ pub fn keypair_from_seed(seed: &[u8; PRIVATE_KEY_SEED_SIZE]) -> Result<(Vec<u8>,
     Ok((public_key, private_key))
 }
 
+/// Deterministically generates a public and private key pair from `seed` and `key_algorithm`.
+/// Since this is deterministic, `seed` is as sensitive as a private key and can
+/// be used directly as the private key.
+#[cfg(feature = "multialg")]
+pub fn keypair_from_seed_multialg(
+    seed: &[u8; PRIVATE_KEY_SEED_SIZE],
+    key_algorithm: KeyAlgorithm,
+) -> Result<(Vec<u8>, PrivateKey)> {
+    let mut public_key = vec![0u8; VM_KEY_ALGORITHM.public_key_size()];
+    let mut private_key = PrivateKey::default();
+    // This function is used with an open-dice config that uses the same algorithms for the
+    // subject and authority. Therefore, the principal is irrelevant in this context as this
+    // function only derives the key pair cryptographically without caring about which
+    // principal it is for. Hence, we arbitrarily set it to `DicePrincipal::kDicePrincipalSubject`.
+    let principal = DicePrincipal::kDicePrincipalSubject;
+    check_result(
+        // SAFETY: The function writes to the `public_key` and `private_key` within the given
+        // bounds, and only reads the `seed`.
+        // The first argument is a pointer to a valid |DiceContext_| object for multi-alg open-dice
+        // and a null pointer otherwise.
+        unsafe {
+            DiceKeypairFromSeed(
+                context_multialg(key_algorithm),
+                principal,
+                seed.as_ptr(),
+                public_key.as_mut_ptr(),
+                private_key.as_mut_ptr(),
+            )
+        },
+        public_key.len(),
+    )?;
+    Ok((public_key, private_key))
+}
+
 /// Derives the CDI_Leaf_Priv from the provided `dice_artifacts`.
 ///
 /// The corresponding public key is included in the leaf certificate of the DICE chain
@@ -111,6 +146,18 @@ pub fn keypair_from_seed(seed: &[u8; PRIVATE_KEY_SEED_SIZE]) -> Result<(Vec<u8>,
 pub fn derive_cdi_leaf_priv(dice_artifacts: &dyn DiceArtifacts) -> Result<PrivateKey> {
     let cdi_priv_key_seed = derive_cdi_private_key_seed(dice_artifacts.cdi_attest())?;
     let (_, private_key) = keypair_from_seed(cdi_priv_key_seed.as_array())?;
+    Ok(private_key)
+}
+
+/// Multialg variant of `derive_cdi_leaf_priv`.
+#[cfg(feature = "multialg")]
+#[allow(dead_code)]
+pub fn derive_cdi_leaf_priv_multialg(
+    dice_artifacts: &dyn DiceArtifacts,
+    key_algorithm: KeyAlgorithm,
+) -> Result<PrivateKey> {
+    let cdi_priv_key_seed = derive_cdi_private_key_seed(dice_artifacts.cdi_attest())?;
+    let (_, private_key) = keypair_from_seed_multialg(cdi_priv_key_seed.as_array(), key_algorithm)?;
     Ok(private_key)
 }
 
