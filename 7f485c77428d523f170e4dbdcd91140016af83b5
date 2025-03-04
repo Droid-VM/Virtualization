@@ -244,6 +244,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93eadcf4_758b987a",
+        "filename": "guest/pvmfw/src/config.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-04T01:41:45Z",
+      "side": 1,
+      "message": "Removed. As the reserved memory handover format is defined and documented in this module, depthcharge is actually the odd one out.",
+      "parentUuid": "30569862_331e60f6",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 59
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6afee7f_e4e504a3",
         "filename": "guest/pvmfw/src/config.rs",
         "patchSetId": 12
@@ -466,6 +490,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1d96b2_d9b51df0",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-04T01:41:45Z",
+      "side": 1,
+      "message": "This will be host.",
+      "parentUuid": "d514c38e_4a0dbbb2",
+      "range": {
+        "startLine": 69,
+        "startChar": 27,
+        "endLine": 69,
+        "endChar": 30
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9295f372_a3a1021e",
@@ -658,6 +706,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f2f1ebc_f6116e53",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-04T01:41:45Z",
+      "side": 1,
+      "message": "Discussed more in https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3466214/comment/b19bd1c4_db0a88a3/",
+      "parentUuid": "e1bcc24a_8f6e1460",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 19
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d707437_f41816e7",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 12
@@ -776,6 +848,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53105649_6aad43c5",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-04T01:41:45Z",
+      "side": 1,
+      "message": "I\u0027m okay with the intermediate types too, however ptosi@ and others are the owners. I\u0027m fine with switching to the parser if that\u0027s what the long term maintainers would prefer.",
+      "parentUuid": "bd446d35_84f0b797",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 17
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6445d78f_a97e5a6e",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 12
@@ -882,6 +978,30 @@
       "side": 1,
       "message": "The way tests are built makes separating this and still testing it at best very awkard since files are built at their own libraries in tests, but each file is part of the larger library in the product build.",
       "parentUuid": "7011f633_8692fa05",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 52
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84d684f7_2f57a033",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-04T01:41:45Z",
+      "side": 1,
+      "message": "More related discussion in https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3466214/comment/b19bd1c4_db0a88a3/",
+      "parentUuid": "366bf6de_19c2b519",
       "range": {
         "startLine": 157,
         "startChar": 0,

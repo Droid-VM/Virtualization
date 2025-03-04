@@ -214,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1d953f8_9fd958a1",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-04T01:41:45Z",
+      "side": 1,
+      "message": "zerocopy types now at lease specifically note unaligned. This code is the boot firmware of the virtual machine. I don\u0027t belive that should ever happen.",
+      "parentUuid": "a036476a_877f0612",
+      "range": {
+        "startLine": 21,
+        "startChar": 17,
+        "endLine": 21,
+        "endChar": 20
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5781437d_26c320e6",
         "filename": "guest/pvmfw/src/reserved_mem.rs",
         "patchSetId": 7

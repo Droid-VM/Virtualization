@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95be6b46_f04c657c",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-04T01:41:45Z",
+      "side": 1,
+      "message": "More info here: https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3466214/comment/6445d78f_a97e5a6e/\n\nPierre and I discussed copying data to clean pages to ensure nothing can be unintentinally leaked to guest VMs. I\u0027ve updated the name and added notes. Here\u0027s what I think we need to reconcile: (@ptosi, please chime in.)\n\n- This function must leak memory if it reallocates the pages since those pages are given to a guest VM. There is no returning to pvmfw.\n- This function should probably be maked unsafe since it leaks memory.\n- This function should probably not be public since it leaks memory. It is only called in fdt.rs and should be private there. `vm_base` being incompatible with unit tests is preventing me from having this function both tested and there. This incompatibility further complicates things because individual files are built as libraries for tests but are modules in a larger library for the main build.\n- Not copying to a new page looks like it would be okay for the current desktop case but this feature is intended for more that just desktop\u0027s use and doing the copy seems to be the better approach. ptosi@ could expand more as he\u0027s an owner of pvmfw and advised on this.\n\nIMO, keeping this function here to it can be tests but documenting it\u0027s very strange behavior best addresses the big picture given the unusual environment it runs in and that it\u0027s not useful anywhere outside of pvmfw.",
+      "parentUuid": "b19bd1c4_db0a88a3",
+      "range": {
+        "startLine": 154,
+        "startChar": 7,
+        "endLine": 154,
+        "endChar": 25
+      },
+      "revId": "729d78286fdbb83e4cf5b8d903571c0a8bcb3b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "894a7483_43f31ce7",
         "filename": "guest/pvmfw/src/config/reserved_mem.rs",
         "patchSetId": 16
