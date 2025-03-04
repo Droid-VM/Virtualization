@@ -16,6 +16,24 @@
       "message": "We need to fix the build errors for this cl:\n\n```\nerror: hardware/interfaces/security/see/hwcrypto/aidl/vts/functional/Android.bp:66:1: \"VtsAidlHwCryptoConnTest\" depends on undefined module \"trusty_vm_launcher_sh\".\nOr did you mean [\"libtrusty-properties\" \"libtrusty_fuzz_utils\" \"libtrusty_metrics_test\" \"rust_sysroot_defaults\"]?\nerror: hardware/interfaces/security/see/hwcrypto/aidl/vts/functional/Android.bp:66:1: \"VtsAidlHwCryptoConnTest\" depends on undefined module \"trusty_wait_ready_sh\".\nOr did you mean [\"libtrusty-properties\" \"libtrusty_fuzz_utils\"]?\nninja: build stopped: subcommand failed.\n05:25:55 soong bootstrap failed with: exit status 1\n```",
       "revId": "c430b0f4639feb5463c805ac04cd78defc7bda01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23415c9a_62dc929a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-03-04T15:44:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "195a429b_0f66e2e1",
+      "revId": "c430b0f4639feb5463c805ac04cd78defc7bda01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
