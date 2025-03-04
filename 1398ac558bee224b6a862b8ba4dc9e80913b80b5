@@ -165,6 +165,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40f6f89e_b040b423",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/Application.kt",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 3364509
+      },
+      "writtenOn": "2025-03-04T06:33:18Z",
+      "side": 1,
+      "message": "At the desktop, the lifecycle enters `onStop` only when you turn off the screen or minimize the window. Entering full screen mode of other Apps won\u0027t make the Terminal App into `onStop()` status.",
+      "parentUuid": "bbdd96de_3e8132da",
+      "revId": "1398ac558bee224b6a862b8ba4dc9e80913b80b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85ed34c1_518589c6",
