@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59a5d7dc_ad2f9027",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3364509
+      },
+      "writtenOn": "2025-03-04T06:33:03Z",
+      "side": 1,
+      "message": "I agree that there\u0027s no need to put `isMemoryBalloonEnabled()` into a separate CL, since the change is trival getter function. Also, Add API to check balloon status is not really the main topic of this CL.\n\nHowever, I think it\u0027s better to keep adding the `isMemoryBalloonEnabled()` API in this CL rather than the following CL. Since the next CL is more related to the Application and this CL is about virtmgr.\n\nMy opinion is that we should remove the `Add API to check balloon status and` from the commit title. Also, change the commit message to make the paragraph of \"introducing API\" into second paragraph as additional.",
+      "parentUuid": "01bb31dc_aa50e253",
+      "range": {
+        "startLine": 7,
+        "startChar": 32,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "6afc98628bb83ddb566eeb5643781a4d0752941c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44c3a1ac_f59de427",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "writtenOn": "2025-03-01T00:18:11Z",
       "side": 1,
       "message": "Do you want to leave a log for the case of config.balloon \u0026\u0026 !hypervisor.memory_reclaim.supported so that the user knows that the ask was rejected?",
+      "range": {
+        "startLine": 902,
+        "startChar": 12,
+        "endLine": 902,
+        "endChar": 14
+      },
+      "revId": "6afc98628bb83ddb566eeb5643781a4d0752941c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be484a8d_20564982",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 3364509
+      },
+      "writtenOn": "2025-03-04T06:33:03Z",
+      "side": 1,
+      "message": "Yes, added an `info!()` level log here, if the balloon is not enabled.",
+      "parentUuid": "67f311ff_3407e73e",
       "range": {
         "startLine": 902,
         "startChar": 12,
