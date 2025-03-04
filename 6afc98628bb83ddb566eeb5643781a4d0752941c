@@ -188,6 +188,30 @@
       },
       "revId": "6afc98628bb83ddb566eeb5643781a4d0752941c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3e12750_7f9c58ac",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-04T07:23:47Z",
+      "side": 1,
+      "message": "my suggestion was to print a warning when config.balloon is true, but we couldn\u0027t actually turn it on due to hypervisor.memory_reclaim.supported is false.",
+      "parentUuid": "365be995_d32a0ff0",
+      "range": {
+        "startLine": 902,
+        "startChar": 12,
+        "endLine": 902,
+        "endChar": 14
+      },
+      "revId": "6afc98628bb83ddb566eeb5643781a4d0752941c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
