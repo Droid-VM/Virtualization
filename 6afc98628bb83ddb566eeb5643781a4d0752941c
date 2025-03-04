@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c19805b_4aaa0c3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-04T06:54:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "59a5d7dc_ad2f9027",
+      "range": {
+        "startLine": 7,
+        "startChar": 32,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "6afc98628bb83ddb566eeb5643781a4d0752941c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44c3a1ac_f59de427",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Yes, added an `info!()` level log here, if the balloon is not enabled.",
       "parentUuid": "67f311ff_3407e73e",
+      "range": {
+        "startLine": 902,
+        "startChar": 12,
+        "endLine": 902,
+        "endChar": 14
+      },
+      "revId": "6afc98628bb83ddb566eeb5643781a4d0752941c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "365be995_d32a0ff0",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-04T06:54:37Z",
+      "side": 1,
+      "message": "I think Jiyong\u0027s suggestion is to print both values of `hypervisor.memory_reclaim.supported` and `config.balloon`. So one can know the balloon is disabled by setprop or vm config",
+      "parentUuid": "be484a8d_20564982",
       "range": {
         "startLine": 902,
         "startChar": 12,
