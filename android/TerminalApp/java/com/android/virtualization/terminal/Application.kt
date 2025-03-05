@@ -19,11 +19,19 @@ import android.app.Application as AndroidApplication
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.util.Log
 
 public class Application : AndroidApplication() {
+    internal var debianService: DebianServiceImpl? = null
+
     override fun onCreate() {
         super.onCreate()
         setupNotificationChannels()
+        try {
+            debianService = DebianServiceImpl(this)
+        } catch (e: Exception) {
+            Log.e(MainActivity.TAG, "cannot create DebianServiceImpl", e)
+        }
     }
 
     private fun setupNotificationChannels() {

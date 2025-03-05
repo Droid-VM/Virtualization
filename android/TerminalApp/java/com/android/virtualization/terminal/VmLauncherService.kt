@@ -38,10 +38,9 @@ import android.system.virtualmachine.VirtualMachineCustomImageConfig.AudioConfig
 import android.system.virtualmachine.VirtualMachineException
 import android.util.Log
 import android.widget.Toast
-import com.android.system.virtualmachine.flags.Flags.terminalGuiSupport
+import com.android.system.virtualmachine.flags.Flags
 import com.android.virtualization.terminal.MainActivity.Companion.TAG
 import com.android.virtualization.terminal.Runner.Companion.create
-import com.android.virtualization.terminal.VmLauncherService.VmLauncherServiceCallback
 import io.grpc.Grpc
 import io.grpc.InsecureServerCredentials
 import io.grpc.Metadata
@@ -54,7 +53,6 @@ import io.grpc.okhttp.OkHttpServerBuilder
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.lang.RuntimeException
 import java.net.InetSocketAddress
 import java.net.SocketAddress
 import java.nio.file.Files
@@ -70,7 +68,6 @@ class VmLauncherService : Service() {
     private var virtualMachine: VirtualMachine? = null
     private var resultReceiver: ResultReceiver? = null
     private var server: Server? = null
-    private var debianService: DebianServiceImpl? = null
     private var portNotifier: PortNotifier? = null
 
     interface VmLauncherServiceCallback {
@@ -94,6 +91,7 @@ class VmLauncherService : Service() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         if (intent.action == ACTION_SHUTDOWN_VM) {
+            val debianService = (application as Application).debianService
             if (debianService != null && debianService!!.shutdownDebian()) {
                 // During shutdown, change the notification content to indicate that it's closing
                 val notification = createNotificationForTerminalClose()
@@ -285,7 +283,7 @@ class VmLauncherService : Service() {
 
         // Set the initial display size
         // TODO(jeongik): set up the display size on demand
-        if (terminalGuiSupport() && displayInfo != null) {
+        if (Flags.terminalGuiSupport() && displayInfo != null) {
             builder
                 .setDisplayConfig(
                     VirtualMachineCustomImageConfig.DisplayConfig.Builder()
@@ -335,7 +333,7 @@ class VmLauncherService : Service() {
         try {
             // TODO(b/372666638): gRPC for java doesn't support vsock for now.
             val port = 0
-            debianService = DebianServiceImpl(this)
+            val debianService = (application as Application).debianService
             server =
                 OkHttpServerBuilder.forPort(port, InsecureServerCredentials.create())
                     .intercept(interceptor)
@@ -360,6 +358,25 @@ class VmLauncherService : Service() {
                 }
             }
         )
+
+        startStorageBalloonTask()
+    }
+
+    private fun startStorageBalloonTask() {
+        if (!Flags.terminalStorageBalloon()) {
+            return
+        }
+
+        val storageBalloonTaskRequest =
+            androidx.work.OneTimeWorkRequest.Builder(StorageBalloonWorker::class.java)
+                .setInitialDelay(1, TimeUnit.SECONDS)
+                .build()
+        androidx.work.WorkManager.getInstance(this)
+            .enqueueUniqueWork(
+                "storageBalloonTask",
+                androidx.work.ExistingWorkPolicy.REPLACE,
+                storageBalloonTaskRequest,
+            )
     }
 
     override fun onDestroy() {
@@ -382,7 +399,9 @@ class VmLauncherService : Service() {
     }
 
     private fun stopDebianServer() {
+        val debianService = (application as Application).debianService
         debianService?.killForwarderHost()
+        debianService?.closeStorageBalloonRequestQueue()
         server?.shutdown()
     }
 
