@@ -31,6 +31,7 @@ import android.os.Looper
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.ResultReceiver
+import android.os.StatFs
 import android.os.Trace
 import android.system.virtualmachine.VirtualMachine
 import android.system.virtualmachine.VirtualMachineCustomImageConfig
@@ -40,7 +41,6 @@ import android.widget.Toast
 import com.android.system.virtualmachine.flags.Flags.terminalGuiSupport
 import com.android.virtualization.terminal.MainActivity.Companion.TAG
 import com.android.virtualization.terminal.Runner.Companion.create
-import com.android.virtualization.terminal.VmLauncherService.VmLauncherServiceCallback
 import io.grpc.Grpc
 import io.grpc.InsecureServerCredentials
 import io.grpc.Metadata
@@ -53,21 +53,28 @@ import io.grpc.okhttp.OkHttpServerBuilder
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.lang.RuntimeException
 import java.net.InetSocketAddress
 import java.net.SocketAddress
 import java.nio.file.Files
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.ScheduledFuture
+import java.util.concurrent.TimeUnit
 
 class VmLauncherService : Service() {
     // TODO: using lateinit for some fields to avoid null
     private var executorService: ExecutorService? = null
+    private var scheduledExecutorService: ScheduledExecutorService? = null
+
     private var virtualMachine: VirtualMachine? = null
     private var resultReceiver: ResultReceiver? = null
     private var server: Server? = null
     private var debianService: DebianServiceImpl? = null
     private var portNotifier: PortNotifier? = null
+    private var storageBalloonTask: ScheduledFuture<*>? = null
+
+    private val storageBalloonTaskPeriodSeconds: Long = 5
 
     interface VmLauncherServiceCallback {
         fun onVmStart()
@@ -99,6 +106,7 @@ class VmLauncherService : Service() {
             return START_NOT_STICKY
         }
         executorService = Executors.newCachedThreadPool(TerminalThreadFactory(applicationContext))
+        scheduledExecutorService = Executors.newScheduledThreadPool(1)
 
         val image = InstalledImage.getDefault(this)
         val json = ConfigJson.from(this, image.configPath)
@@ -298,6 +306,33 @@ class VmLauncherService : Service() {
                 }
             }
         )
+
+        startStorageBalloonTask()
+    }
+
+    private fun calculateGuestAvailableStorageSize(): Long {
+        // Reserve 1GB for the host.
+        val hostReservedBytes = 1024L * 1024 * 1024
+        val statFs = StatFs(filesDir.absolutePath)
+        val hostAvailableBytes = statFs.availableBytes
+        return hostAvailableBytes - hostReservedBytes
+    }
+
+    private fun startStorageBalloonTask() {
+        val task = Runnable {
+            if (debianService != null) {
+                debianService!!.setAvailableStorageBytes(calculateGuestAvailableStorageSize())
+            } else {
+                Log.e(TAG, "debianService is null.")
+            }
+        }
+        storageBalloonTask =
+            scheduledExecutorService!!.scheduleAtFixedRate(
+                task,
+                0,
+                storageBalloonTaskPeriodSeconds,
+                TimeUnit.SECONDS,
+            )
     }
 
     override fun onDestroy() {
@@ -313,6 +348,8 @@ class VmLauncherService : Service() {
                     Log.e(TAG, "failed to stop a VM instance", e)
                 }
             }
+            scheduledExecutorService?.shutdownNow()
+            scheduledExecutorService = null
             executorService?.shutdownNow()
             executorService = null
             virtualMachine = null
@@ -322,6 +359,7 @@ class VmLauncherService : Service() {
 
     private fun stopDebianServer() {
         debianService?.killForwarderHost()
+        debianService?.closeStorageBalloonRequestQueue()
         server?.shutdown()
     }
 
