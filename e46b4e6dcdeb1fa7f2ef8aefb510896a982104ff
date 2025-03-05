@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fdcc90a_27ca65bc",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-03-05T13:42:01Z",
+      "side": 1,
+      "message": "Wrap this into try with resources blocks, e.g.:\n\ntry (FileInputStream fis \u003d new FileInputStream(trace)) {\n  try (GZIPInputStream gzip \u003d new GZIPInputStream(fis)) {\n     and so on :)\n  }\n}",
+      "range": {
+        "startLine": 288,
+        "startChar": 11,
+        "endLine": 291,
+        "endChar": 56
+      },
+      "revId": "e46b4e6dcdeb1fa7f2ef8aefb510896a982104ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18880fec_749e33b5",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-03-05T13:42:01Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 142
+      },
+      "revId": "e46b4e6dcdeb1fa7f2ef8aefb510896a982104ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
