@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "319540d9_d2e9e319",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-03-05T13:36:49Z",
+      "side": 1,
+      "message": "You should close the buffered readers.\n\nEasiest probably will be to:\n\n1. move the next[i] \u003d getNextEvent(brs[i]) into a separate for loop.\n2. Wrap next for loop including with the while (true) loop into try { .. } finally { } block, and close the buffered readers in the finally block.",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 305,
+        "endChar": 43
+      },
+      "revId": "6c5e71674be8ebf916ec1413d290b0928d301c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
