@@ -38,6 +38,7 @@ import android.system.virtualmachine.VirtualMachineCustomImageConfig.AudioConfig
 import android.system.virtualmachine.VirtualMachineException
 import android.util.Log
 import android.widget.Toast
+import androidx.work.WorkManager
 import com.android.internal.annotations.GuardedBy
 import com.android.system.virtualmachine.flags.Flags.terminalGuiSupport
 import com.android.virtualization.terminal.MainActivity.Companion.TAG
@@ -55,11 +56,13 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.lang.Math.min
+import java.lang.RuntimeException
 import java.net.InetSocketAddress
 import java.net.SocketAddress
 import java.nio.file.Files
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class VmLauncherService : Service() {
     inner class VmLauncherServiceBinder : android.os.Binder() {
@@ -70,10 +73,10 @@ class VmLauncherService : Service() {
 
     // TODO: using lateinit for some fields to avoid null
     private var executorService: ExecutorService? = null
+
     private var virtualMachine: VirtualMachine? = null
     private var resultReceiver: ResultReceiver? = null
     private var server: Server? = null
-    private var debianService: DebianServiceImpl? = null
     private var portNotifier: PortNotifier? = null
     private var mLock = Object()
 
@@ -106,6 +109,8 @@ class VmLauncherService : Service() {
             }
         }
     }
+
+    private val storageBalloonTaskPeriodSeconds: Long = 5
 
     interface VmLauncherServiceCallback {
         fun onVmStart()
@@ -160,8 +165,9 @@ class VmLauncherService : Service() {
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        val application = application as Application
         if (intent.action == ACTION_STOP_VM_LAUNCHER_SERVICE) {
-            if (debianService != null && debianService!!.shutdownDebian()) {
+            if (application.debianService != null && application.debianService!!.shutdownDebian()) {
                 // During shutdown, change the notification content to indicate that it's closing
                 val notification = createNotificationForTerminalClose()
                 getSystemService<NotificationManager?>(NotificationManager::class.java)
@@ -370,7 +376,7 @@ class VmLauncherService : Service() {
         try {
             // TODO(b/372666638): gRPC for java doesn't support vsock for now.
             val port = 0
-            debianService = DebianServiceImpl(this)
+            val debianService = (application as Application).debianService
             server =
                 OkHttpServerBuilder.forPort(port, InsecureServerCredentials.create())
                     .intercept(interceptor)
@@ -395,6 +401,21 @@ class VmLauncherService : Service() {
                 }
             }
         )
+
+        startStorageBalloonTask()
+    }
+
+    private fun startStorageBalloonTask() {
+        val storageBalloonTaskRequest =
+            androidx.work.OneTimeWorkRequest.Builder(StorageBalloonWorker::class.java)
+                .setInitialDelay(1, TimeUnit.SECONDS)
+                .build()
+        androidx.work.WorkManager.getInstance(this)
+            .enqueueUniqueWork(
+                "storageBalloonTask",
+                androidx.work.ExistingWorkPolicy.REPLACE,
+                storageBalloonTaskRequest,
+            )
     }
 
     override fun onDestroy() {
@@ -410,6 +431,7 @@ class VmLauncherService : Service() {
                     Log.e(TAG, "failed to stop a VM instance", e)
                 }
             }
+            WorkManager.getInstance(this).cancelAllWork()
             executorService?.shutdownNow()
             executorService = null
             virtualMachine = null
@@ -418,7 +440,9 @@ class VmLauncherService : Service() {
     }
 
     private fun stopDebianServer() {
+        val debianService = (application as Application).debianService
         debianService?.killForwarderHost()
+        debianService?.closeStorageBalloonRequestQueue()
         server?.shutdown()
     }
 
