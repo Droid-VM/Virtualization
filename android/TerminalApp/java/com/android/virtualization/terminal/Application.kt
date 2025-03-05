@@ -23,16 +23,24 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 
 public class Application : AndroidApplication() {
+    internal var debianService: DebianServiceImpl? = null
+
     override fun onCreate() {
         super.onCreate()
         setupNotificationChannels()
         val lifecycleObserver = ApplicationLifecycleObserver()
         ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
+        try {
+            debianService = DebianServiceImpl(this)
+        } catch (e: Exception) {
+            Log.e(MainActivity.TAG, "cannot create DebianServiceImpl", e)
+        }
     }
 
     private fun setupNotificationChannels() {
