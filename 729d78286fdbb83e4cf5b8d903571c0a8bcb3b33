@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ffe9272_5c9c4e36",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-03-05T00:11:40Z",
+      "side": 1,
+      "message": "Thank you for the elaboration in the doc comment!\n\n\u003e must leak memory if it reallocates the pages since those pages are given to a guest VM. There is no returning to pvmfw\n\nSome important memory span that is allocated in one location, stored as an addr/len pair in some data structure, and then accessed elsewhere from that data structure is the sort of thing `unsafe` exists for. Seeing this bigger picture, there should be a specific `unsafe` location where the system will require that the addr/len\u0027s in the `fdt` be valid to prevent a segfault (or worse). That is the location, which is likely already `unsafe`, which should state \"`add_reserved_mem` leaked new memory with the indicated `addr`/`len` in `fdt`\", or something like that. This is a promise to future readers/editors that some distantly located code is implemented correctly and why that matters.\n\n\u003e This function should probably be maked unsafe since it leaks memory.\n\nNo, [leaking is not an `unsafe` operation](https://doc.rust-lang.org/std/mem/fn.forget.html#safety). `unsafe` should _only_ be used for operations concerning memory safety, and not for other forms of undesirable program behavior.\n\n\u003e This function should probably not be public since it leaks memory\n\n+1, memory leaking functions should always be limited in scope. Could it be `pub(crate)`? I\u0027m not sure this `mod` needs to be `pub`.\n\n\u003e Not copying to a new page looks like it would be okay for the current desktop case but this feature is intended for more that just desktop\u0027s use and doing the copy seems to be the better approach. ptosi@ could expand more as he\u0027s an owner of pvmfw and advised on this.\n\nI am interested in an expansion on why this is desirable. As noted below, `alloc` doesn\u0027t typically guarantee a new page, so you might want to use a different allocation API.",
+      "parentUuid": "95be6b46_f04c657c",
+      "range": {
+        "startLine": 154,
+        "startChar": 7,
+        "endLine": 154,
+        "endChar": 25
+      },
+      "revId": "729d78286fdbb83e4cf5b8d903571c0a8bcb3b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "894a7483_43f31ce7",
         "filename": "guest/pvmfw/src/config/reserved_mem.rs",
         "patchSetId": 16

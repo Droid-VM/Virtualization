@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5d9f725_dba880b2",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-03-05T00:11:40Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 158,
+        "startChar": 69,
+        "endLine": 158,
+        "endChar": 72
+      },
+      "revId": "313617457b01e66c7edeb8fe2837ff479d4f72e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07cc0b5c_b0e5a01e",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-03-05T00:11:40Z",
+      "side": 1,
+      "message": "Remember that this Markdown and rendered as such in rustdoc. Format this as a Markdown list:\n\n```suggestion\n/// # Parameters\n///\n/// - `fdt`: a device tree to add reserved memory nodes to. /reserved-memory must already be\n/// present.\n/// - `config`: a pvmfw reserved memory blob to add nodes from\n/// - `guest_align`: the page alignment of the guest vm. This must be a power of 2.\n/// - `name`: a target vm name used to filter which reserved memory nodes to add.\n```",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 79
+      },
+      "revId": "313617457b01e66c7edeb8fe2837ff479d4f72e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36ca73af_508256f5",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-03-05T00:11:40Z",
+      "side": 1,
+      "message": "The `std::alloc::alloc` API doesn\u0027t guarantee this is in a new page - you\u0027d need something lower level (or promises about this system\u0027s allocator I don\u0027t know of) to guarantee that.",
+      "revId": "313617457b01e66c7edeb8fe2837ff479d4f72e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a394ce9_90eaa222",
+        "filename": "guest/pvmfw/src/fdt.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 1408,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-03-05T00:11:40Z",
+      "side": 1,
+      "message": "Consider `error!()` logging the specific code and context of the failure - this\u0027d be invaluable for future debuggers",
+      "range": {
+        "startLine": 1408,
+        "startChar": 8,
+        "endLine": 1408,
+        "endChar": 46
+      },
+      "revId": "313617457b01e66c7edeb8fe2837ff479d4f72e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
