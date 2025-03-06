@@ -32,6 +32,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.ConditionVariable
 import android.os.Environment
+import android.os.StatFs
 import android.os.SystemProperties
 import android.os.Trace
 import android.provider.Settings
@@ -411,7 +412,7 @@ public class MainActivity :
             return
         }
 
-        resizeDiskIfNecessary(image)
+        truncateDiskIfNecessary(image)
 
         val tapIntent = Intent(this, MainActivity::class.java)
         tapIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -470,13 +471,24 @@ public class MainActivity :
         return bootCompleted.block(timeoutMillis)
     }
 
-    private fun resizeDiskIfNecessary(image: InstalledImage) {
-        try {
-            // TODO(b/382190982): Show snackbar message instead when it's recoverable.
-            image.resize(intent.getLongExtra(KEY_DISK_SIZE, image.getSize()))
-        } catch (e: IOException) {
-            start(this, Exception("Failed to resize disk", e))
-            return
+    private fun truncateDiskIfNecessary(image: InstalledImage) {
+        val curSize = image.getSize()
+        val physicalSize = image.getPhysicalSize()
+        Log.d(TAG, "rootfs's apparent size=$curSize, physical size=$physicalSize")
+
+        // Change the rootfs disk's apparent size to 95% of the total disk size.
+        // Note that the physical size is not changed.
+        val statFs = StatFs(filesDir.absolutePath)
+        val hostSize = statFs.totalBytes
+        val expectedSize = hostSize * 95 / 100
+
+        if (curSize != expectedSize) {
+            try {
+                image.truncate(expectedSize)
+            } catch (e: IOException) {
+                start(this, Exception("Failed to truncate disk", e))
+                return
+            }
         }
     }
 
