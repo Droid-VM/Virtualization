@@ -94,6 +94,30 @@
       },
       "revId": "76b683f387e67338ff2ee3499ec7fc51c14bd433",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea1f5ced_1c225351",
+        "filename": "tests/backcompat_test/goldens/dt_dump_golden.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-03-06T19:32:41Z",
+      "side": 0,
+      "message": "I ended up submitting aosp/3489537 since this CL looks like it\u0027s got some investigation going on with it.\n\nThe change required is rather simple for `avf_backompat_tests`, where you will simply need to change `defer-rollback-protection` to the new name in https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/backcompat_test/src/main.rs. Logic shouldn\u0027t change since it depends on Secretkeeper being supported.",
+      "parentUuid": "c281a256_d89e3810",
+      "range": {
+        "startLine": 46,
+        "startChar": 3,
+        "endLine": 46,
+        "endChar": 29
+      },
+      "revId": "76b683f387e67338ff2ee3499ec7fc51c14bd433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
