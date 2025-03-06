@@ -28,7 +28,6 @@ import java.io.RandomAccessFile
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
-import kotlin.math.ceil
 
 /** Collection of files that consist of a VM image. */
 public class InstalledImage private constructor(val installDir: Path) {
@@ -98,44 +97,6 @@ public class InstalledImage private constructor(val installDir: Path) {
     }
 
     @Throws(IOException::class)
-    fun getSmallestSizePossible(): Long {
-        runE2fsck(rootPartition)
-        val p: String = rootPartition.toAbsolutePath().toString()
-        val result = runCommand("/system/bin/resize2fs", "-P", p)
-        val regex = "Estimated minimum size of the filesystem: ([0-9]+)".toRegex()
-        val matchResult = result.lines().firstNotNullOfOrNull { regex.find(it) }
-        if (matchResult != null) {
-            try {
-                val size = matchResult.groupValues[1].toLong()
-                // The return value is the number of 4k block
-                return roundUp(size * 4 * 1024)
-            } catch (e: NumberFormatException) {
-                // cannot happen
-            }
-        }
-        val msg = "Failed to get min size, p=$p, result=$result"
-        Log.e(TAG, msg)
-        throw RuntimeException(msg)
-    }
-
-    @Throws(IOException::class)
-    fun resize(desiredSize: Long): Long {
-        val roundedUpDesiredSize = roundUp(desiredSize)
-        val curSize = getSize()
-
-        if (roundedUpDesiredSize == curSize) {
-            return roundedUpDesiredSize
-        }
-
-        runE2fsck(rootPartition)
-        if (roundedUpDesiredSize > curSize) {
-            allocateSpace(rootPartition, roundedUpDesiredSize)
-        }
-        resizeFilesystem(rootPartition, roundedUpDesiredSize)
-        return getSize()
-    }
-
-    @Throws(IOException::class)
     fun truncate(size: Long) {
         try {
             val raf = RandomAccessFile(rootPartition.toFile(), "rw")
@@ -163,65 +124,6 @@ public class InstalledImage private constructor(val installDir: Path) {
         fun getDefault(context: Context): InstalledImage {
             val installDir = context.getFilesDir().toPath().resolve(INSTALL_DIRNAME)
             return InstalledImage(installDir)
-        }
-
-        @Throws(IOException::class)
-        private fun allocateSpace(path: Path, sizeInBytes: Long) {
-            try {
-                val raf = RandomAccessFile(path.toFile(), "rw")
-                val fd = raf.fd
-                Os.posix_fallocate(fd, 0, sizeInBytes)
-                raf.close()
-                Log.d(TAG, "Allocated space to: $sizeInBytes bytes")
-            } catch (e: ErrnoException) {
-                Log.e(TAG, "Failed to allocate space", e)
-                throw IOException("Failed to allocate space", e)
-            }
-        }
-
-        @Throws(IOException::class)
-        private fun runE2fsck(path: Path) {
-            val p: String = path.toAbsolutePath().toString()
-            runCommand("/system/bin/e2fsck", "-y", "-f", p)
-            Log.d(TAG, "e2fsck completed: $path")
-        }
-
-        @Throws(IOException::class)
-        private fun resizeFilesystem(path: Path, sizeInBytes: Long) {
-            val sizeInMB = sizeInBytes / (1024 * 1024)
-            if (sizeInMB == 0L) {
-                Log.e(TAG, "Invalid size: $sizeInBytes bytes")
-                throw IllegalArgumentException("Size cannot be zero MB")
-            }
-            val sizeArg = sizeInMB.toString() + "M"
-            val p: String = path.toAbsolutePath().toString()
-            runCommand("/system/bin/resize2fs", p, sizeArg)
-            Log.d(TAG, "resize2fs completed: $path, size: $sizeArg")
-        }
-
-        @Throws(IOException::class)
-        private fun runCommand(vararg command: String): String {
-            try {
-                val process = ProcessBuilder(*command).redirectErrorStream(true).start()
-                process.waitFor()
-                val result = String(process.inputStream.readAllBytes())
-                if (process.exitValue() != 0) {
-                    Log.w(
-                        TAG,
-                        "Process returned with error, command=${listOf(*command).joinToString(" ")}," +
-                            "exitValue=${process.exitValue()}, result=$result",
-                    )
-                }
-                return result
-            } catch (e: InterruptedException) {
-                Thread.currentThread().interrupt()
-                throw IOException("Command interrupted", e)
-            }
-        }
-
-        private fun roundUp(bytes: Long): Long {
-            // Round up every diskSizeStep MB
-            return ceil((bytes.toDouble()) / RESIZE_STEP_BYTES).toLong() * RESIZE_STEP_BYTES
         }
     }
 }
