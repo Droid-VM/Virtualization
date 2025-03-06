@@ -55,6 +55,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.lang.RuntimeException
+import java.lang.Math.min
 import java.net.InetSocketAddress
 import java.net.SocketAddress
 import java.nio.file.Files
@@ -75,6 +76,25 @@ class VmLauncherService : Service() {
     private var server: Server? = null
     private var debianService: DebianServiceImpl? = null
     private var portNotifier: PortNotifier? = null
+    private var currentBalloonPercent = 0;
+
+    private val inflateBalloonHandler = Handler(Looper.getMainLooper())
+    private val inflateBalloonTask: Runnable = object : Runnable {
+        override fun run() {
+            if (currentBalloonPercent < INITIAL_BALLOON_PERCENT
+                || currentBalloonPercent > MAX_BALLOON_PERCENT) {
+                Log.e(TAG, "currentBalloonPercent=$currentBalloonPercent is invalid," +
+                        " should be in range of $INITIAL_BALLOON_PERCENT~$MAX_BALLOON_PERCENT")
+                return
+            }
+            if (currentBalloonPercent < MAX_BALLOON_PERCENT) {
+                currentBalloonPercent = min(MAX_BALLOON_PERCENT, currentBalloonPercent + 5)
+                virtualMachine?.setMemoryBalloonByPercent(currentBalloonPercent)
+                inflateBalloonHandler.postDelayed(this, BALLOON_INFLATE_INTERVAL_MILLIS)
+            }
+        }
+    }
+
 
     interface VmLauncherServiceCallback {
         fun onVmStart()
@@ -99,13 +119,17 @@ class VmLauncherService : Service() {
             // When the app starts, reset the memory balloon to 0%.
             // This gives the app maximum available memory.
             ApplicationLifeCycleEvent.APP_ON_START -> {
-                virtualMachine?.setMemoryBalloonByPercent(0)
+                inflateBalloonHandler.removeCallbacks(inflateBalloonTask);
+                currentBalloonPercent = 0;
+                virtualMachine?.setMemoryBalloonByPercent(currentBalloonPercent)
             }
             ApplicationLifeCycleEvent.APP_ON_STOP -> {
-                // When the app stops, inflate the memory balloon to 10%.
+                // When the app stops, inflate the memory balloon to initial 10%. Inflate the
+                // balloon by 5% every 60 seconds until reaching 50% of total memory.
                 // This allows the system to reclaim memory while the app is in the background.
-                // TODO(b/400590341) Inflate the balloon while the application remains Stop status.
-                virtualMachine?.setMemoryBalloonByPercent(10)
+                currentBalloonPercent = INITIAL_BALLOON_PERCENT;
+                virtualMachine?.setMemoryBalloonByPercent(currentBalloonPercent)
+                inflateBalloonHandler.postDelayed(inflateBalloonTask, BALLOON_INFLATE_INTERVAL_MILLIS);
             }
             else -> {
                 Log.e(TAG, "unrecognized lifecycle event: $event")
@@ -139,10 +163,7 @@ class VmLauncherService : Service() {
         val displaySize = intent.getParcelableExtra(EXTRA_DISPLAY_INFO, DisplayInfo::class.java)
 
         customImageConfigBuilder.setAudioConfig(
-            AudioConfig.Builder()
-                .setUseSpeaker(true)
-                .setUseMicrophone(true)
-                .build()
+            AudioConfig.Builder().setUseSpeaker(true).setUseMicrophone(true).build()
         )
         if (overrideConfigIfNecessary(customImageConfigBuilder, displaySize)) {
             configBuilder.setCustomImageConfig(customImageConfigBuilder.build())
@@ -375,6 +396,10 @@ class VmLauncherService : Service() {
         private const val RESULT_START = 0
         private const val RESULT_STOP = 1
         private const val RESULT_ERROR = 2
+
+        private const val INITIAL_BALLOON_PERCENT = 10
+        private const val MAX_BALLOON_PERCENT = 50
+        private const val BALLOON_INFLATE_INTERVAL_MILLIS = 60000L
 
         private fun getMyIntent(context: Context): Intent {
             return Intent(context.getApplicationContext(), VmLauncherService::class.java)
