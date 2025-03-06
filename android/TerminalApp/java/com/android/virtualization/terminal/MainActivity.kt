@@ -28,6 +28,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.ConditionVariable
 import android.os.Environment
+import android.os.StatFs
 import android.os.SystemProperties
 import android.provider.Settings
 import android.util.DisplayMetrics
@@ -48,7 +49,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.android.internal.annotations.VisibleForTesting
 import com.android.microdroid.test.common.DeviceProperties
-import com.android.system.virtualmachine.flags.Flags.terminalGuiSupport
+import com.android.system.virtualmachine.flags.Flags
 import com.android.virtualization.terminal.ErrorActivity.Companion.start
 import com.android.virtualization.terminal.InstalledImage.Companion.getDefault
 import com.android.virtualization.terminal.VmLauncherService.Companion.run
@@ -130,9 +131,9 @@ public class MainActivity :
         }
 
         displayMenu?.also {
-            it.visibility = if (terminalGuiSupport()) View.VISIBLE else View.GONE
+            it.visibility = if (Flags.terminalGuiSupport()) View.VISIBLE else View.GONE
             it.setEnabled(false)
-            if (terminalGuiSupport()) {
+            if (Flags.terminalGuiSupport()) {
                 it.setOnClickListener {
                     val intent = Intent(this, DisplayActivity::class.java)
                     intent.flags =
@@ -313,7 +314,11 @@ public class MainActivity :
             return
         }
 
-        resizeDiskIfNecessary(image)
+        if (Flags.terminalStorageBalloon()) {
+            truncateDiskIfNecessary(image)
+        } else {
+            resizeDiskIfNecessary(image)
+        }
 
         val tapIntent = Intent(this, MainActivity::class.java)
         tapIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -377,6 +382,30 @@ public class MainActivity :
         } catch (e: IOException) {
             start(this, Exception("Failed to resize disk", e))
             return
+        }
+    }
+
+    private fun truncateDiskIfNecessary(image: InstalledImage) {
+        val curSize = image.getSize()
+        val physicalSize = image.getPhysicalSize()
+
+        // Change the rootfs disk's apparent size to 95% of the total disk size.
+        // Note that the physical size is not changed.
+        val statFs = StatFs(filesDir.absolutePath)
+        val hostSize = statFs.totalBytes
+        val expectedSize = hostSize * 95 / 100
+        Log.d(
+            TAG,
+            "rootfs apparent size=$curSize, physical size=$physicalSize, expectedSize=$expectedSize",
+        )
+
+        if (curSize != expectedSize) {
+            try {
+                image.truncate(expectedSize)
+            } catch (e: IOException) {
+                start(this, Exception("Failed to truncate disk", e))
+                return
+            }
         }
     }
 
