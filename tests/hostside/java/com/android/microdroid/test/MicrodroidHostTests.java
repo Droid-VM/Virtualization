@@ -26,7 +26,7 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeFalse;
 import static org.junit.Assume.assumeTrue;
 
@@ -1463,14 +1463,9 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     private void ensureUpdatableVmSupported() throws DeviceNotAvailableException {
-        if (PropertyUtil.isVendorApiLevelAtLeast(getAndroidDevice(), 202504)) {
-            assertTrue(
-                    "Missing Updatable VM support, have you declared Secretkeeper interface?",
-                    isUpdatableVmSupported());
-        } else {
-            assumeTrue(
-                    "Vendor API lower than 202504 may not support Updatable VM",
-                    isUpdatableVmSupported());
+        if (!isUpdatableVmSupported()
+                && PropertyUtil.isVendorApiLevelAtLeast(getAndroidDevice(), 202504)) {
+            fail("Missing Updatable VM support, have you declared Secretkeeper interface?");
         }
     }
 
