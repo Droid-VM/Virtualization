@@ -150,7 +150,12 @@ class VmLauncherService : Service() {
         val json = ConfigJson.from(this, image.configPath)
         val configBuilder = json.toConfigBuilder(this)
         val customImageConfigBuilder = json.toCustomImageConfigBuilder(this)
-        image.resize(diskSize)
+
+        if (!Flags.terminalStorageBalloon()) {
+            // Note: this doesn't always do the resizing. If the current image size is the same as
+            // the requested size which is rounded up to the page alignment, resizing is not done.
+            image.resize(diskSize)
+        }
 
         customImageConfigBuilder.setAudioConfig(
             AudioConfig.Builder().setUseSpeaker(true).setUseMicrophone(true).build()
