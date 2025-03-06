@@ -32,12 +32,6 @@ class SettingsActivity : AppCompatActivity() {
         val settingsItems =
             arrayOf(
                 SettingsItem(
-                    resources.getString(R.string.settings_disk_resize_title),
-                    resources.getString(R.string.settings_disk_resize_sub_title),
-                    R.drawable.baseline_storage_24,
-                    SettingsItemEnum.DiskResize,
-                ),
-                SettingsItem(
                     resources.getString(R.string.settings_port_forwarding_title),
                     resources.getString(R.string.settings_port_forwarding_sub_title),
                     R.drawable.baseline_call_missed_outgoing_24,
