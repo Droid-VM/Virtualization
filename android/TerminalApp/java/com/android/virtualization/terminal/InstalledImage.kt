@@ -25,9 +25,6 @@ import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
 import java.io.RandomAccessFile
-import java.lang.IllegalArgumentException
-import java.lang.NumberFormatException
-import java.lang.RuntimeException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
@@ -91,6 +88,16 @@ public class InstalledImage private constructor(val installDir: Path) {
     }
 
     @Throws(IOException::class)
+    fun getPhysicalSize(): Long {
+        val raf = RandomAccessFile(rootPartition.toFile(), "rw")
+        val fd = raf.fd
+        val stat = Os.fstat(fd)
+        raf.close()
+        // The unit of st_blocks is 512 byte in Android.
+        return 512L * stat.st_blocks
+    }
+
+    @Throws(IOException::class)
     fun getSmallestSizePossible(): Long {
         runE2fsck(rootPartition)
         val p: String = rootPartition.toAbsolutePath().toString()
@@ -126,6 +133,20 @@ public class InstalledImage private constructor(val installDir: Path) {
         }
         resizeFilesystem(rootPartition, roundedUpDesiredSize)
         return getSize()
+    }
+
+    @Throws(IOException::class)
+    fun truncate(size: Long) {
+        try {
+            val raf = RandomAccessFile(rootPartition.toFile(), "rw")
+            val fd = raf.fd
+            Os.ftruncate(fd, size)
+            raf.close()
+            Log.d(TAG, "Truncated space to: $size bytes")
+        } catch (e: ErrnoException) {
+            Log.e(TAG, "Failed to allocate space", e)
+            throw IOException("Failed to allocate space", e)
+        }
     }
 
     companion object {
