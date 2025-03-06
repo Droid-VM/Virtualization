@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26eb9690_21ccafab",
+        "filename": "libs/dice/open_dice/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-06T14:04:43Z",
+      "side": 1,
+      "message": "Could you add an integration test target to call this library as a user (e.g. [1]) to check the newly added functions?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/dice/open_dice/Android.bp;l\u003d86;drc\u003d36f783f32ed9c9c9c80b1108f317e43e5cb05c8f\n\nThe new functions are not exposed in `lib.rs` to be called from outside, tests will also help find issues like this.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 40
+      },
+      "revId": "97553cab3bc3b503651f3342584d2fc75211ddaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da4bd28d_eb265222",
+        "filename": "libs/dice/open_dice/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-06T14:04:43Z",
+      "side": 1,
+      "message": "nit: Is this needed for your project?",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "97553cab3bc3b503651f3342584d2fc75211ddaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aedaf2b_53a131a1",
+        "filename": "libs/dice/open_dice/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-06T14:04:43Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 37
+      },
+      "revId": "97553cab3bc3b503651f3342584d2fc75211ddaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09931b34_55252127",
+        "filename": "libs/dice/open_dice/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-06T14:04:43Z",
+      "side": 1,
+      "message": "These two have nothing to do with VM. I\u0027d prefer not to add them at all to avoid confusion.",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 2
+      },
+      "revId": "97553cab3bc3b503651f3342584d2fc75211ddaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f3aa7c1_1e5fdd1b",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-06T14:04:43Z",
+      "side": 1,
+      "message": "The public key size should be decided according to the `key_algorithm` received.",
+      "range": {
+        "startLine": 111,
+        "startChar": 35,
+        "endLine": 111,
+        "endChar": 69
+      },
+      "revId": "97553cab3bc3b503651f3342584d2fc75211ddaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf923afb_e35b7e93",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-06T14:04:43Z",
+      "side": 1,
+      "message": "Instead of changing the `context()` function, which is used in many places, could you just create a local `context` in this particular function to minimize impact of this change?",
+      "range": {
+        "startLine": 125,
+        "startChar": 16,
+        "endLine": 125,
+        "endChar": 39
+      },
+      "revId": "97553cab3bc3b503651f3342584d2fc75211ddaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
