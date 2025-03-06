@@ -15,7 +15,6 @@
  */
 package com.android.virtualization.terminal
 
-import android.app.Flags
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
