@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d494ad1f_e9480b7d",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-07T08:19:50Z",
+      "side": 1,
+      "message": "nit: This context serves nothing here as the error gets absorbed in the subsequent `unwrap_or()` step.",
+      "range": {
+        "startLine": 229,
+        "startChar": 36,
+        "endLine": 229,
+        "endChar": 86
+      },
+      "revId": "7f45f920b8136f3e51bdb544dc8bb6c69fe539cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
