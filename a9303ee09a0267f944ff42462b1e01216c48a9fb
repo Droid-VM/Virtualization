@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67f15ae5_816145b3",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/DebianServiceImpl.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 3364509
+      },
+      "writtenOn": "2025-03-07T06:40:21Z",
+      "side": 1,
+      "message": "is it possible this function run concurrently with `closeStorageBalloonRequestQueue()`? Maybe using `?` instead of `!!` will be better.",
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0d0feff_2b161bc5",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
         "patchSetId": 1
@@ -96,6 +113,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc23c9c1_f8779a3f",
+        "filename": "guest/storage_balloon_agent/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 3364509
+      },
+      "writtenOn": "2025-03-07T06:40:21Z",
+      "side": 1,
+      "message": "This context messages is little bit confusing, with line 54, even if `guest_available_bytes \u003e free`, at least the sub result should be 0, which won\u0027t cause the underflow.",
+      "range": {
+        "startLine": 58,
+        "startChar": 146,
+        "endLine": 58,
+        "endChar": 167
+      },
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "673070cc_9749af12",
+        "filename": "guest/storage_balloon_agent/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 3364509
+      },
+      "writtenOn": "2025-03-07T06:40:21Z",
+      "side": 1,
+      "message": "QQ: In this calculation, why are we rounding down instead of rounding up?",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 62
+      },
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d555eca_681532b5",
         "filename": "guest/storage_balloon_agent/src/main.rs",
         "patchSetId": 1
@@ -135,6 +198,29 @@
         "startChar": 26,
         "endLine": 88,
         "endChar": 34
+      },
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cca8f4e7_ea8b8c7b",
+        "filename": "guest/storage_balloon_agent/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 3364509
+      },
+      "writtenOn": "2025-03-07T06:40:21Z",
+      "side": 1,
+      "message": "set storage balloon?\n```suggestion\n            error!(\"failed to set storage balloon size: {}\", e);\n```",
+      "range": {
+        "startLine": 117,
+        "startChar": 30,
+        "endLine": 117,
+        "endChar": 41
       },
       "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
