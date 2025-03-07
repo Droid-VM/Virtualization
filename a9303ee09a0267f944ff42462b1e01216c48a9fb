@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fffe4d6_4a325e7c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-07T11:28:53Z",
+      "side": 1,
+      "message": "Added a logic to change delay based on available disk space as `calculateDelaySeconds` in `StorageBalloonWorker`.\n\nYeah, `ACTION_DEVICE_STORAGE_LOW` is deprecated and we can no longer receive it.",
+      "parentUuid": "a1dcc259_22ef8381",
+      "range": {
+        "startLine": 77,
+        "startChar": 56,
+        "endLine": 77,
+        "endChar": 57
+      },
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea5f222d_2a6e040b",
@@ -78,6 +102,30 @@
       "writtenOn": "2025-03-06T06:33:37Z",
       "side": 1,
       "message": "For this type of task, https://developer.android.com/reference/android/app/job/JobScheduler is recommended (and I believe semi-enforced).",
+      "range": {
+        "startLine": 109,
+        "startChar": 35,
+        "endLine": 109,
+        "endChar": 44
+      },
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e4cdae8_7a8cc229",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-07T11:28:53Z",
+      "side": 1,
+      "message": "Thanks! It looks like WorkManger, which uses JobScheduler inside, is preferred if we don\u0027t need something avaialbe only in JobScheduler.\nhttps://developer.android.com/reference/androidx/work/WorkManager\n\nRewrited with WorkManager.",
+      "parentUuid": "ea5f222d_2a6e040b",
       "range": {
         "startLine": 109,
         "startChar": 35,
@@ -134,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d1c0dc_568165f7",
+        "filename": "guest/storage_balloon_agent/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-07T11:28:53Z",
+      "side": 1,
+      "message": "nice catch. This sub must not fail. Updated.",
+      "parentUuid": "bc23c9c1_f8779a3f",
+      "range": {
+        "startLine": 58,
+        "startChar": 146,
+        "endLine": 58,
+        "endChar": 167
+      },
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "673070cc_9749af12",
@@ -147,6 +219,30 @@
       "writtenOn": "2025-03-07T06:40:21Z",
       "side": 1,
       "message": "QQ: In this calculation, why are we rounding down instead of rounding up?",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 62
+      },
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb9c5ec_15d46798",
+        "filename": "guest/storage_balloon_agent/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-07T11:28:53Z",
+      "side": 1,
+      "message": "Good point. rounding up should be better, as it\u0027s more restrict for guest.",
+      "parentUuid": "673070cc_9749af12",
       "range": {
         "startLine": 60,
         "startChar": 8,
@@ -203,6 +299,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b1c6fbf_7a6ea2f5",
+        "filename": "guest/storage_balloon_agent/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-07T11:28:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d555eca_681532b5",
+      "range": {
+        "startLine": 88,
+        "startChar": 15,
+        "endLine": 88,
+        "endChar": 25
+      },
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "599bf7b5_105679d5",
+        "filename": "guest/storage_balloon_agent/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-07T11:28:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9359c81_64cc85ce",
+      "range": {
+        "startLine": 88,
+        "startChar": 26,
+        "endLine": 88,
+        "endChar": 34
+      },
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cca8f4e7_ea8b8c7b",
@@ -216,6 +360,30 @@
       "writtenOn": "2025-03-07T06:40:21Z",
       "side": 1,
       "message": "set storage balloon?\n```suggestion\n            error!(\"failed to set storage balloon size: {}\", e);\n```",
+      "range": {
+        "startLine": 117,
+        "startChar": 30,
+        "endLine": 117,
+        "endChar": 41
+      },
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58c68f75_4c9acf38",
+        "filename": "guest/storage_balloon_agent/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-07T11:28:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cca8f4e7_ea8b8c7b",
       "range": {
         "startLine": 117,
         "startChar": 30,
