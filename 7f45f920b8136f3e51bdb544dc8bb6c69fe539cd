@@ -46,6 +46,30 @@
       },
       "revId": "7f45f920b8136f3e51bdb544dc8bb6c69fe539cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a012f392_3040ad5d",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-03-07T18:56:02Z",
+      "side": 1,
+      "message": "`res.map(|val| val.parse::\u003ci32\u003e().with_context(|| format!(\"Failed to read {prop}\")))` is an `Option\u003cResult\u003ci32\u003e\u003e` and the `unwrap_or` only removes the `Option`",
+      "parentUuid": "edb6d7d6_2006a214",
+      "range": {
+        "startLine": 229,
+        "startChar": 36,
+        "endLine": 229,
+        "endChar": 86
+      },
+      "revId": "7f45f920b8136f3e51bdb544dc8bb6c69fe539cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
