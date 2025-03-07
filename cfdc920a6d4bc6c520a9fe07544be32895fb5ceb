@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcc8a85a_23ee178e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-03-07T19:03:57Z",
+      "side": 1,
+      "message": "I suspect the death of the VM is bringing down the service, but then we try to use the service later which is causing a fatal crash.\n\nhttps://android-bug-tool.corp.google.com/bug_tool?url\u003dhttps%3A%2F%2Fandroid-build.googleplex.com%2Fbuilds%2FI80500010373105510%2F13160950%252Ftest-mapping-avf-presubmit%252Finv_17129765943615052612%252Fsandbox-avf_backcompat_tests%2523test_device_tree_compat-19151FDF600FD3-logcat-on-failure_4588260697956137509.txt\u0026source\u003dABDX",
+      "parentUuid": "e59ff7fe_b7ee4e8b",
+      "revId": "cfdc920a6d4bc6c520a9fe07544be32895fb5ceb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "277acb53_a91649be",
         "filename": "tests/backcompat_test/src/main.rs",
         "patchSetId": 2
