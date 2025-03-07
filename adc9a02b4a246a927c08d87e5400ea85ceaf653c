@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "26f9e11e_0af7ac6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-07T08:16:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "adc9a02b4a246a927c08d87e5400ea85ceaf653c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b256218b_284f8521",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 1
@@ -55,6 +72,30 @@
       "side": 1,
       "message": "Correct - The logic here would be to fail if `Secretkeeper` is not available but the device is launched after Android V.\n\nDevices released with older versions of Android don\u0027t need to support upgradable VMs, even after they upgrade to the latest version of Android, however they have the option to.",
       "parentUuid": "b256218b_284f8521",
+      "range": {
+        "startLine": 1472,
+        "startChar": 21,
+        "endLine": 1472,
+        "endChar": 49
+      },
+      "revId": "adc9a02b4a246a927c08d87e5400ea85ceaf653c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "875bd484_575a9570",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-07T08:16:22Z",
+      "side": 1,
+      "message": "\u003e The logic here would be to fail if Secretkeeper is not available but the device is launched after Android V.\n\nCorrect. Updatable VM feature relies on the VM DICE chain, and a valid DICE chain should be ROM-rooted. Since the ROM rooted aspect cannot change post-factory through any update, we need establish a way for determining the first vendor API level across both GRF and non-GRF devices. Using `ro.vendor.api_level` addresses this. @jiyong@google.com could you please review this for confirmation?",
+      "parentUuid": "7aac5e25_6922f7fe",
       "range": {
         "startLine": 1472,
         "startChar": 21,
