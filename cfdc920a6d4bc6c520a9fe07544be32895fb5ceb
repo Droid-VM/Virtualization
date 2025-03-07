@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "277acb53_a91649be",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-03-07T18:58:33Z",
+      "side": 1,
+      "message": "how about\n\n```\nlet Some(val) \u003d rustutils::system_properties::read(prop)? else {\n    return Ok(-1);\n};\nval.parse::\u003ci32\u003e().with_context(|| format!(\"Failed to read {prop}\"))\n```",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 68
+      },
+      "revId": "cfdc920a6d4bc6c520a9fe07544be32895fb5ceb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
