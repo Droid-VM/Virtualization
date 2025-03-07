@@ -16,6 +16,29 @@
       "message": "Sorry for the spam earlier, realized the logic was incorrect - This is the correct logic that this function should be doing (check `ro.vendor.api_level` instead of `ro.board.api_level`)",
       "revId": "adc9a02b4a246a927c08d87e5400ea85ceaf653c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b256218b_284f8521",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2025-03-07T05:20:36Z",
+      "side": 1,
+      "message": "Note: Using `getVsrApilevel` means that the Updatable VM may not be supported for the devices lauched with Android V or earlier even after they are upgraded to the latest Android.",
+      "range": {
+        "startLine": 1472,
+        "startChar": 21,
+        "endLine": 1472,
+        "endChar": 49
+      },
+      "revId": "adc9a02b4a246a927c08d87e5400ea85ceaf653c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
