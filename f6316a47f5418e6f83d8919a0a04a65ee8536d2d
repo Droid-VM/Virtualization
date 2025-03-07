@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce7f068e_8ae67e86",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/StorageBalloonWorker.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-07T15:25:46Z",
+      "side": 1,
+      "message": "These are many tunable parameters. Consider adding comments in case these need to be adjusted.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 57
+      },
+      "revId": "f6316a47f5418e6f83d8919a0a04a65ee8536d2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63568a88_ce015d6e",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-07T15:25:46Z",
+      "side": 1,
+      "message": "This part can just be `Runnable {`",
+      "range": {
+        "startLine": 86,
+        "startChar": 39,
+        "endLine": 88,
+        "endChar": 32
+      },
+      "revId": "f6316a47f5418e6f83d8919a0a04a65ee8536d2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d566255_0e404a69",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-07T15:25:46Z",
+      "side": 1,
+      "message": "readability. variable name too long. consider introducing a local variable with a simpler name. ex: `cur`.",
+      "range": {
+        "startLine": 91,
+        "startChar": 24,
+        "endLine": 91,
+        "endChar": 48
+      },
+      "revId": "f6316a47f5418e6f83d8919a0a04a65ee8536d2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c65877e9_78c0c299",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-07T15:25:46Z",
+      "side": 1,
+      "message": "This part is duplicated in StorageBalloonWorker. Please dedup.",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 418,
+        "endChar": 5
+      },
+      "revId": "f6316a47f5418e6f83d8919a0a04a65ee8536d2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
