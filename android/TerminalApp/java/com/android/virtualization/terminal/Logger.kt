@@ -30,6 +30,7 @@ import java.lang.RuntimeException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardOpenOption
+import java.time.LocalDateTime
 import java.util.concurrent.ExecutorService
 import libcore.io.Streams
 
@@ -38,23 +39,30 @@ import libcore.io.Streams
  */
 internal object Logger {
     fun setup(vm: VirtualMachine, path: Path, executor: ExecutorService) {
+        val tag = vm.name
         if (vm.config.debugLevel != VirtualMachineConfig.DEBUG_LEVEL_FULL) {
+            Log.i(tag, "Logs are not captured. Non-debuggable VM.")
             return
         }
 
         try {
             val console = vm.getConsoleOutput()
-            val file = Files.newOutputStream(path, StandardOpenOption.CREATE)
+            val file =
+                Files.newOutputStream(path, StandardOpenOption.SYNC, StandardOpenOption.APPEND)
             executor.submit<Int?> {
                 console.use { console ->
                     LineBufferedOutputStream(file).use { fileOutput ->
+                        val now = LocalDateTime.now()
+                        val header = "\n\nVirtual machine started at $now"
+                        fileOutput.write(header.toByteArray())
+
                         Streams.copy(console, fileOutput)
                     }
                 }
             }
 
             val log = vm.getLogOutput()
-            executor.submit<Unit> { log.use { writeToLogd(it, vm.name) } }
+            executor.submit<Unit> { log.use { writeToLogd(it, tag) } }
         } catch (e: VirtualMachineException) {
             throw RuntimeException(e)
         } catch (e: IOException) {
@@ -63,11 +71,11 @@ internal object Logger {
     }
 
     @Throws(IOException::class)
-    private fun writeToLogd(input: InputStream?, vmName: String?) {
+    private fun writeToLogd(input: InputStream?, tag: String?) {
         val reader = BufferedReader(InputStreamReader(input))
         reader
             .useLines { lines -> lines.takeWhile { !Thread.interrupted() } }
-            .forEach { Log.d(vmName, it) }
+            .forEach { Log.d(tag, it) }
     }
 
     private class LineBufferedOutputStream(out: OutputStream?) : BufferedOutputStream(out) {
