@@ -22,6 +22,7 @@ use crate::debug_config::{DebugConfig, DebugPolicy};
 use crate::dt_overlay::{create_device_tree_overlay, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
 use crate::payload::{ApexInfoList, add_microdroid_payload_images, add_microdroid_system_images, add_microdroid_vendor_image};
 use crate::selinux::{check_host_service_permission, check_tee_service_permission, getfilecon, getprevcon, SeContext};
+use crate::host_services;
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::{
     Certificate::Certificate,
@@ -49,7 +50,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IGlobalVmContext::IGlobalVmContext;
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVirtualizationServiceInternal::IVirtualizationServiceInternal;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
-        BnVirtualMachineService, IVirtualMachineService,
+        BnVirtualMachineService, IVirtualMachineService, ServiceConnectionInfo::ServiceConnectionInfo,
 };
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::ISecretkeeper::{BnSecretkeeper, ISecretkeeper};
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::SecretId::SecretId;
@@ -2238,6 +2239,8 @@ impl<T> AsRef<T> for BorrowedOrOwned<'_, T> {
 struct VirtualMachineService {
     state: Arc<Mutex<State>>,
     cid: Cid,
+    // Keep a map of instances to ports to know if we've already set up a proxy
+    proxied_services: Arc<Mutex<HashMap<String, i32>>>,
 }
 
 impl Interface for VirtualMachineService {}
@@ -2317,6 +2320,22 @@ impl IVirtualMachineService for VirtualMachineService {
     fn claimSecretkeeperEntry(&self, id: &[u8; 64]) -> binder::Result<()> {
         GLOBAL_SERVICE.claimSecretkeeperEntry(id)
     }
+
+    fn getServiceConnectionInfo(&self, name: &str) -> binder::Result<ServiceConnectionInfo> {
+        // If we've previously proxied this service, we only need to return the connection info
+        if let Some(p) = self.proxied_services.lock().unwrap().get(name) {
+            return Ok(ServiceConnectionInfo { port: *p });
+        }
+
+        let info = host_services::get_service_connection_info(name, self.cid)?;
+
+        self.proxied_services.lock().unwrap().insert(name.to_string(), info.port);
+        Ok(info)
+    }
+
+    fn getSupportedHostServices(&self) -> binder::Result<Vec<String>> {
+        host_services::get_supported_host_services()
+    }
 }
 
 fn is_secretkeeper_supported() -> bool {
@@ -2327,7 +2346,7 @@ fn is_secretkeeper_supported() -> bool {
 impl VirtualMachineService {
     fn new_binder(state: Arc<Mutex<State>>, cid: Cid) -> Strong<dyn IVirtualMachineService> {
         BnVirtualMachineService::new_binder(
-            VirtualMachineService { state, cid },
+            VirtualMachineService { state, cid, proxied_services: Default::default() },
             BinderFeatures::default(),
         )
     }
