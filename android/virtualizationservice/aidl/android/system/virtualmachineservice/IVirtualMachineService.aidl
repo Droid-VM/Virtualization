@@ -69,4 +69,21 @@ interface IVirtualMachineService {
      * @param id Identifier for the secret held in Secretkeeper for the caller
      */
     void claimSecretkeeperEntry(in byte[64] id);
+
+    /**
+     * VSOCK connection info for a host service
+     */
+    parcelable ServiceConnectionInfo {
+        int port;
+    }
+
+    /**
+     * Request VSOCK connection info for a specific host service.
+     */
+    ServiceConnectionInfo getServiceConnectionInfo(in String name);
+
+    /**
+     * Request the supported host VSOCK services.
+     */
+    String[] getSupportedHostServices();
 }
