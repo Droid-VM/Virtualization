@@ -18,6 +18,7 @@ mod dice;
 mod instance;
 mod ioutil;
 mod payload;
+mod rpc_servicemanager;
 mod swap;
 mod verify;
 mod vm_payload_service;
@@ -33,6 +34,7 @@ use android_system_virtualization_payload::aidl::android::system::virtualization
 
 use crate::dice::dice_derivation;
 use crate::instance::{InstanceDisk, MicrodroidData};
+use crate::rpc_servicemanager::register_rpc_servicemanager;
 use crate::verify::verify_payload;
 use crate::vm_payload_service::register_vm_payload_service;
 use anyhow::{anyhow, bail, ensure, Context, Error, Result};
@@ -417,6 +419,8 @@ fn try_run_payload(
         vm_payload_service_fd,
         is_new_instance,
     )?;
+
+    register_rpc_servicemanager(service.clone())?;
 
     // Set export_tombstones if enabled
     if should_export_tombstones(&config) {
