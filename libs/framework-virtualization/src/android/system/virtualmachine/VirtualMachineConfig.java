@@ -836,6 +836,14 @@ public final class VirtualMachineConfig {
                         .orElse(null);
         config.teeServices = EMPTY_STRING_ARRAY;
         config.customMemoryBackingFiles = new CustomMemoryBackingFile[0];
+        // FIXME for testing only
+        config.hostServices =
+                new String[] {
+                    "android.frameworks.stats.IStats/default",
+                    "something_else",
+                    "storaged",
+                    "android.frameworks.vibrator.IVibratorControlService/default"
+                };
         return config;
     }
 
@@ -906,6 +914,14 @@ public final class VirtualMachineConfig {
 
         vsConfig.boostUclamp = mShouldBoostUclamp;
         vsConfig.hugePages = mShouldUseHugepages;
+        // FIXME for testing only
+        vsConfig.hostServices =
+                new String[] {
+                    "android.frameworks.stats.IStats/default",
+                    "something_else",
+                    "storaged",
+                    "android.frameworks.vibrator.IVibratorControlService/default"
+                };
 
         return vsConfig;
     }
