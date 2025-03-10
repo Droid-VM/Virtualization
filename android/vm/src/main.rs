@@ -75,6 +75,10 @@ pub struct CommonConfig {
     #[cfg(tee_services_allowlist)]
     #[arg(long)]
     tee_services: Vec<String>,
+
+    /// Host services this VM wants to access.
+    #[arg(long)]
+    host_services: Vec<String>,
 }
 
 impl CommonConfig {
