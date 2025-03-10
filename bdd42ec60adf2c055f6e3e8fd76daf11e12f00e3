@@ -22,6 +22,30 @@
       },
       "revId": "bdd42ec60adf2c055f6e3e8fd76daf11e12f00e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9725035c_80c4b06c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/Application.kt",
+        "patchSetId": 12
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 3364509
+      },
+      "writtenOn": "2025-03-10T04:42:05Z",
+      "side": 1,
+      "message": "Yes, I verified this function will never be called. Created a CL for removing it: aosp/3529763",
+      "parentUuid": "0f36f219_5fb117b3",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 55
+      },
+      "revId": "bdd42ec60adf2c055f6e3e8fd76daf11e12f00e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
