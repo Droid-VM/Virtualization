@@ -46,6 +46,7 @@ use microdroid_payload_config::{ApkConfig, OsConfig, Task, TaskType, VmPayloadCo
 use nix::mount::{umount2, MntFlags};
 use nix::sys::signal::Signal;
 use payload::load_metadata;
+use rpc_servicemanager::register_rpc_servicemanager;
 use rpcbinder::RpcSession;
 use rustutils::sockets::android_get_control_socket;
 use rustutils::system_properties;
@@ -416,6 +417,12 @@ fn try_run_payload(
         vm_secret,
         vm_payload_service_fd,
         is_new_instance,
+    )?;
+
+    register_rpc_servicemanager(
+        service
+            .getHostRpcProvider()
+            .context("failed to get the host RPC provider from the host")?,
     )?;
 
     // Set export_tombstones if enabled
