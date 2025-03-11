@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10102183_d78b6ee6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-03-11T22:41:11Z",
+      "side": 1,
+      "message": "The spot I\u0027m checking it from in this CL (`create_vm_internal`) will should catch all VMs.\n\nWhen I say it is tricky, I mean that we can\u0027t differentiate randomly assigned IDs from staticly chosen IDs. They all provide the ID the same way. We\u0027d need to do something like keep a DB of the randomly assigned IDs and then check if the ID is in it if we want to treat them differently policy wise.",
+      "parentUuid": "e80a29ad_b22acb5f",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 69
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "251b1599_c9e3d0a3",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 2
@@ -299,6 +323,30 @@
       "writtenOn": "2025-02-26T11:45:29Z",
       "side": 1,
       "message": "How about?\n```\nlet vendor_like \u003d matches!(calling_partition, CallingPartition::Vendor | CallingPartition::Odm);\n\n(vendor_like \u0026\u0026 !instance_id.starts_with(INSTANCE_ID_VENDOR_PREFIX)) ||\n(!vendor_like \u0026\u0026 instance_id.starts_with(INSTANCE_ID_VENDOR_PREFIX))\n{\n   // err\n}\n```\n\nThis will ensure no other partiiton can claim from vendor reserved range either",
+      "range": {
+        "startLine": 616,
+        "startChar": 8,
+        "endLine": 617,
+        "endChar": 66
+      },
+      "revId": "f20605ab620509b25545d2f1640e9a041c421f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a52f3ef8_6f811bc8",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-03-11T22:41:11Z",
+      "side": 1,
+      "message": "What about the old randomly assigned IDs? There\u0027d be a 1 in 2^32 chance of a collision with the vendor prefix, which is reasonably likely if you\u0027ve got 100s of millions of them.",
+      "parentUuid": "607ea432_197804dc",
       "range": {
         "startLine": 616,
         "startChar": 8,
