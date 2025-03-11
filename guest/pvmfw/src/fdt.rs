@@ -21,6 +21,7 @@ use crate::RebootReason;
 use alloc::collections::BTreeMap;
 use alloc::ffi::CString;
 use alloc::format;
+use alloc::string::String;
 use alloc::vec::Vec;
 use core::cmp::max;
 use core::cmp::min;
@@ -1369,6 +1370,7 @@ pub fn modify_for_next_stage(
     kaslr_seed: u64,
     reserved_mem: Option<&[u8]>,
     guest_page_size: usize,
+    vm_name: Option<String>,
 ) -> libfdt::Result<()> {
     if let Some(debug_policy) = debug_policy {
         let backup = Vec::from(fdt.as_slice());
@@ -1399,13 +1401,15 @@ pub fn modify_for_next_stage(
     }
 
     if let Some(reserved_mem) = reserved_mem {
-        crate::config::reserved_mem::add_reserved_mem(
-            fdt,
-            reserved_mem,
-            guest_page_size,
-            c"desktop-trusty",
-        )
-        .map_err(|_| FdtError::BadStructure)?;
+        if let Some(vm_name) = vm_name {
+            crate::config::reserved_mem::add_reserved_mem(
+                fdt,
+                reserved_mem,
+                guest_page_size,
+                &vm_name,
+            )
+            .map_err(|_| FdtError::BadStructure)?;
+        }
     }
 
     fdt.pack()?;
