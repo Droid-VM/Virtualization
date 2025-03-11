@@ -167,12 +167,12 @@ pub fn add_reserved_mem(
     fdt: &mut Fdt,
     config: &[u8],
     guest_align: usize,
-    name: &CStr,
+    name: &str,
 ) -> Result<(), Error> {
     let cfg_header = ConfigHeader::new(config)?;
 
     for hdr in cfg_header.into_iter() {
-        if hdr.vm_name == name {
+        if hdr.vm_name.to_str().map_err(|_| Error::InvalidCStr)? == name {
             if hdr.blob.is_empty() {
                 return Err(Error::ZeroSize);
             }
@@ -366,7 +366,7 @@ mod tests {
         let fdt = Fdt::from_mut_slice(&mut fdt_data).unwrap();
         fdt.unpack().unwrap();
 
-        add_reserved_mem(fdt, &bytes, 4096, c"Fry").unwrap();
+        add_reserved_mem(fdt, &bytes, 4096, "Fry").unwrap();
         fdt.pack().unwrap();
 
         let rmem = fdt.node(c"/reserved-memory").unwrap().unwrap();
@@ -400,7 +400,7 @@ mod tests {
         let fdt = Fdt::from_mut_slice(&mut fdt_data).unwrap();
         fdt.unpack().unwrap();
 
-        add_reserved_mem(fdt, &bytes, 4096, c"Leela").unwrap();
+        add_reserved_mem(fdt, &bytes, 4096, "Leela").unwrap();
         fdt.pack().unwrap();
 
         let rmem = fdt.node(c"/reserved-memory").unwrap().unwrap();
@@ -432,7 +432,7 @@ mod tests {
         let fdt = Fdt::from_mut_slice(&mut fdt_data).unwrap();
         fdt.unpack().unwrap();
 
-        add_reserved_mem(fdt, &bytes, 4096, c"Zoidberg").unwrap();
+        add_reserved_mem(fdt, &bytes, 4096, "Zoidberg").unwrap();
         fdt.pack().unwrap();
 
         let rmem = fdt.node(c"/reserved-memory").unwrap().unwrap();
@@ -458,7 +458,7 @@ mod tests {
         let mut fdt_data = vec![0u8; 1024];
         let fdt = Fdt::create_empty_tree(&mut fdt_data).unwrap();
 
-        assert_eq!(add_reserved_mem(fdt, &bytes, 4096, c"Fry"), Err(Error::MissingNode));
+        assert_eq!(add_reserved_mem(fdt, &bytes, 4096, "Fry"), Err(Error::MissingNode));
     }
 
     #[test]
@@ -479,7 +479,7 @@ mod tests {
         let fdt = Fdt::from_mut_slice(&mut fdt_data).unwrap();
         fdt.unpack().unwrap();
 
-        assert_eq!(add_reserved_mem(fdt, &bytes, 4096, c"Fry"), Err(Error::ZeroSize));
+        assert_eq!(add_reserved_mem(fdt, &bytes, 4096, "Fry"), Err(Error::ZeroSize));
     }
 
     #[test]
@@ -500,6 +500,6 @@ mod tests {
         let fdt = Fdt::from_mut_slice(&mut fdt_data).unwrap();
         fdt.unpack().unwrap();
 
-        assert_eq!(add_reserved_mem(fdt, &bytes, 4095, c"Fry"), Err(Error::BadGuestAlign));
+        assert_eq!(add_reserved_mem(fdt, &bytes, 4095, "Fry"), Err(Error::BadGuestAlign));
     }
 }

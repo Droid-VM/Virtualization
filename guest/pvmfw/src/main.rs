@@ -191,6 +191,7 @@ fn main<'a>(
         kaslr_seed,
         config,
         guest_page_size,
+        verified_boot_data.name,
     )
     .map_err(|e| {
         error!("Failed to configure device tree: {e}");
