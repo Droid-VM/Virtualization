@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dc85e78_6c3480cb",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/DebianServiceImpl.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-11T08:52:59Z",
+      "side": 1,
+      "message": "Nice catch! I\u0027ve added `mlock` to avoid the race.",
+      "parentUuid": "67f15ae5_816145b3",
+      "revId": "a9303ee09a0267f944ff42462b1e01216c48a9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0d0feff_2b161bc5",
