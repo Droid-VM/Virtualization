@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e45c312_483a8a1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-11T14:32:50Z",
+      "side": 1,
+      "message": "Some comments. Not sure if it\u0027s ready for review or not. Could you please let me know when the cl is ready for review? Thanks!",
+      "revId": "b401c1f9579a60de807b74dd8253fc44fd7cf8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc727846_0a71d21f",
+        "filename": "libs/dice/open_dice/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-11T14:32:50Z",
+      "side": 1,
+      "message": "Could you also add this test to TEST_MAPPING?",
+      "range": {
+        "startLine": 111,
+        "startChar": 11,
+        "endLine": 111,
+        "endChar": 55
+      },
+      "revId": "b401c1f9579a60de807b74dd8253fc44fd7cf8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7825c403_8bb24f99",
+        "filename": "libs/dice/open_dice/src/dice.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-11T14:32:50Z",
+      "side": 1,
+      "message": "Could you create a context in the function directly with as following? We don\u0027t have any other usecases for such conversion, it\u0027s also not so clear why a context take the same authority/subject algorithm.\n\n```\nlet context \u003d DiceContext_ {\n  authority_algorithm: key_algorithm.into(),\n  subject_algorithm: key_algorithm.into(),\n};\n```",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 1
+      },
+      "revId": "b401c1f9579a60de807b74dd8253fc44fd7cf8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28163dce_a2e97a4c",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-11T14:32:50Z",
+      "side": 1,
+      "message": "Can you drop this?",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 19
+      },
+      "revId": "b401c1f9579a60de807b74dd8253fc44fd7cf8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a56f530_fe882faa",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-11T14:32:50Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 19
+      },
+      "revId": "b401c1f9579a60de807b74dd8253fc44fd7cf8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22bc4761_d969bd8c",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-11T14:32:50Z",
+      "side": 1,
+      "message": "Let\u0027s try not push dead code.",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 19
+      },
+      "revId": "b401c1f9579a60de807b74dd8253fc44fd7cf8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a57e5a6a_5c69af6a",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-11T14:32:50Z",
+      "side": 1,
+      "message": "Can we avoid such printing in this library? You can add a new error type and let caller log if they want.",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 33
+      },
+      "revId": "b401c1f9579a60de807b74dd8253fc44fd7cf8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6375c32b_0f9346d4",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-11T14:32:50Z",
+      "side": 1,
+      "message": "There\u0027s no \"otherwise\" case for this function since it\u0027s only available in multialg version.",
+      "range": {
+        "startLine": 346,
+        "startChar": 12,
+        "endLine": 346,
+        "endChar": 40
+      },
+      "revId": "b401c1f9579a60de807b74dd8253fc44fd7cf8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a0d1e3b_d4b02df2",
+        "filename": "libs/dice/open_dice/src/retry.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-11T14:32:50Z",
+      "side": 1,
+      "message": "Please don\u0027t push dead code.",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 19
+      },
+      "revId": "b401c1f9579a60de807b74dd8253fc44fd7cf8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebb5a6f1_a903e972",
+        "filename": "libs/dice/open_dice/src/retry.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-11T14:32:50Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 19
+      },
+      "revId": "b401c1f9579a60de807b74dd8253fc44fd7cf8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
