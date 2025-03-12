@@ -22,6 +22,30 @@
       },
       "revId": "17867009eab2f8e3ec4b177bdd835dbd47987b25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96100fdc_5e108781",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-03-12T14:21:38Z",
+      "side": 1,
+      "message": "This is equivalent to \"the functionality checking functionality is not enabled\", that may not always mean the functionality being checked is not enabled. I think returning false can be false negative, we should fail the result.\n\nMaybe the caller can handle the Exception since `isFeatureEnabled` cannot succed.",
+      "parentUuid": "e7611fdd_25c987ff",
+      "range": {
+        "startLine": 234,
+        "startChar": 7,
+        "endLine": 237,
+        "endChar": 26
+      },
+      "revId": "17867009eab2f8e3ec4b177bdd835dbd47987b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
