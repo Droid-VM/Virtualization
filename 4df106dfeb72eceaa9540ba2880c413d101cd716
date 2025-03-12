@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d7abe2b_53e36921",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-12T10:41:46Z",
+      "side": 1,
+      "message": "Oh sorry, as this CoseSign1 here doesn\u0027t cover another key, then one key algorithm is okay. Let\u0027s keep the one key version. Sorry for the back and forth.",
+      "parentUuid": "1af746aa_92db77f5",
+      "range": {
+        "startLine": 238,
+        "startChar": 4,
+        "endLine": 238,
+        "endChar": 32
+      },
+      "revId": "4df106dfeb72eceaa9540ba2880c413d101cd716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "38395798_98c55c8d",
         "filename": "libs/dice/open_dice/src/ops.rs",
         "patchSetId": 14
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "Should I do the same with `retry_*_multialg` functions too? (two params)",
       "parentUuid": "33bb55db_f4a23dc5",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 32
+      },
+      "revId": "4df106dfeb72eceaa9540ba2880c413d101cd716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78fef393_e8cabcdd",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-12T10:41:46Z",
+      "side": 1,
+      "message": "No. It\u0027s fine to keep one key.",
+      "parentUuid": "01d6daac_b69e0ccb",
       "range": {
         "startLine": 292,
         "startChar": 0,
