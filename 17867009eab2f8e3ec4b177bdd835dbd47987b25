@@ -94,6 +94,30 @@
       },
       "revId": "17867009eab2f8e3ec4b177bdd835dbd47987b25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00c84908_922cb5b3",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-03-12T15:48:22Z",
+      "side": 1,
+      "message": "\u003e By checking exception I guess?\n\nRight, but what action can it perform apart from skipping the test? \n\nI still slightly prefer to simply return false if check-feature-enabled failed (and maybe log the reason why it failed to host logs). There are no reasons check-feature-enable command should fail apart from trying to run it on a old build that doesn\u0027t implement it.",
+      "parentUuid": "6f3068bb_9e90e1b8",
+      "range": {
+        "startLine": 234,
+        "startChar": 7,
+        "endLine": 237,
+        "endChar": 26
+      },
+      "revId": "17867009eab2f8e3ec4b177bdd835dbd47987b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
