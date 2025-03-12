@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80ede431_c3815246",
+        "filename": "libs/dice/open_dice/tests/api_test.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-12T11:02:17Z",
+      "side": 1,
+      "message": "nit: You could add `key_algorithm` to the function above to avoid duplication here. It\u0027s fine to expose `EXPECTED_EC_P256_*` consts in all test variants.",
+      "range": {
+        "startLine": 292,
+        "startChar": 7,
+        "endLine": 292,
+        "endChar": 33
+      },
+      "revId": "6d750670b47ae0aef81c88208c67205cfcd95997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
