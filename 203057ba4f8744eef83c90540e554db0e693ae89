@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "143d7283_1b4c94ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-12T14:55:30Z",
+      "side": 1,
+      "message": "Oops, thanks.\nI added a new aconfig flag. \n\nI\u0027ll do more manual tests tomorrow, as `aflags list` didn\u0027t show my new flag for some reason on my local machine. `adb installl VmTerminalApp` may not be enough to add a new flag? Let me try full image build.",
+      "parentUuid": "4e8bc7ef_bcf2a03d",
+      "revId": "203057ba4f8744eef83c90540e554db0e693ae89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec610214_6ef9b620",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/DebianServiceImpl.kt",
         "patchSetId": 5
@@ -67,6 +85,24 @@
       "writtenOn": "2025-03-11T09:21:56Z",
       "side": 1,
       "message": "do nothing if the flag is not set.",
+      "revId": "203057ba4f8744eef83c90540e554db0e693ae89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b0375c1_640c8557",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/DebianServiceImpl.kt",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-12T14:55:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec610214_6ef9b620",
       "revId": "203057ba4f8744eef83c90540e554db0e693ae89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -84,6 +120,24 @@
       "writtenOn": "2025-03-11T09:21:56Z",
       "side": 1,
       "message": "please hide this behind the flag so that it doesn\u0027t affect 25Q2 release.\n\nyou will have to add a new flag under avf_flags.aconfig.",
+      "revId": "203057ba4f8744eef83c90540e554db0e693ae89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a6b3e72_ceab6b21",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 5
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-12T14:55:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61ca8ea8_c1fe5924",
       "revId": "203057ba4f8744eef83c90540e554db0e693ae89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
