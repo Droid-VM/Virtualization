@@ -70,6 +70,30 @@
       },
       "revId": "17867009eab2f8e3ec4b177bdd835dbd47987b25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f3068bb_9e90e1b8",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-03-12T14:32:43Z",
+      "side": 1,
+      "message": "\u003e How can a test handle an exception thrown from isFeatureEnabled?\n\nBy checking exception I guess?\n\nOn a second thought, maybe we should (instead of asserting), `assumeTrue(result.getStatus() \u003d\u003d CommandStatus.SUCCESS)`, that way the test would not silently succeed?",
+      "parentUuid": "66d3b6b9_8a5737d1",
+      "range": {
+        "startLine": 234,
+        "startChar": 7,
+        "endLine": 237,
+        "endChar": 26
+      },
+      "revId": "17867009eab2f8e3ec4b177bdd835dbd47987b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
