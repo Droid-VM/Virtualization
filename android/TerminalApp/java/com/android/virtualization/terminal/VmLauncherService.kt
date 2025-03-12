@@ -60,7 +60,6 @@ import java.lang.RuntimeException
 import java.net.InetSocketAddress
 import java.net.SocketAddress
 import java.nio.file.Files
-import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -117,8 +116,6 @@ class VmLauncherService : Service() {
 
     interface VmLauncherServiceCallback {
         fun onVmStart()
-
-        fun onTerminalAvailable(info: TerminalInfo)
 
         fun onVmStop()
 
@@ -233,56 +230,35 @@ class VmLauncherService : Service() {
 
         portNotifier = PortNotifier(this)
 
-        getTerminalServiceInfo()
-            .thenAcceptAsync(
-                { info ->
-                    val ipAddress = info.hostAddresses[0].hostAddress
-                    val port = info.port
-                    val bundle = Bundle()
-                    bundle.putString(KEY_TERMINAL_IPADDRESS, ipAddress)
-                    bundle.putInt(KEY_TERMINAL_PORT, port)
-                    resultReceiver!!.send(RESULT_TERMINAL_AVAIL, bundle)
-                    startDebianServer(ipAddress)
-                },
-                executorService,
-            )
-
-        return START_NOT_STICKY
-    }
-
-    private fun getTerminalServiceInfo(): CompletableFuture<NsdServiceInfo> {
-        val executor = Executors.newSingleThreadExecutor(TerminalThreadFactory(applicationContext))
+        // TODO: dedup this part
         val nsdManager = getSystemService<NsdManager?>(NsdManager::class.java)
-        val queryInfo = NsdServiceInfo()
-        queryInfo.serviceType = "_http._tcp"
-        queryInfo.serviceName = "ttyd"
-        var resolvedInfo = CompletableFuture<NsdServiceInfo>()
-
+        val info = NsdServiceInfo()
+        info.serviceType = "_http._tcp"
+        info.serviceName = "ttyd"
         nsdManager.registerServiceInfoCallback(
-            queryInfo,
-            executor,
+            info,
+            executorService!!,
             object : NsdManager.ServiceInfoCallback {
-                var found: Boolean = false
+                var started: Boolean = false
 
                 override fun onServiceInfoCallbackRegistrationFailed(errorCode: Int) {}
 
-                override fun onServiceInfoCallbackUnregistered() {
-                    executor.shutdown()
-                }
+                override fun onServiceInfoCallbackUnregistered() {}
 
                 override fun onServiceLost() {}
 
                 override fun onServiceUpdated(info: NsdServiceInfo) {
                     Log.i(TAG, "Service found: $info")
-                    if (!found) {
-                        found = true
+                    if (!started) {
+                        started = true
                         nsdManager.unregisterServiceInfoCallback(this)
-                        resolvedInfo.complete(info)
+                        startDebianServer(info.hostAddresses[0].hostAddress)
                     }
                 }
             },
         )
-        return resolvedInfo
+
+        return START_NOT_STICKY
     }
 
     private fun createNotificationForTerminalClose(): Notification {
@@ -462,10 +438,6 @@ class VmLauncherService : Service() {
         private const val RESULT_START = 0
         private const val RESULT_STOP = 1
         private const val RESULT_ERROR = 2
-        private const val RESULT_TERMINAL_AVAIL = 3
-
-        private const val KEY_TERMINAL_IPADDRESS = "address"
-        private const val KEY_TERMINAL_PORT = "port"
 
         private const val INITIAL_MEM_BALLOON_PERCENT = 10
         private const val MAX_MEM_BALLOON_PERCENT = 50
@@ -491,11 +463,6 @@ class VmLauncherService : Service() {
                         }
                         when (resultCode) {
                             RESULT_START -> callback.onVmStart()
-                            RESULT_TERMINAL_AVAIL -> {
-                                val ipAddress = resultData!!.getString(KEY_TERMINAL_IPADDRESS)
-                                val port = resultData!!.getInt(KEY_TERMINAL_PORT)
-                                callback.onTerminalAvailable(TerminalInfo(ipAddress!!, port))
-                            }
                             RESULT_STOP -> callback.onVmStop()
                             RESULT_ERROR -> callback.onVmError()
                         }
@@ -521,8 +488,6 @@ class VmLauncherService : Service() {
         }
     }
 }
-
-data class TerminalInfo(val ipAddress: String, val port: Int)
 
 data class DisplayInfo(val width: Int, val height: Int, val dpi: Int, val refreshRate: Int) :
     Parcelable {
