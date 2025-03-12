@@ -57,6 +57,30 @@
       ],
       "revId": "9c0b99f7a0b9c8a6d88b6efbaca975222cb31c0a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "010ce25f_50108236",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2025-03-12T04:18:23Z",
+      "side": 1,
+      "message": "What I\u0027ve observed from this bug was, the height of activeTerminalView is relying \non whether doubleline or singleline is visible. For instance:\n1. keysDoubleLine is visible.\n1. Observing activeTerminalView doesn\u0027t have enough height.\n1. keysDoubleLine is becoming invisible and keysSingleLine is becoming visible.\n1. Observing activeTerminalView now have enough height.\n1. keysSingleLine is becoming invisible and keysDoubleLine is becoming visible.\n1. Repeat steps 2-5.",
+      "parentUuid": "c1ca10f9_0a6bdd16",
+      "range": {
+        "startLine": 122,
+        "startChar": 45,
+        "endLine": 122,
+        "endChar": 49
+      },
+      "revId": "9c0b99f7a0b9c8a6d88b6efbaca975222cb31c0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
