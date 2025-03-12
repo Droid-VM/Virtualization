@@ -16,6 +16,47 @@
       "message": "@jeongik@google.com For foldable devices, it seems keyboard occupies exactly a half of screen when folding about 90 degrees. And view for the modifier keys are not included in the half of device screen occupied by keyboard. Was there any reason not to set modifier keys as a part of keyboard?",
       "revId": "9c0b99f7a0b9c8a6d88b6efbaca975222cb31c0a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ca10f9_0a6bdd16",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-12T04:13:18Z",
+      "side": 1,
+      "message": "may it be always `keysDoubleLine`? because we want to test if there is enough room for keysDoubleLine, and then if not we wanna use keysSingleLine",
+      "range": {
+        "startLine": 122,
+        "startChar": 45,
+        "endLine": 122,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e213ca97_6411da60",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+              "range": {
+                "startLine": 121,
+                "startChar": 0,
+                "endLine": 123,
+                "endChar": 0
+              },
+              "replacement": "        return activeTerminalView!!.height + keysDoubleLine.height \u003c 0.4f * activity.window.decorView.height\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9c0b99f7a0b9c8a6d88b6efbaca975222cb31c0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
