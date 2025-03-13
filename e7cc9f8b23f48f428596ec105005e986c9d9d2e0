@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f761f50c_1c47478f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MemBalloonController.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-13T07:26:18Z",
+      "side": 1,
+      "message": "I think it would be `\u003c\u003d` to reach MAX_PERCENT. or just set MAX_PERENT in else",
+      "range": {
+        "startLine": 68,
+        "startChar": 47,
+        "endLine": 68,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cdd51ad5_ecc6deb8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/MemBalloonController.kt",
+              "range": {
+                "startLine": 68,
+                "startChar": 0,
+                "endLine": 69,
+                "endChar": 0
+              },
+              "replacement": "                            if (balloonPercent \u003c\u003d MAX_PERCENT) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e7cc9f8b23f48f428596ec105005e986c9d9d2e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
