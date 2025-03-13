@@ -15,6 +15,7 @@
  */
 package com.android.virtualization.terminal
 
+import android.app.ForegroundServiceStartNotAllowedException
 import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
@@ -361,8 +362,12 @@ public class MainActivity :
                         .build()
                 )
                 .build()
-
-        run(this, this, notification, getDisplayInfo())
+        try {
+            run(this, this, notification, getDisplayInfo())
+        } catch (e: ForegroundServiceStartNotAllowedException) {
+            Log.e(TAG, "Failed to start VM because the activity is in the background.", e)
+            finish()
+        }
     }
 
     @VisibleForTesting
