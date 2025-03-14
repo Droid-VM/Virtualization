@@ -182,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86ad448f_ba3fad32",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:37:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1e1ac3b8_daf49ed5",
+      "range": {
+        "startLine": 70,
+        "startChar": 3,
+        "endLine": 70,
+        "endChar": 40
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01904765_b244d38c",
@@ -219,6 +243,30 @@
       "side": 1,
       "message": "pre-pvmfw auths the payload and pass it to pvmfw without any signing meta data. I can keep the print as it. It anyways give debug log about kernel load addr and size.",
       "parentUuid": "01904765_b244d38c",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 93
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58061380_93fdf722",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:37:58Z",
+      "side": 1,
+      "message": "Ack; so `signed_kernel` is the binary kernel to be entered, not the ELF (PIL), right?",
+      "parentUuid": "ac9385c3_2753ff0d",
       "range": {
         "startLine": 95,
         "startChar": 4,
