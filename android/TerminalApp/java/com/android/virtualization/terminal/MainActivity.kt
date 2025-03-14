@@ -52,6 +52,7 @@ import com.android.internal.annotations.VisibleForTesting
 import com.android.microdroid.test.common.DeviceProperties
 import com.android.system.virtualmachine.flags.Flags
 import com.android.virtualization.terminal.ErrorActivity.Companion.start
+import com.android.virtualization.terminal.InstalledImage.Companion.roundUp
 import com.android.virtualization.terminal.VmLauncherService.VmLauncherServiceCallback
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -316,6 +317,9 @@ public class MainActivity :
         // When storage ballooning flag is enabled, convert rootfs disk into a sparse file.
         if (Flags.terminalStorageBalloon()) {
             truncateDiskIfNecessary(image)
+        } else {
+            // If not, check if the disk is sparse. If so, convert it to non-sparse.
+            convertToNonSparseDiskIfNecessary(image)
         }
 
         val tapIntent = Intent(this, MainActivity::class.java)
@@ -363,7 +367,7 @@ public class MainActivity :
                 )
                 .build()
 
-        val diskSize = intent.getLongExtra(EXTRA_DISK_SIZE, image.getSize())
+        val diskSize = intent.getLongExtra(EXTRA_DISK_SIZE, image.getApparentSize())
 
         val intent =
             VmLauncherService.getIntentForStart(
@@ -386,15 +390,50 @@ public class MainActivity :
         return bootCompleted.block(timeoutMillis)
     }
 
-    private fun truncateDiskIfNecessary(image: InstalledImage) {
-        val curSize = image.getSize()
-        val physicalSize = image.getPhysicalSize()
-
-        // Change the rootfs disk's apparent size to 95% of the total disk size.
-        // Note that the physical size is not changed.
+    private fun calculateSparseDiskSize(): Long {
+        // With storage ballooning enabledd, we create a sparse file with 95% of the total size.
         val statFs = StatFs(filesDir.absolutePath)
         val hostSize = statFs.totalBytes
-        val expectedSize = hostSize * 95 / 100
+        return roundUp(hostSize * 95 / 100)
+    }
+
+    // Convert the rootfs disk to a non-sparse file.
+    private fun convertToNonSparseDiskIfNecessary(image: InstalledImage) {
+        try {
+            val curApparentSize = image.getApparentSize()
+            val curPhysicalSize = image.getPhysicalSize()
+            Log.d(TAG, "Current disk size: apparent=$curApparentSize, physical=$curPhysicalSize")
+
+            // If storage ballooning was enabled via Flags.terminalStorageBalloon() before but it's
+            // now disabled, the disk is still a sparse file whose apparent size is too large.
+            // We need to shrink it to the minimum size.
+            //
+            // The disk file is considered sparse if its apparent disk size matches the expected
+            // sparse disk size.
+            // In addition, we consider it sparse if the physical size is 90% or
+            // more less of its apparent size. This additional condition is a fallback for cases
+            // where the logic of calculating the expected sparse disk size since the disk is
+            // created.
+            if (
+                curApparentSize == calculateSparseDiskSize() ||
+                    curPhysicalSize < curApparentSize * 90 / 100
+            ) {
+                Log.d(TAG, "A sparse disk is detected. Shrink it to the minimum size.")
+                val newSize = image.shrinkToMinimumSize()
+                Log.d(TAG, "Shrink the disk image: $curApparentSize -> $newSize")
+            }
+        } catch (e: IOException) {
+            start(this, Exception("Failed to resize disk", e))
+            return
+        }
+    }
+
+    // Resize the rootfs disk as a sparse file.
+    private fun truncateDiskIfNecessary(image: InstalledImage) {
+        val curSize = image.getApparentSize()
+        val physicalSize = image.getPhysicalSize()
+
+        val expectedSize = calculateSparseDiskSize()
         Log.d(
             TAG,
             "rootfs apparent size=$curSize, physical size=$physicalSize, expectedSize=$expectedSize",
