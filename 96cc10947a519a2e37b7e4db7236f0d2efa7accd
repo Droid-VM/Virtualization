@@ -64,6 +64,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32487150_39d5fdb5",
+        "filename": "guest/pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:56Z",
+      "side": 1,
+      "message": "Done in PS2",
+      "parentUuid": "37c8fb54_f3480fcb",
+      "range": {
+        "startLine": 812,
+        "startChar": 0,
+        "endLine": 817,
+        "endChar": 6
+      },
+      "revId": "96cc10947a519a2e37b7e4db7236f0d2efa7accd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a1690fd_ea09876f",
@@ -87,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "020db34c_40076cfb",
+        "filename": "guest/pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:56Z",
+      "side": 1,
+      "message": "Done in PS2",
+      "parentUuid": "7a1690fd_ea09876f",
+      "range": {
+        "startLine": 1013,
+        "startChar": 26,
+        "endLine": 1013,
+        "endChar": 27
+      },
+      "revId": "96cc10947a519a2e37b7e4db7236f0d2efa7accd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a15e5156_6cdd7739",
@@ -100,6 +148,30 @@
       "writtenOn": "2025-02-04T17:37:13Z",
       "side": 1,
       "message": "Not need to `warn!` on a missing device, AFAIU; just\n```\nlet wdt_info \u003d read_wdt_info_from(fdt).map_err(...)?;\nif let Some(ref info) \u003d wdt_info {\n    validate_wdt_info(info, cpus.len())?;\n}\n```",
+      "range": {
+        "startLine": 1151,
+        "startChar": 7,
+        "endLine": 1154,
+        "endChar": 5
+      },
+      "revId": "96cc10947a519a2e37b7e4db7236f0d2efa7accd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "527ef8e5_4e4c6302",
+        "filename": "guest/pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1154,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:56Z",
+      "side": 1,
+      "message": "Done in PS2",
+      "parentUuid": "a15e5156_6cdd7739",
       "range": {
         "startLine": 1151,
         "startChar": 7,

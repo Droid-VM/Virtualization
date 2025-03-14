@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62f1cd31_da250e1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:56Z",
+      "side": 1,
+      "message": "`385802423`",
+      "range": {
+        "startLine": 19,
+        "startChar": 5,
+        "endLine": 19,
+        "endChar": 9
+      },
+      "revId": "37ab678f5bafae3c39940cb4177060c5c8e69bba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "057256dd_0b2317ce",
+        "filename": "guest/pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:56Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n    fn patch_wdt_info(\n        fdt: \u0026mut Fdt,\n        wdt_info: \u0026Option\u003cWdtInfo\u003e,\n        num_cpus: usize,\n    ) -\u003e libfdt::Result\u003c()\u003e {\n        let mut interrupts \u003d WdtInfo::get_expected(num_cpus).irq;\n        for v in interrupts.iter_mut() {",
+      "range": {
+        "startLine": 912,
+        "startChar": 0,
+        "endLine": 918,
+        "endChar": 0
+      },
+      "revId": "37ab678f5bafae3c39940cb4177060c5c8e69bba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f4095d0_c3b8984c",
+        "filename": "guest/pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:56Z",
+      "side": 1,
+      "message": "Move this inside the `if wdt_info.is_some()` branch?",
+      "range": {
+        "startLine": 917,
+        "startChar": 4,
+        "endLine": 920,
+        "endChar": 5
+      },
+      "revId": "37ab678f5bafae3c39940cb4177060c5c8e69bba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
