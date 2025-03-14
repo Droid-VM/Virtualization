@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2563275a_a30bd617",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:36Z",
+      "side": 1,
+      "message": "I see. Please rebase this on aosp/3537503 with your own `get_granule_size()`.",
+      "parentUuid": "b79e4b67_e89100a1",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85a046a9_30face88",
         "filename": "libs/libvmbase/src/memory/tracker.rs",
         "patchSetId": 1
