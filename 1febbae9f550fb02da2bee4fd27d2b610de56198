@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd5f719c_c79cdeca",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-14T04:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43235906_0a443639",
+      "range": {
+        "startLine": 367,
+        "startChar": 17,
+        "endLine": 367,
+        "endChar": 61
+      },
+      "revId": "1febbae9f550fb02da2bee4fd27d2b610de56198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d086b44f_0f2ce55a",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-03-13T15:22:56Z",
       "side": 1,
       "message": "what if we don\u0027t call this?",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 369,
+        "endChar": 20
+      },
+      "revId": "1febbae9f550fb02da2bee4fd27d2b610de56198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d1f5fb9_d4e64d05",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-14T04:00:34Z",
+      "side": 1,
+      "message": "in this case, terminal keeps waiting for vm(actually ttyd) is ready. if we want to do better, we can retry it in onResume(), but i think finish() and then re-create might be good enough..",
+      "parentUuid": "d086b44f_0f2ce55a",
       "range": {
         "startLine": 369,
         "startChar": 0,
