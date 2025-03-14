@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6154d5aa_404e1a7d",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/Application.kt",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-14T14:55:40Z",
+      "side": 1,
+      "message": "I just wanted to put this at a place where both VmLauncherService and StorageBalloonWorker can access. As you commented in another thread, companion object in StorageBalloonWorker should be a better approach.\nRemoved this field.",
+      "parentUuid": "759d4237_b99e5b84",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 57
+      },
+      "revId": "6f5dbf1775fc8a11f579a197acd55a563049a936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cba0342b_8fab88aa",
@@ -85,6 +109,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f325b56_ae298ef9",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/StorageBalloonWorker.kt",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-14T14:55:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cba0342b_8fab88aa",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 77
+      },
+      "revId": "6f5dbf1775fc8a11f579a197acd55a563049a936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9f6e5e0_e4c9d2ee",
@@ -108,6 +156,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f2c74b1_76e194c5",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 7
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-14T14:55:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9f6e5e0_e4c9d2ee",
+      "range": {
+        "startLine": 366,
+        "startChar": 0,
+        "endLine": 369,
+        "endChar": 0
+      },
+      "revId": "6f5dbf1775fc8a11f579a197acd55a563049a936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "044569bc_a7870b09",
@@ -121,6 +193,30 @@
       "writtenOn": "2025-03-13T15:21:23Z",
       "side": 1,
       "message": "THis part is very specific to StorageBalloonWorker. Please move this to the class.",
+      "range": {
+        "startLine": 370,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 0
+      },
+      "revId": "6f5dbf1775fc8a11f579a197acd55a563049a936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a61e15f_eb5a8e92",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 7
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-14T14:55:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "044569bc_a7870b09",
       "range": {
         "startLine": 370,
         "startChar": 0,
