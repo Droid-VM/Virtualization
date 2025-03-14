@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3402795_bc7fb70b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:07Z",
+      "side": 1,
+      "message": "You could also add `Bug: 385802423`",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 3
+      },
+      "revId": "bbfb334f05a51fe0ef2cd28af1a845254175dc79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55a6b71a_8b65d84d",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:07Z",
+      "side": 1,
+      "message": "Fundamentally, this patch is adding support for assigning physical IOMMUs, irrespective of the underlying hypervisor and this is an implementation detail. As the IOMMUs get treated as \"regular\" devices, pvmfw will naturally enforce the (physical) topology by enforcing the \u003ciommus\u003e properties of the devices behind the SMMUs. IMO, this whole comment could be clearer as\n```\n// Ignore \u003ciommus\u003e if no pvIOMMUs are expected based on the VM DTBO, possibly\n// because physical IOMMUs are being assigned directly.\n```\nLocal variables here would arguably be more clearly named as `pviommus` instead of `iommus`; I\u0027ll see if that\u0027s doable without conflicting with your stack too much.",
+      "range": {
+        "startLine": 903,
+        "startChar": 46,
+        "endLine": 903,
+        "endChar": 95
+      },
+      "revId": "bbfb334f05a51fe0ef2cd28af1a845254175dc79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47c0af45_475bf83a",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:07Z",
+      "side": 1,
+      "message": "Ideally, it would be nice to detect a misconfigured `\u003ciommus\u003e` instead of silently overwriting the property received by the guest, as done here. As this isn\u0027t security-critical and a similar behavior exists elsewhere, it shouldn\u0027t block this CL. Still, would you mind adding a `TODO` for it?",
+      "range": {
+        "startLine": 911,
+        "startChar": 12,
+        "endLine": 911,
+        "endChar": 16
+      },
+      "revId": "bbfb334f05a51fe0ef2cd28af1a845254175dc79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "138b3832_86d48690",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:07Z",
+      "side": 1,
+      "message": "Would you mind adding some unit tests covering VM DTBOs that don\u0027t expect pvIOMMUs but contains physical IOMMUs?",
+      "range": {
+        "startLine": 1159,
+        "startChar": 0,
+        "endLine": 1159,
+        "endChar": 11
+      },
+      "revId": "bbfb334f05a51fe0ef2cd28af1a845254175dc79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

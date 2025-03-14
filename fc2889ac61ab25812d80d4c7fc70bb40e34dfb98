@@ -16,6 +16,24 @@
       "message": "@ptosi@google.com, With this patch, before coming here, we have ensured that iommu property is present in the physical node. So iommus must be present in crosvm generated DT as well. After apply overlay in crosvm, this shouldn\u0027t be missing, isn\u0027t it?",
       "revId": "fc2889ac61ab25812d80d4c7fc70bb40e34dfb98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc295cd_ece34ed8",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:07Z",
+      "side": 1,
+      "message": "Isn\u0027t `AssignedDeviceInfo::parse_iommus` called on the node from the input DT? AFAICT, your logic of skipping calling this function when `physical_device.iommus.is_none()` (i.e. no pvIOMMUs are expected) is fine. Do you see any issues?",
+      "parentUuid": "5193be9c_ad51155b",
+      "revId": "fc2889ac61ab25812d80d4c7fc70bb40e34dfb98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
