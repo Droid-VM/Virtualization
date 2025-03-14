@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb2dc91f_93ebf9f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:20Z",
+      "side": 1,
+      "message": "`385802423`",
+      "range": {
+        "startLine": 13,
+        "startChar": 5,
+        "endLine": 13,
+        "endChar": 9
+      },
+      "revId": "17b18d133f391dfab8161d11e736c82aa9ef577e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3113d95_ef373b63",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:20Z",
+      "side": 1,
+      "message": "Nit: would you mind moving the `let Some(cells)` assignment above the comment and use `cells.count()` directly in place of `interrupts_cells`? Thanks",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 806,
+        "endChar": 56
+      },
+      "revId": "17b18d133f391dfab8161d11e736c82aa9ef577e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb97b32_381f8af7",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-14T13:36:20Z",
+      "side": 1,
+      "message": "Should we otherwise (`else`) remove the property?\n\nUnlike physical IOMMUs, I don\u0027t see a use-case for `\u003cinterrupts\u003e` injected through the VM DTBO?",
+      "range": {
+        "startLine": 922,
+        "startChar": 8,
+        "endLine": 922,
+        "endChar": 9
+      },
+      "revId": "17b18d133f391dfab8161d11e736c82aa9ef577e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
