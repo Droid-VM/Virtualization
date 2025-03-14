@@ -128,7 +128,7 @@ class VmLauncherService : Service() {
         if (!Flags.terminalStorageBalloon()) {
             // Note: this doesn't always do the resizing. If the current image size is the same as
             // the requested size which is rounded up to the page alignment, resizing is not done.
-            val diskSize = intent.getLongExtra(EXTRA_DISK_SIZE, image.getSize())
+            val diskSize = intent.getLongExtra(EXTRA_DISK_SIZE, image.getApparentSize())
             image.resize(diskSize)
         }
 
