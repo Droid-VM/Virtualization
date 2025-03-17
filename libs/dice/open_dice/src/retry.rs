@@ -17,7 +17,11 @@
 //! of this buffer may fail and callers will see Error::MemoryAllocationError.
 //! When running with std, allocation may fail.
 
+#[cfg(feature = "multialg")]
+use crate::bcc::bcc_main_flow_multialg;
 use crate::bcc::{bcc_format_config_descriptor, bcc_main_flow, DiceConfigValues};
+#[cfg(feature = "multialg")]
+use crate::dice::dice_main_flow_multialg;
 use crate::dice::{
     dice_main_flow, Cdi, CdiValues, DiceArtifacts, InputValues, CDI_SIZE, PRIVATE_KEY_SEED_SIZE,
     PRIVATE_KEY_SIZE,
@@ -109,6 +113,30 @@ pub fn retry_bcc_main_flow(
     Ok(OwnedDiceArtifacts { cdi_values: next_cdi_values, bcc: next_bcc })
 }
 
+/// Multialg variant of `retry_bcc_main_flow`.
+#[cfg(feature = "multialg")]
+pub fn retry_bcc_main_flow_multialg(
+    current_cdi_attest: &Cdi,
+    current_cdi_seal: &Cdi,
+    bcc: &[u8],
+    input_values: &InputValues,
+    key_algorithm: KeyAlgorithm,
+) -> Result<OwnedDiceArtifacts> {
+    let mut next_cdi_values = CdiValues::default();
+    let next_bcc = retry_with_measured_buffer(|next_bcc| {
+        bcc_main_flow_multialg(
+            current_cdi_attest,
+            current_cdi_seal,
+            bcc,
+            input_values,
+            &mut next_cdi_values,
+            next_bcc,
+            key_algorithm,
+        )
+    })?;
+    Ok(OwnedDiceArtifacts { cdi_values: next_cdi_values, bcc: next_bcc })
+}
+
 /// Executes the main DICE flow.
 ///
 /// Given a full set of input values and the current CDI values, computes the
@@ -126,6 +154,28 @@ pub fn retry_dice_main_flow(
             input_values,
             next_cdi_certificate,
             &mut next_cdi_values,
+        )
+    })?;
+    Ok((next_cdi_values, next_cdi_certificate))
+}
+
+/// Multialg variant of `retry_dice_main_flow`.
+#[cfg(feature = "multialg")]
+pub fn retry_dice_main_flow_multialg(
+    current_cdi_attest: &Cdi,
+    current_cdi_seal: &Cdi,
+    input_values: &InputValues,
+    key_algorithm: KeyAlgorithm,
+) -> Result<(CdiValues, Vec<u8>)> {
+    let mut next_cdi_values = CdiValues::default();
+    let next_cdi_certificate = retry_with_measured_buffer(|next_cdi_certificate| {
+        dice_main_flow_multialg(
+            current_cdi_attest,
+            current_cdi_seal,
+            input_values,
+            next_cdi_certificate,
+            &mut next_cdi_values,
+            key_algorithm,
         )
     })?;
     Ok((next_cdi_values, next_cdi_certificate))

@@ -57,5 +57,6 @@ pub use retry::{
 };
 #[cfg(feature = "multialg")]
 pub use retry::{
-    retry_sign_cose_sign1_multialg, retry_sign_cose_sign1_with_cdi_leaf_priv_multialg,
+    retry_bcc_main_flow_multialg, retry_dice_main_flow_multialg, retry_sign_cose_sign1_multialg,
+    retry_sign_cose_sign1_with_cdi_leaf_priv_multialg,
 };

@@ -404,3 +404,38 @@ pub fn dice_main_flow(
     )?;
     Ok(next_cdi_certificate_actual_size)
 }
+
+#[cfg(feature = "multialg")]
+pub fn dice_main_flow_multialg(
+    current_cdi_attest: &Cdi,
+    current_cdi_seal: &Cdi,
+    input_values: &InputValues,
+    next_cdi_certificate: &mut [u8],
+    next_cdi_values: &mut CdiValues,
+    key_algorithm: KeyAlgorithm,
+) -> Result<usize> {
+    let mut next_cdi_certificate_actual_size = 0;
+    let context = DiceContext_ {
+        authority_algorithm: key_algorithm.into(),
+        subject_algorithm: key_algorithm.into(),
+    };
+    check_result(
+        // SAFETY: The function only reads the current CDI values and inputs and writes
+        // to `next_cdi_certificate` and next CDI values within its bounds.
+        unsafe {
+            DiceMainFlow(
+                &context as *const DiceContext_ as *mut c_void,
+                current_cdi_attest.as_ptr(),
+                current_cdi_seal.as_ptr(),
+                input_values.as_ptr(),
+                next_cdi_certificate.len(),
+                next_cdi_certificate.as_mut_ptr(),
+                &mut next_cdi_certificate_actual_size,
+                next_cdi_values.cdi_attest.as_mut_ptr(),
+                next_cdi_values.cdi_seal.as_mut_ptr(),
+            )
+        },
+        next_cdi_certificate_actual_size,
+    )?;
+    Ok(next_cdi_certificate_actual_size)
+}

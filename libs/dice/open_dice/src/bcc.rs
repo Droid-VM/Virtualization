@@ -16,12 +16,18 @@
 
 use crate::dice::{context, Cdi, CdiValues, DiceArtifacts, InputValues, CDI_SIZE};
 use crate::error::{check_result, DiceError, Result};
+#[cfg(feature = "multialg")]
+use crate::KeyAlgorithm;
 use open_dice_android_bindgen::{
     DiceAndroidConfigValues, DiceAndroidFormatConfigDescriptor, DiceAndroidHandoverParse,
     DiceAndroidMainFlow, DICE_ANDROID_CONFIG_COMPONENT_NAME, DICE_ANDROID_CONFIG_COMPONENT_VERSION,
     DICE_ANDROID_CONFIG_RESETTABLE, DICE_ANDROID_CONFIG_RKP_VM_MARKER,
     DICE_ANDROID_CONFIG_SECURITY_VERSION,
 };
+#[cfg(feature = "multialg")]
+use open_dice_cbor_bindgen::DiceContext_;
+#[cfg(feature = "multialg")]
+use std::ffi::c_void;
 use std::{ffi::CStr, ptr};
 
 /// Contains the input values used to construct the Android Profile for DICE
@@ -106,6 +112,48 @@ pub fn bcc_main_flow(
         unsafe {
             DiceAndroidMainFlow(
                 context(),
+                current_cdi_attest.as_ptr(),
+                current_cdi_seal.as_ptr(),
+                current_chain.as_ptr(),
+                current_chain.len(),
+                input_values.as_ptr(),
+                next_chain.len(),
+                next_chain.as_mut_ptr(),
+                &mut next_chain_size,
+                next_cdi_values.cdi_attest.as_mut_ptr(),
+                next_cdi_values.cdi_seal.as_mut_ptr(),
+            )
+        },
+        next_chain_size,
+    )?;
+    Ok(next_chain_size)
+}
+
+/// Multialg variant of `bcc_main_flow`.
+#[cfg(feature = "multialg")]
+pub fn bcc_main_flow_multialg(
+    current_cdi_attest: &Cdi,
+    current_cdi_seal: &Cdi,
+    current_chain: &[u8],
+    input_values: &InputValues,
+    next_cdi_values: &mut CdiValues,
+    next_chain: &mut [u8],
+    key_algorithm: KeyAlgorithm,
+) -> Result<usize> {
+    let mut next_chain_size = 0;
+    let context = DiceContext_ {
+        authority_algorithm: key_algorithm.into(),
+        subject_algorithm: key_algorithm.into(),
+    };
+    check_result(
+        // SAFETY: `DiceAndroidMainFlow` only reads the `current_chain` and CDI values and writes
+        // to `next_chain` and next CDI values within its bounds. It also reads `input_values` as a
+        // constant input and doesn't store any pointer.
+        // The first argument is a pointer to a valid |DiceContext_| object for multi-alg open-dice
+        // and a null pointer otherwise.
+        unsafe {
+            DiceAndroidMainFlow(
+                &context as *const DiceContext_ as *mut c_void,
                 current_cdi_attest.as_ptr(),
                 current_cdi_seal.as_ptr(),
                 current_chain.as_ptr(),
