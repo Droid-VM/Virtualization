@@ -1,0 +1,116 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97780e66_e2c73cf9",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsActivity.kt",
+        "patchSetId": 10
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-03-17T14:40:54Z",
+      "side": 1,
+      "message": "How about just move disk resize to the last of the settings.\n```suggestion\n        val settingsItems \u003d\n            mutableListOf(\n                SettingsItem(\n                    resources.getString(R.string.settings_port_forwarding_title),\n                    resources.getString(R.string.settings_port_forwarding_sub_title),\n                    R.drawable.baseline_call_missed_outgoing_24,\n                    SettingsItemEnum.PortForwarding,\n                ),\n                SettingsItem(\n                    resources.getString(R.string.settings_recovery_title),\n                    resources.getString(R.string.settings_recovery_sub_title),\n                    R.drawable.baseline_settings_backup_restore_24,\n                    SettingsItemEnum.Recovery,\n                ),\n            )\n        if (!Flags.terminalStorageBalloon()) {\n            settingsItems.add(\n                SettingsItem(\n                    resources.getString(R.string.settings_disk_resize_title),\n                    resources.getString(R.string.settings_disk_resize_sub_title),\n                    R.drawable.baseline_storage_24,\n                    SettingsItemEnum.DiskResize,\n                )\n            )\n        }\n```",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d8ad5f47_33e517cb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsActivity.kt",
+              "range": {
+                "startLine": 22,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsActivity.kt",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": "        val settingsItems \u003d mutableListOf\u003cSettingsItem\u003e(\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsActivity.kt",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "        settingsItems.add(\n            SettingsItem(\n                resources.getString(R.string.settings_disk_resize_title),\n                resources.getString(R.string.settings_disk_resize_sub_title),\n                R.drawable.baseline_storage_24,\n                SettingsItemEnum.DiskResize,\n            )\n        )\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0f9c621971e2136b4c2983d21804617935e9a28e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c5bc420_ff8dfafb",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SplitInitializer.kt",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-03-17T14:40:54Z",
+      "side": 1,
+      "message": "I think it\u0027s no need to remove the SplitPairFilter for SettingsDiskResizeActivity even it\u0027s not used. Given you already changed the placeholder to `SettingsPortForwardingActivity`",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "47e317d0_0e857cf5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SplitInitializer.kt",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "import com.android.system.virtualmachine.flags.VirtualMachineFlags\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SplitInitializer.kt",
+              "range": {
+                "startLine": 32,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "        if (VirtualMachineFlags.terminalStorageBalloon()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0f9c621971e2136b4c2983d21804617935e9a28e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
