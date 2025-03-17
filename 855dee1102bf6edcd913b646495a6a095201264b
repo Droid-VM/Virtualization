@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "886ced69_374f685e",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-17T04:50:21Z",
+      "side": 1,
+      "message": "do we need synchonized for `doStart` and `doShutdown`?(because `executorService` is not single thread pool executor..",
+      "range": {
+        "startLine": 135,
+        "startChar": 16,
+        "endLine": 135,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d8d1b777_dcc42890",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 66,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": "@WorkerThread\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 134,
+                "startChar": 0,
+                "endLine": 135,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 391,
+                "startChar": 0,
+                "endLine": 392,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "855dee1102bf6edcd913b646495a6a095201264b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c225f33f_e82519cd",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-17T04:50:21Z",
+      "side": 1,
+      "message": "I think we need to run this block via thread pool executor as well to avoid ANR.",
+      "range": {
+        "startLine": 421,
+        "startChar": 20,
+        "endLine": 421,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "49e0dfa8_65781bf5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 418,
+                "startChar": 0,
+                "endLine": 425,
+                "endChar": 0
+              },
+              "replacement": "        executorService.execute {\n            if (virtualMachine !\u003d null) {\n                if (virtualMachine!!.getStatus() \u003d\u003d VirtualMachine.STATUS_RUNNING) {\n                    try {\n                        virtualMachine!!.stop()\n                        stopForeground(STOP_FOREGROUND_REMOVE)\n                    } catch (e: VirtualMachineException) {\n                        Log.e(TAG, \"failed to stop a VM instance\", e)\n                    }\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 426,
+                "startChar": 0,
+                "endLine": 426,
+                "endChar": 0
+              },
+              "replacement": "                virtualMachine \u003d null\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 427,
+                "startChar": 0,
+                "endLine": 428,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 429,
+                "startChar": 0,
+                "endLine": 429,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "855dee1102bf6edcd913b646495a6a095201264b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
