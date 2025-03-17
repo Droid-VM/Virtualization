@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cfabcfd_d3c655bd",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-03-17T17:10:11Z",
+      "side": 1,
+      "message": "`fn` definition should have safety docs, or is the function actually safe because you call `non_null_and_aligned_mut` above?",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 48
+      },
+      "revId": "68735a114dfcc02464eb7779b2c5e04dbd258634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b56325_793ef84f",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-03-17T17:10:11Z",
+      "side": 1,
+      "message": "same as above - either `fn` needs safety docs or the fn itself is safe because the implementation checks that the buffer is valid?",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 62
+      },
+      "revId": "68735a114dfcc02464eb7779b2c5e04dbd258634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce8188cb_ea101767",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-03-17T17:10:11Z",
+      "side": 1,
+      "message": "ditto from previous comments",
+      "range": {
+        "startLine": 453,
+        "startChar": 0,
+        "endLine": 464,
+        "endChar": 1
+      },
+      "revId": "68735a114dfcc02464eb7779b2c5e04dbd258634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
