@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d9d75b0_46c32935",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-17T11:01:10Z",
+      "side": 1,
+      "message": "Switching to storage ballooning will be controlled by feature flags. So, we don\u0027t provide an option to toggle it from UI.\n\nBut, this can be toggled back if we find a problem during rolling out the feature. (I hope this won\u0027t happen, though)\nAlso, it\u0027s possible to disable the flag manually with `aflags` command.",
+      "parentUuid": "976c9124_8d389da1",
+      "revId": "324cec6ecdfba429a48b191cba61f91a5437fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "684ad6cc_1e399b51",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-03-14T15:07:16Z",
       "side": 1,
       "message": "Sorry. I made change around this lines, which is causing you conflicts. These are moved to VmLauncherService.kt.",
+      "revId": "324cec6ecdfba429a48b191cba61f91a5437fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fe5b890_343a2099",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-17T11:01:10Z",
+      "side": 1,
+      "message": "Resolved the conflict. Hope I didn\u0027t break your changes.",
+      "parentUuid": "684ad6cc_1e399b51",
       "revId": "324cec6ecdfba429a48b191cba61f91a5437fc8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
