@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "129ae895_ce439bd1",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.kt",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-17T14:30:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f084947b_b96586f0",
+      "range": {
+        "startLine": 54,
+        "startChar": 43,
+        "endLine": 54,
+        "endChar": 72
+      },
+      "revId": "ae1eae8011bb2669b1e54870f455ab3d1d4f8e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd96e0d7_fc78839b",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-03-17T12:46:44Z",
       "side": 1,
       "message": "This is a long blockig I/O which shouldn\u0027t be executed on the UI thread. Could you move this to doStart in VmLauncherService so that it\u0027s done in a separate worker thread?",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 42
+      },
+      "revId": "ae1eae8011bb2669b1e54870f455ab3d1d4f8e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6471abf_8ce54f5c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.kt",
+        "patchSetId": 8
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-17T14:30:17Z",
+      "side": 1,
+      "message": "Ah, I now understood the intension of `doStart`. Done.",
+      "parentUuid": "cd96e0d7_fc78839b",
       "range": {
         "startLine": 318,
         "startChar": 0,
@@ -125,6 +173,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9768de6_ea90c8de",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.kt",
+        "patchSetId": 8
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-17T14:30:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9781850e_cd5843ae",
+      "range": {
+        "startLine": 397,
+        "startChar": 38,
+        "endLine": 397,
+        "endChar": 40
+      },
+      "revId": "ae1eae8011bb2669b1e54870f455ab3d1d4f8e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2778c19e_94d4a6ed",
@@ -138,6 +210,30 @@
       "writtenOn": "2025-03-17T12:46:44Z",
       "side": 1,
       "message": "Yeah, the truncate could be added as the `else` part here!",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 9
+      },
+      "revId": "ae1eae8011bb2669b1e54870f455ab3d1d4f8e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "171b1c84_0081bd5b",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-17T14:30:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2778c19e_94d4a6ed",
       "range": {
         "startLine": 158,
         "startChar": 0,
