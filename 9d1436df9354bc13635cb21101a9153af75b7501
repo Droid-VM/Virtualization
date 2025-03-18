@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78842a9f_82e29ab0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-18T12:15:26Z",
+      "side": 1,
+      "message": "Following an offline discussion with Vanand, the new APIs are redundant. As their sole purpose is for downstream testing, the existing API, `bcc_handover_main_flow`, should already fulfill the required functionality.",
+      "revId": "9d1436df9354bc13635cb21101a9153af75b7501",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2506e93_561d4641",
+        "filename": "libs/dice/open_dice/src/bcc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-18T12:15:26Z",
+      "side": 1,
+      "message": "This case doesn\u0027t exist here.",
+      "range": {
+        "startLine": 153,
+        "startChar": 14,
+        "endLine": 153,
+        "endChar": 40
+      },
+      "revId": "9d1436df9354bc13635cb21101a9153af75b7501",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
