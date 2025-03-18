@@ -491,9 +491,13 @@ avb_add_hash_footer_defaults {
             enabled: true,
         },
     },
-}
+    rollback_index: select(soong_config_variable("AVF", "platform_security_patch_timestamp"), {
+        any @ val: val,
+        // TODO: We should really not be using default, instead leave the `rollback_index` unset.
+        default: 2,
+    }),
 
-MICRODROID_GKI_ROLLBACK_INDEX = 2
+}
 
 avb_add_hash_footer_defaults {
     name: "microdroid_kernel_cap_defaults",
@@ -504,12 +508,10 @@ avb_add_hash_footer_defaults {
             value: "secretkeeper_protection",
         },
     ],
-    rollback_index: MICRODROID_GKI_ROLLBACK_INDEX,
 }
 
 avb_add_hash_footer_defaults {
     name: "microdroid_kernel_cap_with_uefi_defaults",
-    rollback_index: MICRODROID_GKI_ROLLBACK_INDEX,
     props: [
         {
             name: "com.android.virt.cap",
