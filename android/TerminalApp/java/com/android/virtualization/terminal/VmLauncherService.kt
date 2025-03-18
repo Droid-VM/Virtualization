@@ -425,14 +425,32 @@ class VmLauncherService : Service() {
     @WorkerThread
     private fun doShutdown(resultReceiver: ResultReceiver?) {
         stopForeground(STOP_FOREGROUND_REMOVE)
+        runner?.exitStatus?.thenAcceptAsync { success: Boolean ->
+            resultReceiver?.send(if (success) RESULT_STOP else RESULT_ERROR, null)
+            stopSelf()
+        }
         if (debianService != null && debianService!!.shutdownDebian()) {
             // During shutdown, change the notification content to indicate that it's closing
             val notification = createNotificationForTerminalClose()
             getSystemService<NotificationManager?>(NotificationManager::class.java)
                 .notify(this.hashCode(), notification)
-            runner?.exitStatus?.thenAcceptAsync { success: Boolean ->
-                resultReceiver?.send(if (success) RESULT_STOP else RESULT_ERROR, null)
-                stopSelf()
+
+            runner?.also { r ->
+                // For the case that shutdown from the guest agent fails.
+                // When timeout is set, the original CompletableFuture's every `thenAcceptAsync` is
+                // canceled as well. So add empty `thenAcceptAsync` to avoid interference.
+                r.exitStatus
+                    .thenAcceptAsync {}
+                    .orTimeout(SHUTDOWN_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .exceptionally {
+                        Log.e(
+                            TAG,
+                            "Stop the service directly because the VM instance isn't stopped with " +
+                                "graceful shutdown",
+                        )
+                        r.vm.stop()
+                        null
+                    }
             }
             runner = null
         } else {
@@ -478,8 +496,13 @@ class VmLauncherService : Service() {
         private const val KEY_TERMINAL_IPADDRESS = "address"
         private const val KEY_TERMINAL_PORT = "port"
 
+<<<<<<< PATCH SET (86387b Set up timeout for graceful shutdown)
+        private const val SHUTDOWN_TIMEOUT_SECONDS = 3L
+||||||| BASE
+=======
         private const val GUEST_SPARSE_DISK_SIZE_PERCENTAGE = 95
 
+>>>>>>> BASE      (6765d4 Merge "TerminalApp: Use sparse file for debian rootfs if sto)
         private val VM_BOOT_TIMEOUT_SECONDS: Int =
             {
                 val deviceName = SystemProperties.get("ro.product.vendor.device", "")
