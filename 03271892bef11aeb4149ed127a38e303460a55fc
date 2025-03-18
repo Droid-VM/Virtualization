@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fec317b1_3772aa1b",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SplitInitializer.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-18T11:07:16Z",
+      "side": 1,
+      "message": "I wanted to add this here:\n\n```  setSplitType(SplitAttributes.SplitType.ratio(context.getResources().getDimension(R.dimen.activity_split_ratio)))\n```\n\nBut, I got a runtime error when accessing the resource value.\n\n```\n03-18 19:25:15.340  7078  7078 E AndroidRuntime: Process: com.android.virtualization.terminal, PID: 7078\n03-18 19:25:15.340  7078  7078 E AndroidRuntime: java.lang.RuntimeException: Unable to get provider androidx.startup.InitializationProvider: androidx.startup.StartupException: android.content.res.Resources$NotFoundException: Resource ID #0x7f060051 type #0x4 is not valid\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "2b627659_f9e40c9c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SplitInitializer.kt",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": "                        .setSplitType(SplitAttributes.SplitType.ratio(context.resources.getDimension(R.dimen.activity_split_ratio)))\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SplitInitializer.kt",
+              "range": {
+                "startLine": 78,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": "                        .setSplitType(SplitAttributes.SplitType.ratio(context.resources.getDimension(R.dimen.activity_split_ratio)))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "03271892bef11aeb4149ed127a38e303460a55fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a907adf9_2e67d301",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SplitInitializer.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1971194
+      },
+      "writtenOn": "2025-03-18T11:07:16Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "03271892bef11aeb4149ed127a38e303460a55fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
