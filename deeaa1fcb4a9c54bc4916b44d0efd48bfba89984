@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e79666_2e13752b",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-18T00:16:12Z",
+      "side": 1,
+      "message": "are you planning on standardizing this information, and keeping it next to libbinder, so we can try to share code between VM/Trusty/CHRE/etc...?",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 40
+      },
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80aaa825_85bd27be",
+        "filename": "guest/microdroid_manager/src/rpc_servicemanager.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-18T00:16:12Z",
+      "side": 1,
+      "message": "and can we move this code to lib/binder or otherwise have a smaller standardized interface so that the libbinder SM ABI can never get constrained?",
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
