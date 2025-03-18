@@ -142,6 +142,7 @@ pub struct CrosvmConfig {
     pub instance_id: [u8; 64],
     // (memfd, guest address, size)
     pub custom_memory_backing_files: Vec<(OwnedFd, u64, u64)>,
+    pub start_suspended: bool,
 }
 
 #[derive(Debug)]
@@ -826,6 +827,18 @@ impl VmInstance {
         }
         Ok(())
     }
+
+    /// Performs full resume of VM.
+    pub fn resume_full(&self) -> Result<(), Error> {
+        let socket_path_cstring = path_to_cstring(&self.crosvm_control_socket_path);
+        // SAFETY: Pointer is valid for the lifetime of the call.
+        let success =
+            unsafe { crosvm_control::crosvm_client_resume_vm_full(socket_path_cstring.as_ptr()) };
+        if !success {
+            bail!("Failed to resume VM");
+        }
+        Ok(())
+    }
 }
 
 impl Rss {
@@ -1429,6 +1442,10 @@ fn run_vm(
                 if audio_config.use_speaker { 1 } else { 0 }
             ));
         }
+    }
+
+    if config.start_suspended {
+        command.arg("--suspended");
     }
 
     print_crosvm_args(&command);
