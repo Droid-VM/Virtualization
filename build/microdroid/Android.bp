@@ -476,6 +476,18 @@ avb_gen_vbmeta_image {
     src: ":microdroid_16k_initrd_debuggable",
 }
 
+soong_config_module_type {
+    name: "system_rollback_index_aware_avb_add_hash_footer_defaults",
+    module_type: "avb_add_hash_footer_defaults",
+    config_namespace: "avb",
+    value_variables: [
+        "avb_system_rollback_index",
+    ],
+    properties: [
+        "rollback_index",
+    ],
+}
+
 avb_add_hash_footer_defaults {
     name: "microdroid_kernel_signed_defaults",
     src: ":empty_file",
@@ -495,7 +507,7 @@ avb_add_hash_footer_defaults {
 
 MICRODROID_GKI_ROLLBACK_INDEX = 2
 
-avb_add_hash_footer_defaults {
+system_rollback_index_aware_avb_add_hash_footer_defaults {
     name: "microdroid_kernel_cap_defaults",
     // Below are properties that are conditionally set depending on value of build flags.
     props: [
@@ -504,7 +516,11 @@ avb_add_hash_footer_defaults {
             value: "secretkeeper_protection",
         },
     ],
-    rollback_index: MICRODROID_GKI_ROLLBACK_INDEX,
+    soong_config_variables: {
+        avb_system_rollback_index: {
+            rollback_index: "%s", // TODO: this should be int64
+        },
+    },
 }
 
 avb_add_hash_footer_defaults {
