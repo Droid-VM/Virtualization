@@ -16,6 +16,24 @@
       "message": "QQ: how much time does it spend?(because it is running for every boot..)",
       "revId": "b24d1ab9dbcf4f2f300a8be33009ebf9de600b59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "365b1a6b_c5efb68e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2025-03-18T05:34:09Z",
+      "side": 1,
+      "message": "If the image is clean which is most of the time, this should be pretty quick (\u003c 100ms).\n\nIf there are quite a few blocks corrupted, it would take few seconds (that depends on the size); this is rare but it gives us stability which is more important.",
+      "parentUuid": "4d96b40b_a6bf4360",
+      "revId": "b24d1ab9dbcf4f2f300a8be33009ebf9de600b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
