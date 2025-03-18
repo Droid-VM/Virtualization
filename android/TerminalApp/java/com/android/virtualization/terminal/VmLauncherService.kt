@@ -389,6 +389,14 @@ class VmLauncherService : Service() {
         }
     }
 
+    private val stopSelfRunnable = Runnable {
+        Log.d(
+            TAG,
+            "Stop the service directly because the VM instance isn't stopped with graceful shutdown",
+        )
+        stopSelf()
+    }
+
     @WorkerThread
     private fun doShutdown(resultReceiver: ResultReceiver?) {
         stopForeground(STOP_FOREGROUND_REMOVE)
@@ -402,6 +410,9 @@ class VmLauncherService : Service() {
                 stopSelf()
             }
             runner = null
+            val SHUTDOWN_TIMEOUT = 3000L
+            // For the case that shutdown from the guest agent fails.
+            Handler(Looper.getMainLooper()!!).postDelayed(stopSelfRunnable, SHUTDOWN_TIMEOUT)
         } else {
             // If there is no Debian service or it fails to shutdown, just stop the service.
             runner?.vm?.stop()
@@ -421,6 +432,8 @@ class VmLauncherService : Service() {
                 doShutdown(null)
             }
         })
+        // Cancel the pending job to stop the service.
+        Handler(Looper.getMainLooper()!!).removeCallbacks(stopSelfRunnable)
         portNotifier?.stop()
         getSystemService<NotificationManager?>(NotificationManager::class.java).cancelAll()
         stopDebianServer()
