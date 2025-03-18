@@ -7,6 +7,12 @@ has been explicitly shared back by a VM. Such _protected VMs_ (“pVMs”) are
 therefore able to manipulate secrets without being at risk of an attacker
 stealing them by compromising the Android host.
 
+### protected VM (_"pVM"_)
+
+A pVM is a VM managed by a hypervisor, running in the non-secure or realm world and is isolated from the Android host OS so that access is prevented even in the event of a compromised Android host. pVMs support rich environments, including Linux-based distributions.
+
+The pVM concept is not Google-exclusive. Partner-defined VMs (SoC/OEM) meeting isolation/memory access restrictions are also pVMs.
+
 As pVMs are started dynamically by a _virtual machine manager_ (“VMM”) running
 as a host process and as pVMs must not trust the host (see [_Why
 AVF?_][why-avf]), the virtual machine it configures can't be trusted either.
