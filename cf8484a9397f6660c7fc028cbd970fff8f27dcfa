@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d473df07_a9a597fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2025-03-19T23:45:33Z",
+      "side": 1,
+      "message": "I have some good news. I had probably messed something up on my host build. I rebuild and flashed an image for my test `caiman` device today and the generated images do seem to work perfectly fine on it!.\n\nWithin Ferrochrome, I verified in `dmesg` that `efi: UEFI not found.` is reported now.\nEarlier (with u-boot), `dmesg` reported `efi: EFI v2.100 by Das U-Boot`.\n\nI have tested with both the Debian generic kernel and our custom kernel. \nSo no more fixes seem to be necessary. Sorry for the delay!",
+      "parentUuid": "21618cd7_5dfae315",
+      "revId": "cf8484a9397f6660c7fc028cbd970fff8f27dcfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4326e723_8223261c",
         "filename": "build/debian/build.sh",
         "patchSetId": 7
