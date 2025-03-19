@@ -16,6 +16,29 @@
       "message": "You also need to fix the trusty AVB test:\n\n```\nlatest_trusty_test_vm_kernel_passes_verification\n```",
       "revId": "6a7ff75b16a65aac5cf6aac6dd95ddd3293cf8c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b9ab8e_f3a64cda",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-19T17:00:06Z",
+      "side": 1,
+      "message": "This is for my understanding:\n\nIs this purely controlled by the Android.bp file?\n\nI am wondering what happens if let\u0027ss say a non-Android delivered VM didn\u0027t include this in the Android.bp file. How do we enforce that every vm has this in their DICE chain?",
+      "range": {
+        "startLine": 128,
+        "startChar": 12,
+        "endLine": 128,
+        "endChar": 17
+      },
+      "revId": "6a7ff75b16a65aac5cf6aac6dd95ddd3293cf8c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
