@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f4bba8f_033b826b",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-19T23:23:20Z",
+      "side": 1,
+      "message": "They aren\u0027t needed to check, but they are used in the denial logs [here](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/native/cmds/servicemanager/Access.cpp;drc\u003d8a9bb84af27ac456c27175f22683fc5b6b41c731;l\u003d81). Without this info those logs say `SELinux : avc:  denied  { find } for pid\u003d0 uid\u003d0 name\u003d...` which is confusing.\n\nI don\u0027t know how else servicemanager could get that info about the VM owner without virtmgr passing it along.",
+      "parentUuid": "474e6fd2_26984cb5",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 22
+      },
+      "revId": "932edab8c1ce94df890fb7fce4c6178ed989765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d8e0159_fb3e1fa5",
         "filename": "android/virtmgr/src/selinux.rs",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2025-03-19T12:38:41Z",
       "side": 1,
       "message": "This could better be chained after the call `check_service_access` using `context`.",
+      "range": {
+        "startLine": 274,
+        "startChar": 8,
+        "endLine": 277,
+        "endChar": 15
+      },
+      "revId": "932edab8c1ce94df890fb7fce4c6178ed989765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "387d6639_4050549a",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-19T23:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d8e0159_fb3e1fa5",
       "range": {
         "startLine": 274,
         "startChar": 8,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76e6b462_616cd79b",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-19T23:23:20Z",
+      "side": 1,
+      "message": "We wanted it to be explicit. It\u0027s not strictly needed.\n\nThe VM owner should know which host services it needs and if it\u0027s wrong, they find out when trying to start the VM instead of sometime later when a process tries to get a service.\n\nDo you think it\u0027s not useful to have at this point?\n\n\u003e Why can\u0027t we check the permission when the access is being made?\n\nWe also check it then too: https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3533607/4/android/virtmgr/src/aidl.rs",
+      "parentUuid": "b07db8b0_8dc3fe08",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 26
+      },
+      "revId": "932edab8c1ce94df890fb7fce4c6178ed989765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "541cb2f2_79e7c66a",
         "filename": "tests/vm_accessor/accessor/src/run.rs",
         "patchSetId": 2
@@ -83,6 +155,30 @@
       "writtenOn": "2025-03-18T00:05:45Z",
       "side": 1,
       "message": "can we add it to a manifest for a certain test?",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 33
+      },
+      "revId": "932edab8c1ce94df890fb7fce4c6178ed989765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dab04d9c_8508d5a0",
+        "filename": "tests/vm_accessor/accessor/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-19T23:23:20Z",
+      "side": 1,
+      "message": "Sorry the FIXME was just me making sure the avc denials happen correctly for different types of services and doesn\u0027t belong here.\n\nThis is only the configuration of the VM used in this test, so it will still have the IStats in the child CL that adds IStats. https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3533608/4/tests/vm_accessor/accessor/src/run.rs",
+      "parentUuid": "541cb2f2_79e7c66a",
       "range": {
         "startLine": 121,
         "startChar": 0,
