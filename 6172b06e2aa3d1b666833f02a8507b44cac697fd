@@ -34,6 +34,24 @@
       "parentUuid": "d0055bd6_8d6af4fc",
       "revId": "6172b06e2aa3d1b666833f02a8507b44cac697fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e483f5bf_ef403c07",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2025-03-19T18:10:36Z",
+      "side": 1,
+      "message": "I\u0027m not sure. I\u0027d try putting a `$(warning)` next to your `soong_config_set_int` and see if it shows up when building aosp_shiba.",
+      "parentUuid": "32ee43aa_5627cc59",
+      "revId": "6172b06e2aa3d1b666833f02a8507b44cac697fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
