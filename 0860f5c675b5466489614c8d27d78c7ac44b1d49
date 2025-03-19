@@ -16,6 +16,24 @@
       "message": "Do we expect this to always be set or only sometimes?",
       "revId": "0860f5c675b5466489614c8d27d78c7ac44b1d49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2c1e925_b27f7cb8",
+        "filename": "guest/pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T10:32:01Z",
+      "side": 1,
+      "message": "The `com.android.virt.name` AVB property is optional so it is valid for `vm_name` to be `None`.",
+      "parentUuid": "3a624317_c5db0a06",
+      "revId": "0860f5c675b5466489614c8d27d78c7ac44b1d49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
