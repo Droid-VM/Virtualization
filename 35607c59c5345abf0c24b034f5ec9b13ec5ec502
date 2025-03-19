@@ -1,6 +1,47 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb4fef44_f8689c57",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-19T06:42:16Z",
+      "side": 1,
+      "message": "This can be dropped",
+      "range": {
+        "startLine": 395,
+        "startChar": 38,
+        "endLine": 395,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "25db1d95_920b6ac0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 395,
+                "startChar": 0,
+                "endLine": 396,
+                "endChar": 0
+              },
+              "replacement": "        runner?.exitStatus?.thenAccept { success: Boolean -\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "665e16ae_06b1365f",
@@ -20,6 +61,239 @@
         "endLine": 398,
         "endChar": 9
       },
+      "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "911adf34_249d2e47",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-19T06:42:16Z",
+      "side": 1,
+      "message": "This series of `?.` doesn\u0027t look good. Why don\u0027t we add a check in the beginning like the below?\n\n```\nif (runner \u003d\u003d null) { return }\nval runner \u003d runner!!\n```",
+      "range": {
+        "startLine": 405,
+        "startChar": 27,
+        "endLine": 405,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "58c8f6e1_ffc771f4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 395,
+                "startChar": 0,
+                "endLine": 395,
+                "endChar": 0
+              },
+              "replacement": "        if (runner \u003d\u003d null) {\n            return\n        }\n        val runner \u003d runner!!\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 405,
+                "startChar": 0,
+                "endLine": 406,
+                "endChar": 0
+              },
+              "replacement": "            val vm \u003d runner.vm\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 409,
+                "startChar": 0,
+                "endLine": 411,
+                "endChar": 0
+              },
+              "replacement": "            runner.exitStatus\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 424,
+                "startChar": 0,
+                "endLine": 425,
+                "endChar": 0
+              },
+              "replacement": "            runner.vm?.stop()\n"
+            }
+          ]
+        }
+      ],
+      "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b31a2da0_f1c92676",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-19T06:42:16Z",
+      "side": 1,
+      "message": "You don\u0027t need this workaround if you use whenComplete to schedule the finalization routine.",
+      "range": {
+        "startLine": 406,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 86
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9f49b294_3a1fa991",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 43,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": "import com.android.virtualization.terminal.Constants.VM_BOOT_TIMEOUT_SECONDS\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 174,
+                "startChar": 0,
+                "endLine": 175,
+                "endChar": 0
+              },
+              "replacement": "        runner!!.exitStatus.whenComplete { success: Boolean -\u003e\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 395,
+                "startChar": 0,
+                "endLine": 396,
+                "endChar": 0
+              },
+              "replacement": "        runner?.exitStatus?.whenComplete { success: Boolean -\u003e\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 405,
+                "startChar": 0,
+                "endLine": 406,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 407,
+                "startChar": 0,
+                "endLine": 409,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 411,
+                "startChar": 0,
+                "endLine": 414,
+                "endChar": 0
+              },
+              "replacement": "                ?.whenComplete {\n                    if (it \u003d\u003d null) {\n                        runner?.vm?.stop()\n                    }\n                }\n                ?.orTimeout(SHUTDOWN_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)\n                ?.exceptionallyAsync {\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 418,
+                "startChar": 0,
+                "endLine": 419,
+                "endChar": 0
+              },
+              "replacement": "                    runner?.vm?.stop()\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 465,
+                "startChar": 0,
+                "endLine": 478,
+                "endChar": 0
+              },
+              "replacement": "        private val SHUTDOWN_TIMEOUT_SECONDS \u003d VM_BOOT_TIMEOUT_SECONDS\n"
+            }
+          ]
+        }
+      ],
+      "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c26b72d_a4ba137f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-19T06:42:16Z",
+      "side": 1,
+      "message": "message too long. please try to shorten, or split into two messages.",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 416,
+        "endChar": 113
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "709afc3c_66687344",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+              "range": {
+                "startLine": 416,
+                "startChar": 0,
+                "endLine": 417,
+                "endChar": 0
+              },
+              "replacement": "                        \"Stop the service directly because the VM instance isn\u0027t stopped with \" +\n                                \"graceful shutdown\",\n"
+            }
+          ]
+        }
+      ],
       "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
