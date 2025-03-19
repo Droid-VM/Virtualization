@@ -46,6 +46,30 @@
       },
       "revId": "ca9b39a0088be5f5e14bc1e84a4e6f3a4a8ecd30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7729cee0_1abb3560",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T19:55:14Z",
+      "side": 1,
+      "message": "Yeah, this is due to the files being structured for pvmfw (around `main.rs`) but the `rust_test` using `dice.rs` as the \"main\" file. As a result, while pvmfw builds are happy with\n```\nsrc/\n    main.rs\n    dice.rs\n    dice/\n        chain.rs\n```\n`libpvmfw.dice.test` builds get confused as `mod chain` makes them expect\n```\nsrc/\n    dice.rs\n    chain.rs\n```\n\nI\u0027ve addressed this by moving `dice.rs` to `dice/mod.rs`, so that both builds are happy because the latter now sees\n```\nsrc/dice/\n    mod.rs\n    chain.rs\n```",
+      "parentUuid": "0e2a14e0_0ee1bd0e",
+      "range": {
+        "startLine": 18,
+        "startChar": 8,
+        "endLine": 18,
+        "endChar": 13
+      },
+      "revId": "ca9b39a0088be5f5e14bc1e84a4e6f3a4a8ecd30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
