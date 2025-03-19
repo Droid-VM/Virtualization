@@ -16,6 +16,59 @@
       "message": "Haven\u0027t tested the actual resize yet reboot after resize isn\u0027t working.",
       "revId": "427313393fd1b339f3f4a62d7349ccfdbb36c6bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca8aa24_7606229a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2025-03-19T22:22:28Z",
+      "side": 1,
+      "message": "FYI - Looks like https://r.android.com/3547604 should address this - Will test this out; but wanted to get this review out.",
+      "parentUuid": "4f01bbcf_712dd121",
+      "revId": "427313393fd1b339f3f4a62d7349ccfdbb36c6bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c27f7b25_46f7005d",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2025-03-19T22:22:28Z",
+      "side": 1,
+      "message": "This could be increased to 5GB.",
+      "fixSuggestions": [
+        {
+          "fixId": "c23db074_c12b4b84",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+              "range": {
+                "startLine": 43,
+                "startChar": 0,
+                "endLine": 44,
+                "endChar": 0
+              },
+              "replacement": "    private val defaultHostReserveSizeMb: Long \u003d 5 shl 10\n"
+            }
+          ]
+        }
+      ],
+      "revId": "427313393fd1b339f3f4a62d7349ccfdbb36c6bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
