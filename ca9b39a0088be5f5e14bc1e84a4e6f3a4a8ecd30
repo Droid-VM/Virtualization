@@ -22,6 +22,30 @@
       },
       "revId": "ca9b39a0088be5f5e14bc1e84a4e6f3a4a8ecd30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e2a14e0_0ee1bd0e",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2025-03-19T16:25:18Z",
+      "side": 1,
+      "message": "Wait, no, that\u0027s not the problem. Clippy wants tehre to be another `src/` directory?\n\n```\nFAILED: out/soong/.intermediates/packages/modules/Virtualization/guest/pvmfw/libpvmfw.dice.test/android_arm64_armv8-2a_cortex-a55/libpvmfw.dice.test.clippy\n...v8-2a_cortex-a55/libpvmfw.dice.test.clippy.d.raw \u003e out/soong/.intermediates/packages/modules/Virtualization/guest/pvmfw/libpvmfw.dice.test/android_arm64_armv8-2a_cortex-a55/libpvmfw.dice.test.clippy.d\nerror[E0583]: file not found for module `chain`\n  --\u003e packages/modules/Virtualization/guest/pvmfw/src/dice.rs:18:1\n   |\n18 | pub mod chain;\n   | ^^^^^^^^^^^^^^\n   |\n   \u003d help: to create the module `chain`, create file \"packages/modules/Virtualization/guest/pvmfw/src/chain.rs\" or \"packages/modules/Virtualization/guest/pvmfw/src/chain/mod.rs\"\n   \u003d note: if there is a `mod chain` elsewhere in the crate already, import it with `use crate::...` instead\n```",
+      "parentUuid": "1b06f06d_6cd15ad3",
+      "range": {
+        "startLine": 18,
+        "startChar": 8,
+        "endLine": 18,
+        "endChar": 13
+      },
+      "revId": "ca9b39a0088be5f5e14bc1e84a4e6f3a4a8ecd30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
