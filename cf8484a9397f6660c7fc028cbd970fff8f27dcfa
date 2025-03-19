@@ -37,6 +37,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "587fa179_d0bc94ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2025-03-19T17:45:26Z",
+      "side": 1,
+      "message": "Hi Jiyong,\n\nI was testing on some Aarch64 physical devices and Ferrochrome doesn\u0027t seem to boot with the new config, so I was looking through crosvm logs and debugging that.\n\nFor now in this CL, I have kept the Kokoro Aarch64 builders on the u-boot config.",
+      "parentUuid": "32d5248b_61aa1bc5",
+      "revId": "cf8484a9397f6660c7fc028cbd970fff8f27dcfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e668e3_8970c433",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2025-03-19T17:45:26Z",
+      "side": 1,
+      "message": "Sorry for the delayed response! I noticed that Ferrochrome was not booting on Aarch64, so I was trying to debug that -- forgot to update on this CL.",
+      "parentUuid": "c7325e0c_3f21c797",
+      "revId": "cf8484a9397f6660c7fc028cbd970fff8f27dcfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4326e723_8223261c",
         "filename": "build/debian/build.sh",
         "patchSetId": 7
@@ -72,6 +108,30 @@
       "side": 1,
       "message": "I\u0027d like to land this for 25q2.. by default.",
       "parentUuid": "4326e723_8223261c",
+      "range": {
+        "startLine": 18,
+        "startChar": 18,
+        "endLine": 18,
+        "endChar": 82
+      },
+      "revId": "cf8484a9397f6660c7fc028cbd970fff8f27dcfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffdd7987_02d3da95",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2025-03-19T17:45:26Z",
+      "side": 1,
+      "message": "I have kept the Kokoro Aarch64 builders on the u-boot config, so this CL is ready to merge as is. Once Ferrochrome boots fine with the new config on Aarch64, we can update the Kokoro builder.",
+      "parentUuid": "a623f62c_a898c01d",
       "range": {
         "startLine": 18,
         "startChar": 18,
