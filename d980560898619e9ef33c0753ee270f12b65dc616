@@ -87,6 +87,30 @@
       },
       "revId": "d980560898619e9ef33c0753ee270f12b65dc616",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d617ff97_64a14530",
+        "filename": "libs/dice/open_dice/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2067226
+      },
+      "writtenOn": "2025-03-19T19:39:15Z",
+      "side": 1,
+      "message": "I think that should be possible. However, after reconciling all changes due to reposync I managed to have the apex built by adding `min_sdk_version` exclusively to the multialg variants as you suggested.\n\nThere is just a fix-forward change regarding the visibility of `libdiced_open_dice_multialg`, which I am adding here as we have an incoming change in `secretkeeper` repo",
+      "parentUuid": "0117f283_06ce9bd3",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 34,
+        "endChar": 29
+      },
+      "revId": "d980560898619e9ef33c0753ee270f12b65dc616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
