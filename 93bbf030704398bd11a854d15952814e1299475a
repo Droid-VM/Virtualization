@@ -63,6 +63,47 @@
       ],
       "revId": "93bbf030704398bd11a854d15952814e1299475a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7804cdf2_5bbcac74",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T10:55:34Z",
+      "side": 1,
+      "message": "All VMs are managed by a hypervisor; what makes a VM relevant to AVF is that it is managed by (a hypervisor on behalf of) a VMM running on the Android host, as explained in the following paragraph.",
+      "range": {
+        "startLine": 12,
+        "startChar": 27,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2faf086a_1c81dab5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "guest/pvmfw/README.md",
+              "range": {
+                "startLine": 12,
+                "startChar": 0,
+                "endLine": 13,
+                "endChar": 0
+              },
+              "replacement": "A pVM is a VM managed by a VMM running on the Android host, running in the\nnon-secure or realm world and is isolated from the Android host OS so that access\nis prevented even in the event of a compromised Android host. pVMs support rich\nenvironments, including Linux-based distributions.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "93bbf030704398bd11a854d15952814e1299475a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
