@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5848dca1_8fc9cf4a",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-19T15:36:26Z",
+      "side": 1,
+      "message": "in this case, `ForegroundServiceDidNotStartInTimeException` happens.. because `ACTION_SHUTDOWN_VM` is used for startForegroundService. I\u0027m taking a look at that weird issue now..\n\nBTW, I think either is okay, isn\u0027t it?",
+      "parentUuid": "eb4fef44_f8689c57",
+      "range": {
+        "startLine": 395,
+        "startChar": 38,
+        "endLine": 395,
+        "endChar": 43
+      },
+      "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "665e16ae_06b1365f",
@@ -132,6 +156,30 @@
           ]
         }
       ],
+      "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "409692ed_8d6f6d3a",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-19T15:36:26Z",
+      "side": 1,
+      "message": "added `also` block to remove `?.`",
+      "parentUuid": "911adf34_249d2e47",
+      "range": {
+        "startLine": 405,
+        "startChar": 27,
+        "endLine": 405,
+        "endChar": 29
+      },
       "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -259,6 +307,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "208e4d45_4ede2685",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-19T15:36:26Z",
+      "side": 1,
+      "message": "in this case, `success` in `whenComplete` is null(and before actually exitStatus is avilable) for timeout case, is it okay?",
+      "parentUuid": "b31a2da0_f1c92676",
+      "range": {
+        "startLine": 406,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 86
+      },
+      "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c26b72d_a4ba137f",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
         "patchSetId": 2
@@ -294,6 +366,30 @@
           ]
         }
       ],
+      "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67021c4e_374f08d2",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-19T15:36:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c26b72d_a4ba137f",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 416,
+        "endChar": 113
+      },
       "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
