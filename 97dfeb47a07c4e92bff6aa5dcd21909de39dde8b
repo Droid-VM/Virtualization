@@ -22,6 +22,30 @@
       },
       "revId": "97dfeb47a07c4e92bff6aa5dcd21909de39dde8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1704632_d7dca85d",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-03-19T07:16:09Z",
+      "side": 1,
+      "message": "IMO, yes. `bin/vm check-feature-enabled` is unconditionally enaled since Android 15. The assumption will fail only if the Android build is prior to that (and we are GMS testing using the latest MicrodroidHostTest build)",
+      "parentUuid": "82d3f0c8_fc1c4c32",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 90
+      },
+      "revId": "97dfeb47a07c4e92bff6aa5dcd21909de39dde8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
