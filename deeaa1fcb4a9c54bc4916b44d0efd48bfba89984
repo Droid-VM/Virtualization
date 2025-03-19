@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69ba03dd_8119ebd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-19T12:50:00Z",
+      "side": 1,
+      "message": "is it possible for the guest to host a binder object and pass its IBinder to Android as a callback?",
+      "range": {
+        "startLine": 20,
+        "startChar": 38,
+        "endLine": 20,
+        "endChar": 46
+      },
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46990a1f_b3c2a774",
+        "filename": "android/virtmgr/src/host_services.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-19T12:50:00Z",
+      "side": 1,
+      "message": "You will fill this up, right?",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 66
+      },
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52e79666_2e13752b",
         "filename": "android/virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
         "patchSetId": 4
@@ -17,6 +63,29 @@
       "range": {
         "startLine": 73,
         "startChar": 0,
+        "endLine": 88,
+        "endChar": 40
+      },
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6864758a_b67c9516",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-19T12:50:00Z",
+      "side": 1,
+      "message": "How would microdroid_manager use this?",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
         "endLine": 88,
         "endChar": 40
       },
