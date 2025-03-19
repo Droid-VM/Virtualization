@@ -15,13 +15,15 @@
  */
 package com.android.virtualization.terminal
 
+import android.content.Context
 import android.content.Intent
 import android.icu.text.MeasureFormat
 import android.icu.text.NumberFormat
 import android.icu.util.Measure
 import android.icu.util.MeasureUnit
 import android.os.Bundle
-import android.os.Environment
+import android.os.storage.StorageManager
+import android.os.storage.StorageManager.UUID_DEFAULT
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextUtils
@@ -38,7 +40,7 @@ import java.util.regex.Pattern
 
 class SettingsDiskResizeActivity : AppCompatActivity() {
     private val numberPattern: Pattern = Pattern.compile("[\\d]*[\\٫.,]?[\\d]+")
-    private val defaultMaxDiskSizeMb: Long = 16 shl 10
+    private val defaultHostReserveSizeMb: Long = 1 shl 10
 
     private var diskSizeStepMb: Long = 0
     private var diskSizeMb: Long = 0
@@ -73,10 +75,15 @@ class SettingsDiskResizeActivity : AppCompatActivity() {
         val image = InstalledImage.getDefault(this)
         diskSizeMb = bytesToMb(image.getSize())
         val minDiskSizeMb = bytesToMb(image.getSmallestSizePossible()).coerceAtMost(diskSizeMb)
-        val usableSpaceMb =
-            bytesToMb(Environment.getDataDirectory().getUsableSpace()) and
-                (diskSizeStepMb - 1).inv()
-        val maxDiskSizeMb = defaultMaxDiskSizeMb.coerceAtMost(diskSizeMb + usableSpaceMb)
+
+        var storageManager =
+            applicationContext.getSystemService(Context.STORAGE_SERVICE) as StorageManager
+        val hostAllocatableBytes = storageManager.getAllocatableBytes(UUID_DEFAULT)
+
+        var maxDiskSizeMb = bytesToMb(hostAllocatableBytes)
+        if (maxDiskSizeMb > defaultHostReserveSizeMb) {
+            maxDiskSizeMb -= defaultHostReserveSizeMb
+        }
 
         diskSizeText = findViewById<TextView>(R.id.settings_disk_resize_resize_gb_assigned)!!
         val diskMaxSizeText = findViewById<TextView>(R.id.settings_disk_resize_resize_gb_max)
