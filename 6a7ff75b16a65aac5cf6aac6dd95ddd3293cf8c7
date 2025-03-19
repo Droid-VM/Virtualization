@@ -39,6 +39,30 @@
       },
       "revId": "6a7ff75b16a65aac5cf6aac6dd95ddd3293cf8c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02d41c1e_42d3c552",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-19T17:26:03Z",
+      "side": 1,
+      "message": "RKP VTS can verify the DICE chains of KeyMint and RKP VMs, though for KeyMint\u0027s DICE chain, the second-to-last certificate\u0027s component name (the change in this cl) is not checked up to now. If we want to enforce this in other Trusty VMs, we\u0027d probably need to add similar VTS.",
+      "parentUuid": "99b9ab8e_f3a64cda",
+      "range": {
+        "startLine": 128,
+        "startChar": 12,
+        "endLine": 128,
+        "endChar": 17
+      },
+      "revId": "6a7ff75b16a65aac5cf6aac6dd95ddd3293cf8c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
