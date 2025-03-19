@@ -22,6 +22,47 @@
       },
       "revId": "93bbf030704398bd11a854d15952814e1299475a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7755b74e_7b5c6a4a",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-19T04:20:45Z",
+      "side": 1,
+      "message": "access to its memory is restricted even in the ...",
+      "range": {
+        "startLine": 12,
+        "startChar": 129,
+        "endLine": 12,
+        "endChar": 196
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8de313c8_614518f0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "guest/pvmfw/README.md",
+              "range": {
+                "startLine": 12,
+                "startChar": 0,
+                "endLine": 13,
+                "endChar": 0
+              },
+              "replacement": "A pVM is a VM managed by a hypervisor, running in the non-secure or realm world and is isolated from the Android host OS so that access to its memory is restricted even for a compromised Android host. pVMs support rich environments, including Linux-based distributions.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "93bbf030704398bd11a854d15952814e1299475a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
