@@ -39,6 +39,30 @@
       },
       "revId": "d980560898619e9ef33c0753ee270f12b65dc616",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ef4548a_9e3527fa",
+        "filename": "libs/dice/open_dice/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2067226
+      },
+      "writtenOn": "2025-03-19T15:14:46Z",
+      "side": 1,
+      "message": "Thanks Alice. It looks like I needed a repo sync to find the `...multialg` module. Still, after setting `min_sdk_version` only on those, I got build errors suggesting to add the sdk version to libdiced_open_dice as well:\n\n```\nDependency path: com.google.sdv.comms{os:android,arch:common,apex:com.google.sdv.comms}\n           via tag apex.dependencyTag{\"executable\"}\n    -\u003e sdv_sd_agent_vendor{os:android,image:vendor,arch:x86_64_silvermont,apex:apex35}\n           via tag rust.dependencyTag: { name:rlibTag library:true procMacro:false dynamic:false}\n    -\u003e libexplicitkeydice{os:android,image:vendor,arch:x86_64_silvermont,rust_libraries:rlib,rust_stdlinkage:rlib-std,apex:apex35}\n           via tag rust.dependencyTag: { name:rlibTag library:true procMacro:false dynamic:false}\n    -\u003e libdiced_open_dice{os:android,image:vendor,arch:x86_64_silvermont,rust_libraries:rlib,rust_stdlinkage:rlib-std,apex:apex35}\n\nConsider adding \u0027min_sdk_version: \"35\"\u0027 to \"libdiced_open_dice\"\n```\n\nTo give more context, [here](https://googleplex-android-review.git.corp.google.com/q/topic:%22a15-add-min_sdk_version-to-comm-stack-apex%22) is a WIP gerrit topic with the changes needed to have our APEX built. It looks like the dependency `libexplicitkeydice` is the one requiring this change.\n\nI need to perform an update on `external/open-dice/` repo before continuing on this, but wanted to give you an update for what I see from my side",
+      "parentUuid": "8083bf27_3441eca7",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 34,
+        "endChar": 29
+      },
+      "revId": "d980560898619e9ef33c0753ee270f12b65dc616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
