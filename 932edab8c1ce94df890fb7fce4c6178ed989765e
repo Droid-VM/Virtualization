@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "474e6fd2_26984cb5",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-19T12:38:41Z",
+      "side": 1,
+      "message": "Why are these needed for the check? (especially pid)",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 22
+      },
+      "revId": "932edab8c1ce94df890fb7fce4c6178ed989765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d8e0159_fb3e1fa5",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-19T12:38:41Z",
+      "side": 1,
+      "message": "This could better be chained after the call `check_service_access` using `context`.",
+      "range": {
+        "startLine": 274,
+        "startChar": 8,
+        "endLine": 277,
+        "endChar": 15
+      },
+      "revId": "932edab8c1ce94df890fb7fce4c6178ed989765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b07db8b0_8dc3fe08",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-19T12:38:41Z",
+      "side": 1,
+      "message": "Why does this have to be part of the config? Why can\u0027t we check the permission when the access is being made?",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 26
+      },
+      "revId": "932edab8c1ce94df890fb7fce4c6178ed989765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "541cb2f2_79e7c66a",
         "filename": "tests/vm_accessor/accessor/src/run.rs",
         "patchSetId": 2
