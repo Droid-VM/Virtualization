@@ -63,6 +63,30 @@
       },
       "revId": "d980560898619e9ef33c0753ee270f12b65dc616",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0117f283_06ce9bd3",
+        "filename": "libs/dice/open_dice/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-19T16:07:05Z",
+      "side": 1,
+      "message": "I see. `libdiced_open_dice` is being used in the unit test target [1]. Would it be possible to switch that target to `libdiced_open_dice_multialg` so we can limit the change of this cl to `*_multialg`?\n\n[1] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/software_defined_vehicle/core_services/service_discovery/sdv_sd_agent/Android.bp;l\u003d126;drc\u003dd93cc638d84c7a2b4ceb9e66f5e78a20902f72be",
+      "parentUuid": "8ef4548a_9e3527fa",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 34,
+        "endChar": 29
+      },
+      "revId": "d980560898619e9ef33c0753ee270f12b65dc616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
