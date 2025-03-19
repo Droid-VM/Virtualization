@@ -66,6 +66,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff8f3554_4e873ef3",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T10:31:49Z",
+      "side": 1,
+      "message": "I\u0027m not convinced `std::alloc` should be relevant here (see my other comment about splitting the code into individually testable steps) but wouldn\u0027t aligning (\"rounding up\") the blob size to the guest page size achieve that, with the proper layout alignment?",
+      "parentUuid": "36ca73af_508256f5",
+      "revId": "313617457b01e66c7edeb8fe2837ff479d4f72e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a394ce9_90eaa222",
         "filename": "guest/pvmfw/src/fdt.rs",
         "patchSetId": 18

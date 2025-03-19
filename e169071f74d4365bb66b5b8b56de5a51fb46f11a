@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91746575_0ebe89b5",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T10:31:49Z",
+      "side": 1,
+      "message": "The names of these `struct` and fields don\u0027t help with readability, IMO; WDYT of\n\n- `ConfigHeader`/`RMemHeader` -\u003e `ResMem`/`ResMemEntry`\n- `ConfigHeader::{hdrs,buffer}` -\u003e `ResMem::{entries,data}`\n- `ConfigHeaderIterator`/`ConfigHeaderEntry` -\u003e `ResMemIterator`/`ResMemEntryInfo`\n\n?",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 8
+      },
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46ebcc24_f1489499",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T10:31:49Z",
+      "side": 1,
+      "message": "The ranges seem superfluous, as you only seem to be dealing with the start/end values. I\u0027m also nervous about the potential overflow when computing `blob.end`. Should this be simplified into\n```\nlet start \u003d hdr.blob_offset();\nlet end \u003d start.checked_add(hdr.blob_size()).ok_or(...)?;\nif start \u003c last_blob_end || end \u003e buffer.len() {\n    return ...;\n}\nlast_blob_end \u003d end;\n```\n?",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 37
+      },
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86eeea43_b960101a",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T10:31:49Z",
+      "side": 1,
+      "message": "`let hdr \u003d self.hdr.hdrs.get(self.next)?`?",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 48
+      },
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1433e30_fe427ec7",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T10:31:49Z",
+      "side": 1,
+      "message": "You also need to flush the D-cache over this range, in case the guest doesn\u0027t re-enable the MMU.",
+      "range": {
+        "startLine": 185,
+        "startChar": 12,
+        "endLine": 185,
+        "endChar": 72
+      },
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a944004_94c00553",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T10:31:49Z",
+      "side": 1,
+      "message": "Unit-test coverage for this flag seems to be missing.",
+      "range": {
+        "startLine": 198,
+        "startChar": 12,
+        "endLine": 198,
+        "endChar": 45
+      },
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f930f8_14e6e681",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T10:31:49Z",
+      "side": 1,
+      "message": "May be easier to follow as\n```\nlet compat \u003d d.0.to_bytes_with_nul();\nlet blob \u003d d.1.as_slice();\nlet vm_name \u003d d.2.to_bytes_with_nul();\n\nlet vm_name_offset \u003d out_data.len() as u32;\nout_data.extend_from_slice(vm_name);\nlet blob_offset  \u003d out_data.len() as u32;\nout_data.extend_from_slice(blob);\nlet compat_offset  \u003d out_data.len() as u32;\nout_data.extend_from_slice(compat);\n\nout_hdr.hdrs[i] \u003d make_header(vm_name_offset, blob_offset, blob.len() as u32, compat_offset);\n```\nWDYT?",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 64
+      },
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5020ed55_50abf352",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T10:31:49Z",
+      "side": 1,
+      "message": "`resmem`?",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 10
+      },
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "045afe78_78ac7c26",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-19T10:31:49Z",
+      "side": 1,
+      "message": "At this point, the secrets contained in the config data (your currently-named `config` variable) should have been zeroed and the caches flushed. AFAICT, this code currently leaks any secret received from the BL to any guest, as they remain resident in memory.",
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
