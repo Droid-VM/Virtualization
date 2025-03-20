@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a55cc17b_f632ad21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2025-03-20T06:15:49Z",
+      "side": 1,
+      "message": "Resize would fail in that case. The resize amount calculated may very well change by the time resize2fs is invoked; but that will addressed in storage ballooning feature.",
+      "parentUuid": "6e8fd109_ca0dd134",
+      "revId": "427313393fd1b339f3f4a62d7349ccfdbb36c6bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c27f7b25_46f7005d",
