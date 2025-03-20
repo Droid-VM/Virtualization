@@ -24,6 +24,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.ClientCertRequest
+import android.webkit.JavascriptInterface
 import android.webkit.SslErrorHandler
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
@@ -87,9 +88,44 @@ class TerminalTabFragment() : Fragment() {
 
         terminalView.webChromeClient = WebChromeClient()
         terminalView.webViewClient = TerminalWebViewClient()
+        terminalView.addJavascriptInterface(TerminalViewInterface(context!!), "Android")
 
         (activity as MainActivity).modifierKeysController.addTerminalView(terminalView)
         terminalViewModel.terminalViews.add(terminalView)
+    }
+
+    private inner class TerminalWebChromeClient : WebChromeClient() {
+        override fun onReceivedTitle(view: WebView?, title: String?) {
+            super.onReceivedTitle(view, title)
+            title?.let { originalTitle ->
+                val ttydSuffix = " | login -f droid (localhost)"
+                val displayedTitle =
+                    if (originalTitle.endsWith(ttydSuffix)) {
+                        // When the session is created. The format of the title will be
+                        // 'droid@localhost: ~ | login -f droid (localhost)'.
+                        originalTitle.dropLast(ttydSuffix.length)
+                    } else {
+                        originalTitle
+                    }
+
+                terminalViewModel.terminalTabs[id]
+                    ?.customView
+                    ?.findViewById<TextView>(R.id.tab_title)
+                    ?.text = displayedTitle
+            }
+        }
+    }
+
+    inner class TerminalViewInterface(private val mContext: android.content.Context) {
+        @JavascriptInterface
+        fun closeTab() {
+            if (activity != null) {
+                activity?.runOnUiThread {
+                    val mainActivity = (activity as MainActivity)
+                    mainActivity.closeTab(terminalViewModel.terminalTabs[id]!!)
+                }
+            }
+        }
     }
 
     private inner class TerminalWebViewClient : WebViewClient() {
@@ -147,6 +183,7 @@ class TerminalTabFragment() : Fragment() {
                             bootProgressView.visibility = View.GONE
                             terminalView.visibility = View.VISIBLE
                             terminalView.mapTouchToMouseEvent()
+                            terminalView.applyTerminalDisconnectCallback()
                             updateMainActivity()
                         }
                     }
