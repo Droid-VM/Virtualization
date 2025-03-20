@@ -142,6 +142,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edd049af_1e09cdd6",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-03-20T10:50:09Z",
+      "side": 1,
+      "message": "Thanks for adding aosp/3537503. With that, now there is no need to change the if-else order in init_shared_pool() in tracker.rs. Because in init_shared_pool, get_mem_sharer is called which is not implemented for Gunyah.",
+      "parentUuid": "2563275a_a30bd617",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85a046a9_30face88",
@@ -209,6 +227,24 @@
       "side": 1,
       "message": "I think it makes sense to prioritize a static swiotlb, when provided. As we validate that the region is within main memory (`total`), the worst an attacker could do is force the use of a memory region that hasn\u0027t been shared as the static swiotlb, AFAICT.\n\nWould you mind turning this hunk into its own commit, as it affects all hypervisors and is atomic and independent of the support you\u0027re adding in this stack?",
       "parentUuid": "29c3e395_1d1b86ba",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c4f3e98_28a858e5",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-03-20T10:50:09Z",
+      "side": 1,
+      "message": "Not needed as there is another way to get granule size now. aosp/3537503",
+      "parentUuid": "fa3c0d36_98d41a69",
       "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
