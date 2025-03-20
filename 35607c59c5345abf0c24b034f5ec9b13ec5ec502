@@ -116,6 +116,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ab0451f4_a5904035",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-20T08:46:06Z",
+      "side": 1,
+      "message": "will clean up in follow-up CL.",
+      "parentUuid": "af52e598_9af0d2f9",
+      "range": {
+        "startLine": 395,
+        "startChar": 38,
+        "endLine": 395,
+        "endChar": 43
+      },
+      "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "665e16ae_06b1365f",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
         "patchSetId": 2
@@ -367,6 +391,30 @@
       "side": 1,
       "message": "in this case, `success` in `whenComplete` is null(and before actually exitStatus is avilable) for timeout case, is it okay?",
       "parentUuid": "b31a2da0_f1c92676",
+      "range": {
+        "startLine": 406,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 86
+      },
+      "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edc07426_7d02682b",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-20T08:46:06Z",
+      "side": 1,
+      "message": "resolved.",
+      "parentUuid": "208e4d45_4ede2685",
       "range": {
         "startLine": 406,
         "startChar": 0,
