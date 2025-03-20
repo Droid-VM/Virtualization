@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8ea0567_d8ee1789",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-20T21:44:22Z",
+      "side": 1,
+      "message": "I believe Bartłomiej is pointing out something different from what I was referring to in [this comment](https://r.android.com/c/platform/packages/modules/Virtualization/+/3466214/comment/045afe78_78ac7c26/) and the email: yes, the \"original\" bytes in the config data entry will need to be cleared (to avoid leaking them to all and any guest) but he\u0027s pointing out that when `jump_to_payload` clears the scratch memory region, it currently is also clearing the secrets you\u0027re expecting to be leaving behind. See how that function carefully avoids overwriting the DICE chain (\"BCC\"), as it should do the same for any pages allocated for resmem regions.\n\n\u003e does each guest receive its own copy of the config data or is it shared?\n\nEach guest receives its own copy of the whole pvmfw, including its config data.\n\n\u003e I can naively clear the entire reserved memory blob or just the ones that got processed\n\nAfter the copies of the data have been allocated and populated, you can unconditionally clear the whole config data entry. Make sure to flush the caches on those regions.",
+      "parentUuid": "d5facb7e_c23fac40",
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91746575_0ebe89b5",
         "filename": "guest/pvmfw/src/config/reserved_mem.rs",
         "patchSetId": 21
