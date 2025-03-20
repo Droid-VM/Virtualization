@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940e8ca3_2169c0ac",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-03-20T04:00:18Z",
+      "side": 1,
+      "message": "Q) Does this even possible? The max size of the scroll bar is capped to the available space, so users can\u0027t set the beyond the available size.\n\nIf it\u0027s possible (perhaps due the the background job?), then the error handling should be goe to the `resizeDiskIfNecessary`, when we actually try resize.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8fa45aef_11a07fee",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+              "range": {
+                "startLine": 36,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 158,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c91fdd7ceeefb32546eead666aa2d056dbd4ffa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
