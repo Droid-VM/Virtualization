@@ -115,6 +115,30 @@
       },
       "revId": "c91fdd7ceeefb32546eead666aa2d056dbd4ffa1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ca2c6d_6d99ff20",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2025-03-20T04:28:43Z",
+      "side": 1,
+      "message": "I can update, but have wonder on how. The maximum value of slider may be changed realtime. How do you think about the precondition for updating that value?\n- Updating after canceling the dialog?\n- Updating per fixed period? (e.g. 1s)",
+      "parentUuid": "23845ac8_2e692825",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 55
+      },
+      "revId": "c91fdd7ceeefb32546eead666aa2d056dbd4ffa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
