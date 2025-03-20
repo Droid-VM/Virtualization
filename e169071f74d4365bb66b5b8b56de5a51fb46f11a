@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5facb7e_c23fac40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-20T20:10:50Z",
+      "side": 1,
+      "message": "Yes, Pierre and I were discussing that a bit via email. From Pierre:\n```Regarding the config data, my understanding was that pvmfw was expected to unconditionally zero the received config data entry, if any, before running the guest. That way, guests can never read it. But if they have a VM name (and rollback protection mechanism) expected by the config data, they receive the page-aligned copy from pvmfw\u0027s heap, described in the DT.```\n\nIf there are multiple guests launched with pvmfw, does each guest receive its own copy of the config data or is it shared? I ask because I\u0027m trying to figure out if I can naively clear the entire reserved memory blob or just the ones that got processed.",
+      "parentUuid": "f12a3ad8_2f1ebb5b",
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91746575_0ebe89b5",
         "filename": "guest/pvmfw/src/config/reserved_mem.rs",
         "patchSetId": 21
