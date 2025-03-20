@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c72cd6f_f9903558",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-20T00:16:30Z",
+      "side": 1,
+      "message": "Hi - I was thinking of this as an alternative to permissions. However, giving VM owners control over this, separate from the sepolicy is quite good. For instance, the sepolicy may allow a service for any VM, but someone writing that VM may want to restrict it furnther.",
+      "parentUuid": "76e6b462_616cd79b",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 26
+      },
+      "revId": "932edab8c1ce94df890fb7fce4c6178ed989765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "541cb2f2_79e7c66a",
         "filename": "tests/vm_accessor/accessor/src/run.rs",
         "patchSetId": 2
