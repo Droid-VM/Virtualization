@@ -16,6 +16,47 @@
       "message": "Please fix this ERROR reported by Copyright header: Missing AOSP copyright header\n\nAnalyzer Description: Validates if source files start with correct copyright header\n\nMissing AOSP copyright header",
       "revId": "340ec5b1c9bd9118192f0b8c7c98dd9027679e0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf818f7b_e2894537",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-20T16:21:49Z",
+      "side": 1,
+      "message": "maybe the change in this file is unintentional?",
+      "range": {
+        "startLine": 803,
+        "startChar": 12,
+        "endLine": 804,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "21702ac0_9efcf997",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachine.java",
+              "range": {
+                "startLine": 803,
+                "startChar": 0,
+                "endLine": 805,
+                "endChar": 0
+              },
+              "replacement": "            // We know that it\u0027s already dropped. Skip through.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "340ec5b1c9bd9118192f0b8c7c98dd9027679e0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
