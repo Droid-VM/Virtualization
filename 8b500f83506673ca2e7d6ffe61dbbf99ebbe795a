@@ -39,6 +39,30 @@
       },
       "revId": "8b500f83506673ca2e7d6ffe61dbbf99ebbe795a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8528302e_ae369a4d",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-03-20T11:24:50Z",
+      "side": 1,
+      "message": "Not yet, it would be good to fix that. In particular we would need an x86_64 implementation of the functions in https://github.com/google/percore/blob/main/src/exceptions/aarch64.rs to mask and restore exceptions. Is there someone who could implement that?",
+      "parentUuid": "da09e92c_7a105968",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 27
+      },
+      "revId": "8b500f83506673ca2e7d6ffe61dbbf99ebbe795a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
