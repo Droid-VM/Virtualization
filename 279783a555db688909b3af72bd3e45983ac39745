@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55aea80d_2ac7305d",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2025-03-20T06:58:06Z",
+      "side": 0,
+      "message": "I understood the mechanism on this line is for:\n- `defaultMaxDiskSizeMb` represents the cap, desired to be removed\n- `diskSizeMb` represents current size of disk\n- `diskSizeMb + usableSpaceMb` represents the limit of enlarged disk size.\n\nI think there should be same or similar mechanism for retrieving the limit of enlarged disk size? Not certain but the value `hostAllocatableBytes` itself is not related to current disk size.",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 89
+      },
+      "revId": "279783a555db688909b3af72bd3e45983ac39745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
