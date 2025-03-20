@@ -33,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.android.virtualization.terminal.VmLauncherService.VmLauncherServiceCallback
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import java.util.Locale
 import java.util.regex.Pattern
 
@@ -56,6 +57,13 @@ class SettingsDiskResizeActivity : AppCompatActivity() {
         return bytes shl 20
     }
 
+    private fun getAvailableSizeMb(): Long {
+        val usableSpaceMb =
+            bytesToMb(Environment.getDataDirectory().getUsableSpace()) and
+                (diskSizeStepMb - 1).inv()
+        return diskSizeMb + usableSpaceMb
+    }
+
     private fun mbToProgress(bytes: Long): Int {
         return (bytes / diskSizeStepMb).toInt()
     }
@@ -73,10 +81,7 @@ class SettingsDiskResizeActivity : AppCompatActivity() {
         val image = InstalledImage.getDefault(this)
         diskSizeMb = bytesToMb(image.getApparentSize())
         val minDiskSizeMb = bytesToMb(image.getSmallestSizePossible()).coerceAtMost(diskSizeMb)
-        val usableSpaceMb =
-            bytesToMb(Environment.getDataDirectory().getUsableSpace()) and
-                (diskSizeStepMb - 1).inv()
-        val maxDiskSizeMb = defaultMaxDiskSizeMb.coerceAtMost(diskSizeMb + usableSpaceMb)
+        val maxDiskSizeMb = defaultMaxDiskSizeMb.coerceAtMost(getAvailableSizeMb())
 
         diskSizeText = findViewById<TextView>(R.id.settings_disk_resize_resize_gb_assigned)!!
         val diskMaxSizeText = findViewById<TextView>(R.id.settings_disk_resize_resize_gb_max)
@@ -138,7 +143,19 @@ class SettingsDiskResizeActivity : AppCompatActivity() {
     }
 
     private fun resize() {
-        diskSizeMb = progressToMb(diskSizeSlider.progress)
+        val desiredDiskSizeMb = progressToMb(diskSizeSlider.progress)
+        if (getAvailableSizeMb() < desiredDiskSizeMb) {
+            Snackbar.make(
+                    findViewById(android.R.id.content),
+                    R.string.settings_disk_resize_not_enough_space_message,
+                    Snackbar.LENGTH_SHORT,
+                )
+                .show()
+            cancel()
+            return
+        }
+
+        diskSizeMb = desiredDiskSizeMb
         buttons.isVisible = false
 
         // Note: we first stop the VM, and wait for it to fully stop. Then we (re) start the Main
