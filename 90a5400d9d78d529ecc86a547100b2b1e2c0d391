@@ -3,6 +3,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b1bb0b9_5bd5eb71",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-20T08:57:08Z",
+      "side": 1,
+      "message": "it doesn\u0027t need to be `var`",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 11
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3dbe0aab_351cd96c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.kt",
+              "range": {
+                "startLine": 121,
+                "startChar": 0,
+                "endLine": 122,
+                "endChar": 0
+              },
+              "replacement": "        val roundedUpDesiredSize \u003d roundUp(desiredSize)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "90a5400d9d78d529ecc86a547100b2b1e2c0d391",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8b196e33_1f8d3702",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.kt",
         "patchSetId": 2
