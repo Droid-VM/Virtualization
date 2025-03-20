@@ -162,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd313d74_d83e8403",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-03-20T07:30:11Z",
+      "side": 1,
+      "message": "I\u0027m sorry but could you clarify button and title?\n\nLet me share the current status with this CL + patchset. If user click button from http://shortn/_TNavA9vY0A, then you\u0027ll see recovery activity (http://shortn/_1jXtK7FMEy) for now. Touching \u0027Reset to initial\u0027 version would pop-up dialog (http://shortn/_FjOq26rckf).\nThe behavior is to match the UX flow with the unrecoverable error.\n\n\nSo my question would be:\n\nQ1) What exactly is the button title that you\u0027re referring?\nAre you saying that \u0027Recovery\u0027 button at the right bottom of the upgrade activity?\n\n\nQ2) Do you expect the button to launch dialog directly, without launching recovery activity in the middle?\nIf so, should we match the behavior between unrecoverable error vs upgrade required? I don\u0027t think that they should match, but just to double check.\n\n\nQ3) Would we like to change the dialog title as well?\n\u0027Reset terminal\u0027 looks OK for me, but there could be a better name.",
+      "parentUuid": "83cc1f15_ef14fc26",
+      "range": {
+        "startLine": 127,
+        "startChar": 43,
+        "endLine": 127,
+        "endChar": 51
+      },
+      "revId": "568d7c663bfb089ce6e2a792b3fa6f942edc1b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d044d1e2_6ad09d0a",
         "filename": "android/TerminalApp/res/values/strings.xml",
         "patchSetId": 1
