@@ -139,6 +139,30 @@
       },
       "revId": "c91fdd7ceeefb32546eead666aa2d056dbd4ffa1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f46ec16f_88c1af35",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2025-03-20T05:26:11Z",
+      "side": 1,
+      "message": "I have another CL which remove the cap of max size: https://r.android.com/3551139\n\nI am trying to understand how getAvailableSizeMb() will impact in that case if the cap of 16GB is removed.",
+      "parentUuid": "37ca2c6d_6d99ff20",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 55
+      },
+      "revId": "c91fdd7ceeefb32546eead666aa2d056dbd4ffa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
