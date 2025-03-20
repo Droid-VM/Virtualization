@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a67143c1_d8805c05",
+        "filename": "tests/old_images_avf_test/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-03-20T09:37:38Z",
+      "side": 1,
+      "message": "Can we conditionally ignore this test? The current cl fully deactivates the tests in protected mode, yet we still need to maintain the code. If there\u0027s no immediate plan to re-enable it, I\u0027d rather remove the code and reintroduce it when the problem is fixed.",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7c1949fa_0bc05999",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/old_images_avf_test/src/main.rs",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 178,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "tests/old_images_avf_test/src/main.rs",
+              "range": {
+                "startLine": 187,
+                "startChar": 0,
+                "endLine": 189,
+                "endChar": 0
+              },
+              "replacement": "        bail!(\"pVMs are not supported on device. skipping test\");\n"
+            },
+            {
+              "path": "tests/old_images_avf_test/src/main.rs",
+              "range": {
+                "startLine": 201,
+                "startChar": 0,
+                "endLine": 203,
+                "endChar": 0
+              },
+              "replacement": "        bail!(\"VMs are not supported on device. skipping test\");\n"
+            },
+            {
+              "path": "tests/old_images_avf_test/src/main.rs",
+              "range": {
+                "startLine": 208,
+                "startChar": 0,
+                "endLine": 209,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "tests/old_images_avf_test/src/main.rs",
+              "range": {
+                "startLine": 218,
+                "startChar": 0,
+                "endLine": 220,
+                "endChar": 0
+              },
+              "replacement": "        bail!(\"pVMs are not supported on device. skipping test\");\n"
+            },
+            {
+              "path": "tests/old_images_avf_test/src/main.rs",
+              "range": {
+                "startLine": 232,
+                "startChar": 0,
+                "endLine": 234,
+                "endChar": 0
+              },
+              "replacement": "        bail!(\"VMs are not supported on device. skipping test\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7b670e310d9b941859101fa92071a3ebf16bc886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
