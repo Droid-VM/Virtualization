@@ -63,6 +63,30 @@
       },
       "revId": "8b500f83506673ca2e7d6ffe61dbbf99ebbe795a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f70d1a_c1f8da28",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-20T11:40:51Z",
+      "side": 1,
+      "message": "It would be interesting to understand if the AArch64 model of exception this crate is based on even works on Intel (e.g. NMI). I\u0027m not sure if there\u0027s interest to work on this (@bgrzesik@google.com, WDYT?) but, as mentioned in another comment, this CL doesn\u0027t seem needed until we start unmasking interrupts.\n\nIn the meantime, I don\u0027t want to affect the x86 build by adding callers of `percore` in common code.",
+      "parentUuid": "8528302e_ae369a4d",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 27
+      },
+      "revId": "8b500f83506673ca2e7d6ffe61dbbf99ebbe795a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
