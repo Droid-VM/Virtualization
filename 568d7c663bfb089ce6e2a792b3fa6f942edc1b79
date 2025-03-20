@@ -16,6 +16,98 @@
       "message": "Please check screenshot when reviewing this change. It works, but doesn\u0027t look fancy. Might be OK because this is one time UI.",
       "revId": "568d7c663bfb089ce6e2a792b3fa6f942edc1b79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0034c361_1dae5a75",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ErrorActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-20T06:56:26Z",
+      "side": 1,
+      "message": "When this activity is started via `startForUpdate`, this method should trigger the recoverity activity with the \"backup\" option forcibly on.",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 29
+      },
+      "revId": "568d7c663bfb089ce6e2a792b3fa6f942edc1b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b367ca7b_affd6a6b",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-20T06:56:26Z",
+      "side": 1,
+      "message": "This button should be titled \"upgrade\" when the error activity was started for the upgrade.",
+      "range": {
+        "startLine": 127,
+        "startChar": 43,
+        "endLine": 127,
+        "endChar": 51
+      },
+      "revId": "568d7c663bfb089ce6e2a792b3fa6f942edc1b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d044d1e2_6ad09d0a",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-20T06:56:26Z",
+      "side": 1,
+      "message": "Upgrade to newer terminal",
+      "range": {
+        "startLine": 158,
+        "startChar": 47,
+        "endLine": 158,
+        "endChar": 62
+      },
+      "revId": "568d7c663bfb089ce6e2a792b3fa6f942edc1b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0266da4c_20dbdfb7",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-20T06:56:26Z",
+      "side": 1,
+      "message": "Linux terminal you were using is out of date. Please upgrade to proceed.",
+      "range": {
+        "startLine": 162,
+        "startChar": 46,
+        "endLine": 162,
+        "endChar": 166
+      },
+      "revId": "568d7c663bfb089ce6e2a792b3fa6f942edc1b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
