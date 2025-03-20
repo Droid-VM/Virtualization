@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3be4d6a9_011c7d8a",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2025-03-20T08:53:44Z",
+      "side": 1,
+      "message": "If you have concern about using `curSize` in the scope of allocateSpace, why do we return `curSize` instead of `getApparentSize()`?",
+      "parentUuid": "8b196e33_1f8d3702",
+      "range": {
+        "startLine": 132,
+        "startChar": 23,
+        "endLine": 132,
+        "endChar": 38
+      },
+      "revId": "90a5400d9d78d529ecc86a547100b2b1e2c0d391",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6bb8f7df_c7523b7e",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.kt",
         "patchSetId": 2
@@ -89,6 +113,30 @@
           ]
         }
       ],
+      "revId": "90a5400d9d78d529ecc86a547100b2b1e2c0d391",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80b899ad_a80023ad",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2025-03-20T08:53:44Z",
+      "side": 1,
+      "message": "At the scope of that conditional statement, the result of `getApparentSize()` would be different based on the behavior of `fallocate`.",
+      "parentUuid": "6bb8f7df_c7523b7e",
+      "range": {
+        "startLine": 141,
+        "startChar": 8,
+        "endLine": 141,
+        "endChar": 46
+      },
       "revId": "90a5400d9d78d529ecc86a547100b2b1e2c0d391",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
