@@ -90,6 +90,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "af52e598_9af0d2f9",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-20T08:38:53Z",
+      "side": 1,
+      "message": "\u003e thenAcceptAsync is an odd choice because it will execute this function in the forkjoin pool.\n\nBTW even in the case of `thenAccept`, it is running on top of `ForkJoinPool.commonPool()`. https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/TerminalApp/java/com/android/virtualization/terminal/Runner.kt;l\u003d87?q\u003dForkJoinPool.commonPool()%20TerminalApp\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain\n\n\u003e that\u0027s odd. we don\u0027t call startForegroundService but call stopForeground upon ACTION_SHUTDOWN_VM.\n\nyeah.. that\u0027s really odd. I think it\u0027s timing issue due to the thread.\nif it uses thenAccept, it blocks every thenAcceptAsync, so it causes this weird issue.(because `ACTION_SHUTDOWN_VM` from MainActivity arrives near `ACTION_START_VM` causes ForegroundServiceDidNotStartInTimeException.)\n\nI think we need to clean up stopSelf() and need to check if we can use stopService instead of \u0027startService\u0027 with SHUTDOWN action. But it would be included in follow-up change instead of making this change bigger..",
+      "parentUuid": "3582bb9a_cbac3a4e",
+      "range": {
+        "startLine": 395,
+        "startChar": 38,
+        "endLine": 395,
+        "endChar": 43
+      },
+      "revId": "35607c59c5345abf0c24b034f5ec9b13ec5ec502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "665e16ae_06b1365f",
