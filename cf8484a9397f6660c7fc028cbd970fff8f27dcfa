@@ -125,6 +125,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c24ed7_bd279fb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2025-03-20T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4e668e3_8970c433",
+      "revId": "cf8484a9397f6660c7fc028cbd970fff8f27dcfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4326e723_8223261c",
@@ -186,6 +204,30 @@
       "side": 1,
       "message": "I have kept the Kokoro Aarch64 builders on the u-boot config, so this CL is ready to merge as is. Once Ferrochrome boots fine with the new config on Aarch64, we can update the Kokoro builder.",
       "parentUuid": "a623f62c_a898c01d",
+      "range": {
+        "startLine": 18,
+        "startChar": 18,
+        "endLine": 18,
+        "endChar": 82
+      },
+      "revId": "cf8484a9397f6660c7fc028cbd970fff8f27dcfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a89fac11_c698645b",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2025-03-20T00:19:07Z",
+      "side": 1,
+      "message": "Since aarch64 builds actually do seem to work fine, as per our discussion, I have switched the default for the Kokoro aarch64 builders to direct loading as well.",
+      "parentUuid": "ffdd7987_02d3da95",
       "range": {
         "startLine": 18,
         "startChar": 18,
