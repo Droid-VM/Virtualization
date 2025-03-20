@@ -173,6 +173,7 @@ fn run_vm(image_path: &str, test_name: &CStr, protected_vm: bool) -> Result<()> 
 }
 
 #[test]
+#[ignore] // TODO(b/405001068): Rialto img is tightly coupled with pvmfw img, making back compatibility of the guest boot protocol tricky
 fn test_run_rialto_protected() -> Result<()> {
     if hypervisor_props::is_protected_vm_supported()? {
         run_vm(
@@ -201,6 +202,7 @@ fn test_run_rialto_non_protected() -> Result<()> {
 }
 
 #[test]
+#[ignore] // TODO(b/405001068): Rialto img is tightly coupled with pvmfw img, making back compatibility of the guest boot protocol tricky
 fn test_run_android16_rialto_protected() -> Result<()> {
     if hypervisor_props::is_protected_vm_supported()? {
         run_vm(
