@@ -36,6 +36,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e8fd109_ca0dd134",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-03-20T06:06:34Z",
+      "side": 1,
+      "message": "This could be a newbie question, but is it OK to use device\u0027s total max size?\n\nI\u0027m asking this because we end up with calling `/system/bin/resize2fs ${ROOTPART_PATH} ${RESIZE_TARGET}` (see: `resizeFileSystem`) from hostside, and I wonder whether it\u0027s OK to do when the resize amount is more than free disk space.",
+      "revId": "427313393fd1b339f3f4a62d7349ccfdbb36c6bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c27f7b25_46f7005d",
