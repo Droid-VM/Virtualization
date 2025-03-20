@@ -112,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d290999_bacae17c",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-03-20T11:08:22Z",
+      "side": 1,
+      "message": "Implemented a dummy next state DICE data which is garbage value to avoid panic here at the expense of alloacting a single page of heap memory temporarly at a point where pvmfw is going to jump to next stage. It will not wait memory in next stage as the dice reserve mem node is removed for Optional DICE case.",
+      "parentUuid": "31a51435_c0f84f5c",
+      "range": {
+        "startLine": 190,
+        "startChar": 8,
+        "endLine": 190,
+        "endChar": 37
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbd72afb_6baefac9",
@@ -267,6 +291,30 @@
       "side": 1,
       "message": "Ack; so `signed_kernel` is the binary kernel to be entered, not the ELF (PIL), right?",
       "parentUuid": "ac9385c3_2753ff0d",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 93
+      },
+      "revId": "66de31b36c900e84350fbdee63e03ecb490b27d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6dddca4_7590d5b2",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-03-20T11:08:22Z",
+      "side": 1,
+      "message": "I have revered that line in next PS. Debug logs says \"Signed kernel\". But actually it is a raw binary. But I am okay with that.",
+      "parentUuid": "58061380_93fdf722",
       "range": {
         "startLine": 95,
         "startChar": 4,

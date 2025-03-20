@@ -16,6 +16,29 @@
       "message": "Note: Not verified on target device as the pre-pvmfw needs some work to get pvmfw running.",
       "revId": "c5d802fd25d9e7aef7e583a13bbaf251a46f8964",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a9ead2b_755439eb",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-03-20T11:08:22Z",
+      "side": 1,
+      "message": "Code after this is not going to check what is inside it. Also kernel will not reserve this memory as the dice reserve mem node is absent. As the merge deadline is tomorrow can we keep this for now and raise another gerrit for removing it?",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 55
+      },
+      "revId": "c5d802fd25d9e7aef7e583a13bbaf251a46f8964",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
