@@ -103,7 +103,11 @@ public class MainActivity :
 
         // if installer is launched, it will be handled in onActivityResult
         if (!launchInstaller) {
-            if (!Environment.isExternalStorageManager()) {
+            if (image.isOlderThanCurrentVersion()) {
+                ErrorActivity.Companion.startForUpdate(applicationContext)
+                // Explicitly finish to make sure that user can't go back from ErrorActivity.
+                finish()
+            } else if (!Environment.isExternalStorageManager()) {
                 requestStoragePermissions(this, manageExternalStorageActivityResultLauncher)
             } else {
                 startVm()

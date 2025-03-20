@@ -45,9 +45,16 @@ class ErrorActivity : BaseActivity() {
         super.onResume()
 
         val intent = getIntent()
-        val e = intent.getParcelableExtra<Exception?>(EXTRA_CAUSE, Exception::class.java)
+
+        findViewById<TextView>(R.id.title)
+            .setText(intent.getIntExtra(EXTRA_TITLE, R.string.error_title))
+
+        findViewById<TextView>(R.id.desc)
+            .setText(intent.getIntExtra(EXTRA_DESC, R.string.error_desc))
+
         val cause = findViewById<TextView>(R.id.cause)
-        cause.text = e?.let { getString(R.string.error_code, getStackTrace(it)) }
+        val e = intent.getParcelableExtra<Exception?>(EXTRA_CAUSE, Exception::class.java)
+        cause.text = e?.let { getString(R.string.error_code, getStackTrace(it)) } ?: ""
     }
 
     private fun launchRecoveryActivity() {
@@ -56,11 +63,21 @@ class ErrorActivity : BaseActivity() {
     }
 
     companion object {
+        private const val EXTRA_TITLE = "title"
+        private const val EXTRA_DESC = "desc"
         private const val EXTRA_CAUSE = "cause"
 
         fun start(context: Context, e: Exception) {
             val intent = Intent(context, ErrorActivity::class.java)
             intent.putExtra(EXTRA_CAUSE, e)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        }
+
+        fun startForUpdate(context: Context) {
+            val intent = Intent(context, ErrorActivity::class.java)
+            intent.putExtra(EXTRA_TITLE, R.string.error_title_update_required)
+            intent.putExtra(EXTRA_DESC, R.string.error_desc_update_required)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }

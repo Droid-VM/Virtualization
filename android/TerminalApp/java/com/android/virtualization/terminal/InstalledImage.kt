@@ -66,6 +66,16 @@ public class InstalledImage private constructor(val installDir: Path) {
         }
     }
 
+    fun isOlderThanCurrentVersion(): Boolean {
+        val year =
+            try {
+                buildId.split(" ").last().toInt()
+            } catch (e: Exception) {
+                0
+            }
+        return year < RELEASE_YEAR
+    }
+
     @Throws(IOException::class)
     fun uninstallAndBackup(): Path {
         Files.delete(marker)
@@ -165,6 +175,7 @@ public class InstalledImage private constructor(val installDir: Path) {
         private const val CONFIG_FILENAME = "vm_config.json"
         private const val BUILD_ID_FILENAME = "build_id"
         const val MARKER_FILENAME: String = "completed"
+        const val RELEASE_YEAR: Int = 2025
 
         const val RESIZE_STEP_BYTES: Long = 4 shl 20 // 4 MiB
 
