@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08a3745b_5d87ea5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-03-20T04:21:52Z",
+      "side": 1,
+      "message": "LGTM if you\u0027ll also handle in the same for the actual resize in next CL.",
+      "revId": "c91fdd7ceeefb32546eead666aa2d056dbd4ffa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "940e8ca3_2169c0ac",
@@ -66,6 +83,30 @@
       "side": 1,
       "message": "It\u0027s quite rare to reproduce, but it\u0027s possible in fact. For instance,\n1. User enlarge disk size via slider, and press \u0027Apply\u0027 button.\n1. Somehow more disk is used by others.\n1. User press \u0027Confirm\u0027 button with desired size.\n1. VmTerminalApp tries to restart with not applicable disk size.\n\nAlso as you said, usable disk size might be shrinked between pressing \u0027Confirm\u0027 button and trying resize task after restarting VmLauncherService. But, I thought that leaving snackbar message here is still valid, to keep state for showing `SettingDiskResizeActivity` at most.",
       "parentUuid": "940e8ca3_2169c0ac",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 55
+      },
+      "revId": "c91fdd7ceeefb32546eead666aa2d056dbd4ffa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23845ac8_2e692825",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-03-20T04:21:52Z",
+      "side": 1,
+      "message": "Then could you also update the slider\u0027s max as well?",
+      "parentUuid": "d0a13d77_4acc4bd9",
       "range": {
         "startLine": 147,
         "startChar": 0,
