@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61d9b502_8fc50e2f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ErrorActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-03-20T07:14:23Z",
+      "side": 1,
+      "message": "Q) Does \u0027forcily on\u0027 mean \u0027checked but disabled\u0027?",
+      "parentUuid": "0034c361_1dae5a75",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 29
+      },
+      "revId": "568d7c663bfb089ce6e2a792b3fa6f942edc1b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b367ca7b_affd6a6b",
         "filename": "android/TerminalApp/res/values/strings.xml",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2025-03-20T06:56:26Z",
       "side": 1,
       "message": "This button should be titled \"upgrade\" when the error activity was started for the upgrade.",
+      "range": {
+        "startLine": 127,
+        "startChar": 43,
+        "endLine": 127,
+        "endChar": 51
+      },
+      "revId": "568d7c663bfb089ce6e2a792b3fa6f942edc1b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f751c2b1_90f712a7",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-03-20T07:14:23Z",
+      "side": 1,
+      "message": "Q) Do you also want to modify the button title? It\u0027s currently saying `Reset to initial version\u0027 but it might be confusing for upgrading. \u0027Start upgrade\u0027 or something else?",
+      "parentUuid": "b367ca7b_affd6a6b",
       "range": {
         "startLine": 127,
         "startChar": 43,
