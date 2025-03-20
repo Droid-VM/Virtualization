@@ -210,6 +210,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80300a4e_02948a7a",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-03-20T08:33:14Z",
+      "side": 1,
+      "message": "Let me summarize requirements:\n\n- if build_id is outdated, then show upgrade activity (better to create a new one)\n- upgrade activity would have following UI\n  - title: \"Upgrade to newer terminal\"\n  - desc: \"Linux terminal you were using is out of date. Please upgrade to proceed.\\nData will be backup at /mnt/backup\"\n  - button (right bottom): \"Upgrade\"\n- Clicking the button will reset in place, and launch installer activity.\n\nCorrect me if I\u0027m wrong here. Let me start work on next patchset based on the summary here before your feedback.",
+      "parentUuid": "d9ed3eca_e4a6f4aa",
+      "range": {
+        "startLine": 127,
+        "startChar": 43,
+        "endLine": 127,
+        "endChar": 51
+      },
+      "revId": "568d7c663bfb089ce6e2a792b3fa6f942edc1b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d044d1e2_6ad09d0a",
         "filename": "android/TerminalApp/res/values/strings.xml",
         "patchSetId": 1
