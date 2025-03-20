@@ -800,7 +800,8 @@ public class VirtualMachine implements AutoCloseable {
                 throw new VirtualMachineException("VM is not in stopped state");
             }
         } catch (RemoteException e) {
-            throw e.rethrowAsRuntimeException();
+            // We know that it's already dropped.
+            // Skip through.
         }
         // It's stopped, but we still have a reference to it - we can fix that.
         dropVm();
@@ -834,7 +835,7 @@ public class VirtualMachine implements AutoCloseable {
                 }
             }
         } catch (RemoteException e) {
-            throw e.rethrowAsRuntimeException();
+            throw new VirtualMachineException(e);
         }
     }
 
