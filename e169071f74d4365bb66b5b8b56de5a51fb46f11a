@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f12a3ad8_2f1ebb5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-03-20T11:33:45Z",
+      "side": 1,
+      "message": "I could not find a comment that mentions this, so I sincerely apologize if I am duplicating someone\u0027s comment. But from what I can tell and from testing locally, the CL is missing the modification of `jump_to_payload` implemenetation and at the moment pvmfw with this change clears the reserved memory blobs before jumping to the payload.",
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91746575_0ebe89b5",
         "filename": "guest/pvmfw/src/config/reserved_mem.rs",
         "patchSetId": 21
