@@ -81,6 +81,70 @@
       },
       "revId": "179262a63159dc7526bcff019e6c24e023078560",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a28c3b39_d60883f3",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-20T08:28:21Z",
+      "side": 1,
+      "message": "You don\u0027t need to run this when posix_fallocate fails.",
+      "range": {
+        "startLine": 133,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 24
+      },
+      "revId": "179262a63159dc7526bcff019e6c24e023078560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c94b9a97_11cd13b2",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-20T08:28:21Z",
+      "side": 1,
+      "message": "What if this doesn\u0027t match with getApparentSize? I suggest drop this from the argument list and call getApparentSize inside of this function, so that it\u0027s harder to use this function incorrectly.",
+      "range": {
+        "startLine": 138,
+        "startChar": 56,
+        "endLine": 138,
+        "endChar": 76
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "409e058a_f73411d4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.kt",
+              "range": {
+                "startLine": 139,
+                "startChar": 0,
+                "endLine": 139,
+                "endChar": 0
+              },
+              "replacement": "        if (desiredSizeInBytes !\u003d curSizeInBytes) {\n            Log.e(TAG, \"desiredSizeInBytes !\u003d curSizeInBytes\")\n            throw RuntimeException(\"desiredSizeInBytes !\u003d curSizeInBytes\")\n        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "179262a63159dc7526bcff019e6c24e023078560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
