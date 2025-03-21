@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "073cb383_1a9bf92a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-03-21T06:45:09Z",
+      "side": 1,
+      "message": "Done. Thanks!",
+      "parentUuid": "f4db0850_c7a0a89d",
+      "revId": "4d869348e8e9a966895d13cd68822e0541a20e7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5f490a24_c7f3e8a7",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2025-03-19T13:48:06Z",
       "side": 1,
       "message": "A follow up change might want to add the test describedin b/392081737#comment6",
+      "revId": "4d869348e8e9a966895d13cd68822e0541a20e7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83b2f743_b958ac04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-03-21T06:45:09Z",
+      "side": 1,
+      "message": "I believe a combination of #assert_latest_payload_verification_passes test [1] \u0026 protected service_vm boot tests[2] gives the equivalent coverage. Lets discuss this over the bug.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/pvmfw/avb/tests/utils.rs;l\u003d114?q\u003dpackages%2Fmodules%2FVirtualization%2Fguest%2Fpvmfw%2Favb%2Ftests%2Futils.rs\n\n[2] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/rialto/tests/test.rs;l\u003d58?q\u003drialto\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain:packages%2Fmodules%2FVirtualization%2F",
+      "parentUuid": "5f490a24_c7f3e8a7",
       "revId": "4d869348e8e9a966895d13cd68822e0541a20e7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
