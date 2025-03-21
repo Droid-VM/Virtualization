@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d016ab_6b50156d",
+        "filename": "guest/pvmfw/src/arch/aarch64/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-03-21T13:55:45Z",
+      "side": 1,
+      "message": "You could simplify this to something like `let skipped \u003d dice_handover.unwrap_or(scratch.start.0..scratch.start.0);`.",
+      "fixSuggestions": [
+        {
+          "fixId": "9b159032_f67e9f17",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "guest/pvmfw/src/arch/aarch64/payload.rs",
+              "range": {
+                "startLine": 51,
+                "startChar": 0,
+                "endLine": 58,
+                "endChar": 0
+              },
+              "replacement": "    // An empty region at the start of the scratch region is compatible with the ASM\n    // implementation and results in the whole scratch region being zeroed.\n    let skipped \u003d dice_handover.unwrap_or(scratch.start.0..scratch.start.0);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0822b266ed1fbf84d3fa5cba8d6e58a9faca211d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
