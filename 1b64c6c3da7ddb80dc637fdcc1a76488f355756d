@@ -16,6 +16,29 @@
       "message": "Note: Not verified on target device as the pre-pvmfw needs some work to get pvmfw running.",
       "revId": "1b64c6c3da7ddb80dc637fdcc1a76488f355756d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07831b30_20b6b15c",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-21T11:40:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n\n        fn parse_interrupts(node: \u0026FdtNode) -\u003e Result\u003cOption\u003cVec\u003cu8\u003e\u003e\u003e {\n            let Some(cells) \u003d node.getprop_cells(c\"interrupts\")? else {\n                return Ok(None);\n            };\n            // Validation: Validate if interrupts cell numbers are multiple of #interrupt-cells.\n            // We can\u0027t know how many interrupts would exist.",
+      "range": {
+        "startLine": 798,
+        "startChar": 0,
+        "endLine": 804,
+        "endChar": 0
+      },
+      "revId": "1b64c6c3da7ddb80dc637fdcc1a76488f355756d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
