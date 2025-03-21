@@ -150,6 +150,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f3a05c3_45bb897c",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-21T12:47:23Z",
+      "side": 1,
+      "message": "AFAIU, you\u0027re only suggesting this to avoid having to (slightly) modify `jump_to_payload()`?\n\nIf so, let me merge a patch that would allow the path when `current_bcc_handover.is_none()` to return `(None, false)`, making this much simpler.",
+      "parentUuid": "4a8ce31f_6fe53302",
+      "revId": "3ed210fdaa4d14070df9e4a8fa5be383d5a8e270",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6056868d_fc1a4e9c",
         "filename": "libs/libvmbase/asm/aarch64/entry.S",
         "patchSetId": 2
