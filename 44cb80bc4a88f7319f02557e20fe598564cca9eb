@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b33a2cf7_16b8a2a4",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/Logger.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-21T08:24:22Z",
+      "side": 1,
+      "message": "IOException? it might be too broad.",
+      "range": {
+        "startLine": 64,
+        "startChar": 28,
+        "endLine": 64,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d85e4e5b_b6c65fcf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/Logger.kt",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "                } catch (e: IOException) {\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/Logger.kt",
+              "range": {
+                "startLine": 74,
+                "startChar": 0,
+                "endLine": 75,
+                "endChar": 0
+              },
+              "replacement": "                    } catch (e: IOException) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "44cb80bc4a88f7319f02557e20fe598564cca9eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1bff0bc_bbfe69f7",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/Logger.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-21T08:24:22Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 74,
+        "startChar": 32,
+        "endLine": 74,
+        "endChar": 41
+      },
+      "revId": "44cb80bc4a88f7319f02557e20fe598564cca9eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ac0372_f5c8ea27",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/Logger.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-21T08:24:22Z",
+      "side": 1,
+      "message": "VirtualMachineException?",
+      "range": {
+        "startLine": 79,
+        "startChar": 20,
+        "endLine": 79,
+        "endChar": 29
+      },
+      "revId": "44cb80bc4a88f7319f02557e20fe598564cca9eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
