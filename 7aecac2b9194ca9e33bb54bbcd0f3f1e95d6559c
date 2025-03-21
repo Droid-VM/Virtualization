@@ -16,6 +16,75 @@
       "message": "Note: Not verified on target device as the pre-pvmfw needs some work to get pvmfw running.",
       "revId": "7aecac2b9194ca9e33bb54bbcd0f3f1e95d6559c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eb6b32d_1d319ba5",
+        "filename": "libs/libhypervisor_backends/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-21T11:43:17Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n    use core::{fmt, result};\n\n    #[cfg(target_arch \u003d \"aarch64\")]\n    use super::hypervisor::GeniezoneError;\n    #[cfg(target_arch \u003d \"aarch64\")]\n    use super::hypervisor::GunyahError;\n    use super::hypervisor::KvmError;\n    #[cfg(target_arch \u003d \"aarch64\")]\n    use uuid::Uuid;",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "7aecac2b9194ca9e33bb54bbcd0f3f1e95d6559c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "774e8d31_43ef3c1d",
+        "filename": "libs/libhypervisor_backends/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-21T11:43:17Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n                }\n                #[cfg(target_arch \u003d \"aarch64\")]\n                Self::GunyahError(e) \u003d\u003e {\n                    write!(f, \"Failed to invoke Gunyah HVC: {e}\")\n                }\n                #[cfg(target_arch \u003d \"aarch64\")]\n                Self::UnsupportedHypervisorUuid(u) \u003d\u003e {",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "7aecac2b9194ca9e33bb54bbcd0f3f1e95d6559c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1867bb62_02f60590",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/gunyah.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-21T11:43:17Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n    use super::common::Hypervisor;\n    use super::DeviceAssigningHypervisor;\n    use crate::{Error, Result};\n    use thiserror::Error;\n    use uuid::{uuid, Uuid};\n\n    const SIZE_4KB: usize \u003d 4 \u003c\u003c 10;",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 0
+      },
+      "revId": "7aecac2b9194ca9e33bb54bbcd0f3f1e95d6559c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
