@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ece3fa4_48266e84",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalTabFragment.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-21T14:04:04Z",
+      "side": 1,
+      "message": "nits: return early if `activity as MainActivity` is null.",
+      "range": {
+        "startLine": 204,
+        "startChar": 8,
+        "endLine": 204,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8c86684c_f4c05b0b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalTabFragment.kt",
+              "range": {
+                "startLine": 204,
+                "startChar": 0,
+                "endLine": 212,
+                "endChar": 0
+              },
+              "replacement": "        val mainActivity \u003d activity as MainActivity ?: return\n        if (terminalGuiSupport()) {\n            mainActivity.displayMenu!!.visibility \u003d View.VISIBLE\n            mainActivity.displayMenu!!.isEnabled \u003d true\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalTabFragment.kt",
+              "range": {
+                "startLine": 213,
+                "startChar": 0,
+                "endLine": 213,
+                "endChar": 0
+              },
+              "replacement": "        mainActivity.tabAddButton!!.isEnabled \u003d true\n        mainActivity.bootCompleted.open()\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b3c7a9bc960b005d0da4ebee1004807c0adcaf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
