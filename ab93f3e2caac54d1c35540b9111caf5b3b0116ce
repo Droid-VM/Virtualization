@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa4cb7ed_22f110ab",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2025-03-21T01:08:34Z",
+      "side": 1,
+      "message": "nit: since this value is changing by time, `diskSizeMb` might be larger `maxDiskSizeMb` after introducing `defaultHostReserveSizeMb`. I don\u0027t think this is a critical problem, but just wanted to mention.",
+      "range": {
+        "startLine": 66,
+        "startChar": 12,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "04cdbce7_4e0d55ce",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+              "range": {
+                "startLine": 66,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": "        val availableSizeMb \u003d bytesToMb(storageManager.getAllocatableBytes(UUID_DEFAULT))\n        return diskSizeMb + availableSizeMb\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ab93f3e2caac54d1c35540b9111caf5b3b0116ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
