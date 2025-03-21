@@ -201,13 +201,15 @@ class TerminalTabFragment() : Fragment() {
     }
 
     private fun updateMainActivity() {
-        val mainActivity = (activity as MainActivity)
-        if (terminalGuiSupport()) {
-            mainActivity.displayMenu!!.visibility = View.VISIBLE
-            mainActivity.displayMenu!!.isEnabled = true
+        if (activity != null) {
+            val mainActivity = (activity as MainActivity)
+            if (terminalGuiSupport()) {
+                mainActivity.displayMenu!!.visibility = View.VISIBLE
+                mainActivity.displayMenu!!.isEnabled = true
+            }
+            mainActivity.tabAddButton!!.isEnabled = true
+            mainActivity.bootCompleted.open()
         }
-        mainActivity.tabAddButton!!.isEnabled = true
-        mainActivity.bootCompleted.open()
     }
 
     private fun readClientCertificate() {
