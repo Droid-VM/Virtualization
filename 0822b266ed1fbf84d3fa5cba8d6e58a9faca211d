@@ -34,6 +34,24 @@
       ],
       "revId": "0822b266ed1fbf84d3fa5cba8d6e58a9faca211d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6793dda2_cb05cbcc",
+        "filename": "guest/pvmfw/src/arch/aarch64/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-21T14:22:53Z",
+      "side": 1,
+      "message": "True, I didn\u0027t want to mix up the 2 comments and use the `else` to \"scope\" the second one; do you want me to change it to `.unwrap_or()`?",
+      "parentUuid": "19d016ab_6b50156d",
+      "revId": "0822b266ed1fbf84d3fa5cba8d6e58a9faca211d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
