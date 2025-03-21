@@ -16,6 +16,23 @@
       "message": "Note: Not verified on target device as the pre-pvmfw needs some fixes to get pvmfw running.",
       "revId": "9a7cf3b0cdd8cf3413fb4a17b151f5e12d6c6e20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62ab0be1_8b9ca2b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-21T12:34:29Z",
+      "side": 1,
+      "message": "Presubmit failed as this CL breaks the build; see the build errors for\n```\nm libpvmfw.device_assignment.test\n```",
+      "revId": "9a7cf3b0cdd8cf3413fb4a17b151f5e12d6c6e20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
