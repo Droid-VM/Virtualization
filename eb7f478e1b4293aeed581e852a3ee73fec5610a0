@@ -16,6 +16,88 @@
       "message": "ttyd doesn\u0027t successfully calls `window.close()`. So I monitor the console.log to achieve it instead.",
       "revId": "eb7f478e1b4293aeed581e852a3ee73fec5610a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d82da4de_03eb554e",
+        "filename": "android/TerminalApp/assets/js/terminal_disconnect.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-21T01:17:56Z",
+      "side": 1,
+      "message": "can we override `window.close` instead of console.log? relying on text log might be fragile.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 4
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1e1d5e30_6d9da267",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/assets/js/terminal_disconnect.js",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "  window.close \u003d function() {\n    Android.closeTab()\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eb7f478e1b4293aeed581e852a3ee73fec5610a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b064aaf_48025af4",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalTabFragment.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-21T01:17:56Z",
+      "side": 1,
+      "message": "nits: maybe TerminalApp?",
+      "range": {
+        "startLine": 96,
+        "startChar": 79,
+        "endLine": 96,
+        "endChar": 86
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b50d3576_c962fd77",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalTabFragment.kt",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": "        terminalView.addJavascriptInterface(TerminalViewInterface(context!!), \"TerminalApp\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eb7f478e1b4293aeed581e852a3ee73fec5610a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
