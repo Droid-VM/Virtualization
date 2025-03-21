@@ -1349,7 +1349,7 @@ mod tests {
             node_path: CString::new("/bus0/backlight").unwrap(),
             reg: vec![[0x9, 0xFF].into()],
             interrupts: Some(into_fdt_prop(vec![0x0, 0xF, 0x4])),
-            iommus: Some(vec![]),
+            iommus: None,
         }];
 
         assert_eq!(device_info.assigned_devices, expected);
