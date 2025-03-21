@@ -197,6 +197,7 @@ public class MainActivity :
             finish()
         }
         viewPager.offscreenPageLimit -= 1
+        terminalViewModel.terminalTabs.remove(terminalTabAdapter.tabs[tab.position].id)
         terminalTabAdapter.deleteTab(tab.position)
         tabLayout.removeTab(tab)
     }
