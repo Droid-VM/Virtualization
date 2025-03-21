@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7982d690_672ae384",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-21T00:52:40Z",
+      "side": 1,
+      "message": "Okay, I see now. Would the be any issue with having `next_dice_handover` always be next to all the other reserved memory? If not, then I could just allocate all the pages needed in a continguous chunk and that minimizes the changes need in `jump_to_payload`.",
+      "parentUuid": "a8ea0567_d8ee1789",
+      "revId": "e169071f74d4365bb66b5b8b56de5a51fb46f11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91746575_0ebe89b5",
         "filename": "guest/pvmfw/src/config/reserved_mem.rs",
         "patchSetId": 21
