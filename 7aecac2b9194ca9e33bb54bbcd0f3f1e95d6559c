@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1c6a01b_ffcede77",
+        "filename": "libs/libhypervisor_backends/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-21T20:20:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0eb6b32d_1d319ba5",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "7aecac2b9194ca9e33bb54bbcd0f3f1e95d6559c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "774e8d31_43ef3c1d",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e06b612_97bfb99d",
+        "filename": "libs/libhypervisor_backends/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-21T20:20:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "774e8d31_43ef3c1d",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "7aecac2b9194ca9e33bb54bbcd0f3f1e95d6559c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1867bb62_02f60590",
@@ -77,6 +125,30 @@
       "writtenOn": "2025-03-21T11:43:17Z",
       "side": 1,
       "message": "Please fix this ERROR reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n    use super::common::Hypervisor;\n    use super::DeviceAssigningHypervisor;\n    use crate::{Error, Result};\n    use thiserror::Error;\n    use uuid::{uuid, Uuid};\n\n    const SIZE_4KB: usize \u003d 4 \u003c\u003c 10;",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 0
+      },
+      "revId": "7aecac2b9194ca9e33bb54bbcd0f3f1e95d6559c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68b8b310_0f4bb9cc",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/gunyah.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-03-21T20:20:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1867bb62_02f60590",
       "range": {
         "startLine": 1,
         "startChar": 0,
