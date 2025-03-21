@@ -14,14 +14,10 @@
 
 
 ifeq ($(findstring enabled, $(TRUSTY_SYSTEM_VM)),enabled)
-
-# This is the default set of packages to load the trusty system vm.
-# It can be overridden by device-specific configuration.
-TRUSTY_SYSTEM_VM_PRODUCT_PACKAGES ?= trusty_security_vm.elf \
+PRODUCT_PACKAGES += \
+	trusty_security_vm.elf \
 	trusty_security_vm_launcher \
 	trusty_security_vm_launcher.rc \
 	early_vms.xml \
-
-PRODUCT_PACKAGES += $(TRUSTY_SYSTEM_VM_PRODUCT_PACKAGES)
 
 endif
