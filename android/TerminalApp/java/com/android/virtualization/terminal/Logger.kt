@@ -19,7 +19,6 @@ import android.system.virtualmachine.VirtualMachine
 import android.system.virtualmachine.VirtualMachineConfig
 import android.system.virtualmachine.VirtualMachineException
 import android.util.Log
-import com.android.virtualization.terminal.Logger.LineBufferedOutputStream
 import java.io.BufferedOutputStream
 import java.io.BufferedReader
 import java.io.IOException
@@ -56,16 +55,16 @@ internal object Logger {
             val logPath = dir.resolve(LocalDateTime.now().toString() + ".txt")
             val console = vm.getConsoleOutput()
             val file = Files.newOutputStream(logPath, StandardOpenOption.CREATE)
-            executor.submit<Int?> {
+            executor.execute({
                 console.use { console ->
                     LineBufferedOutputStream(file).use { fileOutput ->
                         Streams.copy(console, fileOutput)
                     }
                 }
-            }
+            })
 
             val log = vm.getLogOutput()
-            executor.submit<Unit> { log.use { writeToLogd(it, tag) } }
+            executor.execute({ log.use { writeToLogd(it, tag) } })
         } catch (e: VirtualMachineException) {
             throw RuntimeException(e)
         } catch (e: IOException) {
