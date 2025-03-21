@@ -228,6 +228,7 @@ class TerminalTabFragment() : Fragment() {
     }
 
     override fun onDestroy() {
+        terminalView.terminalClose()
         terminalViewModel.terminalViews.remove(terminalView)
         super.onDestroy()
     }
