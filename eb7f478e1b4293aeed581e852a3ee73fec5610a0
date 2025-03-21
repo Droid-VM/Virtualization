@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10caed7b_6c2142bc",
+        "filename": "android/TerminalApp/assets/js/terminal_disconnect.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2025-03-21T03:45:07Z",
+      "side": 1,
+      "message": "I think it works. But the `ttyd` binary in current image is old. And the github repo doesn\u0027t have released version with patch the calls `window.close`: https://github.com/tsl0922/ttyd/commit/9c87671ccae9eefa3c01b08169272c0922e7cdff\n\nIs it okay to modifiy the build script to clone from a specific hash?",
+      "parentUuid": "d82da4de_03eb554e",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 4
+      },
+      "revId": "eb7f478e1b4293aeed581e852a3ee73fec5610a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b064aaf_48025af4",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalTabFragment.kt",
         "patchSetId": 2
