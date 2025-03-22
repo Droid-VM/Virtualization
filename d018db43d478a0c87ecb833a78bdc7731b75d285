@@ -34,6 +34,47 @@
       "parentUuid": "4b39fd5d_cc88aa26",
       "revId": "d018db43d478a0c87ecb833a78bdc7731b75d285",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b132d13_e3447a52",
+        "filename": "android/TerminalApp/res/drawable/ic_launcher_monochrome.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-03-22T01:27:58Z",
+      "side": 1,
+      "message": "nits: 2025?",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "76e518d9_bd1d0569",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/res/drawable/ic_launcher_monochrome.xml",
+              "range": {
+                "startLine": 2,
+                "startChar": 0,
+                "endLine": 3,
+                "endChar": 0
+              },
+              "replacement": "\u003c!--  Copyright 2025 The Android Open Source Project\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d018db43d478a0c87ecb833a78bdc7731b75d285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
