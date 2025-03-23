@@ -236,6 +236,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc720a97_9e04565d",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-23T23:15:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1d953f8_9fd958a1",
+      "range": {
+        "startLine": 21,
+        "startChar": 17,
+        "endLine": 21,
+        "endChar": 20
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5781437d_26c320e6",
@@ -746,6 +770,30 @@
       "side": 1,
       "message": "FTR, aosp/3452838 is now merged and this CL has already been rebased.\n\nHowever, to Bartłomiej\u0027s point, please squash aosp/3536663 into this commit instead of hard-coding (albeit temporarily) use-case specific inputs (`c\"desktop-trusty\"`) deep in the implementation.",
       "parentUuid": "036a4e74_08656d41",
+      "range": {
+        "startLine": 111,
+        "startChar": 7,
+        "endLine": 111,
+        "endChar": 25
+      },
+      "revId": "7e992e97ad1a98faaa388a202a90a03334bbe33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e711f18e_99e314a0",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-23T23:15:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "267d96b0_24fe42b0",
       "range": {
         "startLine": 111,
         "startChar": 7,

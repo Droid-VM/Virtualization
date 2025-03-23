@@ -894,6 +894,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d254332d_4ee2ba1b",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-23T23:15:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "53105649_6aad43c5",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 17
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6445d78f_a97e5a6e",
@@ -1050,6 +1074,30 @@
       "side": 1,
       "message": "Yes, this is exactly why I\u0027m suggesting to properly decouple the different logical steps i.e.\n\n1. parsing of the config data entry (easy to test in CI)\n1. based on the VB data, identifying the right blobs to pass and copying them to page-aligned regions, leaked to prevent reallocation/corruption (not-so-easy to test but trivial)\n1. add the address-size pairs to the trusted DT post validation (easy to test in CI)\n1. unconditional clearing of the config data entry (not-so-easy to test)\n\nBut all of this is instead currently burried deep inside `fdt::prepare_for_next_stage`, which should be limited to DT modifications.\n\nNote that this suggestion simplifies supporting other firmware ABIs (step 3.) in the future, if needed.",
       "parentUuid": "84d684f7_2f57a033",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 52
+      },
+      "revId": "7f485c77428d523f170e4dbdcd91140016af83b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34079a9b_cae6497c",
+        "filename": "guest/pvmfw/src/reserved_mem.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1339975
+      },
+      "writtenOn": "2025-03-23T23:15:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04713021_e4b56f77",
       "range": {
         "startLine": 157,
         "startChar": 0,
