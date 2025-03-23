@@ -31,6 +31,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.android.virtualization.terminal.VmLauncherService.VmLauncherServiceCallback
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Locale
 import java.util.regex.Pattern
@@ -70,7 +71,7 @@ class SettingsDiskResizeActivity : AppCompatActivity() {
         diskSizeStepMb = 1L shl resources.getInteger(R.integer.disk_size_round_up_step_size_in_mb)
 
         val image = InstalledImage.getDefault(this)
-        diskSizeMb = bytesToMb(image.getSize())
+        diskSizeMb = bytesToMb(image.getApparentSize())
         val minDiskSizeMb = bytesToMb(image.getSmallestSizePossible()).coerceAtMost(diskSizeMb)
         val usableSpaceMb =
             bytesToMb(Environment.getDataDirectory().getUsableSpace()) and
@@ -140,12 +141,34 @@ class SettingsDiskResizeActivity : AppCompatActivity() {
         diskSizeMb = progressToMb(diskSizeSlider.progress)
         buttons.isVisible = false
 
-        // Restart terminal
-        val intent = baseContext.packageManager.getLaunchIntentForPackage(baseContext.packageName)
-        intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        intent?.putExtra(MainActivity.KEY_DISK_SIZE, mbToBytes(diskSizeMb))
-        finish()
-        startActivity(intent)
+        // Note: we first stop the VM, and wait for it to fully stop. Then we (re) start the Main
+        // Activity with an extra argument specifying the new size. The actual resizing will be done
+        // there.
+        // TODO: show progress until the stop is confirmed
+        val intent =
+            VmLauncherService.getIntentForShutdown(
+                this,
+                object : VmLauncherServiceCallback {
+                    override fun onVmStart() {}
+
+                    override fun onTerminalAvailable(info: TerminalInfo) {}
+
+                    override fun onVmStop() {
+                        finish()
+
+                        val intent =
+                            baseContext.packageManager.getLaunchIntentForPackage(
+                                baseContext.packageName
+                            )!!
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        intent.putExtra(MainActivity.EXTRA_DISK_SIZE, mbToBytes(diskSizeMb))
+                        startActivity(intent)
+                    }
+
+                    override fun onVmError() {}
+                },
+            )
+        startService(intent)
     }
 
     fun updateSliderText(sizeMb: Long) {
