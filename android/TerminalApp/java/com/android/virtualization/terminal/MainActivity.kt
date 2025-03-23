@@ -78,7 +78,6 @@ public class MainActivity :
     private lateinit var terminalTabAdapter: TerminalTabAdapter
     private val terminalInfo = CompletableFuture<TerminalInfo>()
     private val terminalViewModel: TerminalViewModel by viewModels()
-    private var isVmRunning = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -264,16 +263,13 @@ public class MainActivity :
         executorService.shutdown()
         getSystemService<AccessibilityManager>(AccessibilityManager::class.java)
             .removeAccessibilityStateChangeListener(this)
-        if (isVmRunning) {
-            val intent = VmLauncherService.getIntentForShutdown(this, this)
-            startService(intent)
-        }
+        val intent = VmLauncherService.getIntentForShutdown(this, this)
+        startService(intent)
         super.onDestroy()
     }
 
     override fun onVmStart() {
         Log.i(TAG, "onVmStart()")
-        isVmRunning = true
     }
 
     override fun onTerminalAvailable(info: TerminalInfo) {
@@ -282,13 +278,11 @@ public class MainActivity :
 
     override fun onVmStop() {
         Log.i(TAG, "onVmStop()")
-        isVmRunning = false
         finish()
     }
 
     override fun onVmError() {
         Log.i(TAG, "onVmError()")
-        isVmRunning = false
         // TODO: error cause is too simple.
         ErrorActivity.start(this, Exception("onVmError"))
     }
