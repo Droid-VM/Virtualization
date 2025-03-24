@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f107fb23_e0357fd6",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-03-24T17:47:52Z",
+      "side": 1,
+      "message": "This unaligned error case is impossible, right? The `ResMemEntry` can be `derive(zerocopy::Unaligned)`. With that, you can write this and be assured that unaligned errors are statically impossible:\n\n```\n// outside\nuse zerocopy::{SizeError, Unaligned};\n\n\n#[repr(C)]\n#[derive(\n    Clone, Copy, Debug, Default, Eq, FromBytes, Immutable, IntoBytes, KnownLayout, PartialEq, Unaligned\n)]\npub(crate) struct ResMemEntry {\n    vm_name_offset: U32\u003cNativeEndian\u003e,\n    blob_offset: U32\u003cNativeEndian\u003e,\n    blob_size: U32\u003cNativeEndian\u003e,\n    compat_offset: U32\u003cNativeEndian\u003e,\n    flags: U32\u003cNativeEndian\u003e,\n}\n\nimpl\u003cSrc, Dst: ?Sized\u003e From\u003cSizeError\u003cSrc, Dst\u003e\u003e for Error {\n    fn from(x: SizeError\u003cSrc, Dst\u003e) -\u003e Error { Error::InconsistentSize }\n}\n\n// here\nlet (entries, buffer) \u003d \u003c[ResMemEntry]\u003e::ref_from_prefix_with_elems(rem, count as usize)\n    .map_err(SizeError::from)?;\n```",
+      "range": {
+        "startLine": 81,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 16
+      },
+      "revId": "73baf51ae37992293e682cc876866078adba4edc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
