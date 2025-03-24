@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a3c4600_6130252b",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-24T12:56:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5f4bba8f_033b826b",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 22
+      },
+      "revId": "932edab8c1ce94df890fb7fce4c6178ed989765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d8e0159_fb3e1fa5",
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "Hi - I was thinking of this as an alternative to permissions. However, giving VM owners control over this, separate from the sepolicy is quite good. For instance, the sepolicy may allow a service for any VM, but someone writing that VM may want to restrict it furnther.",
       "parentUuid": "76e6b462_616cd79b",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 26
+      },
+      "revId": "932edab8c1ce94df890fb7fce4c6178ed989765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da9c41ce_02d839e1",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-03-24T12:56:17Z",
+      "side": 1,
+      "message": "YAGNI? Do we have a real usecase of such flexibility?\n\n------------\n\n\u003e We also check it then too\n\nThanks. I\u0027ve discovered that later.",
+      "parentUuid": "1c72cd6f_f9903558",
       "range": {
         "startLine": 152,
         "startChar": 0,
