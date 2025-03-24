@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ferrochrome.javabackend"
+    xmlns:tools="http://schemas.android.com/tools">
+
+     <uses-sdk android:minSdkVersion="33" android:targetSdkVersion="33"/>
+   <application android:label="Java backend for binder test">
+    <service
+        android:name=".MainService"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="com.ferrochrome.TEST_SERVICE" />
+      </intent-filter>
+    </service>
+    <service
+        android:name=".InstanceService"
+        android:exported="true"
+        android:process=":instance">
+    </service>
+  </application>
+</manifest>

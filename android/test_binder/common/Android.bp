@@ -1,0 +1,14 @@
+aidl_interface {
+    name: "test_binder.aidl",
+    srcs: ["aidl/**/*.aidl"],
+    unstable: true,
+    local_include_dir: "aidl",
+    backend: {
+        java: {
+            enabled: true,
+        },
+        rust: {
+            enabled: true,
+        },
+    },
+}

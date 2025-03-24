@@ -1,0 +1,31 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_binary {
+    name: "rustbackend",
+    crate_name: "rustbackend",
+    srcs: ["src/main.rs"],
+    edition: "2021",
+    prefer_rlib: true,
+    rustlibs: [
+        "test_binder.aidl-rust",
+        "libanyhow",
+        "libandroid_logger",
+        "libbinder_rs",
+        "libenv_logger",
+        "libglob",
+        "libhypervisor_props",
+        "liblog_rust",
+        "libmicrodroid_payload_config",
+        "librand",
+        "libvmconfig",
+        "libvmclient",
+        "libnix",
+        "librpcbinder_rs",
+        "libshared_child",
+        "libcommand_fds",
+        "librustutils",
+        "libclap",
+    ],
+}

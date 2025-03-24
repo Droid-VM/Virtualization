@@ -1,0 +1,48 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_library_shared {
+    name: "libtest_binder_jni",
+    srcs: [
+        "lib.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "libbinder_rpc_unstable",
+        "liblog",
+        "libnativehelper",
+    ],
+    static_libs: [
+        "libtest_binder.ffi",
+    ],
+}
+
+rust_defaults {
+    name: "libtest_binder.default",
+    crate_name: "test_binder",
+    srcs: ["src/lib.rs"],
+    edition: "2021",
+    prefer_rlib: true,
+    host_supported: false,
+    rustlibs: [
+        "libbinder_rs",
+        "libcommand_fds",
+        "liblog_rust",
+        "libnix",
+        "librpcbinder_rs",
+        "libshared_child",
+        "libthiserror",
+    ],
+}
+
+rust_library {
+    name: "libtest_binder",
+    defaults: ["libtest_binder.default"],
+}
+
+rust_ffi_static {
+    name: "libtest_binder.ffi",
+    defaults: ["libtest_binder.default"],
+}

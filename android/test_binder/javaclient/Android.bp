@@ -1,0 +1,21 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "javaclient",
+    srcs: [
+        "java/**/*.java",
+    ],
+    resource_dirs: ["res"],
+    static_libs: [
+        "androidx-constraintlayout_constraintlayout",
+        "androidx.appcompat_appcompat",
+        "com.android.microdroid.testservice-java",
+        "com.google.android.material_material",
+        "test_binder.aidl-java",
+    ],
+    jni_libs: ["libtest_binder_jni"],
+    platform_apis: true,
+    privileged: true,
+}
