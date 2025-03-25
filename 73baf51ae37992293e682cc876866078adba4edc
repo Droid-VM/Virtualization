@@ -22,6 +22,30 @@
       },
       "revId": "73baf51ae37992293e682cc876866078adba4edc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67b26617_5a53e8d8",
+        "filename": "guest/pvmfw/src/config/reserved_mem.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 3562310
+      },
+      "writtenOn": "2025-03-25T17:42:26Z",
+      "side": 1,
+      "message": "[This](https://docs.rs/zerocopy/latest/zerocopy/error/enum.ConvertError.html#impl-From%3CConvertError%3CAlignmentError%3CSrc,+Dst%3E,+S,+V%3E%3E-for-ConvertError%3CInfallible,+S,+V%3E) is the `impl` that powers this: you can convert from `CastError` to `SizeError` via `From`/`Into` by checking that `Dst: Unaligned`",
+      "parentUuid": "f107fb23_e0357fd6",
+      "range": {
+        "startLine": 81,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 16
+      },
+      "revId": "73baf51ae37992293e682cc876866078adba4edc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
