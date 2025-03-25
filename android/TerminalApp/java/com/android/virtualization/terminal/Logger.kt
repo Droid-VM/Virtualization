@@ -47,10 +47,6 @@ internal object Logger {
         }
 
         try {
-            if (Files.isRegularFile(dir)) {
-                Log.i(tag, "Removed legacy log file: $dir")
-                Files.delete(dir)
-            }
             Files.createDirectories(dir)
             deleteOldLogs(dir, 10)
             val logPath = dir.resolve(LocalDateTime.now().toString() + ".txt")
