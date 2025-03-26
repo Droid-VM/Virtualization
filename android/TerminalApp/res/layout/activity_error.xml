@@ -52,6 +52,8 @@
         android:layout_marginHorizontal="60dp"
         android:layout_below="@id/desc"
         android:textSize="14sp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:scrollbars="vertical|horizontal"
         android:scrollHorizontally="true" />
 
