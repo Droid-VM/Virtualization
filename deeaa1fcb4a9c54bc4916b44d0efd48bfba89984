@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22ebb124_d120bb78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:15Z",
+      "side": 1,
+      "message": "Yes, the proxy in virtmgr needs to be smart about it though as it needs to also proxy each of those callback binders. (the cpp `IFooDelegator` class does this already, but not ndk and there is no delegator yet for rust - these things are planned).\n\nIt will be simpler without the proxy once we figure out a good solution for that.",
+      "parentUuid": "69ba03dd_8119ebd0",
+      "range": {
+        "startLine": 20,
+        "startChar": 38,
+        "endLine": 20,
+        "endChar": 46
+      },
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46990a1f_b3c2a774",
         "filename": "android/virtmgr/src/host_services.rs",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2025-03-19T12:50:00Z",
       "side": 1,
       "message": "You will fill this up, right?",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 66
+      },
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9067b67_60a6a5e4",
+        "filename": "android/virtmgr/src/host_services.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:15Z",
+      "side": 1,
+      "message": "Yes in the next CL here: https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3533608/4/android/virtmgr/src/host_services.rs",
+      "parentUuid": "46990a1f_b3c2a774",
       "range": {
         "startLine": 30,
         "startChar": 4,
@@ -93,6 +141,102 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb617c80_bcc5bc02",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:15Z",
+      "side": 1,
+      "message": "I was thinking in the implementation of `IServiceManager::listServices`. Maybe we don\u0027t care about that as much for services from another device? It\u0027s also harder to get from `virtmgr` if we aren\u0027t passing the full list of supported services when creating the VM anyways.\n\nI\u0027ll remove this for now.",
+      "parentUuid": "6864758a_b67c9516",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 40
+      },
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1fe3840_cd2ac1aa",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:15Z",
+      "side": 1,
+      "message": "for the implementaiton of `IServiceManager::listServices()`, but maybe it\u0027s not actually useful to try and list all of the services available off-device. We can add it in later when implementing `listServices` if it makes sense then.",
+      "parentUuid": "6864758a_b67c9516",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 40
+      },
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc54bf80_9b85a53f",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:15Z",
+      "side": 1,
+      "message": "Yes, I moved it into its own interface next to the IServiceManager interface.",
+      "parentUuid": "52e79666_2e13752b",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 40
+      },
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c664b1bf_8434ef9d",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:15Z",
+      "side": 1,
+      "message": "Yes, moved into `libs/binder`",
+      "parentUuid": "52e79666_2e13752b",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 40
+      },
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80aaa825_85bd27be",
@@ -106,6 +250,42 @@
       "writtenOn": "2025-03-18T00:16:12Z",
       "side": 1,
       "message": "and can we move this code to lib/binder or otherwise have a smaller standardized interface so that the libbinder SM ABI can never get constrained?",
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d71a2da5_00bf2a0d",
+        "filename": "guest/microdroid_manager/src/rpc_servicemanager.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:15Z",
+      "side": 1,
+      "message": "Moved it into `cmds/servicemanager/rpc_servicemanager`",
+      "parentUuid": "80aaa825_85bd27be",
+      "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dae1386_d6279c4f",
+        "filename": "guest/microdroid_manager/src/rpc_servicemanager.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80aaa825_85bd27be",
       "revId": "deeaa1fcb4a9c54bc4916b44d0efd48bfba89984",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
