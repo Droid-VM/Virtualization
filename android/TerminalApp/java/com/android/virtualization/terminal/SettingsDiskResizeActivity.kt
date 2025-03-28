@@ -15,15 +15,13 @@
  */
 package com.android.virtualization.terminal
 
-import android.content.Context
 import android.content.Intent
 import android.icu.text.MeasureFormat
 import android.icu.text.NumberFormat
 import android.icu.util.Measure
 import android.icu.util.MeasureUnit
 import android.os.Bundle
-import android.os.storage.StorageManager
-import android.os.storage.StorageManager.UUID_DEFAULT
+import android.os.Environment
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextUtils
@@ -41,7 +39,7 @@ import java.util.regex.Pattern
 
 class SettingsDiskResizeActivity : AppCompatActivity() {
     private val numberPattern: Pattern = Pattern.compile("[\\d]*[\\٫.,]?[\\d]+")
-    private val defaultHostReserveSizeMb: Long = 5 shl 10
+    private val defaultMaxDiskSizeMb: Long = 16 shl 10
 
     private var diskSizeStepMb: Long = 0
     private var diskSizeMb: Long = 0
@@ -61,10 +59,10 @@ class SettingsDiskResizeActivity : AppCompatActivity() {
     }
 
     private fun getAvailableSizeMb(): Long {
-        var storageManager =
-            applicationContext.getSystemService(Context.STORAGE_SERVICE) as StorageManager
-        val hostAllocatableMb = bytesToMb(storageManager.getAllocatableBytes(UUID_DEFAULT))
-        return diskSizeMb + hostAllocatableMb
+        val usableSpaceMb =
+            bytesToMb(Environment.getDataDirectory().getUsableSpace()) and
+                (diskSizeStepMb - 1).inv()
+        return diskSizeMb + usableSpaceMb
     }
 
     private fun mbToProgress(bytes: Long): Int {
@@ -84,10 +82,7 @@ class SettingsDiskResizeActivity : AppCompatActivity() {
         val image = InstalledImage.getDefault(this)
         diskSizeMb = bytesToMb(image.getApparentSize())
         val minDiskSizeMb = bytesToMb(image.getSmallestSizePossible()).coerceAtMost(diskSizeMb)
-        var maxDiskSizeMb = getAvailableSizeMb()
-        if (maxDiskSizeMb > defaultHostReserveSizeMb) {
-            maxDiskSizeMb -= defaultHostReserveSizeMb
-        }
+        val maxDiskSizeMb = defaultMaxDiskSizeMb.coerceAtMost(getAvailableSizeMb())
 
         diskSizeText = findViewById<TextView>(R.id.settings_disk_resize_resize_gb_assigned)!!
         diskMaxSizeText = findViewById<TextView>(R.id.settings_disk_resize_resize_gb_max)
