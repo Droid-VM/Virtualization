@@ -958,6 +958,7 @@ fn run_vm(
         command.arg("--params").arg("printk.devkmsg=on");
         command.arg("--params").arg("console=hvc0");
     }
+    command.arg("--params").arg("earlycon=uart8250,mmio,0x3f8");
 
     command.arg("--mem").arg(memory_mib.to_string());
 
