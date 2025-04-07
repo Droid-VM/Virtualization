@@ -32,7 +32,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.android.system.virtualmachine.flags.Flags.terminalGuiSupport
 import com.android.virtualization.terminal.CertificateUtils.createOrGetKey
 import com.android.virtualization.terminal.CertificateUtils.writeCertificateToFile
@@ -45,7 +45,7 @@ class TerminalTabFragment() : Fragment() {
     private lateinit var id: String
     private var certificates: Array<X509Certificate>? = null
     private var privateKey: PrivateKey? = null
-    private val terminalViewModel: TerminalViewModel by activityViewModels()
+    private lateinit var terminalViewModel: TerminalViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +59,7 @@ class TerminalTabFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        terminalViewModel = ViewModelProvider(this)[TerminalViewModel::class.java]
         terminalView = view.findViewById(R.id.webview)
         bootProgressView = view.findViewById(R.id.boot_progress)
         initializeWebView()
@@ -76,11 +77,6 @@ class TerminalTabFragment() : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         terminalView.saveState(outState)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        updateFocus()
     }
 
     private fun initializeWebView() {
@@ -152,7 +148,6 @@ class TerminalTabFragment() : Fragment() {
                             terminalView.visibility = View.VISIBLE
                             terminalView.mapTouchToMouseEvent()
                             updateMainActivity()
-                            updateFocus()
                         }
                     }
                 },
@@ -192,12 +187,6 @@ class TerminalTabFragment() : Fragment() {
         writeCertificateToFile(activity!!, pke.certificate)
         privateKey = pke.privateKey
         certificates = arrayOf<X509Certificate>(pke.certificate as X509Certificate)
-    }
-
-    private fun updateFocus() {
-        if (terminalViewModel.selectedTabViewId == id) {
-            terminalView.requestFocus()
-        }
     }
 
     companion object {
