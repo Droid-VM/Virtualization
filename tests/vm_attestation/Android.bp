@@ -49,6 +49,7 @@ rust_ffi {
     visibility: [
         ":__subpackages__",
         "//packages/modules/Virtualization/tests/testapk",
+        "//packages/modules/Virtualization/tests/benchmark",
     ],
 }
 
