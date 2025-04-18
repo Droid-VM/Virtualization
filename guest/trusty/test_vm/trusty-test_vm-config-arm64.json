@@ -1,8 +1,8 @@
 {
     "name": "trusty_test_vm",
-    "kernel": "/data/local/tmp/trusty_test_vm/trusty_test_vm.elf",
+    "kernel": "/system/system_ext/etc/vm/trusty_vm/trusty_test_vm.elf",
     "platform_version": "1.0",
     "cpu_topology": "one_cpu",
     "memory_mib": 112,
-    "protected": true
+    "protected": false
 }

@@ -19,8 +19,8 @@ package {
 
 prebuilt_etc {
     name: "trusty_test_vm_config",
-    enabled: false,
-    installable: false,
+    //enabled: false,
+    //installable: false,
     arch: {
         arm64: {
             src: "trusty-test_vm-config-arm64.json",
