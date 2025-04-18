@@ -143,12 +143,14 @@ fn get_hypervisor() -> &'static dyn Hypervisor {
 
 /// Gets the MMIO_GUARD hypervisor singleton, if any.
 pub fn get_mmio_guard() -> Option<&'static dyn MmioGuardedHypervisor> {
-    get_hypervisor().as_mmio_guard()
+    //get_hypervisor().as_mmio_guard()
+    None
 }
 
 /// Gets the dynamic memory sharing hypervisor singleton, if any.
 pub fn get_mem_sharer() -> Option<&'static dyn MemSharingHypervisor> {
-    get_hypervisor().as_mem_sharer()
+    //get_hypervisor().as_mem_sharer()
+    None
 }
 
 /// Gets the device assigning hypervisor singleton, if any.

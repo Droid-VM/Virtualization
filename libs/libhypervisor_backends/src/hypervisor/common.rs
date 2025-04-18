@@ -24,6 +24,7 @@ pub trait Hypervisor {
     }
 
     /// Returns the hypervisor's dynamic memory sharing implementation, if any.
+    #[allow(dead_code)]
     fn as_mem_sharer(&self) -> Option<&dyn MemSharingHypervisor> {
         None
     }
