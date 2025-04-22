@@ -923,7 +923,11 @@ fn run_vm(
     if config.protected {
         match system_properties::read(SYSPROP_CUSTOM_PVMFW_PATH)? {
             Some(pvmfw_path) if !pvmfw_path.is_empty() => {
-                command.arg("--protected-vm-with-firmware").arg(pvmfw_path)
+                if pvmfw_path == "none" {
+                    command.arg("--protected-vm-without-firmware")
+                } else {
+                    command.arg("--protected-vm-with-firmware").arg(pvmfw_path)
+                }
             }
             _ => command.arg("--protected-vm"),
         };
@@ -958,6 +962,7 @@ fn run_vm(
         command.arg("--params").arg("printk.devkmsg=on");
         command.arg("--params").arg("console=hvc0");
     }
+    command.arg("--params").arg("earlycon=uart8250,mmio,0x3f8");
 
     command.arg("--mem").arg(memory_mib.to_string());
 
