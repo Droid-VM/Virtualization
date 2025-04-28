@@ -1429,5 +1429,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assumeTrue(
                 "Microdroid is not supported for specific VM protection type",
                 getAndroidDevice().supportsMicrodroid(protectedVm));
+        boolean isGsi =
+                android.runForResult("[ -e /system/system_ext/etc/init/init.gsi.rc ]").getStatus()
+                        == CommandStatus.SUCCESS;
+        if (isGsi) {
+            assumeFalse("Testing protected VMs on GSI isn't supported. b/272443823", protectedVm);
+        }
     }
 }
