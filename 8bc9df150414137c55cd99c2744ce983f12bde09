@@ -206,6 +206,47 @@
       },
       "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e35bc8f9_8378521c",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1258331
+      },
+      "writtenOn": "2025-07-12T02:15:07Z",
+      "side": 1,
+      "message": "where does calculate_sha256_digest() come from? \n\nI don\u0027t see it neither in the codebase nor in this patch stack,",
+      "range": {
+        "startLine": 332,
+        "startChar": 45,
+        "endLine": 332,
+        "endChar": 68
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "47bc08ba_c964f47a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "guest/pvmfw/avb/src/verify.rs",
+              "range": {
+                "startLine": 332,
+                "startChar": 0,
+                "endLine": 333,
+                "endChar": 0
+              },
+              "replacement": "    let vbmeta_digest \u003d vbmeta_image.calculate_sha256_digest();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
