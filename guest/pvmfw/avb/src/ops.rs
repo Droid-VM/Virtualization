@@ -90,7 +90,7 @@ impl<'a> avb::Ops<'a> for Ops<'a> {
         Ok(buffer.len())
     }
 
-    fn get_preloaded_partition(&mut self, partition: &CStr) -> IoResult<&'a [u8]> {
+    fn get_preloaded_partition(&mut self, partition: &CStr, _: usize) -> IoResult<&'a [u8]> {
         self.payload.get_partition(partition)
     }
 
