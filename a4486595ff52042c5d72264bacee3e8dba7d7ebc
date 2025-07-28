@@ -16,6 +16,24 @@
       "message": "FYI: `ciborium::from_reader` says it has an internal buffer, but I think it is only for a subset of operations, it will still make a lot of small reads, so you should prefer to add some buffering around the socket here\n\n(was going to send a CL, but it is non-trivial since you can\u0027t create and drop a BufReader here without potentially dropping bytes, probably need to keep it alive in the struct, but I didn\u0027t think hard about it)",
       "revId": "a4486595ff52042c5d72264bacee3e8dba7d7ebc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17c564d_d9a42cf0",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-07-28T11:27:42Z",
+      "side": 1,
+      "message": "Hi Frederick,\n\nApologies for the delayed response. I was OOO for two weeks in July and just saw your comment.\n\nIs this still an issue, or do you already have a CL for it?",
+      "parentUuid": "bd25c1fc_e0b32323",
+      "revId": "a4486595ff52042c5d72264bacee3e8dba7d7ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
