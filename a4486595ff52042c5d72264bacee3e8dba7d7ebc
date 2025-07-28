@@ -34,6 +34,24 @@
       "parentUuid": "bd25c1fc_e0b32323",
       "revId": "a4486595ff52042c5d72264bacee3e8dba7d7ebc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2239545_311215ab",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-07-28T22:05:06Z",
+      "side": 1,
+      "message": "No worries. I don\u0027t have a CL. I don\u0027t know if this is causing a real problem, I just noticed there was an opportunity to optimize it (I was auditing all the CBOR lib usage as part of http://ag/34559172)",
+      "parentUuid": "c17c564d_d9a42cf0",
+      "revId": "a4486595ff52042c5d72264bacee3e8dba7d7ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
