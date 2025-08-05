@@ -17,7 +17,12 @@
 //! of this buffer may fail and callers will see Error::MemoryAllocationError.
 //! When running with std, allocation may fail.
 
-use crate::bcc::{bcc_format_config_descriptor, bcc_main_flow, BccHandover, DiceConfigValues};
+#[cfg(feature = "multialg")]
+use crate::bcc::bcc_main_flow;
+use crate::bcc::{bcc_format_config_descriptor, BccHandover, DiceConfigValues};
+
+#[cfg(feature = "multialg")]
+use crate::dice::DiceContext;
 use crate::dice::{
     dice_main_flow, Cdi, CdiValues, DiceArtifacts, InputValues, CDI_SIZE, PRIVATE_KEY_SEED_SIZE,
     PRIVATE_KEY_SIZE,
@@ -103,7 +108,9 @@ pub fn retry_bcc_format_config_descriptor(values: &DiceConfigValues) -> Result<V
 ///
 /// Given a full set of input values along with the current BCC and CDI values,
 /// computes the next CDI values and matching updated BCC.
+#[cfg(feature = "multialg")]
 pub fn retry_bcc_main_flow(
+    context: DiceContext,
     current_cdi_attest: &Cdi,
     current_cdi_seal: &Cdi,
     bcc: &[u8],
@@ -112,6 +119,7 @@ pub fn retry_bcc_main_flow(
     let mut next_cdi_values = CdiValues::default();
     let next_bcc = retry_with_measured_buffer(|next_bcc| {
         bcc_main_flow(
+            context,
             current_cdi_attest,
             current_cdi_seal,
             bcc,
