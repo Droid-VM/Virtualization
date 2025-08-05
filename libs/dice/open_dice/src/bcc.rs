@@ -14,11 +14,15 @@
 
 //! This module mirrors the content in open-dice/include/dice/android.h
 
-use crate::dice::{context, Cdi, CdiValues, DiceArtifacts, InputValues, CDI_SIZE};
+#[cfg(feature = "multialg")]
+use crate::dice::{Cdi, CdiValues, DiceContext, InputValues};
+use crate::dice::{DiceArtifacts, CDI_SIZE};
 use crate::error::{check_result, DiceError, Result};
+#[cfg(feature = "multialg")]
+use open_dice_android_bindgen::DiceAndroidMainFlow;
 use open_dice_android_bindgen::{
     DiceAndroidConfigValues, DiceAndroidFormatConfigDescriptor, DiceAndroidHandoverParse,
-    DiceAndroidMainFlow, DICE_ANDROID_CONFIG_COMPONENT_NAME, DICE_ANDROID_CONFIG_COMPONENT_VERSION,
+    DICE_ANDROID_CONFIG_COMPONENT_NAME, DICE_ANDROID_CONFIG_COMPONENT_VERSION,
     DICE_ANDROID_CONFIG_RESETTABLE, DICE_ANDROID_CONFIG_RKP_VM_MARKER,
     DICE_ANDROID_CONFIG_SECURITY_VERSION,
 };
@@ -88,7 +92,9 @@ pub fn bcc_format_config_descriptor(values: &DiceConfigValues, buffer: &mut [u8]
 ///
 /// Given a full set of input values along with the current DICE chain and CDI values,
 /// computes the next CDI values and matching updated DICE chain.
+#[cfg(feature = "multialg")]
 pub fn bcc_main_flow(
+    context: DiceContext,
     current_cdi_attest: &Cdi,
     current_cdi_seal: &Cdi,
     current_chain: &[u8],
@@ -97,6 +103,7 @@ pub fn bcc_main_flow(
     next_chain: &mut [u8],
 ) -> Result<usize> {
     let mut next_chain_size = 0;
+    let mut context: open_dice_cbor_bindgen::DiceContext_ = context.into();
     check_result(
         // SAFETY: `DiceAndroidMainFlow` only reads the `current_chain` and CDI values and writes
         // to `next_chain` and next CDI values within its bounds. It also reads `input_values` as a
@@ -105,7 +112,7 @@ pub fn bcc_main_flow(
         // and a null pointer otherwise.
         unsafe {
             DiceAndroidMainFlow(
-                context(),
+                &mut context as *mut _ as *mut std::ffi::c_void,
                 current_cdi_attest.as_ptr(),
                 current_cdi_seal.as_ptr(),
                 current_chain.as_ptr(),

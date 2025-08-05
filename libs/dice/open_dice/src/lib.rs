@@ -28,11 +28,9 @@ mod error;
 mod ops;
 mod retry;
 
+pub use bcc::{bcc_format_config_descriptor, bcc_handover_parse, BccHandover, DiceConfigValues};
 #[cfg(feature = "multialg")]
-pub use bcc::bcc_handover_main_flow;
-pub use bcc::{
-    bcc_format_config_descriptor, bcc_handover_parse, bcc_main_flow, BccHandover, DiceConfigValues,
-};
+pub use bcc::{bcc_handover_main_flow, bcc_main_flow};
 #[cfg(feature = "multialg")]
 pub use dice::DiceContext;
 pub use dice::{
@@ -51,11 +49,11 @@ pub use ops::{
     sign_cose_sign1_with_cdi_leaf_priv_multialg, verify_multialg,
 };
 pub use retry::{
-    retry_bcc_format_config_descriptor, retry_bcc_main_flow, retry_dice_main_flow,
-    retry_generate_certificate, retry_sign_cose_sign1, retry_sign_cose_sign1_with_cdi_leaf_priv,
-    OwnedDiceArtifacts,
+    retry_bcc_format_config_descriptor, retry_dice_main_flow, retry_generate_certificate,
+    retry_sign_cose_sign1, retry_sign_cose_sign1_with_cdi_leaf_priv, OwnedDiceArtifacts,
 };
 #[cfg(feature = "multialg")]
 pub use retry::{
-    retry_sign_cose_sign1_multialg, retry_sign_cose_sign1_with_cdi_leaf_priv_multialg,
+    retry_bcc_main_flow, retry_sign_cose_sign1_multialg,
+    retry_sign_cose_sign1_with_cdi_leaf_priv_multialg,
 };
