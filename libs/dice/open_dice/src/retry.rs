@@ -27,12 +27,14 @@ use crate::dice::{
     CdiValues, DiceArtifacts, InputValues, CDI_SIZE, PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE,
 };
 use crate::error::{DiceError, Result};
-use crate::ops::{generate_certificate, sign_cose_sign1, sign_cose_sign1_with_cdi_leaf_priv};
+use crate::ops::{generate_certificate, sign_cose_sign1};
 #[cfg(feature = "multialg")]
-use crate::{
-    ops::{sign_cose_sign1_multialg, sign_cose_sign1_with_cdi_leaf_priv_multialg},
-    KeyAlgorithm,
+use crate::ops::{
+    sign_cose_sign1_multialg, sign_cose_sign1_with_cdi_leaf_priv,
+    sign_cose_sign1_with_cdi_leaf_priv_multialg,
 };
+#[cfg(feature = "multialg")]
+use crate::KeyAlgorithm;
 use alloc::vec::Vec;
 #[cfg(feature = "serde_derive")]
 use serde_derive::{Deserialize, Serialize};
@@ -203,6 +205,7 @@ pub fn retry_sign_cose_sign1_multialg(
 /// Signs a message with the given the private key derived from the
 /// CDI Attest of the given `dice_artifacts` and returns the signature
 /// as an encoded CoseSign1 object.
+#[cfg(feature = "multialg")]
 pub fn retry_sign_cose_sign1_with_cdi_leaf_priv(
     message: &[u8],
     aad: &[u8],

@@ -15,17 +15,19 @@
 //! Structs and functions about the types used in DICE.
 //! This module mirrors the content in open-dice/include/dice/dice.h
 
-use crate::error::{check_result, DiceError, Result};
+#[cfg(feature = "multialg")]
+use crate::error::check_result;
+use crate::error::{DiceError, Result};
 use coset::iana;
 pub use open_dice_cbor_bindgen::DiceMode;
 use open_dice_cbor_bindgen::{
-    DiceConfigType, DiceDeriveCdiPrivateKeySeed, DiceInputValues, DICE_CDI_SIZE, DICE_HASH_SIZE,
-    DICE_HIDDEN_SIZE, DICE_ID_SIZE, DICE_INLINE_CONFIG_SIZE, DICE_PRIVATE_KEY_BUFFER_SIZE,
-    DICE_PRIVATE_KEY_SEED_SIZE,
+    DiceConfigType, DiceInputValues, DICE_CDI_SIZE, DICE_HASH_SIZE, DICE_HIDDEN_SIZE, DICE_ID_SIZE,
+    DICE_INLINE_CONFIG_SIZE, DICE_PRIVATE_KEY_BUFFER_SIZE, DICE_PRIVATE_KEY_SEED_SIZE,
 };
 #[cfg(feature = "multialg")]
 use open_dice_cbor_bindgen::{
-    DiceContext_, DiceDeriveCdiCertificateId, DiceKeyAlgorithm, DiceMainFlow,
+    DiceContext_, DiceDeriveCdiCertificateId, DiceDeriveCdiPrivateKeySeed, DiceKeyAlgorithm,
+    DiceMainFlow,
 };
 #[cfg(feature = "serde_derive")]
 use serde_derive::{Deserialize, Serialize};
@@ -338,14 +340,19 @@ impl<'a> InputValues<'a> {
 }
 
 /// Derives a CDI private key seed from a `cdi_attest` value.
-pub fn derive_cdi_private_key_seed(cdi_attest: &Cdi) -> Result<PrivateKeySeed> {
+#[cfg(feature = "multialg")]
+pub fn derive_cdi_private_key_seed(
+    context: DiceContext,
+    cdi_attest: &Cdi,
+) -> Result<PrivateKeySeed> {
     let mut seed = PrivateKeySeed::default();
+    let mut context: open_dice_cbor_bindgen::DiceContext_ = context.into();
     check_result(
         // SAFETY: The function writes to the buffer within the given bounds, and only reads the
         // input values. The first argument context is not used in this function.
         unsafe {
             DiceDeriveCdiPrivateKeySeed(
-                ptr::null_mut(), // context
+                &mut context as *mut _ as *mut std::ffi::c_void,
                 cdi_attest.as_ptr(),
                 seed.as_mut_ptr(),
             )
