@@ -20,11 +20,11 @@ use coset::iana;
 pub use open_dice_cbor_bindgen::DiceMode;
 use open_dice_cbor_bindgen::{
     DiceConfigType, DiceDeriveCdiCertificateId, DiceDeriveCdiPrivateKeySeed, DiceInputValues,
-    DiceMainFlow, DICE_CDI_SIZE, DICE_HASH_SIZE, DICE_HIDDEN_SIZE, DICE_ID_SIZE,
-    DICE_INLINE_CONFIG_SIZE, DICE_PRIVATE_KEY_BUFFER_SIZE, DICE_PRIVATE_KEY_SEED_SIZE,
+    DICE_CDI_SIZE, DICE_HASH_SIZE, DICE_HIDDEN_SIZE, DICE_ID_SIZE, DICE_INLINE_CONFIG_SIZE,
+    DICE_PRIVATE_KEY_BUFFER_SIZE, DICE_PRIVATE_KEY_SEED_SIZE,
 };
 #[cfg(feature = "multialg")]
-use open_dice_cbor_bindgen::{DiceContext_, DiceKeyAlgorithm};
+use open_dice_cbor_bindgen::{DiceContext_, DiceKeyAlgorithm, DiceMainFlow};
 #[cfg(feature = "serde_derive")]
 use serde_derive::{Deserialize, Serialize};
 use std::{ffi::c_void, marker::PhantomData, ptr};
@@ -376,7 +376,9 @@ pub fn derive_cdi_certificate_id(cdi_public_key: &[u8]) -> Result<DiceId> {
 /// Given a full set of input values and the current CDI values, computes the
 /// next CDI values and a matching certificate.
 /// Returns the actual size of the next CDI certificate.
+#[cfg(feature = "multialg")]
 pub fn dice_main_flow(
+    context: DiceContext,
     current_cdi_attest: &Cdi,
     current_cdi_seal: &Cdi,
     input_values: &InputValues,
@@ -384,12 +386,13 @@ pub fn dice_main_flow(
     next_cdi_values: &mut CdiValues,
 ) -> Result<usize> {
     let mut next_cdi_certificate_actual_size = 0;
+    let mut context: open_dice_cbor_bindgen::DiceContext_ = context.into();
     check_result(
         // SAFETY: The function only reads the current CDI values and inputs and writes
         // to `next_cdi_certificate` and next CDI values within its bounds.
         unsafe {
             DiceMainFlow(
-                context(),
+                &mut context as *mut _ as *mut std::ffi::c_void,
                 current_cdi_attest.as_ptr(),
                 current_cdi_seal.as_ptr(),
                 input_values.as_ptr(),
