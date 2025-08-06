@@ -22,10 +22,9 @@ use crate::bcc::bcc_main_flow;
 use crate::bcc::{bcc_format_config_descriptor, BccHandover, DiceConfigValues};
 
 #[cfg(feature = "multialg")]
-use crate::dice::DiceContext;
+use crate::dice::{dice_main_flow, Cdi, DiceContext};
 use crate::dice::{
-    dice_main_flow, Cdi, CdiValues, DiceArtifacts, InputValues, CDI_SIZE, PRIVATE_KEY_SEED_SIZE,
-    PRIVATE_KEY_SIZE,
+    CdiValues, DiceArtifacts, InputValues, CDI_SIZE, PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE,
 };
 use crate::error::{DiceError, Result};
 use crate::ops::{generate_certificate, sign_cose_sign1, sign_cose_sign1_with_cdi_leaf_priv};
@@ -135,7 +134,9 @@ pub fn retry_bcc_main_flow(
 ///
 /// Given a full set of input values and the current CDI values, computes the
 /// next CDI values and a matching certificate.
+#[cfg(feature = "multialg")]
 pub fn retry_dice_main_flow(
+    context: DiceContext,
     current_cdi_attest: &Cdi,
     current_cdi_seal: &Cdi,
     input_values: &InputValues,
@@ -143,6 +144,7 @@ pub fn retry_dice_main_flow(
     let mut next_cdi_values = CdiValues::default();
     let next_cdi_certificate = retry_with_measured_buffer(|next_cdi_certificate| {
         dice_main_flow(
+            context,
             current_cdi_attest,
             current_cdi_seal,
             input_values,
