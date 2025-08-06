@@ -17,9 +17,11 @@
 //! main DICE functions depend on.
 
 use crate::dice::{
-    context, derive_cdi_private_key_seed, DiceArtifacts, Hash, InputValues, PrivateKey, HASH_SIZE,
-    PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE, VM_KEY_ALGORITHM,
+    context, Hash, InputValues, PrivateKey, HASH_SIZE, PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE,
+    VM_KEY_ALGORITHM,
 };
+#[cfg(feature = "multialg")]
+use crate::dice::{derive_cdi_private_key_seed, DiceArtifacts, DiceContext};
 use crate::error::{check_result, DiceError, Result};
 #[cfg(feature = "multialg")]
 use crate::KeyAlgorithm;
@@ -152,8 +154,12 @@ pub fn keypair_from_seed_multialg(
 /// Refer to the following documentation for more information about CDI_Leaf_Priv:
 ///
 /// security/rkp/aidl/android/hardware/security/keymint/IRemotelyProvisionedComponent.aidl
-pub fn derive_cdi_leaf_priv(dice_artifacts: &dyn DiceArtifacts) -> Result<PrivateKey> {
-    let cdi_priv_key_seed = derive_cdi_private_key_seed(dice_artifacts.cdi_attest())?;
+#[cfg(feature = "multialg")]
+pub fn derive_cdi_leaf_priv(
+    context: DiceContext,
+    dice_artifacts: &dyn DiceArtifacts,
+) -> Result<PrivateKey> {
+    let cdi_priv_key_seed = derive_cdi_private_key_seed(context, dice_artifacts.cdi_attest())?;
     let (_, private_key) = keypair_from_seed(cdi_priv_key_seed.as_array())?;
     Ok(private_key)
 }
@@ -164,7 +170,10 @@ pub fn derive_cdi_leaf_priv_multialg(
     dice_artifacts: &dyn DiceArtifacts,
     key_algorithm: KeyAlgorithm,
 ) -> Result<PrivateKey> {
-    let cdi_priv_key_seed = derive_cdi_private_key_seed(dice_artifacts.cdi_attest())?;
+    let cdi_priv_key_seed = derive_cdi_private_key_seed(
+        DiceContext { authority_algorithm: key_algorithm, subject_algorithm: key_algorithm },
+        dice_artifacts.cdi_attest(),
+    )?;
     let (_, private_key) = keypair_from_seed_multialg(cdi_priv_key_seed.as_array(), key_algorithm)?;
     Ok(private_key)
 }
@@ -272,13 +281,20 @@ pub fn sign_cose_sign1_multialg(
 /// Uses `DiceCoseSignAndEncodeSign1`.
 ///
 /// Returns the actual size of encoded_signature on success.
+#[cfg(feature = "multialg")]
 pub fn sign_cose_sign1_with_cdi_leaf_priv(
     message: &[u8],
     aad: &[u8],
     dice_artifacts: &dyn DiceArtifacts,
     encoded_signature: &mut [u8],
 ) -> Result<usize> {
-    let private_key = derive_cdi_leaf_priv(dice_artifacts)?;
+    let private_key = derive_cdi_leaf_priv(
+        DiceContext {
+            authority_algorithm: KeyAlgorithm::Ed25519,
+            subject_algorithm: KeyAlgorithm::Ed25519,
+        },
+        dice_artifacts,
+    )?;
     sign_cose_sign1(message, aad, private_key.as_array(), encoded_signature)
 }
 
