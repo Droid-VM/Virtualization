@@ -19,12 +19,14 @@ use crate::error::{check_result, DiceError, Result};
 use coset::iana;
 pub use open_dice_cbor_bindgen::DiceMode;
 use open_dice_cbor_bindgen::{
-    DiceConfigType, DiceDeriveCdiCertificateId, DiceDeriveCdiPrivateKeySeed, DiceInputValues,
-    DICE_CDI_SIZE, DICE_HASH_SIZE, DICE_HIDDEN_SIZE, DICE_ID_SIZE, DICE_INLINE_CONFIG_SIZE,
-    DICE_PRIVATE_KEY_BUFFER_SIZE, DICE_PRIVATE_KEY_SEED_SIZE,
+    DiceConfigType, DiceDeriveCdiPrivateKeySeed, DiceInputValues, DICE_CDI_SIZE, DICE_HASH_SIZE,
+    DICE_HIDDEN_SIZE, DICE_ID_SIZE, DICE_INLINE_CONFIG_SIZE, DICE_PRIVATE_KEY_BUFFER_SIZE,
+    DICE_PRIVATE_KEY_SEED_SIZE,
 };
 #[cfg(feature = "multialg")]
-use open_dice_cbor_bindgen::{DiceContext_, DiceKeyAlgorithm, DiceMainFlow};
+use open_dice_cbor_bindgen::{
+    DiceContext_, DiceDeriveCdiCertificateId, DiceKeyAlgorithm, DiceMainFlow,
+};
 #[cfg(feature = "serde_derive")]
 use serde_derive::{Deserialize, Serialize};
 use std::{ffi::c_void, marker::PhantomData, ptr};
@@ -54,6 +56,7 @@ pub type InlineConfig = [u8; INLINE_CONFIG_SIZE];
 /// Array type of CDIs.
 pub type Cdi = [u8; CDI_SIZE];
 /// Array type of DICE ID.
+#[cfg(feature = "multialg")]
 pub type DiceId = [u8; ID_SIZE];
 
 /// Key algorithm used for DICE.
@@ -353,14 +356,16 @@ pub fn derive_cdi_private_key_seed(cdi_attest: &Cdi) -> Result<PrivateKeySeed> {
 }
 
 /// Derives an ID from the given `cdi_public_key` value.
-pub fn derive_cdi_certificate_id(cdi_public_key: &[u8]) -> Result<DiceId> {
+#[cfg(feature = "multialg")]
+pub fn derive_cdi_certificate_id(context: DiceContext, cdi_public_key: &[u8]) -> Result<DiceId> {
     let mut id = [0u8; ID_SIZE];
+    let mut context: open_dice_cbor_bindgen::DiceContext_ = context.into();
     check_result(
         // SAFETY: The function writes to the buffer within the given bounds, and only reads the
         // input values. The first argument context is not used in this function.
         unsafe {
             DiceDeriveCdiCertificateId(
-                ptr::null_mut(), // context
+                &mut context as *mut _ as *mut std::ffi::c_void,
                 cdi_public_key.as_ptr(),
                 cdi_public_key.len(),
                 id.as_mut_ptr(),

@@ -16,15 +16,16 @@
 
 #[cfg(test)]
 mod tests {
-    use diced_open_dice::{
-        derive_cdi_certificate_id, derive_cdi_private_key_seed, hash, kdf, keypair_from_seed,
-        retry_sign_cose_sign1, retry_sign_cose_sign1_with_cdi_leaf_priv, sign, verify,
-        DiceArtifacts, PrivateKey, CDI_SIZE, HASH_SIZE, ID_SIZE, PRIVATE_KEY_SEED_SIZE,
-    };
     #[cfg(feature = "multialg")]
     use diced_open_dice::{
-        keypair_from_seed_multialg, retry_sign_cose_sign1_multialg,
-        retry_sign_cose_sign1_with_cdi_leaf_priv_multialg, verify_multialg, KeyAlgorithm,
+        derive_cdi_certificate_id, keypair_from_seed_multialg, retry_sign_cose_sign1_multialg,
+        retry_sign_cose_sign1_with_cdi_leaf_priv_multialg, verify_multialg, DiceContext,
+        KeyAlgorithm, ID_SIZE,
+    };
+    use diced_open_dice::{
+        derive_cdi_private_key_seed, hash, kdf, keypair_from_seed, retry_sign_cose_sign1,
+        retry_sign_cose_sign1_with_cdi_leaf_priv, sign, verify, DiceArtifacts, PrivateKey,
+        CDI_SIZE, HASH_SIZE, PRIVATE_KEY_SEED_SIZE,
     };
 
     use coset::{CborSerializable, CoseSign1};
@@ -57,13 +58,35 @@ mod tests {
         assert_eq!(EXPECTED_DERIVED_KEY, derived_key);
     }
 
+    #[cfg(feature = "multialg")]
     #[test]
     fn derive_cdi_certificate_id_succeeds() {
         const EXPECTED_ID: [u8; ID_SIZE] = [
             0x7a, 0x36, 0x45, 0x2c, 0x02, 0xf6, 0x2b, 0xec, 0xf9, 0x80, 0x06, 0x75, 0x87, 0xa5,
             0xc1, 0x44, 0x0c, 0xd3, 0xc0, 0x6d,
         ];
-        assert_eq!(EXPECTED_ID, derive_cdi_certificate_id(b"MyPubKey").unwrap());
+        assert_eq!(
+            EXPECTED_ID,
+            derive_cdi_certificate_id(
+                DiceContext {
+                    authority_algorithm: KeyAlgorithm::Ed25519,
+                    subject_algorithm: KeyAlgorithm::Ed25519
+                },
+                b"MyPubKey"
+            )
+            .unwrap()
+        );
+        assert_eq!(
+            EXPECTED_ID,
+            derive_cdi_certificate_id(
+                DiceContext {
+                    authority_algorithm: KeyAlgorithm::EcdsaP256,
+                    subject_algorithm: KeyAlgorithm::EcdsaP384
+                },
+                b"MyPubKey"
+            )
+            .unwrap()
+        );
     }
 
     const EXPECTED_SEED: &[u8] = &[
