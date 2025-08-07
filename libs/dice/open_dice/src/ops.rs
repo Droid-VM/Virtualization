@@ -17,20 +17,19 @@
 //! main DICE functions depend on.
 
 use crate::dice::{
-    context, Hash, InputValues, PrivateKey, HASH_SIZE, PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE,
+    context, Hash, InputValues, HASH_SIZE, PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE,
     VM_KEY_ALGORITHM,
 };
 #[cfg(feature = "multialg")]
-use crate::dice::{derive_cdi_private_key_seed, DiceArtifacts, DiceContext};
+use crate::dice::{derive_cdi_private_key_seed, DiceArtifacts, DiceContext, PrivateKey};
 use crate::error::{check_result, DiceError, Result};
 #[cfg(feature = "multialg")]
 use crate::KeyAlgorithm;
 use alloc::{vec, vec::Vec};
 #[cfg(feature = "multialg")]
-use open_dice_cbor_bindgen::DiceContext_;
+use open_dice_cbor_bindgen::{DiceContext_, DiceKeypairFromSeed, DicePrincipal};
 use open_dice_cbor_bindgen::{
-    DiceCoseSignAndEncodeSign1, DiceGenerateCertificate, DiceHash, DiceKdf, DiceKeypairFromSeed,
-    DicePrincipal, DiceSign, DiceVerify,
+    DiceCoseSignAndEncodeSign1, DiceGenerateCertificate, DiceHash, DiceKdf, DiceSign, DiceVerify,
 };
 #[cfg(feature = "multialg")]
 use std::ffi::c_void;
@@ -81,14 +80,19 @@ pub fn kdf(ikm: &[u8], salt: &[u8], info: &[u8], derived_key: &mut [u8]) -> Resu
 /// Deterministically generates a public and private key pair from `seed`.
 /// Since this is deterministic, `seed` is as sensitive as a private key and can
 /// be used directly as the private key.
-pub fn keypair_from_seed(seed: &[u8; PRIVATE_KEY_SEED_SIZE]) -> Result<(Vec<u8>, PrivateKey)> {
-    let mut public_key = vec![0u8; VM_KEY_ALGORITHM.public_key_size()];
-    let mut private_key = PrivateKey::default();
+#[cfg(feature = "multialg")]
+pub fn keypair_from_seed(
+    context: DiceContext,
+    seed: &[u8; PRIVATE_KEY_SEED_SIZE],
+) -> Result<(Vec<u8>, PrivateKey)> {
+    let mut context: open_dice_cbor_bindgen::DiceContext_ = context.into();
     // This function is used with an open-dice config that uses the same algorithms for the
     // subject and authority. Therefore, the principal is irrelevant in this context as this
     // function only derives the key pair cryptographically without caring about which
     // principal it is for. Hence, we arbitrarily set it to `DicePrincipal::kDicePrincipalSubject`.
     let principal = DicePrincipal::kDicePrincipalSubject;
+    let mut public_key = vec![0u8; VM_KEY_ALGORITHM.public_key_size()];
+    let mut private_key = PrivateKey::default();
     check_result(
         // SAFETY: The function writes to the `public_key` and `private_key` within the given
         // bounds, and only reads the `seed`.
@@ -96,7 +100,7 @@ pub fn keypair_from_seed(seed: &[u8; PRIVATE_KEY_SEED_SIZE]) -> Result<(Vec<u8>,
         // and a null pointer otherwise.
         unsafe {
             DiceKeypairFromSeed(
-                context(),
+                &mut context as *mut _ as *mut std::ffi::c_void,
                 principal,
                 seed.as_ptr(),
                 public_key.as_mut_ptr(),
@@ -160,7 +164,7 @@ pub fn derive_cdi_leaf_priv(
     dice_artifacts: &dyn DiceArtifacts,
 ) -> Result<PrivateKey> {
     let cdi_priv_key_seed = derive_cdi_private_key_seed(context, dice_artifacts.cdi_attest())?;
-    let (_, private_key) = keypair_from_seed(cdi_priv_key_seed.as_array())?;
+    let (_, private_key) = keypair_from_seed(context, cdi_priv_key_seed.as_array())?;
     Ok(private_key)
 }
 
