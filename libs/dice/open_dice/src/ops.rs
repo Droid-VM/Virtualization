@@ -16,22 +16,21 @@
 //! It contains the set of functions that implement various operations that the
 //! main DICE functions depend on.
 
-use crate::dice::{
-    context, Hash, InputValues, HASH_SIZE, PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE,
-    VM_KEY_ALGORITHM,
-};
+use crate::dice::{context, Hash, InputValues, HASH_SIZE, PRIVATE_KEY_SEED_SIZE, VM_KEY_ALGORITHM};
 #[cfg(feature = "multialg")]
-use crate::dice::{derive_cdi_private_key_seed, DiceArtifacts, DiceContext, PrivateKey};
+use crate::dice::{
+    derive_cdi_private_key_seed, DiceArtifacts, DiceContext, PrivateKey, PRIVATE_KEY_SIZE,
+};
 use crate::error::{check_result, DiceError, Result};
 #[cfg(feature = "multialg")]
 use crate::KeyAlgorithm;
 #[cfg(feature = "multialg")]
 use alloc::{vec, vec::Vec};
 #[cfg(feature = "multialg")]
-use open_dice_cbor_bindgen::{DiceContext_, DiceKeypairFromSeed, DicePrincipal, DiceSign};
 use open_dice_cbor_bindgen::{
-    DiceCoseSignAndEncodeSign1, DiceGenerateCertificate, DiceHash, DiceKdf, DiceVerify,
+    DiceContext_, DiceCoseSignAndEncodeSign1, DiceKeypairFromSeed, DicePrincipal, DiceSign,
 };
+use open_dice_cbor_bindgen::{DiceGenerateCertificate, DiceHash, DiceKdf, DiceVerify};
 #[cfg(feature = "multialg")]
 use std::ffi::c_void;
 use std::ptr;
@@ -215,13 +214,16 @@ pub fn sign(
 /// object in `encoded_signature`. Uses `DiceCoseSignAndEncodeSign1`.
 ///
 /// Returns the actual size of encoded_signature on success.
+#[cfg(feature = "multialg")]
 pub fn sign_cose_sign1(
+    context: DiceContext,
     message: &[u8],
     aad: &[u8],
     private_key: &[u8; PRIVATE_KEY_SIZE],
     encoded_signature: &mut [u8],
 ) -> Result<usize> {
     let mut encoded_signature_actual_size = 0;
+    let mut context: open_dice_cbor_bindgen::DiceContext_ = context.into();
 
     check_result(
         // SAFETY: The function writes to `encoded_signature` and `encoded_signature_actual_size`
@@ -232,7 +234,7 @@ pub fn sign_cose_sign1(
         // and a null pointer otherwise.
         unsafe {
             DiceCoseSignAndEncodeSign1(
-                context(),
+                &mut context as *mut _ as *mut std::ffi::c_void,
                 message.as_ptr(),
                 message.len(),
                 aad.as_ptr(),
@@ -299,14 +301,12 @@ pub fn sign_cose_sign1_with_cdi_leaf_priv(
     dice_artifacts: &dyn DiceArtifacts,
     encoded_signature: &mut [u8],
 ) -> Result<usize> {
-    let private_key = derive_cdi_leaf_priv(
-        DiceContext {
-            authority_algorithm: KeyAlgorithm::Ed25519,
-            subject_algorithm: KeyAlgorithm::Ed25519,
-        },
-        dice_artifacts,
-    )?;
-    sign_cose_sign1(message, aad, private_key.as_array(), encoded_signature)
+    let context = DiceContext {
+        authority_algorithm: KeyAlgorithm::Ed25519,
+        subject_algorithm: KeyAlgorithm::Ed25519,
+    };
+    let private_key = derive_cdi_leaf_priv(context, dice_artifacts)?;
+    sign_cose_sign1(context, message, aad, private_key.as_array(), encoded_signature)
 }
 
 /// Multialg variant of `sign_cose_sign1_with_cdi_leaf_priv`.

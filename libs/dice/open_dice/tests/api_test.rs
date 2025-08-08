@@ -170,8 +170,13 @@ mod tests {
     #[test]
     fn sign_cose_sign1_verify() {
         let (pub_key, priv_key) = get_test_key_pair();
+        let dice_context = DiceContext {
+            authority_algorithm: KeyAlgorithm::Ed25519,
+            subject_algorithm: KeyAlgorithm::Ed25519,
+        };
 
-        let signature_res = retry_sign_cose_sign1(b"MyMessage", b"MyAad", priv_key.as_array());
+        let signature_res =
+            retry_sign_cose_sign1(dice_context, b"MyMessage", b"MyAad", priv_key.as_array());
         assert!(signature_res.is_ok());
         let signature = signature_res.unwrap();
         let cose_sign1_res = CoseSign1::from_slice(&signature);

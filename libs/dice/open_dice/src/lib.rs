@@ -49,11 +49,11 @@ pub use ops::{
 };
 pub use ops::{generate_certificate, hash, kdf, verify};
 pub use retry::{
-    retry_bcc_format_config_descriptor, retry_generate_certificate, retry_sign_cose_sign1,
-    OwnedDiceArtifacts,
+    retry_bcc_format_config_descriptor, retry_generate_certificate, OwnedDiceArtifacts,
 };
 #[cfg(feature = "multialg")]
 pub use retry::{
-    retry_bcc_main_flow, retry_dice_main_flow, retry_sign_cose_sign1_multialg,
-    retry_sign_cose_sign1_with_cdi_leaf_priv, retry_sign_cose_sign1_with_cdi_leaf_priv_multialg,
+    retry_bcc_main_flow, retry_dice_main_flow, retry_sign_cose_sign1,
+    retry_sign_cose_sign1_multialg, retry_sign_cose_sign1_with_cdi_leaf_priv,
+    retry_sign_cose_sign1_with_cdi_leaf_priv_multialg,
 };

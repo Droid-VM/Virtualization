@@ -22,15 +22,13 @@ use crate::bcc::bcc_main_flow;
 use crate::bcc::{bcc_format_config_descriptor, BccHandover, DiceConfigValues};
 
 #[cfg(feature = "multialg")]
-use crate::dice::{dice_main_flow, Cdi, DiceContext};
-use crate::dice::{
-    CdiValues, DiceArtifacts, InputValues, CDI_SIZE, PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE,
-};
+use crate::dice::{dice_main_flow, Cdi, DiceContext, PRIVATE_KEY_SIZE};
+use crate::dice::{CdiValues, DiceArtifacts, InputValues, CDI_SIZE, PRIVATE_KEY_SEED_SIZE};
 use crate::error::{DiceError, Result};
-use crate::ops::{generate_certificate, sign_cose_sign1};
+use crate::ops::generate_certificate;
 #[cfg(feature = "multialg")]
 use crate::ops::{
-    sign_cose_sign1_multialg, sign_cose_sign1_with_cdi_leaf_priv,
+    sign_cose_sign1, sign_cose_sign1_multialg, sign_cose_sign1_with_cdi_leaf_priv,
     sign_cose_sign1_with_cdi_leaf_priv_multialg,
 };
 #[cfg(feature = "multialg")]
@@ -179,13 +177,15 @@ pub fn retry_generate_certificate(
 
 /// Signs a message with the given private key and returns the signature
 /// as an encoded CoseSign1 object.
+#[cfg(feature = "multialg")]
 pub fn retry_sign_cose_sign1(
+    context: DiceContext,
     message: &[u8],
     aad: &[u8],
     private_key: &[u8; PRIVATE_KEY_SIZE],
 ) -> Result<Vec<u8>> {
     retry_with_measured_buffer(|encoded_signature| {
-        sign_cose_sign1(message, aad, private_key, encoded_signature)
+        sign_cose_sign1(context, message, aad, private_key, encoded_signature)
     })
 }
 
