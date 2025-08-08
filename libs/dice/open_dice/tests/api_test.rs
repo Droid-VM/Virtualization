@@ -153,8 +153,12 @@ mod tests {
     #[test]
     fn hash_derive_sign_verify() {
         let (pub_key, priv_key) = get_test_key_pair();
+        let dice_context = DiceContext {
+            authority_algorithm: KeyAlgorithm::Ed25519,
+            subject_algorithm: KeyAlgorithm::Ed25519,
+        };
 
-        let mut signature = sign(b"MyMessage", priv_key.as_array()).unwrap();
+        let mut signature = sign(dice_context, b"MyMessage", priv_key.as_array()).unwrap();
         assert_eq!(&signature, EXPECTED_SIGNATURE);
         assert!(verify(b"MyMessage", &signature, &pub_key).is_ok());
         assert!(verify(b"MyMessage_fail", &signature, &pub_key).is_err());

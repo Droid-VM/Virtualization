@@ -44,10 +44,10 @@ pub use error::{DiceError, Result};
 #[cfg(feature = "multialg")]
 pub use ops::{
     derive_cdi_leaf_priv, derive_cdi_leaf_priv_multialg, keypair_from_seed,
-    keypair_from_seed_multialg, sign_cose_sign1_multialg,
+    keypair_from_seed_multialg, sign, sign_cose_sign1_multialg,
     sign_cose_sign1_with_cdi_leaf_priv_multialg, verify_multialg,
 };
-pub use ops::{generate_certificate, hash, kdf, sign, verify};
+pub use ops::{generate_certificate, hash, kdf, verify};
 pub use retry::{
     retry_bcc_format_config_descriptor, retry_generate_certificate, retry_sign_cose_sign1,
     OwnedDiceArtifacts,

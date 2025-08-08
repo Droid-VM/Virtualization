@@ -25,11 +25,12 @@ use crate::dice::{derive_cdi_private_key_seed, DiceArtifacts, DiceContext, Priva
 use crate::error::{check_result, DiceError, Result};
 #[cfg(feature = "multialg")]
 use crate::KeyAlgorithm;
+#[cfg(feature = "multialg")]
 use alloc::{vec, vec::Vec};
 #[cfg(feature = "multialg")]
-use open_dice_cbor_bindgen::{DiceContext_, DiceKeypairFromSeed, DicePrincipal};
+use open_dice_cbor_bindgen::{DiceContext_, DiceKeypairFromSeed, DicePrincipal, DiceSign};
 use open_dice_cbor_bindgen::{
-    DiceCoseSignAndEncodeSign1, DiceGenerateCertificate, DiceHash, DiceKdf, DiceSign, DiceVerify,
+    DiceCoseSignAndEncodeSign1, DiceGenerateCertificate, DiceHash, DiceKdf, DiceVerify,
 };
 #[cfg(feature = "multialg")]
 use std::ffi::c_void;
@@ -183,8 +184,14 @@ pub fn derive_cdi_leaf_priv_multialg(
 }
 
 /// Signs the `message` with the given `private_key` using `DiceSign`.
-pub fn sign(message: &[u8], private_key: &[u8; PRIVATE_KEY_SIZE]) -> Result<Vec<u8>> {
+#[cfg(feature = "multialg")]
+pub fn sign(
+    context: DiceContext,
+    message: &[u8],
+    private_key: &[u8; PRIVATE_KEY_SIZE],
+) -> Result<Vec<u8>> {
     let mut signature = vec![0u8; VM_KEY_ALGORITHM.signature_size()];
+    let mut context: open_dice_cbor_bindgen::DiceContext_ = context.into();
     check_result(
         // SAFETY: The function writes to the `signature` within the given bounds, and only reads
         // the message and the private key.
@@ -192,7 +199,7 @@ pub fn sign(message: &[u8], private_key: &[u8; PRIVATE_KEY_SIZE]) -> Result<Vec<
         // and a null pointer otherwise.
         unsafe {
             DiceSign(
-                context(),
+                &mut context as *mut _ as *mut std::ffi::c_void,
                 message.as_ptr(),
                 message.len(),
                 private_key.as_ptr(),
