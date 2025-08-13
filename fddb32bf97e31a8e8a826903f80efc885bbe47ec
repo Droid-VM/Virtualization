@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d473dc6_c576313e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-08-13T13:42:42Z",
+      "side": 1,
+      "message": "Hi Vanand,\n\nGreat job! This is a really solid refactoring 👍\n\nBTW why is this published on AOSP? All Android changes are submitted to ag/ now.",
+      "revId": "fddb32bf97e31a8e8a826903f80efc885bbe47ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "652f0ff4_9c2c80f8",
+        "filename": "libs/dice/open_dice/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-08-13T13:42:42Z",
+      "side": 1,
+      "message": "The doc also needs to be updated",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 23
+      },
+      "revId": "fddb32bf97e31a8e8a826903f80efc885bbe47ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02ed8b68_a4865899",
+        "filename": "libs/dice/open_dice/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-08-13T13:42:42Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 63
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ca2a809e_a1f9897e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/dice/open_dice/src/dice.rs",
+              "range": {
+                "startLine": 179,
+                "startChar": 0,
+                "endLine": 180,
+                "endChar": 0
+              },
+              "replacement": "/// Calls the provided function with a null pointer when `multialg` feature is disabled.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fddb32bf97e31a8e8a826903f80efc885bbe47ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
