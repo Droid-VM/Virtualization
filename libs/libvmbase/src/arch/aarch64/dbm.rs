@@ -40,7 +40,7 @@ pub fn set_dbm_enabled(enabled: bool) {
 }
 
 /// Returns `true` if hardware dirty state management is available.
-fn dbm_available() -> bool {
+pub fn dbm_available() -> bool {
     if !cfg!(feature = "cpu_feat_hafdbs") {
         return false;
     }

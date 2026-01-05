@@ -14,6 +14,7 @@
 
 //! Page table management.
 
+use crate::arch::dbm::dbm_available;
 use crate::read_sysreg;
 use aarch64_paging::idmap::IdMap;
 use aarch64_paging::paging::{
@@ -119,11 +120,17 @@ impl PageTable {
         // dirty once a store hits them, but also to ensure that we can clear the read-only
         // attribute while the mapping is live without causing break-before-make (BBM) violations.
         // The latter implies that we must avoid the use of the contiguous hint as well.
-        self.idmap.map_range_with_constraints(
-            range,
-            DATA_DBM,
-            Constraints::NO_BLOCK_MAPPINGS | Constraints::NO_CONTIGUOUS_HINT,
-        )
+        if dbm_available() {
+            self.idmap.map_range_with_constraints(
+                range,
+                DATA_DBM,
+                Constraints::NO_BLOCK_MAPPINGS | Constraints::NO_CONTIGUOUS_HINT,
+            )
+        } else {
+             // When DBM support is not available, map the pages in read/write as we are
+             // seeing data corruption issues with software DBM handling.
+            self.map_data(range)
+        }
     }
 
     /// Maps the given range of virtual addresses to the physical addresses as read-only
