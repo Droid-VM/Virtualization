@@ -15,7 +15,6 @@
  */
 
 #include <aidl/android/crosvm/BnCrosvmAndroidDisplayService.h>
-#include <aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.h>
 #include <android-base/result.h>
 #include <android/binder_manager.h>
 #include <android/binder_process.h>
@@ -28,7 +27,6 @@
 #include "surface_control_dl.h"
 
 using aidl::android::crosvm::BnCrosvmAndroidDisplayService;
-using aidl::android::system::virtualizationservice_internal::IVirtualizationServiceInternal;
 using aidl::android::view::Surface;
 
 using android::base::Error;
@@ -371,43 +369,33 @@ private:
 typedef void (*ErrorCallback)(const char* message);
 
 struct AndroidDisplayContext {
-    std::shared_ptr<IVirtualizationServiceInternal> virt_service;
     std::shared_ptr<DisplayService> disp_service;
     ErrorCallback error_callback;
 
-    AndroidDisplayContext(ErrorCallback cb) : error_callback(cb) {
+    AndroidDisplayContext(const char* service_name, ErrorCallback cb) : error_callback(cb) {
         auto disp_service = ::ndk::SharedRefBase::make<DisplayService>();
 
-        // Creates DisplayService and register it to the virtualizationservice. This is needed
-        // because this code is executed inside of crosvm which runs as an app. Apps are not allowed
-        // to register a service to the service manager.
-        auto virt_service = IVirtualizationServiceInternal::fromBinder(ndk::SpAIBinder(
-                AServiceManager_waitForService("android.system.virtualizationservice")));
-        if (virt_service == nullptr) {
-            errorf("Failed to find virtualization service");
-            return;
-        }
-        auto status = virt_service->setDisplayService(disp_service->asBinder());
-        if (!status.isOk()) {
-            errorf("Failed to register display service");
-            return;
-        }
-
-        this->virt_service = virt_service;
-        this->disp_service = disp_service;
+        // Register the DisplayService directly to the service manager under `service_name`
+        // (passed from crosvm's --android-display-service argument). This works because crosvm
+        // here is launched in a privileged (root) context with SELinux permissive, so it is
+        // allowed to register a service. The app side looks the service up by the same name.
+        //
+        // The binder thread pool MUST be started before addService so that incoming calls
+        // (e.g. setSurface) from the app are serviced.
+        ABinderProcess_setThreadPoolMaxThreadCount(4);
         ABinderProcess_startThreadPool();
-    }
 
-    ~AndroidDisplayContext() {
-        if (virt_service == nullptr) {
-            errorf("Not connected to virtualization service");
+        binder_status_t status =
+                AServiceManager_addService(disp_service->asBinder().get(), service_name);
+        if (status != STATUS_OK) {
+            errorf("Failed to register '%s' to service manager: status=%d", service_name, status);
             return;
         }
-        auto status = this->virt_service->clearDisplayService();
-        if (!status.isOk()) {
-            errorf("Failed to clear display service");
-        }
+
+        this->disp_service = disp_service;
     }
+
+    ~AndroidDisplayContext() = default;
 
     void errorf(const char* format, ...) {
         char buffer[1024];
@@ -422,8 +410,8 @@ struct AndroidDisplayContext {
 };
 
 extern "C" struct AndroidDisplayContext* create_android_display_context(
-        const char*, ErrorCallback error_callback) {
-    return new AndroidDisplayContext(error_callback);
+        const char* name, ErrorCallback error_callback) {
+    return new AndroidDisplayContext(name, error_callback);
 }
 
 extern "C" void destroy_android_display_context(struct AndroidDisplayContext* ctx) {
