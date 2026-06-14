@@ -37,8 +37,9 @@ namespace {
 class SinkANativeWindow_Buffer {
 public:
     Result<void> configure(uint32_t width, uint32_t height, int format) {
-        if (format != HAL_PIXEL_FORMAT_BGRA_8888) {
-            return Error() << "Pixel format " << format << " is not BGRA_8888.";
+        // kFormat is RGBA_8888 (see AndroidDisplaySurface::kFormat for why we no longer use BGRA).
+        if (format != HAL_PIXEL_FORMAT_RGBA_8888) {
+            return Error() << "Pixel format " << format << " is not RGBA_8888.";
         }
 
         mBufferBits.resize(width * height * 4);
@@ -58,6 +59,26 @@ private:
     ANativeWindow_Buffer mBuffer;
     std::vector<uint8_t> mBufferBits;
 };
+
+// crosvm always renders scanouts in B,G,R,X byte order (BGRA/BGRX — see SetScanoutBlob in
+// crosvm's devices/src/virtio/gpu/mod.rs). We advertise the Android buffer as RGBA_8888 (see
+// kFormat) instead of BGRA_8888 so the compositor imports it as a regular GL_TEXTURE_2D rather
+// than GL_TEXTURE_EXTERNAL_OES: some GPUs' Skia RenderEngine (observed on Adreno) abort with
+// "Unable to generate SkImage" when asked to sample an external-OES BGRA texture, which crashes
+// surfaceflinger and soft-reboots the device. To keep colors correct under the RGBA layout we
+// swap the R and B channels in place just before posting the buffer.
+static void swapRedBlueInPlace(const ANativeWindow_Buffer& buf) {
+    uint8_t* base = static_cast<uint8_t*>(buf.bits);
+    if (base == nullptr) return;
+    for (int32_t y = 0; y < buf.height; y++) {
+        uint8_t* px = base + static_cast<size_t>(y) * static_cast<size_t>(buf.stride) * 4;
+        for (int32_t x = 0; x < buf.width; x++, px += 4) {
+            uint8_t t = px[0];
+            px[0] = px[2];
+            px[2] = t;
+        }
+    }
+}
 
 static Result<void> copyBuffer(ANativeWindow_Buffer& from, ANativeWindow_Buffer& to) {
     if (from.width != to.width || from.height != to.height) {
@@ -196,6 +217,9 @@ public:
             return Error() << "Failed to get ANativeWindow";
         }
 
+        // crosvm wrote B,G,R,X into the buffer; convert to R,G,B,X to match kFormat (RGBA_8888).
+        swapRedBlueInPlace(mLastBuffer);
+
         if (ANativeWindow_unlockAndPost(anw) != 0) {
             return Error() << "Failed to unlock and post window";
         }
@@ -278,9 +302,13 @@ public:
 
 private:
     // Note: crosvm always uses BGRA8888 or BGRX8888. See devices/src/virtio/gpu/mod.rs in
-    // crosvm where the SetScanoutBlob command is handled. Let's use BGRA not BGRX with a hope
-    // that we will need alpha blending for the cursor surface.
-    static constexpr const int kFormat = HAL_PIXEL_FORMAT_BGRA_8888;
+    // crosvm where the SetScanoutBlob command is handled. We advertise the buffer as RGBA_8888
+    // (not BGRA_8888) so it imports as a regular GL_TEXTURE_2D — a BGRA buffer can be imported as
+    // GL_TEXTURE_EXTERNAL_OES on some GPUs (Adreno) whose Skia RenderEngine then aborts in
+    // makeImage ("Unable to generate SkImage"), crashing surfaceflinger. crosvm's B,G,R,X pixels
+    // are converted to R,G,B,X by swapRedBlueInPlace() before each post. RGBA keeps the alpha
+    // channel (used for cursor blending), matching the old BGRA behavior.
+    static constexpr const int kFormat = HAL_PIXEL_FORMAT_RGBA_8888;
 
     std::string mName;
 
