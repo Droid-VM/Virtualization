@@ -1,0 +1,629 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_ffi_static {
+    name: "libpvmfw",
+    defaults: ["libpvmfw.defaults"],
+    // This enables pvmfw_desktop to be built with a different set of features.
+    features: [
+        "instance-img",
+    ],
+}
+
+rust_defaults {
+    name: "libpvmfw.defaults",
+    crate_name: "pvmfw",
+    defaults: ["vmbase_ffi_defaults"],
+    crate_root: "src/main.rs",
+    features: [
+        "compat-kernel-range-from-gprs",
+        "compat-raw-dice-handover",
+    ],
+    rustlibs: [
+        "libbssl_avf_nostd",
+        "libcbor_util_nostd",
+        "libcfg_if",
+        "libciborium_io_nostd",
+        "libciborium_nostd",
+        "libcoset_nostd",
+        "libdiced_open_dice_nostd",
+        "libhypervisor_backends",
+        "liblibfdt_nostd",
+        "liblog_rust_nostd",
+        "libpvmfw_avb_nostd",
+        "libpvmfw_fdt_template",
+        "libservice_vm_version",
+        "libstatic_assertions",
+        "libtinyvec_nostd",
+        "libuuid_nostd",
+        "libvirtio_drivers",
+        "libvmbase",
+        "libzerocopy_nostd",
+        "libzeroize_nostd",
+    ],
+    srcs: [
+        ":pvmfw_embedded_key_pub_bin",
+    ],
+    target: {
+        android_arm64: {
+            rustlibs: [
+                "libsmccc",
+            ],
+        },
+    },
+}
+
+// Generates an empty file.
+genrule {
+    name: "empty_file",
+    out: ["empty_file"],
+    cmd: "touch $(out)",
+}
+
+rust_defaults {
+    name: "libpvmfw.test.defaults",
+    defaults: ["avf_build_flags_rust"],
+    test_suites: ["general-tests"],
+    test_options: {
+        unit_test: true,
+    },
+    prefer_rlib: true,
+}
+
+rust_test {
+    name: "libpvmfw.bootargs.test",
+    defaults: ["libpvmfw.bootargs.test.defaults"],
+}
+
+rust_test_host {
+    name: "libpvmfw.bootargs.test_host",
+    defaults: ["libpvmfw.bootargs.test.defaults"],
+}
+
+rust_defaults {
+    name: "libpvmfw.bootargs.test.defaults",
+    // For now, only bootargs.rs is written to be conditionally compiled with std.
+    srcs: ["src/bootargs.rs"],
+    defaults: ["libpvmfw.test.defaults"],
+    rustlibs: [
+        "libzeroize",
+    ],
+}
+
+rust_test {
+    name: "libpvmfw.device_assignment.test",
+    defaults: ["libpvmfw.device_assignment.test.defaults"],
+    data_bins: ["dtc_static"],
+}
+
+rust_test_host {
+    name: "libpvmfw.device_assignment.test_host",
+    defaults: ["libpvmfw.device_assignment.test.defaults"],
+    data_bins: ["dtc"],
+    data_libs: ["libfdt"],
+}
+
+rust_defaults {
+    name: "libpvmfw.device_assignment.test.defaults",
+    srcs: ["src/device_assignment.rs"],
+    defaults: ["libpvmfw.test.defaults"],
+    rustlibs: [
+        "libdts",
+        "liblibfdt",
+        "liblog_rust",
+        "libpvmfw_fdt_template",
+        "libzerocopy",
+    ],
+    data: [
+        ":test_pvmfw_devices_vm_dtbo",
+        ":test_pvmfw_devices_vm_dtbo_without_symbols",
+        ":test_pvmfw_devices_vm_dtbo_with_duplicated_iommus",
+        ":test_pvmfw_devices_overlapping_pvmfw",
+        ":test_pvmfw_devices_vm_dtbo_with_dependencies",
+        ":test_pvmfw_devices_vm_dtbo_with_nested_nodes",
+        ":test_pvmfw_devices_with_rng",
+        ":test_pvmfw_devices_with_multiple_devices_iommus",
+        ":test_pvmfw_devices_with_iommu_sharing",
+        ":test_pvmfw_devices_with_iommu_id_conflict",
+        ":test_pvmfw_devices_without_device",
+        ":test_pvmfw_devices_without_iommus",
+        ":test_pvmfw_devices_with_duplicated_pviommus",
+        ":test_pvmfw_devices_with_multiple_reg_iommus",
+        ":test_pvmfw_devices_with_dependency",
+        ":test_pvmfw_devices_with_dependency_loop",
+        ":test_pvmfw_devices_with_multiple_dependencies",
+        ":test_pvmfw_devices_with_nested_nodes",
+        ":test_pvmfw_devices_expected_dt",
+    ],
+    compile_multilib: "first",
+}
+
+rust_test {
+    name: "libpvmfw.dice.test",
+    defaults: ["libpvmfw.dice.test.defaults"],
+}
+
+rust_test_host {
+    name: "libpvmfw.dice.test_host",
+    defaults: ["libpvmfw.dice.test.defaults"],
+}
+
+rust_defaults {
+    name: "libpvmfw.dice.test.defaults",
+    srcs: ["src/dice/mod.rs"],
+    defaults: ["libpvmfw.test.defaults"],
+    rustlibs: [
+        "libcbor_util",
+        "libciborium",
+        "libcoset",
+        "libdiced_open_dice_multialg",
+        "libhwtrust",
+        "liblog_rust",
+        "libpvmfw_avb",
+        "libdiced_sample_inputs_multialg",
+        "libzerocopy",
+        "libhex",
+    ],
+    static_libs: ["libopen_dice_clear_memory"],
+}
+
+rust_test {
+    name: "libpvmfw.reserved_mem.test",
+    defaults: ["libpvmfw.reserved_mem.test.defaults"],
+}
+
+rust_test_host {
+    name: "libpvmfw.reserved_mem.test_host",
+    defaults: ["libpvmfw.reserved_mem.test.defaults"],
+}
+
+rust_defaults {
+    name: "libpvmfw.reserved_mem.test.defaults",
+    srcs: ["src/config/reserved_mem.rs"],
+    defaults: ["libpvmfw.test.defaults"],
+    rustlibs: [
+        "liblibfdt",
+        "liblog_rust",
+        "libzerocopy",
+    ],
+    data: [
+        ":test_pvmfw_devices_without_device",
+    ],
+}
+
+genrule {
+    name: "test_pvmfw_devices_vm_dtbo",
+    defaults: ["dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_vm_dtbo.dts"],
+    out: ["test_pvmfw_devices_vm_dtbo.dtbo"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_vm_dtbo_without_symbols",
+    defaults: ["dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_vm_dtbo_without_symbols.dts"],
+    out: ["test_pvmfw_devices_vm_dtbo_without_symbols.dtbo"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_vm_dtbo_with_duplicated_iommus",
+    defaults: ["dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_vm_dtbo_with_duplicated_iommus.dts"],
+    out: ["test_pvmfw_devices_vm_dtbo_with_duplicated_iommus.dtbo"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_vm_dtbo_with_dependencies",
+    tools: ["dtc"],
+    cmd: "$(location dtc) -@ -I dts -O dtb $(in) -o $(out)",
+    srcs: ["testdata/test_pvmfw_devices_vm_dtbo_with_dependencies.dts"],
+    out: ["test_pvmfw_devices_vm_dtbo_with_dependencies.dtbo"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_vm_dtbo_with_nested_nodes",
+    tools: ["dtc"],
+    cmd: "$(location dtc) -@ -I dts -O dtb $(in) -o $(out)",
+    srcs: ["testdata/test_pvmfw_devices_vm_dtbo_with_nested_nodes.dts"],
+    out: ["test_pvmfw_devices_vm_dtbo_with_nested_nodes.dtbo"],
+}
+
+genrule_defaults {
+    name: "test_device_assignment_dts_to_dtb",
+    defaults: ["dts_to_dtb"],
+    srcs: ["testdata/test_crosvm_dt_base.dtsi"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_overlapping_pvmfw",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_overlapping_pvmfw.dts"],
+    out: ["test_pvmfw_devices_overlapping_pvmfw.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_rng",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_rng.dts"],
+    out: ["test_pvmfw_devices_with_rng.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_without_iommus",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_without_iommus.dts"],
+    out: ["test_pvmfw_devices_without_iommus.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_without_device",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_without_device.dts"],
+    out: ["test_pvmfw_devices_without_device.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_multiple_devices_iommus",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_multiple_devices_iommus.dts"],
+    out: ["test_pvmfw_devices_with_multiple_devices_iommus.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_iommu_sharing",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_iommu_sharing.dts"],
+    out: ["test_pvmfw_devices_with_iommu_sharing.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_iommu_id_conflict",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_iommu_id_conflict.dts"],
+    out: ["test_pvmfw_devices_with_iommu_id_conflict.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_duplicated_pviommus",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_duplicated_pviommus.dts"],
+    out: ["test_pvmfw_devices_with_duplicated_pviommus.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_multiple_reg_iommus",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_multiple_reg_iommus.dts"],
+    out: ["test_pvmfw_devices_with_multiple_reg_iommus.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_dependency",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_dependency.dts"],
+    out: ["test_pvmfw_devices_with_dependency.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_multiple_dependencies",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_multiple_dependencies.dts"],
+    out: ["test_pvmfw_devices_with_multiple_dependencies.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_dependency_loop",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_dependency_loop.dts"],
+    out: ["test_pvmfw_devices_with_dependency_loop.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_nested_nodes",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_nested_nodes.dts"],
+    out: ["test_pvmfw_devices_with_nested_nodes.dtb"],
+}
+
+// We can't use genrule because preprocessed platform DT is built with cc_object.
+// cc_genrule doesn't support default, so we'll build all expected DTs in
+// a single build rule.
+cc_genrule {
+    name: "test_pvmfw_devices_expected_dt",
+    srcs: [
+        ":pvmfw_platform_arm64.dts.preprocessed",
+        "testdata/expected_dt_with_dependency.dts",
+        "testdata/expected_dt_with_multiple_dependencies.dts",
+        "testdata/expected_dt_with_dependency_loop.dts",
+    ],
+    host_supported: true,
+    out: [
+        "expected_dt_with_dependency.dtb",
+        "expected_dt_with_multiple_dependencies.dtb",
+        "expected_dt_with_dependency_loop.dtb",
+    ],
+    tools: ["dtc"],
+    cmd: "FILES=($(in));" +
+        "cp $${FILES[0]} $(genDir)/platform_preprocessed.dts;" +
+        "for DTS in $${FILES[@]:1}; do" +
+        "  DTB=$$(basename -s .dts $${DTS}).dtb;" +
+        "  $(location dtc) -@ -i $(genDir) -I dts -O dtb $${DTS} -o $(genDir)/$${DTB};" +
+        "done",
+    visibility: ["//visibility:private"],
+}
+
+cc_binary {
+    name: "pvmfw",
+    defaults: ["pvmfw.defaults"],
+    static_libs: ["libpvmfw"],
+}
+
+cc_defaults {
+    name: "pvmfw.defaults",
+    defaults: ["vmbase_elf_0x7fc00000_defaults"],
+    static_libs: [
+        "libvmbase_dice_clear_memory",
+    ],
+    // `installable: false` is inherited from vmbase_elf_defaults, and that
+    // hides this module from Make, which makes it impossible for the Make world
+    // to place the unstripped binary to the symbols directory. Marking back as
+    // installable exposes this module to the Make world again. Note that this
+    // module (pvmfw) still is NOT installed to any of the filesystem images. It
+    // is fed into pvmfw_bin and then into pvmfw_img to become a standalone
+    // partition image. This is just to package the unstripped file into the
+    // symbols zip file for debugging purpose.
+    installable: true,
+}
+
+raw_binary {
+    name: "pvmfw_bin",
+    stem: "pvmfw.bin",
+    src: ":pvmfw",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+        android_x86_64: {
+            enabled: true,
+        },
+    },
+}
+
+// Provide pvmfw.bin binary regardless of the architecture for building test.
+// Note that skipping tests on unsupported device is easy
+// while configuring server configuration to make such tests to run on working
+// devices.
+prebuilt_etc {
+    name: "pvmfw_test",
+    filename: "pvmfw_test.bin",
+    target: {
+        android_arm64: {
+            src: ":pvmfw_bin",
+        },
+        android_x86_64: {
+            src: ":pvmfw_bin",
+        },
+    },
+    src: ":empty_file",
+    installable: false,
+}
+
+filegroup {
+    name: "pvmfw_embedded_key",
+    srcs: [":avb_testkey_rsa4096"],
+}
+
+genrule {
+    name: "pvmfw_embedded_key_pub_bin",
+    tools: ["avbtool"],
+    srcs: [":pvmfw_embedded_key"],
+    out: ["pvmfw_embedded_key_pub.bin"],
+    cmd: "$(location avbtool) extract_public_key --key $(in) --output $(out)",
+}
+
+prebuilt_etc {
+    name: "pvmfw_sign_key",
+    src: ":avb_testkey_rsa4096",
+    installable: false,
+}
+
+// We need to rename *.dts into *.cpp as cc_object doesn't accept *.dts as an
+// input
+genrule {
+    name: "pvmfw_platform_arm64.dts.renamed",
+    srcs: ["platform_arm64.dts"],
+    out: ["platform_arm64_dts.cpp"],
+    cmd: "cp $(in) $(out)",
+    visibility: ["//visibility:private"],
+}
+
+genrule {
+    name: "pvmfw_platform_x86_64.dts.renamed",
+    srcs: ["platform_x86_64.dts"],
+    out: ["platform_x86_64_dts.cpp"],
+    cmd: "cp $(in) $(out)",
+    visibility: ["//visibility:private"],
+}
+
+cc_defaults {
+    name: "pvmfw_dt_preprocess_flags",
+    defaults: ["avf_build_flags_cc"],
+    cflags: [
+        "-E",
+        "-P",
+        "-xassembler-with-cpp", // allow C preprocessor directives
+        // Suppress an error about the unused -c that precedes -S.
+        "-Wno-unused-command-line-argument",
+    ],
+}
+
+// Then run the macro processor to replace symbols like GIC_SPI into actual
+// numbers defined in the ARM DT binding headers
+cc_object {
+    name: "pvmfw_platform_arm64.dts.preprocessed",
+    defaults: ["pvmfw_dt_preprocess_flags"],
+    header_libs: ["arm_dt_bindings_headers"],
+    host_supported: true,
+    srcs: [":pvmfw_platform_arm64.dts.renamed"],
+    visibility: ["//visibility:private"],
+}
+
+cc_object {
+    name: "pvmfw_platform_x86_64.dts.preprocessed",
+    defaults: ["pvmfw_dt_preprocess_flags"],
+    host_supported: true,
+    srcs: [":pvmfw_platform_x86_64.dts.renamed"],
+    visibility: ["//visibility:private"],
+}
+
+// Compile the preprocessed dts into binary and create a rust library source
+// having the binary.
+// We have 2 separate dts:
+// - arm64 dts which is used in arm64 pvmfw binary and tests built for all
+//   all architectures and host.
+// - x86_64 dts which is used only in the x86_64 pvmfw binary
+// This library is included in the pvmfw binary and the test binaries as well.
+// So, for x86_64, we include both these compiled dtb in the library source.
+cc_genrule {
+    name: "pvmfw_fdt_template_rs",
+    srcs: [
+        ":pvmfw_platform_arm64.dts.preprocessed",
+        ":pvmfw_platform_x86_64.dts.preprocessed",
+    ],
+    host_supported: true,
+    out: ["lib.rs"],
+    tools: ["dtc"],
+    cmd: "FILES=($(in));" +
+        "DTS_ARM64=$${FILES[0]};" +
+        "DTS_X86_64=$${FILES[1]};" +
+        "$(location dtc) -@ -I dts -O dtb -o $(genDir)/compiled_arm64.dtbo $${DTS_ARM64} && " +
+        "$(location dtc) -@ -I dts -O dtb -o $(genDir)/compiled_x86_64.dtbo $${DTS_X86_64} && " +
+        "(" +
+        "    echo '#![no_std]';" +
+        "    echo '#![allow(missing_docs)]';" +
+        "    echo 'pub const RAW: &[u8] = &[';" +
+        "    xxd -i < $(genDir)/compiled_arm64.dtbo;" +
+        "    echo '];';" +
+        "    echo '#[cfg(target_arch = \"x86_64\")]';" +
+        "    echo 'pub const RAW_X86_64: &[u8] = &[';" +
+        "    xxd -i < $(genDir)/compiled_x86_64.dtbo;" +
+        "    echo '];';" +
+        ") > $(out)",
+    visibility: ["//visibility:private"],
+}
+
+rust_library_rlib {
+    name: "libpvmfw_fdt_template",
+    defaults: ["vmbase_rlib_defaults"],
+    host_supported: true,
+    enabled: true,
+    target: {
+        // pvmfw_fdt_template_rs isn't generated for Windows, but not needed.
+        windows: {
+            enabled: false,
+        },
+    },
+    srcs: [":pvmfw_fdt_template_rs"],
+    crate_name: "pvmfw_fdt_template",
+}
+
+bootimg {
+    name: "pvmfw_img",
+    stem: "pvmfw.img",
+    kernel_prebuilt: select(soong_config_variable("avf", "avf_use_pvmfw_desktop"), {
+        true: ":pvmfw_desktop_bin",
+        default: ":pvmfw_bin",
+    }),
+    header_version: "3",
+    partition_name: "pvmfw",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+        android_x86_64: {
+            enabled: true,
+        },
+    },
+    use_avb: true,
+    avb_private_key: ":pvmfw_sign_key",
+}
+
+// TODO(b/433248882): Unify pvmfw_desktop & pvmfw before release.
+rust_ffi_static {
+    name: "libpvmfw_desktop",
+    defaults: ["libpvmfw.defaults"],
+    // TODO(b/435130679): Unconditionally get digest from AOSP Trusty.
+    srcs: select(soong_config_variable("avf", "avf_use_pvmfw_desktop"), {
+        // Use seemingly unnecessary select, to avoid breaking the build of non-AOSP
+        // manifests, which don't include desktop_trusty_kernel_digest.
+        true: [":desktop_trusty_kernel_digest"],
+        default: [":desktop_trusty_placeholder_kernel_digest"],
+    }),
+    // This enables pvmfw_desktop to be built with a different set of features.
+    features: [
+        "platform_has_desktop_trusty",
+    ],
+}
+
+cc_binary {
+    name: "pvmfw_desktop",
+    defaults: ["pvmfw.defaults"],
+    static_libs: ["libpvmfw_desktop"],
+}
+
+raw_binary {
+    name: "pvmfw_desktop_bin",
+    stem: "pvmfw_desktop.bin",
+    src: ":pvmfw_desktop",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+        android_x86_64: {
+            enabled: true,
+        },
+    },
+}
+
+// TODO(b/435130679): Remove this once desktop Trusty builds from source.
+genrule {
+    name: "desktop_trusty_placeholder_bin",
+    tools: ["avbtool"],
+    out: ["desktop_trusty_placeholder.bin"],
+    cmd: "$(location avbtool) generate_test_image" +
+        " --image_size 1024" +
+        " --output $(out)",
+}
+
+avb_add_hash_footer {
+    name: "desktop_trusty_placeholder",
+    src: ":desktop_trusty_placeholder_bin",
+    partition_name: "boot",
+    private_key: ":pvmfw_embedded_key",
+    salt: "beef",
+}
+
+cc_genrule {
+    name: "desktop_trusty_placeholder_kernel_digest",
+    srcs: [":desktop_trusty_placeholder"],
+    out: ["desktop_trusty.kernelhash"],
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+        android_x86_64: {
+            enabled: true,
+        },
+    },
+    tools: ["avbtool"],
+    cmd: "$(location avbtool) calculate_vbmeta_digest" +
+        " --hash_algorithm sha256" +
+        " --image $(in)" +
+        " --format raw" +
+        " --output $(out)",
+}

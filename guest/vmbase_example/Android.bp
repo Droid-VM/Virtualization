@@ -1,0 +1,79 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_ffi_static {
+    name: "libvmbase_example",
+    defaults: ["vmbase_ffi_defaults"],
+    crate_name: "vmbase_example",
+    srcs: ["src/main.rs"],
+    rustlibs: [
+        "libdiced_open_dice_nostd",
+        "liblibfdt_nostd",
+        "liblog_rust_nostd",
+        "libspin_nostd",
+        "libvirtio_drivers",
+        "libvmbase",
+    ],
+    // TODO(ptosi): Support vmbase_example on x86_64
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
+
+cc_defaults {
+    name: "vmbase_example_elf_defaults",
+    defaults: ["vmbase_elf_defaults"],
+    static_libs: [
+        "libvmbase_example",
+    ],
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
+
+cc_binary {
+    name: "vmbase_example_bios",
+    defaults: [
+        "vmbase_elf_0x80200000_defaults",
+        "vmbase_example_elf_defaults",
+    ],
+}
+
+cc_binary {
+    name: "vmbase_example_kernel",
+    defaults: [
+        "vmbase_elf_0x80000000_defaults",
+        "vmbase_example_elf_defaults",
+    ],
+}
+
+raw_binary {
+    name: "vmbase_example_bios_bin",
+    stem: "vmbase_example_bios.bin",
+    src: ":vmbase_example_bios",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
+
+raw_binary {
+    name: "vmbase_example_kernel_bin",
+    stem: "vmbase_example_kernel.bin",
+    src: ":vmbase_example_kernel",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}

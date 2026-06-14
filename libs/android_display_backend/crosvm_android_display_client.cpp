@@ -1,0 +1,535 @@
+/*
+ * Copyright 2024 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include <aidl/android/crosvm/BnCrosvmAndroidDisplayService.h>
+#include <android-base/result.h>
+#include <android/binder_manager.h>
+#include <android/binder_process.h>
+#include <system/graphics.h> // for HAL_PIXEL_FORMAT_*
+
+#include <condition_variable>
+#include <memory>
+#include <mutex>
+
+#include "surface_control_dl.h"
+
+using aidl::android::crosvm::BnCrosvmAndroidDisplayService;
+using aidl::android::view::Surface;
+
+using android::base::Error;
+using android::base::Result;
+
+namespace {
+
+class SinkANativeWindow_Buffer {
+public:
+    Result<void> configure(uint32_t width, uint32_t height, int format) {
+        // kFormat is RGBA_8888 (see AndroidDisplaySurface::kFormat for why we no longer use BGRA).
+        if (format != HAL_PIXEL_FORMAT_RGBA_8888) {
+            return Error() << "Pixel format " << format << " is not RGBA_8888.";
+        }
+
+        mBufferBits.resize(width * height * 4);
+        mBuffer = ANativeWindow_Buffer{
+                .width = static_cast<int32_t>(width),
+                .height = static_cast<int32_t>(height),
+                .stride = static_cast<int32_t>(width),
+                .format = format,
+                .bits = mBufferBits.data(),
+        };
+        return {};
+    }
+
+    operator ANativeWindow_Buffer&() { return mBuffer; }
+
+private:
+    ANativeWindow_Buffer mBuffer;
+    std::vector<uint8_t> mBufferBits;
+};
+
+// crosvm always renders scanouts in B,G,R,X byte order (BGRA/BGRX — see SetScanoutBlob in
+// crosvm's devices/src/virtio/gpu/mod.rs). We advertise the Android buffer as RGBA_8888 (see
+// kFormat) instead of BGRA_8888 so the compositor imports it as a regular GL_TEXTURE_2D rather
+// than GL_TEXTURE_EXTERNAL_OES: some GPUs' Skia RenderEngine (observed on Adreno) abort with
+// "Unable to generate SkImage" when asked to sample an external-OES BGRA texture, which crashes
+// surfaceflinger and soft-reboots the device. To keep colors correct under the RGBA layout we
+// swap the R and B channels in place just before posting the buffer.
+static void swapRedBlueInPlace(const ANativeWindow_Buffer& buf) {
+    uint8_t* base = static_cast<uint8_t*>(buf.bits);
+    if (base == nullptr) return;
+    for (int32_t y = 0; y < buf.height; y++) {
+        uint8_t* px = base + static_cast<size_t>(y) * static_cast<size_t>(buf.stride) * 4;
+        for (int32_t x = 0; x < buf.width; x++, px += 4) {
+            uint8_t t = px[0];
+            px[0] = px[2];
+            px[2] = t;
+        }
+    }
+}
+
+static Result<void> copyBuffer(ANativeWindow_Buffer& from, ANativeWindow_Buffer& to) {
+    if (from.width != to.width || from.height != to.height) {
+        return Error() << "dimension mismatch. from=(" << from.width << ", " << from.height << ") "
+                       << "to=(" << to.width << ", " << to.height << ")";
+    }
+    uint32_t* dst = reinterpret_cast<uint32_t*>(to.bits);
+    uint32_t* src = reinterpret_cast<uint32_t*>(from.bits);
+    size_t bytes_on_line = to.width * 4; // 4 bytes per pixel
+    for (int32_t h = 0; h < to.height; h++) {
+        memcpy(dst + (h * to.stride), src + (h * from.stride), bytes_on_line);
+    }
+    return {};
+}
+
+// Wrapper which contains the latest available Surface/ANativeWindow from the DisplayService, if
+// available. A Surface/ANativeWindow may not always be available if, for example, the VmLauncherApp
+// on the other end of the DisplayService is not in the foreground / is paused.
+class AndroidDisplaySurface {
+public:
+    AndroidDisplaySurface(const std::string& name) : mName(name) {}
+
+    Result<void> setNativeSurface(Surface* surface) {
+        {
+            std::lock_guard lk(mSurfaceMutex);
+            mNativeSurface = std::make_unique<Surface>(surface->release());
+            mNativeSurfaceNeedsConfiguring = true;
+            Surface* surface = mNativeSurface.get();
+            if (!surface) {
+                return Error() << "Failed to get Surface";
+            }
+
+            ANativeWindow* anw = surface->get();
+            auto& sc = SurfaceControl::GetInstance();
+            if (sc.IsSupported()) {
+                mSurfaceControl = sc.ASurfaceControl_createFromWindow(anw, mName.c_str());
+            }
+            if (!mSurfaceControl) {
+                return Error() << "Failed to create ASurfaceControl";
+            }
+        }
+
+        mNativeSurfaceReady.notify_one();
+        return {};
+    }
+
+    void removeSurface() {
+        {
+            std::lock_guard lk(mSurfaceMutex);
+            auto& sc = SurfaceControl::GetInstance();
+            if (mSurfaceControl) {
+                if (sc.IsSupported()) sc.ASurfaceControl_release(mSurfaceControl);
+                mSurfaceControl = nullptr;
+            }
+            mNativeSurface = nullptr;
+        }
+        mNativeSurfaceReady.notify_one();
+    }
+
+    Surface* getSurface() {
+        std::unique_lock lk(mSurfaceMutex);
+        return mNativeSurface.get();
+    }
+
+    Result<void> configure(uint32_t width, uint32_t height) {
+        std::unique_lock lk(mSurfaceMutex);
+
+        mRequestedSurfaceDimensions = Rect{
+                .width = width,
+                .height = height,
+        };
+
+        if (auto ret = mSinkBuffer.configure(width, height, kFormat); !ret.ok()) {
+            return Error() << "Failed to configure sink buffer: " << ret.error();
+        }
+        if (auto ret = mSavedFrameBuffer.configure(width, height, kFormat); !ret.ok()) {
+            return Error() << "Failed to configure saved frame buffer: " << ret.error();
+        }
+        return {};
+    }
+
+    void waitForNativeSurface() {
+        std::unique_lock lk(mSurfaceMutex);
+        mNativeSurfaceReady.wait(lk, [this] { return mNativeSurface != nullptr; });
+    }
+
+    Result<void> lock(ANativeWindow_Buffer* out_buffer) {
+        std::unique_lock lk(mSurfaceMutex);
+
+        Surface* surface = mNativeSurface.get();
+        if (surface == nullptr) {
+            // Surface not currently available but not necessarily an error
+            // if, for example, the VmLauncherApp is not in the foreground.
+            *out_buffer = mSinkBuffer;
+            return {};
+        }
+
+        ANativeWindow* anw = surface->get();
+        if (anw == nullptr) {
+            return Error() << "Failed to get ANativeWindow";
+        }
+
+        if (mNativeSurfaceNeedsConfiguring) {
+            if (!mRequestedSurfaceDimensions) {
+                return Error() << "Surface dimension is not configured yet!";
+            }
+            const auto& dims = *mRequestedSurfaceDimensions;
+
+            // Ensure locked buffers have our desired format.
+            if (ANativeWindow_setBuffersGeometry(anw, dims.width, dims.height, kFormat) != 0) {
+                return Error() << "Failed to set buffer geometry.";
+            }
+
+            mNativeSurfaceNeedsConfiguring = false;
+        }
+
+        if (ANativeWindow_lock(anw, out_buffer, nullptr) != 0) {
+            return Error() << "Failed to lock window";
+        }
+        mLastBuffer = *out_buffer;
+        return {};
+    }
+
+    Result<void> unlockAndPost() {
+        std::unique_lock lk(mSurfaceMutex);
+
+        Surface* surface = mNativeSurface.get();
+        if (surface == nullptr) {
+            // Surface not currently available but not necessarily an error
+            // if, for example, the VmLauncherApp is not in the foreground.
+            return {};
+        }
+
+        ANativeWindow* anw = surface->get();
+        if (anw == nullptr) {
+            return Error() << "Failed to get ANativeWindow";
+        }
+
+        // crosvm wrote B,G,R,X into the buffer; convert to R,G,B,X to match kFormat (RGBA_8888).
+        swapRedBlueInPlace(mLastBuffer);
+
+        if (ANativeWindow_unlockAndPost(anw) != 0) {
+            return Error() << "Failed to unlock and post window";
+        }
+        return {};
+    }
+
+    Result<void> setBuffer(AHardwareBuffer* ahb) {
+        std::lock_guard lk(mSurfaceMutex);
+        auto& sc = SurfaceControl::GetInstance();
+        if (!sc.IsSupported()) {
+            return Error() << "SurfaceControl is not supported";
+        }
+        auto transaction = sc.ASurfaceTransaction_create();
+        if (!transaction) {
+            return Error() << "Failed to create ASurfaceTransaction";
+        }
+        if (!mSurfaceControl) {
+            return Error() << "mSurfaceControl is destroyed";
+        }
+        sc.ASurfaceTransaction_setBuffer(transaction, mSurfaceControl, ahb,
+                                         -1 /* acquire_fence_fd */);
+        sc.ASurfaceTransaction_apply(transaction);
+        sc.ASurfaceTransaction_delete(transaction);
+        return {};
+    }
+
+    // Saves the last frame drawn
+    Result<void> saveFrame() {
+        std::unique_lock lk(mSurfaceMutex);
+        if (auto ret = copyBuffer(mLastBuffer, mSavedFrameBuffer); !ret.ok()) {
+            return Error() << "Failed to copy frame: " << ret.error();
+        }
+        return {};
+    }
+
+    // Draws the saved frame
+    Result<void> drawSavedFrame() {
+        std::unique_lock lk(mSurfaceMutex);
+        Surface* surface = mNativeSurface.get();
+        if (surface == nullptr) {
+            return Error() << "Surface not ready";
+        }
+
+        ANativeWindow* anw = surface->get();
+        if (anw == nullptr) {
+            return Error() << "Failed to get ANativeWindow";
+        }
+
+        // TODO: dedup this and the one in lock(...)
+        if (mNativeSurfaceNeedsConfiguring) {
+            if (!mRequestedSurfaceDimensions) {
+                return Error() << "Surface dimension is not configured yet!";
+            }
+            const auto& dims = *mRequestedSurfaceDimensions;
+
+            // Ensure locked buffers have our desired format.
+            if (ANativeWindow_setBuffersGeometry(anw, dims.width, dims.height, kFormat) != 0) {
+                return Error() << "Failed to set buffer geometry.";
+            }
+
+            mNativeSurfaceNeedsConfiguring = false;
+        }
+
+        ANativeWindow_Buffer buf;
+        if (ANativeWindow_lock(anw, &buf, nullptr) != 0) {
+            return Error() << "Failed to lock window";
+        }
+
+        if (auto ret = copyBuffer(mSavedFrameBuffer, buf); !ret.ok()) {
+            return Error() << "Failed to copy frame: " << ret.error();
+        }
+
+        if (ANativeWindow_unlockAndPost(anw) != 0) {
+            return Error() << "Failed to unlock and post window";
+        }
+        return {};
+    }
+
+    const std::string& name() const { return mName; }
+
+private:
+    // Note: crosvm always uses BGRA8888 or BGRX8888. See devices/src/virtio/gpu/mod.rs in
+    // crosvm where the SetScanoutBlob command is handled. We advertise the buffer as RGBA_8888
+    // (not BGRA_8888) so it imports as a regular GL_TEXTURE_2D — a BGRA buffer can be imported as
+    // GL_TEXTURE_EXTERNAL_OES on some GPUs (Adreno) whose Skia RenderEngine then aborts in
+    // makeImage ("Unable to generate SkImage"), crashing surfaceflinger. crosvm's B,G,R,X pixels
+    // are converted to R,G,B,X by swapRedBlueInPlace() before each post. RGBA keeps the alpha
+    // channel (used for cursor blending), matching the old BGRA behavior.
+    static constexpr const int kFormat = HAL_PIXEL_FORMAT_RGBA_8888;
+
+    std::string mName;
+
+    std::mutex mSurfaceMutex;
+    std::unique_ptr<Surface> mNativeSurface;
+    ASurfaceControl* mSurfaceControl = nullptr;
+    std::condition_variable mNativeSurfaceReady;
+    bool mNativeSurfaceNeedsConfiguring = true;
+
+    // Buffer which crosvm uses when in background. This is just to not fail crosvm even when
+    // Android-side Surface doesn't exist. The content drawn here is never displayed on the physical
+    // screen.
+    SinkANativeWindow_Buffer mSinkBuffer;
+
+    // Buffer which is currently allocated for crosvm to draw onto. This holds the last frame. This
+    // is what gets displayed on the physical screen.
+    ANativeWindow_Buffer mLastBuffer;
+
+    // Copy of mLastBuffer made by the call saveFrameForSurface. This holds the last good (i.e.
+    // non-blank) frame before the VM goes background. When the VM is brought up to foreground,
+    // this is drawn to the physical screen until the VM starts to emit actual frames.
+    SinkANativeWindow_Buffer mSavedFrameBuffer;
+
+    struct Rect {
+        uint32_t width = 0;
+        uint32_t height = 0;
+    };
+    std::optional<Rect> mRequestedSurfaceDimensions;
+};
+
+class DisplayService : public BnCrosvmAndroidDisplayService {
+public:
+    DisplayService() = default;
+    virtual ~DisplayService() = default;
+
+    ndk::ScopedAStatus setSurface(Surface* surface, bool forCursor) override {
+        getSurface(forCursor).setNativeSurface(surface);
+        return ::ndk::ScopedAStatus::ok();
+    }
+
+    ndk::ScopedAStatus removeSurface(bool forCursor) override {
+        getSurface(forCursor).removeSurface();
+        return ::ndk::ScopedAStatus::ok();
+    }
+
+    ndk::ScopedFileDescriptor& getCursorStream() { return mCursorStream; }
+    ndk::ScopedAStatus setCursorStream(const ndk::ScopedFileDescriptor& in_stream) {
+        mCursorStream = ndk::ScopedFileDescriptor(dup(in_stream.get()));
+        return ::ndk::ScopedAStatus::ok();
+    }
+
+    ndk::ScopedAStatus saveFrameForSurface(bool forCursor) override {
+        if (auto ret = getSurface(forCursor).saveFrame(); !ret.ok()) {
+            std::string msg = std::format("Failed to save frame: {}", ret.error().message());
+            return ::ndk::ScopedAStatus(
+                    AStatus_fromServiceSpecificErrorWithMessage(-1, msg.c_str()));
+        }
+        return ::ndk::ScopedAStatus::ok();
+    }
+
+    ndk::ScopedAStatus drawSavedFrameForSurface(bool forCursor) override {
+        if (auto ret = getSurface(forCursor).drawSavedFrame(); !ret.ok()) {
+            std::string msg = std::format("Failed to draw saved frame: {}", ret.error().message());
+            return ::ndk::ScopedAStatus(
+                    AStatus_fromServiceSpecificErrorWithMessage(-1, msg.c_str()));
+        }
+        return ::ndk::ScopedAStatus::ok();
+    }
+
+    AndroidDisplaySurface& getSurface(bool forCursor) {
+        if (forCursor) {
+            return mCursor;
+        } else {
+            return mScanout;
+        }
+    }
+
+private:
+    AndroidDisplaySurface mScanout{"scanout"};
+    AndroidDisplaySurface mCursor{"cursor"};
+    ndk::ScopedFileDescriptor mCursorStream;
+};
+
+} // namespace
+
+typedef void (*ErrorCallback)(const char* message);
+
+struct AndroidDisplayContext {
+    std::shared_ptr<DisplayService> disp_service;
+    ErrorCallback error_callback;
+
+    AndroidDisplayContext(const char* service_name, ErrorCallback cb) : error_callback(cb) {
+        auto disp_service = ::ndk::SharedRefBase::make<DisplayService>();
+
+        // Register the DisplayService directly to the service manager under `service_name`
+        // (passed from crosvm's --android-display-service argument). This works because crosvm
+        // here is launched in a privileged (root) context with SELinux permissive, so it is
+        // allowed to register a service. The app side looks the service up by the same name.
+        //
+        // The binder thread pool MUST be started before addService so that incoming calls
+        // (e.g. setSurface) from the app are serviced.
+        ABinderProcess_setThreadPoolMaxThreadCount(4);
+        ABinderProcess_startThreadPool();
+
+        binder_status_t status =
+                AServiceManager_addService(disp_service->asBinder().get(), service_name);
+        if (status != STATUS_OK) {
+            errorf("Failed to register '%s' to service manager: status=%d", service_name, status);
+            return;
+        }
+
+        this->disp_service = disp_service;
+    }
+
+    ~AndroidDisplayContext() = default;
+
+    void errorf(const char* format, ...) {
+        char buffer[1024];
+
+        va_list vararg;
+        va_start(vararg, format);
+        vsnprintf(buffer, sizeof(buffer), format, vararg);
+        va_end(vararg);
+
+        error_callback(buffer);
+    }
+};
+
+extern "C" struct AndroidDisplayContext* create_android_display_context(
+        const char* name, ErrorCallback error_callback) {
+    return new AndroidDisplayContext(name, error_callback);
+}
+
+extern "C" void destroy_android_display_context(struct AndroidDisplayContext* ctx) {
+    delete ctx;
+}
+
+extern "C" AndroidDisplaySurface* create_android_surface(struct AndroidDisplayContext* ctx,
+                                                         uint32_t width, uint32_t height,
+                                                         bool forCursor) {
+    if (ctx->disp_service == nullptr) {
+        ctx->errorf("Display service was not created");
+        return nullptr;
+    }
+
+    AndroidDisplaySurface& surface = ctx->disp_service->getSurface(forCursor);
+    if (auto ret = surface.configure(width, height); !ret.ok()) {
+        ctx->errorf("Failed to configure surface %s: %s", surface.name().c_str(),
+                    ret.error().message().c_str());
+    }
+
+    // TODO(b/332785161): if we know that surface can get destroyed dynamically while VM is running,
+    // consider calling ANativeWindow_acquire here and _release in destroy_android_surface, so that
+    // crosvm doesn't hold a dangling pointer.
+    return &surface;
+}
+
+extern "C" void destroy_android_surface(struct AndroidDisplayContext*, ANativeWindow*) {
+    // NOT IMPLEMENTED
+}
+
+extern "C" bool get_android_surface_buffer(struct AndroidDisplayContext* ctx,
+                                           AndroidDisplaySurface* surface,
+                                           ANativeWindow_Buffer* out_buffer) {
+    if (out_buffer == nullptr) {
+        ctx->errorf("out_buffer is null");
+        return false;
+    }
+
+    if (surface == nullptr) {
+        ctx->errorf("Invalid AndroidDisplaySurface provided");
+        return false;
+    }
+
+    auto ret = surface->lock(out_buffer);
+    if (!ret.ok()) {
+        ctx->errorf("Failed to lock surface %s: %s", surface->name().c_str(),
+                    ret.error().message().c_str());
+        return false;
+    }
+
+    return true;
+}
+
+extern "C" void set_android_surface_position(struct AndroidDisplayContext* ctx, uint32_t x,
+                                             uint32_t y) {
+    if (ctx->disp_service == nullptr) {
+        ctx->errorf("Display service was not created");
+        return;
+    }
+    auto fd = ctx->disp_service->getCursorStream().get();
+    if (fd == -1) {
+        ctx->errorf("Invalid fd");
+        return;
+    }
+    uint32_t pos[] = {x, y};
+    write(fd, pos, sizeof(pos));
+}
+
+extern "C" void post_android_surface_buffer(struct AndroidDisplayContext* ctx,
+                                            AndroidDisplaySurface* surface) {
+    if (surface == nullptr) {
+        ctx->errorf("Invalid AndroidDisplaySurface provided");
+        return;
+    }
+
+    auto ret = surface->unlockAndPost();
+    if (!ret.ok()) {
+        ctx->errorf("Failed to unlock and post for surface %s: %s", surface->name().c_str(),
+                    ret.error().message().c_str());
+    }
+    return;
+}
+
+extern "C" void android_display_flip_to(struct AndroidDisplayContext* ctx,
+                                        AndroidDisplaySurface* surface, int64_t rawHandle) {
+    AHardwareBuffer* ahb = static_cast<AHardwareBuffer*>(reinterpret_cast<void*>(rawHandle));
+    auto ret = surface->setBuffer(ahb);
+    if (!ret.ok()) {
+        ctx->errorf("Failed to set buffer %s: %s", surface->name().c_str(),
+                    ret.error().message().c_str());
+    }
+    return;
+}

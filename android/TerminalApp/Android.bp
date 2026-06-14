@@ -1,0 +1,67 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "VmTerminalApp",
+    srcs: [
+        "java/**/*.java",
+        "java/**/*.kt",
+    ],
+    asset_dirs: ["assets"],
+    resource_dirs: ["res"],
+    static_libs: [
+        // TODO(b/330257000): will be removed when binder RPC is used
+        "android.system.virtualizationservice_internal-java",
+        "androidx-constraintlayout_constraintlayout",
+        "androidx.navigation_navigation-fragment-ktx",
+        "androidx.window_window",
+        "androidx.work_work-runtime",
+        "apache-commons-compress",
+        "avf_aconfig_flags_java",
+        "com.google.android.material_material",
+        "debian-service-grpclib-lite",
+        "gson",
+        // TODO(b/331708504): will be removed when AVF framework handles surface
+        "libcrosvm_android_display_service-java",
+        "VmTerminalApp.aidl-java",
+        "MicrodroidCommonTestLib", // for DeviceProperties class
+    ],
+    jni_libs: [
+        "libforwarder_host_jni",
+    ],
+    libs: [
+        "androidx.annotation_annotation",
+        "framework-virtualization.impl",
+        "framework-annotations-lib",
+    ],
+    use_embedded_native_libs: true,
+    platform_apis: true,
+    privileged: true,
+    optimize: {
+        // TODO(b/404723964): enable bytecode optimization again
+        //optimize: true,
+        proguard_flags_files: ["proguard.flags"],
+        shrink_resources: true,
+        keep_runtime_invisible_annotations: true,
+    },
+    apex_available: [
+        "com.android.virt",
+    ],
+    jarjar_rules: "jarjar-rules.txt",
+}
+
+aidl_interface {
+    name: "VmTerminalApp.aidl",
+    srcs: ["aidl/**/*.aidl"],
+    unstable: true,
+    local_include_dir: "aidl",
+    backend: {
+        java: {
+            enabled: true,
+            apex_available: [
+                "com.android.virt",
+            ],
+        },
+    },
+}

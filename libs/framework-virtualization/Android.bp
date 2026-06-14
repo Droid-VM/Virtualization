@@ -1,0 +1,83 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+java_sdk_library {
+    name: "framework-virtualization",
+
+    defaults: ["framework-non-updatable-unbundled-defaults"],
+
+    jarjar_rules: "jarjar-rules.txt",
+
+    srcs: [
+        "src/**/*.java",
+    ],
+    static_libs: [
+        "android.system.virtualizationservice-java",
+        "avf_aconfig_flags_java",
+        // For android.sysprop.HypervisorProperties
+        "PlatformProperties",
+        "AvfBuildFlags",
+    ],
+
+    apex_available: ["com.android.virt"],
+
+    permitted_packages: [
+        "android.system.virtualmachine",
+        "android.system.virtualizationcommon",
+        "android.system.virtualizationservice",
+        // android.sysprop.*, renamed by jarjar
+        "com.android.system.virtualmachine.sysprop",
+    ],
+    errorprone: {
+        enabled: true,
+        javacflags: [
+            // We use @GuardedBy and we want a test failure if our locking isn't consistent with it.
+            "-Xep:GuardedBy:ERROR",
+        ],
+    },
+
+    impl_library_visibility: [
+        "//packages/modules/Virtualization:__subpackages__",
+    ],
+    lint: {
+        baseline_filename: "lint-baseline.xml",
+        warning_checks: [
+            "FlaggedApi",
+        ],
+    },
+    aconfig_declarations: [
+        "avf_aconfig_flags",
+    ],
+}
+
+gensrcs {
+    name: "avf-build-flags-java-gen",
+    srcs: ["src/**/BuildFlags.java_template"],
+    output_extension: "java",
+    cmd: "cp $(in) $(genDir)/tmp.java && " +
+        select(release_flag("RELEASE_AVF_ENABLE_VENDOR_MODULES"), {
+            true: "sed -ie 's/@vendor_modules_enabled_placeholder/true/g'",
+            default: "sed -ie 's/@vendor_modules_enabled_placeholder/false/g'",
+        }) + " $(genDir)/tmp.java && " +
+        select(release_flag("RELEASE_AVF_SUPPORT_LONG_RUNNING_VMS"), {
+            true: "sed -ie 's/@support_long_running_vms_placeholder/true/g'",
+            default: "sed -ie 's/@support_long_running_vms_placeholder/false/g'",
+        }) + " $(genDir)/tmp.java && " +
+        select(release_flag("RELEASE_AVF_ENABLE_ADVANCE_MULTITENANCY"), {
+            true: "sed -ie 's/@support_advance_multitenancy/true/g'",
+            default: "sed -ie 's/@support_advance_multitenancy/false/g'",
+        }) + " $(genDir)/tmp.java && " +
+        " cp $(genDir)/tmp.java $(out)",
+}
+
+java_library {
+    name: "AvfBuildFlags",
+    srcs: [":avf-build-flags-java-gen"],
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.virt",
+    ],
+}

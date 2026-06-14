@@ -1,0 +1,15 @@
+# build.prop for microdroid
+ro.apex.updatable=true
+ro.adb.secure=0
+service.adb.listen_addrs=vsock:5555
+
+# Payload metadata partition
+apexd.payload_metadata.path=/dev/block/by-name/payload-metadata
+
+# Give 2 seconds to handle sys.powerctl
+ro.build.shutdown_timeout=2
+
+# The traced process in host opens a vsock connection on
+# VMADDR_CID_ANY:2010.
+# Keep in sync with system/core/rootdir/init.rc
+traced_relay.relay_port=vsock://2:2010

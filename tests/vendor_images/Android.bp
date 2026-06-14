@@ -1,0 +1,31 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_filesystem {
+    name: "test_microdroid_vendor_image",
+    partition_name: "microdroid-vendor",
+    type: "ext4",
+    file_contexts: ":microdroid_vendor_file_contexts.gen",
+    use_avb: true,
+    avb_private_key: ":avb_testkey_rsa4096",
+    avb_hash_algorithm: "sha256",
+    rollback_index: 5,
+}
+
+android_filesystem {
+    name: "test_microdroid_vendor_image_no_rollback_index",
+    partition_name: "microdroid-vendor",
+    type: "ext4",
+    file_contexts: ":microdroid_vendor_file_contexts.gen",
+    use_avb: true,
+    avb_hash_algorithm: "sha256",
+    avb_private_key: ":avb_testkey_rsa4096",
+}
+
+android_filesystem {
+    name: "test_microdroid_vendor_image_unsigned",
+    partition_name: "microdroid-vendor",
+    type: "ext4",
+    file_contexts: ":microdroid_vendor_file_contexts.gen",
+}

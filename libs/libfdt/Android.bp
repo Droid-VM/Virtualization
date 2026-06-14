@@ -1,0 +1,161 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_bindgen {
+    name: "liblibfdt_bindgen",
+    defaults: ["liblibfdt_bindgen_defaults"],
+    apex_available: ["com.android.virt"],
+}
+
+rust_bindgen_host {
+    name: "liblibfdt_bindgen_host",
+    defaults: ["liblibfdt_bindgen_defaults"],
+}
+
+rust_defaults {
+    name: "liblibfdt_bindgen_defaults",
+    crate_name: "libfdt_bindgen",
+    defaults: ["avf_build_flags_rust"],
+    wrapper_src: "bindgen/fdt.h",
+    source_stem: "bindings",
+    bindgen_flags: [
+        "--allowlist-type=fdt_.*",
+        "--allowlist-function=fdt_.*",
+        "--allowlist-var=FDT_.*",
+        "--use-core",
+        "--raw-line=#![no_std]",
+        "--ctypes-prefix=core::ffi",
+    ],
+    dylib: {
+        enabled: false,
+    },
+    header_libs: [
+        "libfdt",
+    ],
+}
+
+rust_defaults {
+    name: "liblibfdt_defaults",
+    crate_name: "libfdt",
+    defaults: ["avf_build_flags_rust"],
+    srcs: [
+        "src/lib.rs",
+    ],
+    edition: "2021",
+    rustlibs: [
+        "libstatic_assertions",
+    ],
+    target: {
+        android: {
+            srcs: [
+                ":liblibfdt_bindgen",
+            ],
+            rustlibs: [
+                "liblibfdt_bindgen",
+                "libzerocopy_nostd",
+            ],
+        },
+        host: {
+            srcs: [
+                ":liblibfdt_bindgen_host",
+            ],
+            rustlibs: [
+                "liblibfdt_bindgen_host",
+                "libzerocopy",
+            ],
+        },
+    },
+}
+
+rust_library_rlib {
+    name: "liblibfdt",
+    defaults: ["liblibfdt_defaults"],
+    host_supported: true,
+    whole_static_libs: [
+        "libfdt",
+    ],
+    apex_available: ["com.android.virt"],
+}
+
+rust_library_rlib {
+    name: "liblibfdt_nostd",
+    defaults: ["liblibfdt_defaults"],
+    no_stdlibs: true,
+    prefer_rlib: true,
+    stdlibs: [
+        "libcore.rust_sysroot",
+    ],
+    whole_static_libs: [
+        "libfdt_baremetal",
+    ],
+}
+
+rust_test {
+    name: "liblibfdt.integration_test",
+    crate_name: "libfdt_test",
+    defaults: ["avf_build_flags_rust"],
+    srcs: ["tests/api_test.rs"],
+    test_suites: ["general-tests"],
+    data: [
+        ":fdt_test_tree_one_memory_range_dtb",
+        ":fdt_test_tree_multiple_memory_ranges_dtb",
+        ":fdt_test_tree_empty_memory_range_dtb",
+        ":fdt_test_tree_no_memory_node_dtb",
+        ":fdt_test_tree_phandle_dtb",
+    ],
+    prefer_rlib: true,
+    rustlibs: [
+        "liblibfdt",
+    ],
+}
+
+genrule {
+    name: "fdt_test_tree_one_memory_range_dtb",
+    defaults: ["dts_to_dtb"],
+    srcs: [
+        "tests/data/test_tree_no_memory_node.dts",
+        "tests/data/test_tree_one_memory_range.dts",
+    ],
+    out: ["data/test_tree_one_memory_range.dtb"],
+}
+
+genrule {
+    name: "fdt_test_tree_multiple_memory_ranges_dtb",
+    defaults: ["dts_to_dtb"],
+    srcs: [
+        "tests/data/test_tree_no_memory_node.dts",
+        "tests/data/test_tree_multiple_memory_ranges.dts",
+    ],
+    out: ["data/test_tree_multiple_memory_ranges.dtb"],
+}
+
+genrule {
+    name: "fdt_test_tree_empty_memory_range_dtb",
+    defaults: ["dts_to_dtb"],
+    srcs: [
+        "tests/data/test_tree_no_memory_node.dts",
+        "tests/data/test_tree_empty_memory_range.dts",
+    ],
+    out: ["data/test_tree_empty_memory_range.dtb"],
+}
+
+genrule {
+    name: "fdt_test_tree_no_memory_node_dtb",
+    defaults: ["dts_to_dtb"],
+    srcs: ["tests/data/test_tree_no_memory_node.dts"],
+    out: ["data/test_tree_no_memory_node.dtb"],
+}
+
+genrule {
+    name: "fdt_test_tree_phandle_dtb",
+    defaults: ["dts_to_dtb"],
+    srcs: ["tests/data/test_tree_phandle.dts"],
+    out: ["data/test_tree_phandle.dtb"],
+}
+
+dirgroup {
+    name: "trusty_dirgroup_packages_modules_virtualization_libs_libfdt",
+    visibility: ["//trusty/vendor/google/aosp/scripts"],
+    dirs: ["."],
+}

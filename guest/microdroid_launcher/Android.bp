@@ -1,0 +1,21 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_binary {
+    name: "microdroid_launcher",
+    defaults: ["avf_build_flags_cc"],
+    srcs: ["main.cpp"],
+    shared_libs: [
+        "libbase",
+        "libdl",
+        "libdl_android",
+        "liblog",
+    ],
+    static_libs: [
+        "libapexutil",
+        "libprotobuf-cpp-lite",
+        "lib_apex_manifest_proto_lite",
+    ],
+    header_libs: ["vm_payload_headers"],
+}

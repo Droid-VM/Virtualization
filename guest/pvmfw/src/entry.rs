@@ -1,0 +1,296 @@
+// Copyright 2022, The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//! Low-level entry and exit points of pvmfw.
+
+use crate::arch::payload::jump_to_payload;
+use crate::config;
+use crate::memory::MemorySlices;
+use core::slice;
+use log::error;
+use log::warn;
+use log::LevelFilter;
+use vmbase::{
+    bzimage, configure_heap, console_writeln, limit_stack_size, main,
+    memory::{
+        flush, map_image_footer, unshare_all_memory, unshare_all_mmio_except_uart, unshare_uart,
+        MemoryTrackerError, SIZE_256KB, SIZE_4KB,
+    },
+    power::reboot,
+};
+use zeroize::Zeroize;
+
+#[derive(Debug, Clone)]
+pub enum RebootReason {
+    /// A malformed DICE handover was received.
+    InvalidDiceHandover,
+    /// An invalid configuration was appended to pvmfw.
+    InvalidConfig,
+    /// An unexpected internal error happened.
+    InternalError,
+    /// The provided FDT was invalid.
+    InvalidFdt,
+    /// The provided payload was invalid.
+    InvalidPayload,
+    /// The provided ramdisk was invalid.
+    InvalidRamdisk,
+    /// Failed to verify the payload.
+    PayloadVerificationError,
+    /// DICE layering process failed.
+    SecretDerivationError,
+}
+
+impl RebootReason {
+    pub fn as_avf_reboot_string(&self) -> &'static str {
+        match self {
+            Self::InvalidDiceHandover => "PVM_FIRMWARE_INVALID_DICE_HANDOVER",
+            Self::InvalidConfig => "PVM_FIRMWARE_INVALID_CONFIG_DATA",
+            Self::InternalError => "PVM_FIRMWARE_INTERNAL_ERROR",
+            Self::InvalidFdt => "PVM_FIRMWARE_INVALID_FDT",
+            Self::InvalidPayload => "PVM_FIRMWARE_INVALID_PAYLOAD",
+            Self::InvalidRamdisk => "PVM_FIRMWARE_INVALID_RAMDISK",
+            Self::PayloadVerificationError => "PVM_FIRMWARE_PAYLOAD_VERIFICATION_FAILED",
+            Self::SecretDerivationError => "PVM_FIRMWARE_SECRET_DERIVATION_FAILED",
+        }
+    }
+}
+
+main!(start);
+configure_heap!(SIZE_256KB);
+limit_stack_size!(SIZE_4KB * 12);
+
+#[derive(Debug)]
+enum NextStage {
+    LinuxBoot(usize),
+    LinuxBootWithUart(usize),
+}
+
+/// Pvmfw boot arguments
+///
+/// This structure define all arguments that are passed
+/// from crosvm to pVM at boot on time.
+pub struct BootArgs {
+    /// Address of FDT
+    pub fdt: Option<usize>,
+    /// Address of first byte in payload image
+    pub payload_start: Option<usize>,
+    /// Size of payload in bytes
+    pub payload_size: Option<usize>,
+    /// Address of Linux x86 boot params structure
+    pub boot_params: Option<usize>,
+}
+
+impl BootArgs {
+    /// This function parse arguments prepared by `libvmbase` entry code,
+    /// to create new set of boot arguments specific for particular platform.
+    pub fn from_vmbase_args(argv: &[usize]) -> Self {
+        cfg_if::cfg_if! {
+            if #[cfg(target_arch = "aarch64")] {
+                Self {
+                    fdt: argv.first().copied(),
+                    payload_start: argv.get(1).copied(),
+                    payload_size: argv.get(2).copied(),
+                    boot_params: None,
+                }
+            } else if #[cfg(target_arch = "x86_64")] {
+                Self {
+                    fdt: None,
+                    payload_start: None,
+                    payload_size: None,
+                    boot_params: argv.get(1).copied(),
+                }
+            } else {
+                compile_error!("Boot args not supported on this arch")
+            }
+        }
+    }
+}
+
+/// Entry point for pVM firmware.
+pub fn start(argv: &[usize]) {
+    let reboot_reason = match main_wrapper(argv) {
+        Err(r) => r,
+        Ok((next_stage, slices)) => match next_stage {
+            NextStage::LinuxBootWithUart(ep) => jump_to_payload(ep, &slices),
+            NextStage::LinuxBoot(ep) => {
+                if let Err(e) = unshare_uart() {
+                    error!("Failed to unmap UART: {e}");
+                    RebootReason::InternalError
+                } else {
+                    jump_to_payload(ep, &slices)
+                }
+            }
+        },
+    };
+
+    const REBOOT_REASON_CONSOLE: usize = 1;
+    console_writeln!(REBOOT_REASON_CONSOLE, "{}", reboot_reason.as_avf_reboot_string()).unwrap();
+    reboot()
+
+    // if we reach this point and return, vmbase::entry::rust_entry() will call power::shutdown().
+}
+
+/// Sets up the environment for main() and wraps its result for start().
+///
+/// Provide the abstractions necessary for start() to abort the pVM boot and for main() to run with
+/// the assumption that its environment has been properly configured.
+fn main_wrapper<'a>(argv: &[usize]) -> Result<(NextStage, MemorySlices<'a>), RebootReason> {
+    // Limitations in this function:
+    // - only access MMIO once (and while) it has been mapped and configured
+    // - only perform logging once the logger has been initialized
+    // - only access non-pvmfw memory once (and while) it has been mapped
+
+    log::set_max_level(LevelFilter::Info);
+
+    let boot_args = BootArgs::from_vmbase_args(argv);
+
+    let appended_data = get_appended_data_slice().map_err(|e| {
+        error!("Failed to map the appended data: {e}");
+        RebootReason::InternalError
+    })?;
+
+    let appended = AppendedPayload::new(appended_data).ok_or_else(|| {
+        error!("No valid configuration found");
+        RebootReason::InvalidConfig
+    })?;
+
+    let config_entries = appended.get_entries();
+
+    let mut slices = MemorySlices::new(boot_args)?;
+
+    // This wrapper allows main() to be blissfully ignorant of platform details.
+    let (preserved_memory, debuggable_payload) = crate::main(
+        slices.fdt,
+        slices.kernel,
+        slices.ramdisk,
+        config_entries.dice_handover.as_deref(),
+        config_entries.debug_policy,
+        config_entries.vm_dtbo,
+        config_entries.vm_ref_dt,
+        config_entries.reserved_mem.as_deref(),
+    )?;
+    if !preserved_memory.is_empty() {
+        flush(preserved_memory);
+        slices.add_preserved_memory(preserved_memory);
+
+        if let Some(boot_params) = slices.boot_params.as_mut() {
+            boot_params.push_e820_entry(
+                preserved_memory.as_ptr() as usize as u64,
+                preserved_memory.len() as u64,
+                bzimage::e820_entry::TYPE_RESERVED,
+            );
+        }
+    }
+
+    // Keep UART MMIO_GUARD-ed for debuggable payloads, to enable earlycon.
+    let keep_uart = cfg!(debuggable_vms_improvements) && debuggable_payload;
+
+    // Writable-dirty regions will be flushed when MemoryTracker is dropped.
+    if let Some(r) = config_entries.dice_handover {
+        r.zeroize();
+    }
+    if let Some(r) = config_entries.reserved_mem {
+        r.zeroize();
+    }
+
+    unshare_all_mmio_except_uart().map_err(|e| {
+        error!("Failed to unshare MMIO ranges: {e}");
+        RebootReason::InternalError
+    })?;
+    unshare_all_memory();
+
+    let next_stage = select_next_stage(slices.kernel, keep_uart)?;
+
+    Ok((next_stage, slices))
+}
+
+/// Returns the offset of the entry point from the beginning of the provided kernel.
+fn kernel_entry_point_offset(kernel: &[u8]) -> Result<usize, RebootReason> {
+    let offset = if let Some(hdr) = bzimage::setup_header::get_from_bzimage(kernel) {
+        hdr.entry_point_64_offset()
+    } else {
+        0
+    };
+
+    if offset >= kernel.len() {
+        error!("Kernel entry point offset out of range");
+        return Err(RebootReason::InvalidPayload);
+    }
+
+    Ok(offset)
+}
+
+fn select_next_stage(kernel: &[u8], keep_uart: bool) -> Result<NextStage, RebootReason> {
+    let entry_point = kernel.as_ptr() as usize + kernel_entry_point_offset(kernel)?;
+    if keep_uart {
+        Ok(NextStage::LinuxBootWithUart(entry_point))
+    } else {
+        Ok(NextStage::LinuxBoot(entry_point))
+    }
+}
+
+fn get_appended_data_slice() -> Result<&'static mut [u8], MemoryTrackerError> {
+    let range = map_image_footer()?;
+    // SAFETY: This region was just mapped for the first time (as map_image_footer() didn't fail)
+    // and the linker script prevents it from overlapping with other objects.
+    Ok(unsafe { slice::from_raw_parts_mut(range.start as *mut u8, range.len()) })
+}
+
+enum AppendedPayload<'a> {
+    /// Configuration data.
+    Config(config::Config<'a>),
+    /// Deprecated raw DICE handover, as used in Android T.
+    LegacyDiceHandover(&'a mut [u8]),
+}
+
+impl<'a> AppendedPayload<'a> {
+    fn new(data: &'a mut [u8]) -> Option<Self> {
+        // The borrow checker gets confused about the ownership of data (see inline comments) so we
+        // intentionally obfuscate it using a raw pointer; see a similar issue (still not addressed
+        // in v1.77) in https://users.rust-lang.org/t/78467.
+        let data_ptr = data as *mut [u8];
+
+        // Config::new() borrows data as mutable ...
+        match config::Config::new(data) {
+            // ... so this branch has a mutable reference to data, from the Ok(Config<'a>). But ...
+            Ok(valid) => Some(Self::Config(valid)),
+            // ... if Config::new(data).is_err(), the Err holds no ref to data. However ...
+            Err(config::Error::InvalidMagic) if cfg!(feature = "compat-raw-dice-handover") => {
+                // ... the borrow checker still complains about a second mutable ref without this.
+                // SAFETY: Pointer to a valid mut (not accessed elsewhere), 'a lifetime re-used.
+                let data: &'a mut _ = unsafe { &mut *data_ptr };
+
+                const DICE_CHAIN_SIZE: usize = SIZE_4KB;
+                warn!(
+                    "Assuming the appended data at {:?} to be a raw DICE handover",
+                    data.as_ptr()
+                );
+                Some(Self::LegacyDiceHandover(&mut data[..DICE_CHAIN_SIZE]))
+            }
+            Err(e) => {
+                error!("Invalid configuration data at {data_ptr:?}: {e}");
+                None
+            }
+        }
+    }
+
+    fn get_entries(self) -> config::Entries<'a> {
+        match self {
+            Self::Config(cfg) => cfg.get_entries(),
+            Self::LegacyDiceHandover(d) => {
+                config::Entries { dice_handover: Some(d), ..Default::default() }
+            }
+        }
+    }
+}

@@ -1,0 +1,309 @@
+// Copyright 2023, The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//! This module mirrors the content in open-dice/include/dice/ops.h
+//! It contains the set of functions that implement various operations that the
+//! main DICE functions depend on.
+
+use crate::dice::{
+    context, derive_cdi_private_key_seed, DiceArtifacts, DiceContext, Hash, InputValues,
+    PrivateKey, HASH_SIZE, PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE, VM_KEY_ALGORITHM,
+};
+use crate::error::{check_result, DiceError, Result};
+use alloc::{vec, vec::Vec};
+use open_dice_cbor_bindgen::{
+    DiceCoseSignAndEncodeSign1, DiceGenerateCertificate, DiceHash, DiceKdf, DiceKeypairFromSeed,
+    DicePrincipal, DiceSign, DiceVerify,
+};
+use std::ptr;
+
+/// Hashes the provided input using DICE's hash function `DiceHash`.
+pub fn hash(input: &[u8]) -> Result<Hash> {
+    let mut output: Hash = [0; HASH_SIZE];
+    check_result(
+        // SAFETY: DiceHash takes a sized input buffer and writes to a constant-sized output
+        // buffer. The first argument context is not used in this function.
+        unsafe {
+            DiceHash(
+                ptr::null_mut(), // context
+                input.as_ptr(),
+                input.len(),
+                output.as_mut_ptr(),
+            )
+        },
+        output.len(),
+    )?;
+    Ok(output)
+}
+
+/// An implementation of HKDF-SHA512. Derives a key of `derived_key.len()` bytes from `ikm`, `salt`,
+/// and `info`. The derived key is written to the `derived_key`.
+pub fn kdf(ikm: &[u8], salt: &[u8], info: &[u8], derived_key: &mut [u8]) -> Result<()> {
+    check_result(
+        // SAFETY: The function writes to the `derived_key`, within the given bounds, and only
+        // reads the input values. The first argument context is not used in this function.
+        unsafe {
+            DiceKdf(
+                ptr::null_mut(), // context
+                derived_key.len(),
+                ikm.as_ptr(),
+                ikm.len(),
+                salt.as_ptr(),
+                salt.len(),
+                info.as_ptr(),
+                info.len(),
+                derived_key.as_mut_ptr(),
+            )
+        },
+        derived_key.len(),
+    )
+}
+
+/// Deterministically generates a public and private key pair from `seed`.
+/// Since this is deterministic, `seed` is as sensitive as a private key and can
+/// be used directly as the private key.
+///
+/// The behavior of the `dice_context` parameter depends on the library variant being used:
+/// * **When using the multi-alg variant:** `dice_context` specifies the DICE context used during
+///   the computation. This function only uses the `subject_algorithm` field of the `dice_context`.
+///   If this is set to `None`, the KDF defaults to `Ed25519`.
+/// * **When using the non-multialg variant:** This parameter **must** be `None`. The KDF is
+///   determined by the underlying `open-dice` library in this case.
+pub fn keypair_from_seed(
+    dice_context: Option<DiceContext>,
+    seed: &[u8; PRIVATE_KEY_SEED_SIZE],
+) -> Result<(Vec<u8>, PrivateKey)> {
+    let subject_algorithm = match dice_context {
+        Some(DiceContext { authority_algorithm, subject_algorithm }) => {
+            debug_assert_eq!(authority_algorithm, subject_algorithm);
+            subject_algorithm
+        }
+        None => VM_KEY_ALGORITHM,
+    };
+    let mut public_key = vec![0u8; subject_algorithm.public_key_size()];
+    let mut private_key = PrivateKey::default();
+    // This function is used with an open-dice config that uses the same algorithms for the
+    // subject and authority. Therefore, the principal is irrelevant in this context as this
+    // function only derives the key pair cryptographically without caring about which
+    // principal it is for. Hence, we arbitrarily set it to `DicePrincipal::kDicePrincipalSubject`.
+    let principal = DicePrincipal::kDicePrincipalSubject;
+    context(dice_context, |ctx| {
+        check_result(
+            // SAFETY: The function writes to the `public_key` and `private_key` within the given
+            // bounds, and only reads the `seed`.
+            // The first argument is a pointer to a valid |DiceContext_| object for multi-alg
+            // open-dice and a null pointer otherwise.
+            unsafe {
+                DiceKeypairFromSeed(
+                    ctx,
+                    principal,
+                    seed.as_ptr(),
+                    public_key.as_mut_ptr(),
+                    private_key.as_mut_ptr(),
+                )
+            },
+            public_key.len(),
+        )
+    })?;
+    Ok((public_key, private_key))
+}
+
+/// Derives the CDI_Leaf_Priv from the provided `dice_artifacts`.
+///
+/// The corresponding public key is included in the leaf certificate of the DICE chain
+/// contained in `dice_artifacts`.
+///
+/// The behavior of the `dice_context` parameter depends on the library variant being used:
+/// * **When using the multi-alg variant:** `dice_context` specifies the DICE context used during
+///   the computation. If this is set to `None`, the KDF defaults to `Ed25519`.
+/// * **When using the non-multialg variant:** This parameter **must** be `None`. The KDF is
+///   determined by the underlying `open-dice` library in this case.
+///
+/// Refer to the following documentation for more information about CDI_Leaf_Priv:
+///
+/// security/rkp/aidl/android/hardware/security/keymint/IRemotelyProvisionedComponent.aidl
+pub fn derive_cdi_leaf_priv(
+    dice_context: Option<DiceContext>,
+    dice_artifacts: &dyn DiceArtifacts,
+) -> Result<PrivateKey> {
+    let cdi_priv_key_seed = derive_cdi_private_key_seed(dice_artifacts.cdi_attest())?;
+    let (_, private_key) = keypair_from_seed(dice_context, cdi_priv_key_seed.as_array())?;
+    Ok(private_key)
+}
+
+/// Signs the `message` with the given `private_key` using `DiceSign`.
+pub fn sign(message: &[u8], private_key: &[u8; PRIVATE_KEY_SIZE]) -> Result<Vec<u8>> {
+    let mut signature = vec![0u8; VM_KEY_ALGORITHM.signature_size()];
+    context(None, |ctx| {
+        check_result(
+            // SAFETY: The function writes to the `signature` within the given bounds, and only
+            // reads the message and the private key.
+            // The first argument is a pointer to a valid |DiceContext_| object for multi-alg
+            // open-dice and a null pointer otherwise.
+            unsafe {
+                DiceSign(
+                    ctx,
+                    message.as_ptr(),
+                    message.len(),
+                    private_key.as_ptr(),
+                    signature.as_mut_ptr(),
+                )
+            },
+            signature.len(),
+        )
+    })?;
+    Ok(signature)
+}
+
+/// Signs the `message` with the given `private_key` and places a `CoseSign1` encoded
+/// object in `encoded_signature`. Uses `DiceCoseSignAndEncodeSign1`.
+///
+/// The behavior of the `dice_context` parameter depends on the library variant being used:
+/// * **When using the multi-alg variant:** `dice_context` specifies the DICE context used during
+///   the computation. If this is set to `None`, the KDF defaults to `Ed25519`.
+/// * **When using the non-multialg variant:** This parameter **must** be `None`. The KDF is
+///   determined by the underlying `open-dice` library in this case.
+///
+/// Returns the actual size of encoded_signature on success.
+pub fn sign_cose_sign1(
+    dice_context: Option<DiceContext>,
+    message: &[u8],
+    aad: &[u8],
+    private_key: &[u8; PRIVATE_KEY_SIZE],
+    encoded_signature: &mut [u8],
+) -> Result<usize> {
+    let mut encoded_signature_actual_size = 0;
+
+    context(dice_context, |ctx| {
+        check_result(
+            // SAFETY: The function writes to `encoded_signature` and
+            // `encoded_signature_actual_size` within the given bounds. It only reads
+            // `message`, `aad`, and `private_key` within their given bounds.
+            //
+            // The first argument is a pointer to a valid |DiceContext_| object for multi-alg
+            // open-dice and a null pointer otherwise.
+            unsafe {
+                DiceCoseSignAndEncodeSign1(
+                    ctx,
+                    message.as_ptr(),
+                    message.len(),
+                    aad.as_ptr(),
+                    aad.len(),
+                    private_key.as_ptr(),
+                    encoded_signature.len(),
+                    encoded_signature.as_mut_ptr(),
+                    &mut encoded_signature_actual_size,
+                )
+            },
+            encoded_signature_actual_size,
+        )
+    })?;
+    Ok(encoded_signature_actual_size)
+}
+
+/// Signs the `message` with a private key derived from the given `dice_artifacts`
+/// CDI Attest. On success, places a `CoseSign1` encoded object in `encoded_signature`.
+/// Uses `DiceCoseSignAndEncodeSign1`.
+///
+/// The behavior of the `dice_context` parameter depends on the library variant being used:
+/// * **When using the multi-alg variant:** `dice_context` specifies the DICE context used during
+///   the computation. If this is set to `None`, the KDF defaults to `Ed25519`.
+/// * **When using the non-multialg variant:** This parameter **must** be `None`. The KDF is
+///   determined by the underlying `open-dice` library in this case.
+///
+/// Returns the actual size of encoded_signature on success.
+pub fn sign_cose_sign1_with_cdi_leaf_priv(
+    dice_context: Option<DiceContext>,
+    message: &[u8],
+    aad: &[u8],
+    dice_artifacts: &dyn DiceArtifacts,
+    encoded_signature: &mut [u8],
+) -> Result<usize> {
+    let private_key = derive_cdi_leaf_priv(dice_context, dice_artifacts)?;
+    sign_cose_sign1(dice_context, message, aad, private_key.as_array(), encoded_signature)
+}
+
+/// Verifies the `signature` of the `message` with the given `public_key` using `DiceVerify`.
+///
+/// The behavior of the `dice_context` parameter depends on the library variant being used:
+/// * **When using the multi-alg variant:** `dice_context` specifies the DICE context used during
+///   the computation. If this is set to `None`, the KDF defaults to `Ed25519`.
+/// * **When using the non-multialg variant:** This parameter **must** be `None`. The KDF is
+///   determined by the underlying `open-dice` library in this case.
+pub fn verify(
+    dice_context: Option<DiceContext>,
+    message: &[u8],
+    signature: &[u8],
+    public_key: &[u8],
+) -> Result<()> {
+    let subject_algorithm =
+        dice_context.map(|ctx| ctx.subject_algorithm).unwrap_or(VM_KEY_ALGORITHM);
+    if signature.len() != subject_algorithm.signature_size()
+        || public_key.len() != subject_algorithm.public_key_size()
+    {
+        return Err(DiceError::InvalidInput);
+    }
+    context(dice_context, |ctx| {
+        check_result(
+            // SAFETY: only reads the messages, signature and public key as constant values.
+            // The first argument is a pointer to a valid |DiceContext_| object for multi-alg
+            // open-dice and a null pointer otherwise.
+            unsafe {
+                DiceVerify(
+                    ctx,
+                    message.as_ptr(),
+                    message.len(),
+                    signature.as_ptr(),
+                    public_key.as_ptr(),
+                )
+            },
+            0,
+        )
+    })
+}
+
+/// Generates an X.509 certificate from the given `subject_private_key_seed` and
+/// `input_values`, and signed by `authority_private_key_seed`.
+/// The subject private key seed is supplied here so the implementation can choose
+/// between asymmetric mechanisms, for example ECDSA vs Ed25519.
+/// Returns the actual size of the generated certificate.
+pub fn generate_certificate(
+    subject_private_key_seed: &[u8; PRIVATE_KEY_SEED_SIZE],
+    authority_private_key_seed: &[u8; PRIVATE_KEY_SEED_SIZE],
+    input_values: &InputValues,
+    certificate: &mut [u8],
+) -> Result<usize> {
+    let mut certificate_actual_size = 0;
+    context(None, |ctx| {
+        check_result(
+            // SAFETY: The function writes to the `certificate` within the given bounds, and only
+            // reads the input values and the key seeds.
+            // The first argument is a pointer to a valid |DiceContext_| object for multi-alg
+            // open-dice and a null pointer otherwise.
+            unsafe {
+                DiceGenerateCertificate(
+                    ctx,
+                    subject_private_key_seed.as_ptr(),
+                    authority_private_key_seed.as_ptr(),
+                    input_values.as_ptr(),
+                    certificate.len(),
+                    certificate.as_mut_ptr(),
+                    &mut certificate_actual_size,
+                )
+            },
+            certificate_actual_size,
+        )
+    })?;
+    Ok(certificate_actual_size)
+}

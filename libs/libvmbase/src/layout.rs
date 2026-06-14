@@ -1,0 +1,118 @@
+// Copyright 2022, The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//! Memory layout.
+
+#![allow(unused_unsafe)]
+
+use crate::linker::__stack_chk_guard;
+use crate::memory::{max_stack_size, PAGE_SIZE};
+use core::ops::Range;
+
+#[cfg(target_arch = "aarch64")]
+pub use crate::arch::aarch64::layout as crosvm;
+
+#[cfg(target_arch = "x86_64")]
+pub use crate::arch::x86_64::layout as crosvm;
+
+pub use crosvm::console_uart_page;
+
+/// First address that can't be translated by a level 1 TTBR0_EL1.
+pub const MAX_VIRT_ADDR: usize = crosvm::MAX_VIRT_ADDR;
+
+/// Get an address from a linker-defined symbol.
+#[macro_export]
+macro_rules! linker_addr {
+    ($symbol:ident) => {{
+        (&raw const $crate::linker::$symbol) as usize
+    }};
+}
+
+/// Gets the virtual address range between a pair of linker-defined symbols.
+#[macro_export]
+macro_rules! linker_region {
+    ($begin:ident,$end:ident) => {{
+        let start = linker_addr!($begin);
+        let end = linker_addr!($end);
+        start..end
+    }};
+}
+
+/// Executable code.
+pub fn text_range() -> Range<usize> {
+    linker_region!(text_begin, text_end)
+}
+
+/// Read-only data.
+pub fn rodata_range() -> Range<usize> {
+    linker_region!(rodata_begin, rodata_end)
+}
+
+/// Region which may contain a footer appended to the binary at load time.
+pub fn image_footer_range() -> Range<usize> {
+    linker_region!(image_footer_begin, image_footer_end)
+}
+
+/// Initialised writable data.
+pub fn data_range() -> Range<usize> {
+    linker_region!(data_begin, data_end)
+}
+
+/// Zero-initialized writable data.
+pub fn bss_range() -> Range<usize> {
+    linker_region!(bss_begin, bss_end)
+}
+
+/// Writable data region for .data and .bss.
+pub fn data_bss_range() -> Range<usize> {
+    linker_region!(data_begin, bss_end)
+}
+
+/// Writable data region for the stack.
+pub fn stack_range() -> Range<usize> {
+    let end = linker_addr!(init_stack_pointer);
+    let start = if let Some(stack_size) = max_stack_size() {
+        assert_eq!(stack_size % PAGE_SIZE, 0);
+        let start = end.checked_sub(stack_size).unwrap();
+        assert!(start >= linker_addr!(stack_limit));
+        start
+    } else {
+        linker_addr!(stack_limit)
+    };
+
+    start..end
+}
+
+/// Writable data region for the exception handler stack.
+pub fn eh_stack_range() -> Range<usize> {
+    linker_region!(eh_stack_limit, init_eh_stack_pointer)
+}
+
+/// Read-write data (original).
+pub fn data_load_address() -> usize {
+    linker_addr!(data_lma)
+}
+
+/// End of the binary image.
+pub fn binary_end() -> usize {
+    linker_addr!(bin_end)
+}
+
+/// Value of __stack_chk_guard.
+pub fn stack_chk_guard() -> u64 {
+    // SAFETY: __stack_chk_guard shouldn't have any mutable aliases unless the stack overflows. If
+    // it does, then there could be undefined behaviour all over the program, but we want to at
+    // least have a chance at catching it.
+    unsafe { (&raw const __stack_chk_guard).read_volatile() }
+}

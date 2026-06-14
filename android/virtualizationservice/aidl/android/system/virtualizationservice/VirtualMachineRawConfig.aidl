@@ -1,0 +1,143 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package android.system.virtualizationservice;
+
+import android.system.virtualizationservice.AssignedDevices;
+import android.system.virtualizationservice.AudioConfig;
+import android.system.virtualizationservice.CpuOptions;
+import android.system.virtualizationservice.CustomMemoryBackingFile;
+import android.system.virtualizationservice.DiskImage;
+import android.system.virtualizationservice.DisplayConfig;
+import android.system.virtualizationservice.GpuConfig;
+import android.system.virtualizationservice.InputDevice;
+import android.system.virtualizationservice.SharedPath;
+import android.system.virtualizationservice.UsbConfig;
+
+/** Raw configuration for running a VM. */
+parcelable VirtualMachineRawConfig {
+    /** Name of VM */
+    String name;
+
+    /**
+     * Id of the VM instance
+     *
+     * See AVirtualMachineRawConfig_setInstanceId for details.
+     */
+    byte[64] instanceId;
+
+    /** Name of the OS */
+    String osName;
+
+    /** The kernel image, if any. */
+    @nullable ParcelFileDescriptor kernel;
+
+    /** The initial ramdisk for the kernel, if any. */
+    @nullable ParcelFileDescriptor initrd;
+
+    /**
+     * Parameters to pass to the kernel. As far as the VMM and boot protocol are concerned this is
+     * just a string, but typically it will contain multiple parameters separated by spaces.
+     */
+    @nullable @utf8InCpp String params;
+
+    /**
+     * The bootloader to use. If this is supplied then the kernel and initrd must not be supplied;
+     * the bootloader is instead responsibly for loading the kernel from one of the disks.
+     */
+    @nullable ParcelFileDescriptor bootloader;
+
+    /** Disk images to be made available to the VM. */
+    DiskImage[] disks;
+
+    /** Shared paths between host and guest */
+    SharedPath[] sharedPaths;
+
+    /** Whether the VM should be a protected VM. */
+    boolean protectedVm;
+
+    /** The custom VM firmware, used by protected and non-protected VMs */
+    @nullable ParcelFileDescriptor customPvmfw;
+
+    /** The amount of RAM to give the VM, in MiB. 0 or negative to use the default. */
+    int memoryMib;
+
+    /** The amount of swiotlb to give the VM, in MiB. 0 or negative to use the default. */
+    int swiotlbMib;
+
+    /** The vCPU options that will be generated for the VM. */
+    CpuOptions cpuOptions;
+
+    /**
+     * A version or range of versions of the virtual platform that this config is compatible with.
+     * The format follows SemVer.
+     */
+    @utf8InCpp String platformVersion;
+
+    /**
+     * Port at which crosvm will start a gdb server to debug guest kernel.
+     * If set to zero, then gdb server won't be started.
+     */
+    int gdbPort = 0;
+
+    /**
+     *  Ask the kernel for transparent huge-pages (THP). This is only a hint and
+     *  the kernel will allocate THP-backed memory only if globally enabled by
+     *  the system and if any can be found. See
+     *  https://docs.kernel.org/admin-guide/mm/transhuge.html
+     */
+    boolean hugePages;
+
+    /** Assigned devices */
+    AssignedDevices devices;
+
+    @nullable DisplayConfig displayConfig;
+
+    /** List of input devices to the VM */
+    InputDevice[] inputDevices;
+
+    /** Whether the VM should have network feature. */
+    boolean networkSupported;
+
+    /** The serial device for VM console input. */
+    @nullable @utf8InCpp String consoleInputDevice;
+
+    /** Enable boost UClamp for less variance during testing/benchmarking */
+    boolean boostUclamp;
+
+    @nullable GpuConfig gpuConfig;
+
+    @nullable AudioConfig audioConfig;
+
+    boolean balloon;
+
+    /** Enable or disable USB passthrough support */
+    @nullable UsbConfig usbConfig;
+
+    /** List of tee services this VM wants to access */
+    String[] teeServices;
+
+    /**
+     * Set whether to use an alternate, hypervisor-specific authentication method for protected
+     * VMs.
+     */
+    boolean enableHypervisorSpecificAuthMethod;
+
+    /** Custom memfds for a subset of guest memory */
+    CustomMemoryBackingFile[] customMemoryBackingFiles;
+
+    /** List of host services this VM wants to access */
+    String[] hostServices;
+}

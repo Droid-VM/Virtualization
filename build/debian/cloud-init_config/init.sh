@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -ex
+
+SCRIPT_PATH=$(readlink -f -- "${0}")
+SCRIPT_DIR=$(dirname -- ${SCRIPT_PATH});
+
+LOCALDEBS="${SCRIPT_DIR}/localdebs"
+LOCALFILES="${SCRIPT_DIR}/root_files"
+
+install_localdebs() {
+	dpkg -i "${LOCALDEBS}"/*.deb
+}
+
+_copy_files() {
+	cp -vpR "${LOCALFILES}"/* /
+}
+
+_restart_services() {
+	CONFIG_CHANGED_SERVICES=(
+		avahi_ttyd.service
+		backup_mount.service
+		virtiofs.service
+		virtiofs_internal.service
+		ttyd.service
+	)
+	systemctl enable --now "${CONFIG_CHANGED_SERVICES[@]}"
+}
+
+apply_avf_configs() {
+	_copy_files
+	_restart_services
+}
+
+install_localdebs
+apply_avf_configs

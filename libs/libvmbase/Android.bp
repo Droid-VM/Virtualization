@@ -1,0 +1,174 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+// The hierarchy of Soong modules to produce a vmbase-based binary is
+//
+// 0. rlibs may be used to provide high-level code (see "vmbase_rlib_defaults");
+// 1. rust_ffi_static packages low-level Rust code and any rlib into a static
+//    library (see "vmbase_ffi_defaults") that cc_binary supports;
+// 2. cc_library_static may be used for extra C code (see "vmbase_cc_defaults");
+// 3. cc_binary produces an ELF from the (single) Rust-wrapping static library,
+//    optional extra C libraries, and linker script (see "vmbase_elf_defaults");
+// 4. raw_binary strips the ELF into an image that can be loaded to memory;
+
+// Used by intermediate rust_library_rlib for vmbase-based binaries.
+rust_defaults {
+    name: "vmbase_rlib_defaults",
+    defaults: ["avf_build_flags_rust"],
+    edition: "2021",
+    prefer_rlib: true,
+    host_supported: false,
+    enabled: false,
+    target: {
+        android: {
+            // Some users set host_supported, where libcore isn't available.
+            no_stdlibs: true,
+            stdlibs: [
+                "libcompiler_builtins.rust_sysroot",
+                "libcore.rust_sysroot",
+            ],
+        },
+        android_arm64: {
+            enabled: true,
+        },
+        android_x86_64: {
+            enabled: true,
+        },
+    },
+}
+
+// Used by the "top-level" rust_ffi_static of vmbase-based binaries.
+rust_defaults {
+    name: "vmbase_ffi_defaults",
+    defaults: ["vmbase_rlib_defaults"],
+}
+
+// Used by extra cc_library_static linked into the final ELF.
+cc_defaults {
+    name: "vmbase_cc_defaults",
+    defaults: ["avf_build_flags_cc"],
+    nocrt: true,
+    no_libcrt: true,
+    system_shared_libs: [],
+    stl: "none",
+    installable: false,
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+        android_x86_64: {
+            enabled: true,
+        },
+    },
+    sanitize: {
+        hwaddress: false,
+    },
+    native_coverage: false,
+    // TODO(b/346974429): Workaround pvmfw failure when enabling full LTO
+    lto_O0: true,
+}
+
+// Used by cc_binary when producing the ELF of a vmbase-based binary.
+//  ... with a load address at 0x7fc00000.
+cc_defaults {
+    name: "vmbase_elf_0x7fc00000_defaults",
+    defaults: ["vmbase_elf_defaults"],
+    asflags: ["-DVMBASE_IMAGE_LOAD_ADDR=0x7fc00000"],
+    ldflags: ["-Wl,--defsym,_VMBASE_IMAGE_LOAD_ADDR=0x7fc00000"],
+}
+
+//  ... with a load address at 0x80000000.
+cc_defaults {
+    name: "vmbase_elf_0x80000000_defaults",
+    defaults: ["vmbase_elf_defaults"],
+    asflags: ["-DVMBASE_IMAGE_LOAD_ADDR=0x80000000"],
+    ldflags: ["-Wl,--defsym,_VMBASE_IMAGE_LOAD_ADDR=0x80000000"],
+}
+
+//  ... with a load address at 0x80200000.
+cc_defaults {
+    name: "vmbase_elf_0x80200000_defaults",
+    defaults: ["vmbase_elf_defaults"],
+    asflags: ["-DVMBASE_IMAGE_LOAD_ADDR=0x80200000"],
+    ldflags: ["-Wl,--defsym,_VMBASE_IMAGE_LOAD_ADDR=0x80200000"],
+}
+
+cc_defaults {
+    name: "vmbase_elf_defaults",
+    defaults: ["vmbase_cc_defaults"],
+    static_executable: true,
+    static_libs: [
+        "libvmbase_entry",
+    ],
+    srcs: [":vmbase_idmap_S"],
+    linker_scripts: [":vmbase_sections"],
+    visibility: ["//visibility:private"],
+}
+
+rust_library_rlib {
+    name: "libvmbase",
+    defaults: ["vmbase_rlib_defaults"],
+    crate_name: "vmbase",
+    srcs: ["src/lib.rs"],
+    rustlibs: [
+        "libbuddy_system_allocator",
+        "libcfg_if",
+        "libhypervisor_backends",
+        "liblibfdt_nostd",
+        "liblog_rust_nostd",
+        "libonce_cell_nostd",
+        "libsafe_mmio",
+        "libspin_nostd",
+        "libstatic_assertions",
+        "libthiserror_nostd",
+        "libtinyvec_nostd",
+        "libuuid_nostd",
+        "libvirtio_drivers",
+        "libzerocopy_nostd",
+        "libzeroize_nostd",
+    ],
+    whole_static_libs: [
+        "librust_baremetal",
+    ],
+    target: {
+        android_arm64: {
+            rustlibs: [
+                "libaarch64_paging",
+                "libsmccc",
+            ],
+            // TODO(b/277859415, b/277860860): Drop "compat_android_13".
+            features: [
+                "compat_android_13",
+                "cpu_feat_hafdbs",
+            ],
+        },
+    },
+}
+
+cc_library_static {
+    name: "libvmbase_entry",
+    defaults: ["vmbase_cc_defaults"],
+    srcs: [],
+    target: {
+        android_arm64: {
+            srcs: [
+                "asm/aarch64/entry.S",
+                "asm/aarch64/exceptions.S",
+                "asm/aarch64/exceptions_panic.S",
+            ],
+        },
+        android_x86_64: {
+            srcs: [
+                "asm/x86_64/entry.S",
+                "asm/x86_64/gdt.S",
+            ],
+        },
+    },
+}
+
+filegroup {
+    name: "vmbase_sections",
+    srcs: ["sections.ld"],
+}

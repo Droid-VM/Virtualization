@@ -1,0 +1,67 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_defaults {
+    name: "compsvc_common_defaults",
+    edition: "2021",
+    defaults: ["avf_build_flags_rust"],
+    srcs: ["src/compsvc_main.rs"],
+    rustlibs: [
+        "authfs_aidl_interface-rust",
+        "compos_aidl_interface-rust",
+        "libaconfig_compos_flags_rust",
+        "libandroid_logger",
+        "libanyhow",
+        "libbinder_rs",
+        "libcompos_common",
+        "libhex",
+        "liblibc",
+        "liblog_rust",
+        "libminijail_rust",
+        "libnix",
+        "libodsign_proto_rust",
+        "libprotobuf",
+        "libregex",
+        "librpcbinder_rs",
+        "libscopeguard",
+        "libvm_payload_rs",
+    ],
+}
+
+rust_defaults {
+    name: "compsvc_release_defaults",
+    defaults: ["compsvc_common_defaults"],
+    prefer_rlib: true,
+    rustlibs: ["libcompos_wrappers"],
+    shared_libs: [
+        "libcrypto",
+    ],
+    apex_available: [
+        "com.android.compos",
+    ],
+
+}
+
+rust_binary {
+    name: "compsvc",
+    defaults: ["compsvc_release_defaults"],
+}
+
+rust_binary {
+    name: "dex2oatsvc",
+    cfgs: ["compos_verified_dex2oat"],
+    defaults: ["compsvc_release_defaults"],
+}
+
+rust_test {
+    name: "compsvc_test",
+    defaults: ["compsvc_common_defaults"],
+    test_suites: ["general-tests"],
+    auto_gen_config: true,
+    rustlibs: [
+        "libcompos_wrappers_with_mocks",
+        "libmockall",
+        "libtempfile",
+    ],
+}

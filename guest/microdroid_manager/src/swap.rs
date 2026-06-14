@@ -1,0 +1,140 @@
+// Copyright 2022, The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//! Logic for configuring and enabling a ZRAM-backed swap device.
+
+use anyhow::{anyhow, Context, Result};
+use log::warn;
+use std::fs::{read_to_string, OpenOptions};
+use std::io::{Error, Read, Seek, SeekFrom, Write};
+use uuid::Uuid;
+
+const SWAP_DEV: &str = "block/zram0";
+const COMPRESSION_ALGORITHM: &str = "lz4";
+
+/// Parse "MemTotal: N kB" from /proc/meminfo
+fn get_total_memory_kb() -> Result<u32> {
+    let s = read_to_string("/proc/meminfo")?;
+    let mut iter = s.split_whitespace();
+    while let Some(x) = iter.next() {
+        if x.starts_with("MemTotal:") {
+            let n = iter.next().context("No text after MemTotal")?;
+            return n.parse::<u32>().context("No u32 after MemTotal");
+        }
+    }
+    Err(anyhow!("MemTotal not found in /proc/meminfo"))
+}
+
+/// Simple "mkswap": Writes swap-device header into specified device.
+/// The header has no formal public definition, but it can be found in the
+/// Linux source tree at include/linux/swap.h (union swap_header).
+/// This implementation is inspired by the one in Toybox.
+fn mkswap(dev: &str) -> Result<()> {
+    // Size of device, in bytes.
+    let sysfs_size = format!("/sys/{dev}/size");
+    let len = read_to_string(&sysfs_size)?
+        .trim()
+        .parse::<u64>()
+        .context(format!("No u64 in {}", &sysfs_size))?
+        .checked_mul(512)
+        .ok_or_else(|| anyhow!("sysfs_size too large"))?;
+
+    // SAFETY: We give a constant and known-valid sysconf parameter.
+    let pagesize = unsafe { libc::sysconf(libc::_SC_PAGE_SIZE) as u64 };
+
+    let mut f = OpenOptions::new().read(false).write(true).open(format!("/dev/{dev}"))?;
+
+    let last_page = len / pagesize - 1;
+
+    // Write the info fields: [ version, last_page ]
+    let info: [u32; 2] = [1, last_page.try_into().context("Number of pages out of range")?];
+
+    f.seek(SeekFrom::Start(1024))?;
+    f.write_all(&info.iter().flat_map(|v| v.to_ne_bytes()).collect::<Vec<u8>>())?;
+
+    // Write a random version 4 UUID
+    f.seek(SeekFrom::Start(1024 + 12))?;
+    f.write_all(Uuid::new_v4().as_bytes())?;
+
+    // Write the magic signature string.
+    f.seek(SeekFrom::Start(pagesize - 10))?;
+    f.write_all("SWAPSPACE2".as_bytes())?;
+
+    Ok(())
+}
+
+/// Simple "swapon", using libc:: wrapper.
+fn swapon(dev: &str) -> Result<()> {
+    let swapon_arg = std::ffi::CString::new(format!("/dev/{dev}"))?;
+    // SAFETY: We give a nul-terminated string and check the result.
+    let res = unsafe { libc::swapon(swapon_arg.as_ptr(), 0) };
+    if res != 0 {
+        return Err(anyhow!("Failed to swapon: {}", Error::last_os_error()));
+    }
+    Ok(())
+}
+
+/// Selects a compression algorithm for ZRAM. Logs an error if the desired compression algorithm is
+/// not supported by the kernel, which can be checked by reading /sys/$dev/comp_algorithm.
+fn select_compression_algorithm(dev: &str) -> Result<()> {
+    let path = format!("/sys/{dev}/comp_algorithm");
+    let mut f = OpenOptions::new().read(true).write(true).open(path)?;
+
+    // Read the list of available algorithms first.
+    let mut algorithms = String::new();
+    f.read_to_string(&mut algorithms)?;
+
+    // The format of the output of /sys/$dev/comp_algorithm is:
+    // algo_0 algo_1 [algo_2] ... algo_N-1
+    // where the algorithm enclosed by square brackets is the current algorithm.
+    let mut iter = algorithms.split_whitespace();
+    let brackets: &[_] = &['[', ']'];
+
+    for x in &mut iter {
+        let algorithm = x.trim_matches(brackets);
+        if algorithm == COMPRESSION_ALGORITHM {
+            // Only write to the file if the algorithm we want isn't the current algorithm.
+            if !x.starts_with('[') {
+                f.write_all(COMPRESSION_ALGORITHM.as_bytes())?;
+            }
+            return Ok(());
+        }
+    }
+
+    // If we make it to here, then the algorithm we wanted is not available, so log an error, and
+    // move on, since this is a non-fatal condition.
+    warn!("Requested compression algorithm not available; saw: {algorithms}");
+    Ok(())
+}
+
+/// Turn on ZRAM-backed swap
+pub fn init_swap() -> Result<()> {
+    let dev = SWAP_DEV;
+
+    select_compression_algorithm(dev)?;
+
+    // Create a ZRAM block device the same size as total VM memory.
+    let mem_kb = get_total_memory_kb()?;
+    OpenOptions::new()
+        .read(false)
+        .write(true)
+        .open(format!("/sys/{dev}/disksize"))?
+        .write_all(format!("{mem_kb}K").as_bytes())?;
+
+    mkswap(dev)?;
+
+    swapon(dev)?;
+
+    Ok(())
+}

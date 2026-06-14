@@ -1,0 +1,157 @@
+// Copyright 2022, The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//! Android Virtualization Manager
+
+mod aidl;
+mod atom;
+mod composite;
+mod crosvm;
+mod debug_config;
+mod dt_overlay;
+mod host_services;
+mod payload;
+mod secretkeeper;
+mod selinux;
+mod virtualmachine;
+
+use crate::virtualmachine::VirtualizationService;
+use anyhow::{bail, Result};
+use binder::{BinderFeatures, ProcessState};
+use clap::Parser;
+use log::{error, info, LevelFilter};
+use nix::unistd::{setpgid, write, Pid, Uid};
+use rpcbinder::{FileDescriptorTransportMode, RpcServer};
+use rustutils::inherited_fd::take_fd_ownership;
+use std::os::unix::io::{AsFd, RawFd};
+use std::os::unix::raw::{pid_t, uid_t};
+use std::sync::LazyLock;
+
+#[cfg(early)]
+const LOG_TAG: &str = "early_virtmgr";
+#[cfg(not(early))]
+const LOG_TAG: &str = "virtmgr";
+
+static PID_PARENT: LazyLock<Pid> = LazyLock::new(Pid::parent);
+static UID_CURRENT: LazyLock<Uid> = LazyLock::new(Uid::current);
+
+fn get_calling_pid() -> pid_t {
+    // The caller is the parent of this process.
+    PID_PARENT.as_raw()
+}
+
+fn get_calling_uid() -> uid_t {
+    // The caller and this process share the same UID.
+    UID_CURRENT.as_raw()
+}
+
+#[derive(Parser)]
+struct Args {
+    /// File descriptor inherited from the caller to run RpcBinder server on.
+    /// This should be one end of a socketpair() compatible with RpcBinder's
+    /// UDS bootstrap transport.
+    #[clap(long)]
+    rpc_server_fd: RawFd,
+    /// File descriptor inherited from the caller to signal RpcBinder server
+    /// readiness. This should be one end of pipe() and the caller should be
+    /// waiting for HUP on the other end.
+    #[clap(long)]
+    ready_fd: RawFd,
+}
+
+fn check_vm_support() -> Result<()> {
+    if hypervisor_props::is_any_vm_supported()? {
+        Ok(())
+    } else {
+        // This should never happen, it indicates a misconfigured device where the virt APEX
+        // is present but VMs are not supported. If it does happen, fail fast to avoid wasting
+        // resources trying.
+        bail!("Device doesn't support protected or non-protected VMs")
+    }
+}
+
+fn main() {
+    // SAFETY: This is very early in the process. Nobody has taken ownership of the inherited FDs
+    // yet.
+    unsafe { rustutils::inherited_fd::init_once() }
+        .expect("Failed to take ownership of inherited FDs");
+
+    android_logger::init_once(
+        android_logger::Config::default()
+            .with_tag(LOG_TAG)
+            .with_max_level(LevelFilter::Info)
+            .with_log_buffer(android_logger::LogId::System),
+    );
+
+    let pid_zero = Pid::from_raw(0);
+    setpgid(pid_zero, pid_zero).expect("Failed to become a process group leader");
+
+    check_vm_support().unwrap();
+
+    let args = Args::parse();
+
+    let rpc_server_fd =
+        take_fd_ownership(args.rpc_server_fd).expect("Failed to take ownership of rpc_server_fd");
+    let ready_fd = take_fd_ownership(args.ready_fd).expect("Failed to take ownership of ready_fd");
+
+    // Start thread pool for kernel Binder connection to VirtualizationServiceInternal.
+    ProcessState::start_thread_pool();
+
+    if cfg!(early) {
+        // we can't access VirtualizationServiceInternal, so directly call rlimit
+        let pid = std::process::id() as i32;
+        let lim = libc::rlimit { rlim_cur: libc::RLIM_INFINITY, rlim_max: libc::RLIM_INFINITY };
+
+        // SAFETY: borrowing the new limit struct only. prlimit doesn't use lim outside its lifetime
+        let ret = unsafe { libc::prlimit(pid, libc::RLIMIT_MEMLOCK, &lim, std::ptr::null_mut()) };
+        if ret == -1 {
+            panic!("rlimit error: {}", std::io::Error::last_os_error());
+        } else if ret != 0 {
+            panic!("Unexpected return value from prlimit(): {ret}");
+        }
+    } else {
+        virtualmachine::global_service()
+            .unwrap()
+            .removeMemlockRlimit()
+            .expect("Failed to remove memlock rlimit");
+    }
+
+    let service = VirtualizationService::init();
+    let service = aidl::BnVirtualizationService::new_binder(service, BinderFeatures::default());
+    let server = RpcServer::new_unix_domain_bootstrap(service.as_binder(), rpc_server_fd)
+        .expect("Failed to start RpcServer");
+    server.set_supported_file_descriptor_transport_modes(&[FileDescriptorTransportMode::Unix]);
+
+    info!("Started VirtualizationService RpcServer. Ready to accept connections");
+
+    // Signal readiness to the caller by closing our end of the pipe.
+    write(ready_fd.as_fd(), "o".as_bytes())
+        .expect("Failed to write a single character through ready_fd");
+    drop(ready_fd);
+
+    server.join();
+    info!("Shutting down VirtualizationService RpcServer");
+
+    // Do all the standard cleanup we can, mainly to make sure we join logging threads.
+    use binder::binder_impl::Binder;
+    let binder: Binder<aidl::BnVirtualizationService> = service.as_binder().try_into().unwrap();
+    let service: &VirtualizationService = binder.downcast_binder().unwrap();
+    service.get_vms().iter().for_each(|vm| {
+        if let Err(e) = vm.kill() {
+            error!("VM (cid: {}) did not die when I tried to kill it: {:#}", vm.cid, e);
+        }
+    });
+
+    info!("All VMs halted.");
+}

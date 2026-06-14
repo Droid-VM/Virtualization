@@ -1,0 +1,25 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+aidl_interface {
+    name: "android.system.composd",
+    srcs: ["android/system/composd/*.aidl"],
+    // TODO: Make this stable when the APEX becomes updatable.
+    unstable: true,
+    backend: {
+        java: {
+            apex_available: ["com.android.compos"],
+        },
+        rust: {
+            enabled: true,
+            gen_mockall: true,
+            additional_rustlibs: [
+                "libmockall",
+            ],
+            apex_available: [
+                "com.android.compos",
+            ],
+        },
+    },
+}

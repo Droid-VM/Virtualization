@@ -1,0 +1,180 @@
+// When adding or removing tests here, don't forget to amend _all_modules list in
+// wireless/android/busytown/ath_config/configs/prod/avf/tests.gcl
+{
+  // Tests would be run by treehugger to validate pending CLs on AVF repo. These
+  // would run on limited target on git_main, and possibly with filtering.
+  // This MUST be finished within 30min, so keep this as simple as possible.
+  // Do not extend this test group outside of the Virtualization repo. It may
+  // introduce unexpected test growth, so tests maybe demoted to postsubmit.
+  "avf-presubmit": [
+    {
+      "name": "MicrodroidHostTestCases"
+    },
+    {
+      "name": "ComposHostTestCases"
+    },
+    {
+      "name": "MicrodroidTestApp"
+    },
+    {
+      "name": "avf_backcompat_tests"
+    },
+    {
+      "name": "composd_test"
+    }
+  ],
+  // Tests runs after CLs are submitted. All AVF tests and benchmarks are here.
+  // Failure wouldn't be droidmonitored nor block build promotion.
+  // (i.e. FVT + postsubmit.failure_status = INFO).
+  // This would run on wider range of branch/targets than avf-postsubmit.
+  "avf-postsubmit": [
+    {
+      "name": "MicrodroidHostTestCases"
+    },
+    {
+      "name": "ComposHostTestCases"
+    },
+    {
+      "name": "MicrodroidTestApp"
+    },
+    {
+      "name": "AvfRkpdAppIntegrationTests"
+    },
+    {
+      "name": "AvfRkpdVmAttestationTestApp"
+    },
+    {
+      "name": "MicrodroidTestAppNoPerm"
+    },
+    {
+      "name": "VmAttestationTestApp"
+    },
+    {
+      "name": "art_standalone_dexpreopt_tests"
+    },
+    {
+      "name": "composd_cmd.test"
+    },
+    {
+      "name": "compos_key_tests"
+    },
+    {
+      "name": "compos_verify.test"
+    },
+    {
+      "name": "initrd_bootconfig.test"
+    },
+    {
+      "name": "libapkzip.test"
+    },
+    {
+      "name": "libdice_driver_test"
+    },
+    {
+      "name": "old_images_avf_test"
+    },
+    {
+      "name": "odsign_e2e_tests_full"
+    },
+    {
+      "name": "AVFHostTestCases"
+    },
+    {
+      "name": "CustomPvmfwHostTestCases"
+    },
+    {
+      "name": "AvfRkpdAppGoogleIntegrationTests",
+      "keywords": ["internal"]
+    },
+    {
+      "name": "TerminalAppTests"
+    },
+    {
+      "name": "vm_accessor_test"
+    },
+    {
+      "name": "avf_early_vm_test"
+    },
+    {
+      "name": "MicrodroidBenchmarkApp"
+    },
+    {
+      "name": "ComposBenchmarkApp"
+    }
+  ],
+  "postsubmit": [
+    {
+      "name": "CtsMicrodroidDisabledTestCases"
+    }
+  ],
+  "imports": [
+    {
+      "path": "packages/modules/Virtualization/guest/apkdmverity"
+    },
+    {
+      "path": "packages/modules/Virtualization/guest/encryptedstore"
+    },
+    {
+      "path": "packages/modules/Virtualization/android/virtmgr"
+    },
+    {
+      "path": "packages/modules/Virtualization/libs/apexutil"
+    },
+    {
+      "path": "packages/modules/Virtualization/libs/apkverify"
+    },
+    {
+      "path": "packages/modules/Virtualization/libs/bssl"
+    },
+    {
+      "path": "packages/modules/Virtualization/libs/capabilities"
+    },
+    {
+      "path": "packages/modules/Virtualization/libs/devicemapper"
+    },
+    {
+      "path": "packages/modules/Virtualization/libs/dice"
+    },
+    {
+      "path": "packages/modules/Virtualization/libs/libfdt"
+    },
+    {
+      "path": "packages/modules/Virtualization/libs/vbmeta"
+    },
+    {
+      "path": "packages/modules/Virtualization/tests/authfs"
+    },
+    {
+      "path": "packages/modules/Virtualization/guest/microdroid_manager"
+    },
+    {
+      "path": "packages/modules/Virtualization/guest/pvmfw"
+    },
+    {
+      "path": "packages/modules/Virtualization/guest/service_vm"
+    },
+        {
+      "path": "packages/modules/Virtualization/guest/service_vm/requests"
+    },
+    {
+      "path": "packages/modules/Virtualization/libs/libclient_vm_csr"
+    },
+    {
+      "path": "packages/modules/Virtualization/libs/libservice_vm_comm"
+    },
+    {
+      "path": "packages/modules/Virtualization/android/virtualizationservice"
+    },
+    {
+      "path": "packages/modules/Virtualization/android/vm"
+    },
+    {
+      "path": "packages/modules/Virtualization/tests/vmbase_example"
+    },
+    {
+      "path": "packages/modules/Virtualization/guest/zipfuse"
+    }
+  ]
+}
+// When adding or removing tests here, don't forget to amend _all_modules list in
+// wireless/android/busytown/ath_config/configs/prod/avf/tests.gcl

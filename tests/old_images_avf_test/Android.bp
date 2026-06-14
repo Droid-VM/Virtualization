@@ -1,0 +1,57 @@
+prebuilt_etc {
+    name: "backcompat_service_vm",
+    filename: "service_vm.bin",
+    src: ":empty_file",
+    target: {
+        android_arm64: {
+            src: ":service_vm_signed",
+        },
+    },
+    installable: false,
+    visibility: ["//visibility:private"],
+}
+
+prebuilt_etc {
+    name: "android16_service_vm",
+    filename: "android16_service_vm.bin",
+    src: ":empty_file",
+    target: {
+        android_arm64: {
+            src: "images/android16_service_vm.bin",
+        },
+    },
+    installable: false,
+    visibility: ["//visibility:private"],
+}
+
+rust_test {
+    name: "old_images_avf_test",
+    crate_name: "old_images_avf_test",
+    srcs: ["src/main.rs"],
+    rustlibs: [
+        "libanyhow",
+        "libavf_bindgen",
+        "libciborium",
+        "liblog_rust",
+        "libhypervisor_props",
+        "libscopeguard",
+        "libservice_vm_comm",
+        "libvsock",
+    ],
+    shared_libs: ["libavf"],
+    test_suites: [
+        "general-tests",
+    ],
+    data: [
+        ":android16_service_vm",
+        ":backcompat_service_vm",
+    ],
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+    test_config: "AndroidTest.xml",
+    compile_multilib: "first",
+}

@@ -1,0 +1,22 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_test {
+    name: "CtsMicrodroidDisabledTestCases",
+    test_suites: [
+        "cts",
+        "general-tests",
+    ],
+    srcs: ["src/**/*.java"],
+    static_libs: [
+        "androidx.test.runner",
+        "androidx.test.ext.junit",
+        "compatibility-common-util-devicesidelib",
+        "truth",
+    ],
+    sdk_version: "test_current",
+    target_sdk_version: "36",
+    compile_multilib: "both",
+    min_sdk_version: "34",
+}

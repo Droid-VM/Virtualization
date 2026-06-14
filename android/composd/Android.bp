@@ -1,0 +1,61 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_defaults {
+    name: "composd_defaults",
+    edition: "2021",
+    defaults: ["avf_build_flags_rust"],
+    srcs: ["src/composd_main.rs"],
+    rustlibs: [
+        "android.system.composd-rust",
+        "android.system.virtualizationservice-rust",
+        "compos_aidl_interface-rust",
+        "libaconfig_compos_flags_rust",
+        "libandroid_logger",
+        "libanyhow",
+        "libbinder_rs",
+        "libcomposd_native_rust",
+        "libminijail_rust",
+        "libnix",
+        "liblibc",
+        "liblog_rust",
+        "libodsign_proto_rust",
+        "libprotobuf",
+        "librustutils",
+        "libshared_child",
+        "libvmclient",
+    ],
+}
+
+rust_binary {
+    name: "composd",
+    defaults: ["composd_defaults"],
+    prefer_rlib: true,
+    apex_available: [
+        "com.android.compos",
+    ],
+    rustlibs: [
+        "libcompos_wrappers",
+        "libcompos_common",
+    ],
+}
+
+rust_test {
+    name: "composd_test",
+    defaults: ["composd_defaults"],
+    test_suites: ["general-tests"],
+    auto_gen_config: true,
+    test_options: {
+        unit_test: true,
+    },
+    rustlibs: [
+        "libnix",
+        "libonce_cell",
+        "libmockall",
+        "libtempfile",
+        "libcompos_wrappers_with_mocks",
+        "libcompos_common_with_mocks",
+    ],
+    flags: ["-A dead_code"],
+}
