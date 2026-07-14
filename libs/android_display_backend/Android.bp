@@ -1,6 +1,7 @@
 aidl_interface {
     name: "libcrosvm_android_display_service",
     srcs: [
+        "aidl/android/crosvm/DisplayConfig.aidl",
         "aidl/android/crosvm/ICrosvmAndroidDisplayService.aidl",
     ],
     include_dirs: [
