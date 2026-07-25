@@ -18,6 +18,7 @@
 #include <aidl/android/crosvm/DisplayConfig.h>
 #include <android-base/logging.h>
 #include <android-base/result.h>
+#include <android-base/scopeguard.h>
 #include <android/binder_manager.h>
 #include <android/binder_process.h>
 #include <android/hardware_buffer.h>
@@ -34,6 +35,8 @@
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_android.h>
 
+#include <algorithm>
+#include <atomic>
 #include <cerrno>
 #include <condition_variable>
 #include <cstdlib>
@@ -83,6 +86,56 @@ bool envFlagEnabled(const char* name, bool defaultValue) {
     return defaultValue;
 }
 
+enum class RuntimeFlipFailureStage {
+    kNone,
+    kDequeue,
+    kTargetImport,
+    kSubmit,
+    kQueue,
+};
+
+RuntimeFlipFailureStage configuredRuntimeFlipFailureStage() {
+    static const RuntimeFlipFailureStage stage = [] {
+        const char* value = std::getenv("CROSVM_ANDROID_DISPLAY_FAIL_STAGE");
+        if (value == nullptr || *value == '\0') return RuntimeFlipFailureStage::kNone;
+        if (std::strcmp(value, "dequeue") == 0) return RuntimeFlipFailureStage::kDequeue;
+        if (std::strcmp(value, "target_import") == 0) {
+            return RuntimeFlipFailureStage::kTargetImport;
+        }
+        if (std::strcmp(value, "submit") == 0) return RuntimeFlipFailureStage::kSubmit;
+        if (std::strcmp(value, "queue") == 0) return RuntimeFlipFailureStage::kQueue;
+        LOG(WARNING) << "Ignoring invalid CROSVM_ANDROID_DISPLAY_FAIL_STAGE value '" << value
+                     << "'";
+        return RuntimeFlipFailureStage::kNone;
+    }();
+    return stage;
+}
+
+const char* runtimeFlipFailureStageName(RuntimeFlipFailureStage stage) {
+    switch (stage) {
+        case RuntimeFlipFailureStage::kDequeue:
+            return "dequeue";
+        case RuntimeFlipFailureStage::kTargetImport:
+            return "target_import";
+        case RuntimeFlipFailureStage::kSubmit:
+            return "submit";
+        case RuntimeFlipFailureStage::kQueue:
+            return "queue";
+        case RuntimeFlipFailureStage::kNone:
+            return "none";
+    }
+    return "unknown";
+}
+
+bool injectRuntimeFlipFailure(RuntimeFlipFailureStage stage) {
+    if (configuredRuntimeFlipFailureStage() != stage) return false;
+    static std::atomic<bool> injected = false;
+    if (injected.exchange(true, std::memory_order_relaxed)) return false;
+    LOG(WARNING) << "Injecting one-shot Android display runtime flip failure at stage="
+                 << runtimeFlipFailureStageName(stage);
+    return true;
+}
+
 struct HwModuleMethods {
     int (*open)(const void* module, const char* id, void** device);
 };
@@ -124,10 +177,23 @@ struct HwvulkanDevice {
 
 class VulkanDisplayBridge {
 public:
-    VulkanDisplayBridge() { mReady = initialize(); }
+    VulkanDisplayBridge()
+          : mAsyncBlitEnabled(envFlagEnabled("CROSVM_ANDROID_DISPLAY_ASYNC_BLIT", true)) {
+        mReady = initialize();
+    }
 
     ~VulkanDisplayBridge() {
         if (mDevice && mDeviceWaitIdle) mDeviceWaitIdle(mDevice);
+        for (auto& slot : mInFlightSlots) {
+            if (slot.completionSemaphore && mDestroySemaphore) {
+                mDestroySemaphore(mDevice, slot.completionSemaphore, nullptr);
+            }
+            if (slot.acquireSemaphore && mDestroySemaphore) {
+                mDestroySemaphore(mDevice, slot.acquireSemaphore, nullptr);
+            }
+            if (slot.fence && mDestroyFence) mDestroyFence(mDevice, slot.fence, nullptr);
+        }
+        clearTargetCache();
         for (auto& [_, imported] : mImports) destroyImport(imported);
         mImports.clear();
         if (mDevice && mTimestampQueryPool && mDestroyQueryPool) {
@@ -184,42 +250,78 @@ public:
         auto it = mImports.find(importId);
         if (it == mImports.end()) return;
         if (mDeviceWaitIdle) mDeviceWaitIdle(mDevice);
+        for (auto& slot : mInFlightSlots) reclaimSlotAfterDeviceIdle(slot);
         destroyImport(it->second);
         mImports.erase(it);
     }
 
-    bool blit(int64_t importId, AHardwareBuffer* targetAhb) {
+    // Set when the async path can import an acquire fence as a GPU wait semaphore, letting the
+    // caller skip the CPU poll on the dequeued release fence.
+    bool canImportAcquireFence() const { return mAsyncBlitEnabled && mAsyncAcquireImportSupported; }
+
+    // acquireFenceFd is the release fence returned by ANativeWindow_dequeueBuffer. When
+    // canImportAcquireFence() is true the caller passes it here for GPU-side waiting and blit()
+    // takes ownership of it; otherwise the caller must already have waited and pass -1.
+    Result<int> blit(int64_t importId, AHardwareBuffer* targetAhb, int acquireFenceFd = -1,
+                     bool allowFaultInjection = false) {
         ScopedTrace trace("crosvm_display.blit");
         ATRACE_INT64("crosvm_display.frame_id", static_cast<int64_t>(++mFrameSequence));
-        const bool recordGpuTimestamps = mTimestampQueryPool && ATRACE_ENABLED();
-        auto it = mImports.find(importId);
-        if (it == mImports.end()) return false;
-        ImportedImage& image = it->second;
-        TargetImage target{};
-        {
-            ScopedTrace targetTrace("crosvm_display.target_import");
-            if (!createTargetImage(targetAhb, image.width, image.height, target)) {
-                destroyTarget(target);
-                return false;
+        // An early error must preserve the dequeued buffer's release dependency before flip()
+        // cancels it with fence -1. Normal submission disables this guard after Vulkan consumes
+        // the fd.
+        auto acquireFenceGuard = android::base::make_scope_guard([&acquireFenceFd] {
+            if (acquireFenceFd < 0) return;
+            if (auto ret = pollFence(acquireFenceFd); !ret.ok()) {
+                LOG(WARNING) << "Failed to drain display acquire fence on blit error: "
+                             << ret.error();
             }
+            acquireFenceFd = -1;
+        });
+        auto it = mImports.find(importId);
+        if (it == mImports.end()) return Error() << "Unknown display import " << importId;
+        ImportedImage& image = it->second;
+        if (mInFlightSlots.empty()) return Error() << "No Vulkan display in-flight slots";
+
+        if (allowFaultInjection &&
+            injectRuntimeFlipFailure(RuntimeFlipFailureStage::kTargetImport)) {
+            return Error() << "Injected display target import failure";
+        }
+        auto targetResult = acquireTargetImage(targetAhb, image.width, image.height);
+        if (!targetResult.ok()) return targetResult.error();
+        TargetImage& target = *targetResult.value();
+
+        const size_t slotIndex = mNextInFlightSlot++ % mInFlightSlots.size();
+        InFlightSlot& slot = mInFlightSlots[slotIndex];
+        if (auto ret = reclaimSlot(slot); !ret.ok()) return ret.error();
+
+        const bool injectSubmitFailure =
+                allowFaultInjection && injectRuntimeFlipFailure(RuntimeFlipFailureStage::kSubmit);
+        if (injectSubmitFailure && acquireFenceFd >= 0) {
+            acquireFenceGuard.Disable();
+            auto waitResult = pollFence(acquireFenceFd);
+            acquireFenceFd = -1;
+            if (!waitResult.ok()) return waitResult.error();
         }
 
+        const bool recordGpuTimestamps = mTimestampQueryPool && ATRACE_ENABLED();
+        const uint32_t timestampQueryBase = static_cast<uint32_t>(slotIndex * 2);
+        VkCommandBuffer commandBuffer = slot.commandBuffer;
         {
             ScopedTrace recordTrace("crosvm_display.command_record");
-            if (mResetCommandBuffer(mCommandBuffer, 0) != VK_SUCCESS) {
-                destroyTarget(target);
-                return false;
+            if (mResetCommandBuffer(commandBuffer, 0) != VK_SUCCESS) {
+                evictTarget(target);
+                return Error() << "Failed to reset display command buffer";
             }
             VkCommandBufferBeginInfo beginInfo = {
                     .sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
                     .flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
             };
-            if (mBeginCommandBuffer(mCommandBuffer, &beginInfo) != VK_SUCCESS) {
-                destroyTarget(target);
-                return false;
+            if (mBeginCommandBuffer(commandBuffer, &beginInfo) != VK_SUCCESS) {
+                evictTarget(target);
+                return Error() << "Failed to begin display command buffer";
             }
             if (recordGpuTimestamps) {
-                mCmdResetQueryPool(mCommandBuffer, mTimestampQueryPool, 0, 2);
+                mCmdResetQueryPool(commandBuffer, mTimestampQueryPool, timestampQueryBase, 2);
             }
 
             VkImageMemoryBarrier acquireBarriers[2] = {
@@ -246,12 +348,12 @@ public:
                             .subresourceRange = colorRange(),
                     },
             };
-            mCmdPipelineBarrier(mCommandBuffer, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
+            mCmdPipelineBarrier(commandBuffer, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
                                 VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, nullptr, 0, nullptr, 2,
                                 acquireBarriers);
             if (recordGpuTimestamps) {
-                mCmdWriteTimestamp(mCommandBuffer, VK_PIPELINE_STAGE_TRANSFER_BIT,
-                                   mTimestampQueryPool, 0);
+                mCmdWriteTimestamp(commandBuffer, VK_PIPELINE_STAGE_TRANSFER_BIT,
+                                   mTimestampQueryPool, timestampQueryBase);
             }
 
             VkImageBlit region = {
@@ -272,12 +374,12 @@ public:
                                    {static_cast<int32_t>(image.width),
                                     static_cast<int32_t>(image.height), 1}},
             };
-            mCmdBlitImage(mCommandBuffer, image.sourceImage, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+            mCmdBlitImage(commandBuffer, image.sourceImage, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
                           target.image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region,
                           VK_FILTER_NEAREST);
             if (recordGpuTimestamps) {
-                mCmdWriteTimestamp(mCommandBuffer, VK_PIPELINE_STAGE_TRANSFER_BIT,
-                                   mTimestampQueryPool, 1);
+                mCmdWriteTimestamp(commandBuffer, VK_PIPELINE_STAGE_TRANSFER_BIT,
+                                   mTimestampQueryPool, timestampQueryBase + 1);
             }
 
             VkImageMemoryBarrier releaseBarriers[2] = {
@@ -304,32 +406,143 @@ public:
                             .subresourceRange = colorRange(),
                     },
             };
-            mCmdPipelineBarrier(mCommandBuffer, VK_PIPELINE_STAGE_TRANSFER_BIT,
+            mCmdPipelineBarrier(commandBuffer, VK_PIPELINE_STAGE_TRANSFER_BIT,
                                 VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, 0, 0, nullptr, 0, nullptr, 2,
                                 releaseBarriers);
 
-            if (mEndCommandBuffer(mCommandBuffer) != VK_SUCCESS) {
-                destroyTarget(target);
-                return false;
+            if (mEndCommandBuffer(commandBuffer) != VK_SUCCESS) {
+                evictTarget(target);
+                return Error() << "Failed to end display command buffer";
             }
         }
+
+        VkSemaphore signalSemaphore = VK_NULL_HANDLE;
+        if (mAsyncBlitEnabled) {
+            VkExportSemaphoreCreateInfo exportInfo = {
+                    .sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO,
+                    .handleTypes = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT,
+            };
+            VkSemaphoreCreateInfo semaphoreInfo = {
+                    .sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,
+                    .pNext = &exportInfo,
+            };
+            if (mCreateSemaphore(mDevice, &semaphoreInfo, nullptr, &slot.completionSemaphore) !=
+                VK_SUCCESS) {
+                evictTarget(target);
+                return Error() << "Failed to create display completion semaphore";
+            }
+            signalSemaphore = slot.completionSemaphore;
+            if (mResetFences(mDevice, 1, &slot.fence) != VK_SUCCESS) {
+                evictTarget(target);
+                mDestroySemaphore(mDevice, slot.completionSemaphore, nullptr);
+                slot.completionSemaphore = VK_NULL_HANDLE;
+                return Error() << "Failed to reset display in-flight fence";
+            }
+        }
+
+        // Import the dequeued release fence as a GPU wait semaphore so the blit waits on target
+        // availability without a CPU poll. Only attempted on the async path with SYNC_FD import
+        // capability; otherwise the caller has already waited on the fence and passes -1.
+        VkSemaphore waitSemaphore = VK_NULL_HANDLE;
+        VkPipelineStageFlags waitStage = VK_PIPELINE_STAGE_TRANSFER_BIT;
+        if (canImportAcquireFence() && acquireFenceFd >= 0) {
+            VkSemaphoreCreateInfo waitSemaphoreInfo = {
+                    .sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,
+            };
+            if (mCreateSemaphore(mDevice, &waitSemaphoreInfo, nullptr, &slot.acquireSemaphore) !=
+                VK_SUCCESS) {
+                evictTarget(target);
+                if (slot.completionSemaphore) {
+                    mDestroySemaphore(mDevice, slot.completionSemaphore, nullptr);
+                    slot.completionSemaphore = VK_NULL_HANDLE;
+                }
+                return Error() << "Failed to create display acquire semaphore";
+            }
+            VkImportSemaphoreFdInfoKHR importInfo = {
+                    .sType = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR,
+                    .semaphore = slot.acquireSemaphore,
+                    .flags = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT,
+                    .handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT,
+                    .fd = acquireFenceFd,
+            };
+            if (mImportSemaphoreFd(mDevice, &importInfo) != VK_SUCCESS) {
+                // On success Vulkan owns the fd; on failure it stays ours. Fall back to a CPU wait
+                // rather than dropping the acquire dependency, which would risk tearing.
+                mDestroySemaphore(mDevice, slot.acquireSemaphore, nullptr);
+                slot.acquireSemaphore = VK_NULL_HANDLE;
+                acquireFenceGuard.Disable(); // pollFence consumes (closes) the fd
+                if (auto ret = pollFence(acquireFenceFd); !ret.ok()) {
+                    evictTarget(target);
+                    if (slot.completionSemaphore) {
+                        mDestroySemaphore(mDevice, slot.completionSemaphore, nullptr);
+                        slot.completionSemaphore = VK_NULL_HANDLE;
+                    }
+                    return ret.error();
+                }
+            } else {
+                waitSemaphore = slot.acquireSemaphore;
+                acquireFenceGuard.Disable(); // vkImportSemaphoreFdKHR consumed the fd
+            }
+        }
+
         VkSubmitInfo submitInfo = {
                 .sType = VK_STRUCTURE_TYPE_SUBMIT_INFO,
+                .waitSemaphoreCount = waitSemaphore == VK_NULL_HANDLE ? 0u : 1u,
+                .pWaitSemaphores = waitSemaphore == VK_NULL_HANDLE ? nullptr : &waitSemaphore,
+                .pWaitDstStageMask = waitSemaphore == VK_NULL_HANDLE ? nullptr : &waitStage,
                 .commandBufferCount = 1,
-                .pCommandBuffers = &mCommandBuffer,
+                .pCommandBuffers = &commandBuffer,
+                .signalSemaphoreCount = signalSemaphore == VK_NULL_HANDLE ? 0u : 1u,
+                .pSignalSemaphores = signalSemaphore == VK_NULL_HANDLE ? nullptr : &signalSemaphore,
         };
         VkResult result;
         {
             ScopedTrace submitTrace("crosvm_display.queue_submit");
-            result = mQueueSubmit(mQueue, 1, &submitInfo, VK_NULL_HANDLE);
+            result = injectSubmitFailure
+                    ? VK_ERROR_UNKNOWN
+                    : mQueueSubmit(mQueue, 1, &submitInfo,
+                                   mAsyncBlitEnabled ? slot.fence : VK_NULL_HANDLE);
         }
-        if (result == VK_SUCCESS) {
+        if (result != VK_SUCCESS) {
+            evictTarget(target);
+            if (slot.completionSemaphore) {
+                mDestroySemaphore(mDevice, slot.completionSemaphore, nullptr);
+                slot.completionSemaphore = VK_NULL_HANDLE;
+            }
+            if (slot.acquireSemaphore) {
+                mDestroySemaphore(mDevice, slot.acquireSemaphore, nullptr);
+                slot.acquireSemaphore = VK_NULL_HANDLE;
+            }
+            return Error() << "Failed to submit display blit: " << result;
+        }
+
+        if (!mAsyncBlitEnabled) {
             ScopedTrace waitTrace("crosvm_display.queue_wait_idle");
             result = mQueueWaitIdle(mQueue);
+            if (result == VK_SUCCESS && recordGpuTimestamps) {
+                collectGpuBlitDuration(timestampQueryBase);
+            }
+            // Target stays cached for reuse; only the blit completion is awaited here.
+            if (result != VK_SUCCESS) return Error() << "Failed to wait for display queue";
+            return -1;
         }
-        if (result == VK_SUCCESS && recordGpuTimestamps) collectGpuBlitDuration();
-        destroyTarget(target);
-        return result == VK_SUCCESS;
+
+        slot.inFlight = true;
+        slot.timestampPending = recordGpuTimestamps;
+        VkSemaphoreGetFdInfoKHR fdInfo = {
+                .sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR,
+                .semaphore = slot.completionSemaphore,
+                .handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT,
+        };
+        int completionFd = -1;
+        result = mGetSemaphoreFd(mDevice, &fdInfo, &completionFd);
+        if (result != VK_SUCCESS || completionFd < 0) {
+            LOG(WARNING) << "Failed to export display completion sync_fd; draining slot: "
+                         << result;
+            if (auto ret = reclaimSlot(slot); !ret.ok()) return ret.error();
+            return -1;
+        }
+        return completionFd;
     }
 
 private:
@@ -343,6 +556,18 @@ private:
     struct TargetImage {
         VkImage image = VK_NULL_HANDLE;
         VkDeviceMemory memory = VK_NULL_HANDLE;
+        AHardwareBuffer* ahb = nullptr;
+        uint32_t width = 0;
+        uint32_t height = 0;
+    };
+
+    struct InFlightSlot {
+        VkCommandBuffer commandBuffer = VK_NULL_HANDLE;
+        VkFence fence = VK_NULL_HANDLE;
+        VkSemaphore completionSemaphore = VK_NULL_HANDLE;
+        VkSemaphore acquireSemaphore = VK_NULL_HANDLE;
+        bool inFlight = false;
+        bool timestampPending = false;
     };
 
     template <typename T>
@@ -406,7 +631,7 @@ private:
         VkQueryPoolCreateInfo queryInfo = {
                 .sType = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO,
                 .queryType = VK_QUERY_TYPE_TIMESTAMP,
-                .queryCount = 2,
+                .queryCount = static_cast<uint32_t>(mInFlightSlots.size() * 2),
         };
         if (mCreateQueryPool(mDevice, &queryInfo, nullptr, &mTimestampQueryPool) != VK_SUCCESS) {
             mTimestampQueryPool = VK_NULL_HANDLE;
@@ -417,11 +642,11 @@ private:
                   << " ns, validBits=" << mTimestampValidBits;
     }
 
-    void collectGpuBlitDuration() {
+    void collectGpuBlitDuration(uint32_t queryBase) {
         if (!mTimestampQueryPool) return;
         uint64_t timestamps[2]{};
         VkResult result =
-                mGetQueryPoolResults(mDevice, mTimestampQueryPool, 0, 2, sizeof(timestamps),
+                mGetQueryPoolResults(mDevice, mTimestampQueryPool, queryBase, 2, sizeof(timestamps),
                                      timestamps, sizeof(uint64_t), VK_QUERY_RESULT_64_BIT);
         if (result != VK_SUCCESS) {
             if (!mTimestampReadFailureLogged) {
@@ -439,6 +664,53 @@ private:
         const uint64_t durationNs =
                 static_cast<uint64_t>(static_cast<double>(elapsedTicks) * mTimestampPeriodNs);
         ATRACE_INT64("crosvm_display.gpu_blit_ns", static_cast<int64_t>(durationNs));
+    }
+
+    Result<void> reclaimSlot(InFlightSlot& slot) {
+        if (!slot.inFlight) return {};
+        VkResult result;
+        {
+            ScopedTrace waitTrace("crosvm_display.in_flight_wait");
+            result = mWaitForFences(mDevice, 1, &slot.fence, VK_TRUE, UINT64_MAX);
+        }
+        if (result != VK_SUCCESS) {
+            return Error() << "Failed to wait for display in-flight slot: " << result;
+        }
+        slot.inFlight = false;
+        if (slot.timestampPending) {
+            const size_t slotIndex = static_cast<size_t>(&slot - mInFlightSlots.data());
+            collectGpuBlitDuration(static_cast<uint32_t>(slotIndex * 2));
+            slot.timestampPending = false;
+        }
+        // Target images live in mTargetCache and outlive individual slots; do not destroy here.
+        if (slot.completionSemaphore) {
+            mDestroySemaphore(mDevice, slot.completionSemaphore, nullptr);
+            slot.completionSemaphore = VK_NULL_HANDLE;
+        }
+        if (slot.acquireSemaphore) {
+            mDestroySemaphore(mDevice, slot.acquireSemaphore, nullptr);
+            slot.acquireSemaphore = VK_NULL_HANDLE;
+        }
+        return {};
+    }
+
+    void reclaimSlotAfterDeviceIdle(InFlightSlot& slot) {
+        if (!slot.inFlight) return;
+        slot.inFlight = false;
+        if (slot.timestampPending) {
+            const size_t slotIndex = static_cast<size_t>(&slot - mInFlightSlots.data());
+            collectGpuBlitDuration(static_cast<uint32_t>(slotIndex * 2));
+            slot.timestampPending = false;
+        }
+        // Target images live in mTargetCache and outlive individual slots; do not destroy here.
+        if (slot.completionSemaphore) {
+            mDestroySemaphore(mDevice, slot.completionSemaphore, nullptr);
+            slot.completionSemaphore = VK_NULL_HANDLE;
+        }
+        if (slot.acquireSemaphore) {
+            mDestroySemaphore(mDevice, slot.acquireSemaphore, nullptr);
+            slot.acquireSemaphore = VK_NULL_HANDLE;
+        }
     }
 
     bool modifierSupportsBlitSource(VkFormat format, uint64_t modifier) const {
@@ -502,6 +774,48 @@ private:
                 (memoryProperties.compatibleHandleTypes & handleType) != 0;
     }
 
+    bool asyncSemaphoreSupported(
+            PFN_vkEnumerateDeviceExtensionProperties enumerateDeviceExtensionProperties) {
+        if (!enumerateDeviceExtensionProperties || !mGetPhysicalDeviceExternalSemaphoreProperties) {
+            return false;
+        }
+        uint32_t extensionCount = 0;
+        if (enumerateDeviceExtensionProperties(mPhysicalDevice, nullptr, &extensionCount,
+                                               nullptr) != VK_SUCCESS) {
+            return false;
+        }
+        std::vector<VkExtensionProperties> extensions(extensionCount);
+        if (enumerateDeviceExtensionProperties(mPhysicalDevice, nullptr, &extensionCount,
+                                               extensions.data()) != VK_SUCCESS) {
+            return false;
+        }
+        const auto hasExtension = [&extensions](const char* name) {
+            return std::any_of(extensions.begin(), extensions.end(), [name](const auto& extension) {
+                return std::strcmp(extension.extensionName, name) == 0;
+            });
+        };
+        if (!hasExtension(VK_KHR_EXTERNAL_SEMAPHORE_EXTENSION_NAME) ||
+            !hasExtension(VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME)) {
+            return false;
+        }
+
+        VkPhysicalDeviceExternalSemaphoreInfo semaphoreInfo = {
+                .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO,
+                .handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT,
+        };
+        VkExternalSemaphoreProperties semaphoreProperties = {
+                .sType = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES,
+        };
+        mGetPhysicalDeviceExternalSemaphoreProperties(mPhysicalDevice, &semaphoreInfo,
+                                                      &semaphoreProperties);
+        // EXPORTABLE is required for the completion semaphore. IMPORTABLE is a separate capability
+        // needed only for acquire-fence import; record it so the caller can gate that path.
+        mSyncFdImportable = (semaphoreProperties.externalSemaphoreFeatures &
+                             VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT) != 0;
+        return (semaphoreProperties.externalSemaphoreFeatures &
+                VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT) != 0;
+    }
+
     bool initialize() {
         const char* configuredPath = std::getenv("CROSVM_TURNIP_LIBRARY");
         const char* paths[] = {
@@ -545,6 +859,9 @@ private:
 
         auto enumeratePhysicalDevices =
                 instanceProc<PFN_vkEnumeratePhysicalDevices>("vkEnumeratePhysicalDevices");
+        auto enumerateDeviceExtensionProperties =
+                instanceProc<PFN_vkEnumerateDeviceExtensionProperties>(
+                        "vkEnumerateDeviceExtensionProperties");
         auto getQueueFamilyProperties = instanceProc<PFN_vkGetPhysicalDeviceQueueFamilyProperties>(
                 "vkGetPhysicalDeviceQueueFamilyProperties");
         auto createDevice = instanceProc<PFN_vkCreateDevice>("vkCreateDevice");
@@ -556,11 +873,14 @@ private:
         mGetPhysicalDeviceImageFormatProperties2 =
                 instanceProc<PFN_vkGetPhysicalDeviceImageFormatProperties2>(
                         "vkGetPhysicalDeviceImageFormatProperties2");
+        mGetPhysicalDeviceExternalSemaphoreProperties =
+                instanceProc<PFN_vkGetPhysicalDeviceExternalSemaphoreProperties>(
+                        "vkGetPhysicalDeviceExternalSemaphoreProperties");
         mGetDeviceProcAddr = instanceProc<PFN_vkGetDeviceProcAddr>("vkGetDeviceProcAddr");
         mDestroyInstance = instanceProc<PFN_vkDestroyInstance>("vkDestroyInstance");
-        if (!enumeratePhysicalDevices || !getQueueFamilyProperties || !createDevice ||
-            !mGetPhysicalDeviceFormatProperties2 || !mGetPhysicalDeviceImageFormatProperties2 ||
-            !mGetDeviceProcAddr || !mDestroyInstance) {
+        if (!enumeratePhysicalDevices || !enumerateDeviceExtensionProperties ||
+            !getQueueFamilyProperties || !createDevice || !mGetPhysicalDeviceFormatProperties2 ||
+            !mGetPhysicalDeviceImageFormatProperties2 || !mGetDeviceProcAddr || !mDestroyInstance) {
             return false;
         }
 
@@ -575,6 +895,12 @@ private:
             return false;
         }
         mPhysicalDevice = physicalDevices[0];
+
+        if (mAsyncBlitEnabled && !asyncSemaphoreSupported(enumerateDeviceExtensionProperties)) {
+            LOG(WARNING) << "Android display async blit SYNC_FD capability is unavailable; "
+                            "keeping synchronous queue waits";
+            mAsyncBlitEnabled = false;
+        }
 
         uint32_t queueFamilyCount = 0;
         getQueueFamilyProperties(mPhysicalDevice, &queueFamilyCount, nullptr);
@@ -596,19 +922,23 @@ private:
                 .queueCount = 1,
                 .pQueuePriorities = &priority,
         };
-        const char* extensions[] = {
+        std::vector<const char*> extensions = {
                 VK_EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION_NAME,
                 VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION_NAME,
                 VK_ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION_NAME,
                 VK_KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME,
                 VK_EXT_QUEUE_FAMILY_FOREIGN_EXTENSION_NAME,
         };
+        if (mAsyncBlitEnabled) {
+            extensions.push_back(VK_KHR_EXTERNAL_SEMAPHORE_EXTENSION_NAME);
+            extensions.push_back(VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME);
+        }
         VkDeviceCreateInfo deviceInfo = {
                 .sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
                 .queueCreateInfoCount = 1,
                 .pQueueCreateInfos = &queueInfo,
-                .enabledExtensionCount = std::size(extensions),
-                .ppEnabledExtensionNames = extensions,
+                .enabledExtensionCount = static_cast<uint32_t>(extensions.size()),
+                .ppEnabledExtensionNames = extensions.data(),
         };
         if (createDevice(mPhysicalDevice, &deviceInfo, nullptr, &mDevice) != VK_SUCCESS)
             return false;
@@ -625,6 +955,14 @@ private:
         LOAD_DEVICE_PROC(mEndCommandBuffer, "vkEndCommandBuffer");
         LOAD_DEVICE_PROC(mQueueSubmit, "vkQueueSubmit");
         LOAD_DEVICE_PROC(mQueueWaitIdle, "vkQueueWaitIdle");
+        LOAD_DEVICE_PROC(mCreateFence, "vkCreateFence");
+        LOAD_DEVICE_PROC(mDestroyFence, "vkDestroyFence");
+        LOAD_DEVICE_PROC(mWaitForFences, "vkWaitForFences");
+        LOAD_DEVICE_PROC(mResetFences, "vkResetFences");
+        LOAD_DEVICE_PROC(mCreateSemaphore, "vkCreateSemaphore");
+        LOAD_DEVICE_PROC(mDestroySemaphore, "vkDestroySemaphore");
+        LOAD_DEVICE_PROC(mGetSemaphoreFd, "vkGetSemaphoreFdKHR");
+        LOAD_DEVICE_PROC(mImportSemaphoreFd, "vkImportSemaphoreFdKHR");
         LOAD_DEVICE_PROC(mCmdPipelineBarrier, "vkCmdPipelineBarrier");
         LOAD_DEVICE_PROC(mCmdBlitImage, "vkCmdBlitImage");
         LOAD_DEVICE_PROC(mCreateQueryPool, "vkCreateQueryPool");
@@ -650,6 +988,23 @@ private:
             !mBindImageMemory || !mGetMemoryFdProperties || !mGetAhbProperties) {
             return false;
         }
+        if (mAsyncBlitEnabled &&
+            (!mCreateFence || !mDestroyFence || !mWaitForFences || !mResetFences ||
+             !mCreateSemaphore || !mDestroySemaphore || !mGetSemaphoreFd)) {
+            LOG(WARNING) << "Android display async blit Vulkan entry points are unavailable; "
+                            "keeping synchronous queue waits";
+            mAsyncBlitEnabled = false;
+        }
+        // Acquire-fence import is an independent capability on top of async blit: it needs the
+        // import entry point and SYNC_FD IMPORTABLE support. Without it the async path still runs
+        // but the dequeued release fence is waited on the CPU instead of the GPU.
+        mAsyncAcquireImportSupported =
+                mAsyncBlitEnabled && mImportSemaphoreFd != nullptr && mSyncFdImportable;
+        if (mAsyncBlitEnabled) {
+            LOG(INFO) << "Android display acquire-fence semaphore import "
+                      << (mAsyncAcquireImportSupported ? "enabled (GPU wait)"
+                                                       : "unavailable (CPU poll fallback)");
+        }
 
         mGetDeviceQueue(mDevice, mQueueFamilyIndex, 0, &mQueue);
         VkCommandPoolCreateInfo poolInfo = {
@@ -664,11 +1019,27 @@ private:
                 .sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO,
                 .commandPool = mCommandPool,
                 .level = VK_COMMAND_BUFFER_LEVEL_PRIMARY,
-                .commandBufferCount = 1,
+                .commandBufferCount = mAsyncBlitEnabled ? kAsyncInFlightSlotCount : 1,
         };
-        if (mAllocateCommandBuffers(mDevice, &commandInfo, &mCommandBuffer) != VK_SUCCESS) {
+        mInFlightSlots.resize(commandInfo.commandBufferCount);
+        std::vector<VkCommandBuffer> commandBuffers(commandInfo.commandBufferCount);
+        if (mAllocateCommandBuffers(mDevice, &commandInfo, commandBuffers.data()) != VK_SUCCESS) {
             return false;
         }
+        for (size_t i = 0; i < mInFlightSlots.size(); ++i) {
+            mInFlightSlots[i].commandBuffer = commandBuffers[i];
+            if (!mAsyncBlitEnabled) continue;
+            VkFenceCreateInfo fenceInfo = {
+                    .sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO,
+                    .flags = VK_FENCE_CREATE_SIGNALED_BIT,
+            };
+            if (mCreateFence(mDevice, &fenceInfo, nullptr, &mInFlightSlots[i].fence) !=
+                VK_SUCCESS) {
+                return false;
+            }
+        }
+        LOG(INFO) << "Android display async blit " << (mAsyncBlitEnabled ? "enabled" : "disabled")
+                  << ", in-flight slots=" << mInFlightSlots.size();
         initializeGpuTimestamps();
         return true;
     }
@@ -904,7 +1275,65 @@ private:
         ScopedTrace trace("crosvm_display.target_destroy");
         if (target.image && mDestroyImage) mDestroyImage(mDevice, target.image, nullptr);
         if (target.memory && mFreeMemory) mFreeMemory(mDevice, target.memory, nullptr);
+        if (target.ahb) AHardwareBuffer_release(target.ahb);
         target = {};
+    }
+
+    void clearTargetCache() {
+        for (auto& [_, target] : mTargetCache) destroyTarget(target);
+        mTargetCache.clear();
+    }
+
+    // Destroy a cached target and remove it from the cache. Used on blit error paths so a target
+    // that failed mid-record/submit is not left dangling in the cache. Safe to call with a target
+    // that is not (or no longer) cached.
+    void evictTarget(TargetImage& target) {
+        AHardwareBuffer* ahb = target.ahb;
+        destroyTarget(target);
+        if (ahb) mTargetCache.erase(ahb);
+    }
+
+    // Returns a cached Vulkan import for the dequeued AHardwareBuffer, creating it on first use.
+    // BufferQueue recycles a small fixed set of AHBs, so after warm-up this avoids the per-frame
+    // vkCreateImage/vkAllocateMemory/vkImportAndroidHardwareBuffer/vkDestroy churn. The returned
+    // pointer is stable across map growth (unordered_map guarantees reference stability). Cache
+    // entries are freed only on dimension change or teardown, both of which drain the device first,
+    // so an in-flight blit can never reference a destroyed target.
+    Result<TargetImage*> acquireTargetImage(AHardwareBuffer* ahb, uint32_t width, uint32_t height) {
+        // A geometry change makes every cached AHB stale. Drain in-flight work, then rebuild.
+        if (mTargetCacheWidth != width || mTargetCacheHeight != height) {
+            if (mDeviceWaitIdle) mDeviceWaitIdle(mDevice);
+            for (auto& slot : mInFlightSlots) reclaimSlotAfterDeviceIdle(slot);
+            clearTargetCache();
+            mTargetCacheWidth = width;
+            mTargetCacheHeight = height;
+        }
+
+        auto it = mTargetCache.find(ahb);
+        if (it != mTargetCache.end()) return &it->second;
+
+        // Bound the cache: BufferQueue normally holds 3-4 buffers, but a surface churn could leak
+        // stale AHB pointers. If we exceed the cap, drain and reset rather than grow unbounded.
+        if (mTargetCache.size() >= kTargetCacheCap) {
+            if (mDeviceWaitIdle) mDeviceWaitIdle(mDevice);
+            for (auto& slot : mInFlightSlots) reclaimSlotAfterDeviceIdle(slot);
+            clearTargetCache();
+        }
+
+        TargetImage target{};
+        {
+            ScopedTrace targetTrace("crosvm_display.target_import");
+            if (!createTargetImage(ahb, width, height, target)) {
+                destroyTarget(target);
+                return Error() << "Failed to import display target AHardwareBuffer";
+            }
+        }
+        AHardwareBuffer_acquire(ahb);
+        target.ahb = ahb;
+        target.width = width;
+        target.height = height;
+        auto [inserted, _] = mTargetCache.emplace(ahb, target);
+        return &inserted->second;
     }
 
     void destroyImport(ImportedImage& imported) {
@@ -917,7 +1346,29 @@ private:
         imported = {};
     }
 
+    // CPU-side wait on an acquire fence; consumes (closes) the fd. Used only as the fallback when
+    // vkImportSemaphoreFdKHR fails after the caller already handed the fence to blit().
+    static Result<void> pollFence(int fenceFd) {
+        if (fenceFd < 0) return {};
+        pollfd descriptor{.fd = fenceFd, .events = POLLIN, .revents = 0};
+        int result;
+        do {
+            result = poll(&descriptor, 1, -1);
+        } while (result < 0 && errno == EINTR);
+        close(fenceFd);
+        if (result <= 0) return Error() << "Failed to wait for display acquire fence";
+        return {};
+    }
+
     bool mReady = false;
+    static constexpr uint32_t kAsyncInFlightSlotCount = 3;
+    static constexpr size_t kTargetCacheCap = 8;
+    bool mAsyncBlitEnabled = false;
+    bool mAsyncAcquireImportSupported = false;
+    bool mSyncFdImportable = false;
+    std::unordered_map<AHardwareBuffer*, TargetImage> mTargetCache;
+    uint32_t mTargetCacheWidth = 0;
+    uint32_t mTargetCacheHeight = 0;
     void* mLibrary = nullptr;
     HwvulkanDevice* mHal = nullptr;
     VkInstance mInstance = VK_NULL_HANDLE;
@@ -926,7 +1377,8 @@ private:
     VkQueue mQueue = VK_NULL_HANDLE;
     uint32_t mQueueFamilyIndex = 0;
     VkCommandPool mCommandPool = VK_NULL_HANDLE;
-    VkCommandBuffer mCommandBuffer = VK_NULL_HANDLE;
+    std::vector<InFlightSlot> mInFlightSlots;
+    size_t mNextInFlightSlot = 0;
     VkQueryPool mTimestampQueryPool = VK_NULL_HANDLE;
     float mTimestampPeriodNs = 0.0f;
     uint32_t mTimestampValidBits = 0;
@@ -940,6 +1392,8 @@ private:
     PFN_vkGetPhysicalDeviceFormatProperties2 mGetPhysicalDeviceFormatProperties2 = nullptr;
     PFN_vkGetPhysicalDeviceImageFormatProperties2 mGetPhysicalDeviceImageFormatProperties2 =
             nullptr;
+    PFN_vkGetPhysicalDeviceExternalSemaphoreProperties
+            mGetPhysicalDeviceExternalSemaphoreProperties = nullptr;
     PFN_vkDestroyInstance mDestroyInstance = nullptr;
     PFN_vkDestroyDevice mDestroyDevice = nullptr;
     PFN_vkDeviceWaitIdle mDeviceWaitIdle = nullptr;
@@ -952,6 +1406,14 @@ private:
     PFN_vkEndCommandBuffer mEndCommandBuffer = nullptr;
     PFN_vkQueueSubmit mQueueSubmit = nullptr;
     PFN_vkQueueWaitIdle mQueueWaitIdle = nullptr;
+    PFN_vkCreateFence mCreateFence = nullptr;
+    PFN_vkDestroyFence mDestroyFence = nullptr;
+    PFN_vkWaitForFences mWaitForFences = nullptr;
+    PFN_vkResetFences mResetFences = nullptr;
+    PFN_vkCreateSemaphore mCreateSemaphore = nullptr;
+    PFN_vkDestroySemaphore mDestroySemaphore = nullptr;
+    PFN_vkGetSemaphoreFdKHR mGetSemaphoreFd = nullptr;
+    PFN_vkImportSemaphoreFdKHR mImportSemaphoreFd = nullptr;
     PFN_vkCmdPipelineBarrier mCmdPipelineBarrier = nullptr;
     PFN_vkCmdBlitImage mCmdBlitImage = nullptr;
     PFN_vkCreateQueryPool mCreateQueryPool = nullptr;
@@ -1148,7 +1610,7 @@ public:
         return {};
     }
 
-    Result<void> flip(VulkanDisplayBridge& bridge, int64_t importId) {
+    Result<int> flip(VulkanDisplayBridge& bridge, int64_t importId) {
         ScopedTrace trace("crosvm_display.flip");
         std::unique_lock lk(mSurfaceMutex);
 
@@ -1156,18 +1618,24 @@ public:
         if (surface == nullptr) {
             // The display service can temporarily lose its Surface while the launcher is
             // backgrounded. Keep the source import alive and drop the frame in that interval.
-            return {};
+            return -1;
         }
         ANativeWindow* anw = surface->get();
         if (anw == nullptr) return Error() << "Failed to get ANativeWindow";
         {
             ScopedTrace prepareTrace("crosvm_display.prepare_window");
-            if (auto ret = prepareNativeWindowLocked(anw, true); !ret.ok()) return ret;
+            if (auto ret = prepareNativeWindowLocked(anw, true); !ret.ok()) {
+                return Error() << ret.error();
+            }
         }
 
         ANativeWindowBuffer* buffer = nullptr;
         int fenceFd = -1;
         int result;
+        const bool allowFaultInjection = mName == "scanout";
+        if (allowFaultInjection && injectRuntimeFlipFailure(RuntimeFlipFailureStage::kDequeue)) {
+            return Error() << "Injected display dequeue failure";
+        }
         {
             ScopedTrace dequeueTrace("crosvm_display.dequeue_buffer");
             result = ANativeWindow_dequeueBuffer(anw, &buffer, &fenceFd);
@@ -1176,25 +1644,82 @@ public:
             if (fenceFd >= 0) close(fenceFd);
             return Error() << "Failed to dequeue display buffer: " << result;
         }
-        if (auto ret = waitForFence(fenceFd); !ret.ok()) {
+
+        // When the bridge can import the acquire fence as a GPU wait semaphore, hand the fence to
+        // blit() (which takes ownership) instead of blocking the display thread on a CPU poll.
+        int acquireFenceFd = -1;
+        if (bridge.canImportAcquireFence()) {
+            acquireFenceFd = fenceFd;
+            fenceFd = -1;
+        } else if (auto ret = waitForFence(fenceFd); !ret.ok()) {
+            fenceFd = -1; // waitForFence closed it
             ANativeWindow_cancelBuffer(anw, buffer, -1);
-            return ret;
+            return Error() << ret.error();
+        } else {
+            fenceFd = -1; // waitForFence closed it
         }
 
         AHardwareBuffer* targetAhb = ANativeWindowBuffer_getHardwareBuffer(buffer);
-        if (targetAhb == nullptr || !bridge.blit(importId, targetAhb)) {
+        if (targetAhb == nullptr) {
+            if (acquireFenceFd >= 0) {
+                if (auto ret = waitForFence(acquireFenceFd); !ret.ok()) {
+                    ANativeWindow_cancelBuffer(anw, buffer, -1);
+                    return ret.error();
+                }
+            }
             ANativeWindow_cancelBuffer(anw, buffer, -1);
-            return Error() << "Failed to blit into dequeued display buffer";
+            return Error() << "Failed to get display target AHardwareBuffer";
         }
-        {
+        auto completion = bridge.blit(importId, targetAhb, acquireFenceFd, allowFaultInjection);
+        if (!completion.ok()) {
+            // blit() owns acquireFenceFd on every return path, so do not close it here.
+            ANativeWindow_cancelBuffer(anw, buffer, -1);
+            return Error() << "Failed to blit into dequeued display buffer: " << completion.error();
+        }
+        int targetCompletionFd = *completion;
+        int sourceCompletionFd = -1;
+        if (targetCompletionFd >= 0) {
+            sourceCompletionFd = dup(targetCompletionFd);
+            if (sourceCompletionFd < 0) {
+                PLOG(WARNING) << "Failed to duplicate display completion sync_fd; draining";
+                if (auto ret = waitForFence(targetCompletionFd); !ret.ok()) {
+                    ANativeWindow_cancelBuffer(anw, buffer, -1);
+                    return ret.error();
+                }
+                targetCompletionFd = -1;
+            }
+        }
+        const bool injectQueueFailure =
+                allowFaultInjection && injectRuntimeFlipFailure(RuntimeFlipFailureStage::kQueue);
+        bool queueCalled = false;
+        if (injectQueueFailure) {
+            result = -EIO;
+        } else {
             ScopedTrace queueTrace("crosvm_display.queue_buffer");
-            result = ANativeWindow_queueBuffer(anw, buffer, -1);
+            result = ANativeWindow_queueBuffer(anw, buffer, targetCompletionFd);
+            queueCalled = true;
         }
         if (result != 0) {
+            // The duplicate guarantees the target is no longer being written before it is
+            // cancelled back to BufferQueue.
+            if (sourceCompletionFd >= 0) {
+                auto waitResult = waitForFence(sourceCompletionFd);
+                sourceCompletionFd = -1;
+                if (!waitResult.ok()) {
+                    if (!queueCalled && targetCompletionFd >= 0) close(targetCompletionFd);
+                    ANativeWindow_cancelBuffer(anw, buffer, -1);
+                    return waitResult.error();
+                }
+            }
+            // A real queueBuffer call consumes the completion fd even on error. The injected
+            // failure skips that call, so close our still-owned fd after its duplicate signals.
+            if (!queueCalled && targetCompletionFd >= 0) close(targetCompletionFd);
             ANativeWindow_cancelBuffer(anw, buffer, -1);
-            return Error() << "Failed to queue display buffer: " << result;
+            return Error() << (injectQueueFailure ? "Injected display queue failure: "
+                                                  : "Failed to queue display buffer: ")
+                           << result;
         }
-        return {};
+        return sourceCompletionFd;
     }
 
     Result<void> unlockAndPost() {
@@ -1544,6 +2069,10 @@ struct AndroidDisplayContext {
         if (display_path == DisplayPath::kCpu) return;
         display_path = DisplayPath::kCpu;
         LOG(WARNING) << "Android display falling back to CPU for this process: " << reason;
+        // Rust resource states release imports lazily as those resources are revisited. Destroy
+        // the bridge now so inactive source imports, cached AHB targets, and in-flight sync
+        // objects cannot survive for the rest of a sticky CPU-fallback process.
+        vulkan_display.reset();
     }
 
     void errorf(const char* format, ...) {
@@ -1681,8 +2210,11 @@ extern "C" void android_display_release_import(struct AndroidDisplayContext* ctx
 }
 
 extern "C" bool android_display_flip_to(struct AndroidDisplayContext* ctx,
-                                        AndroidDisplaySurface* surface, int64_t rawHandle) {
-    if (!ctx || !surface || !rawHandle || !ctx->vulkan_display || !ctx->vulkanDisplayActive()) {
+                                        AndroidDisplaySurface* surface, int64_t rawHandle,
+                                        int* outCompletionFenceFd) {
+    if (outCompletionFenceFd) *outCompletionFenceFd = -1;
+    if (!ctx || !surface || !rawHandle || !outCompletionFenceFd || !ctx->vulkan_display ||
+        !ctx->vulkanDisplayActive()) {
         return false;
     }
     auto ret = surface->flip(*ctx->vulkan_display, rawHandle);
@@ -1692,5 +2224,6 @@ extern "C" bool android_display_flip_to(struct AndroidDisplayContext* ctx,
         ctx->fallbackToCpu("M1 runtime flip failed");
         return false;
     }
+    *outCompletionFenceFd = *ret;
     return true;
 }
