@@ -86,6 +86,10 @@ bool envFlagEnabled(const char* name, bool defaultValue) {
     return defaultValue;
 }
 
+bool isSurfaceUnavailableStatus(int status) {
+    return status == -ENODEV || status == -EINVAL;
+}
+
 enum class RuntimeFlipFailureStage {
     kNone,
     kDequeue,
@@ -258,6 +262,22 @@ public:
     // Set when the async path can import an acquire fence as a GPU wait semaphore, letting the
     // caller skip the CPU poll on the dequeued release fence.
     bool canImportAcquireFence() const { return mAsyncBlitEnabled && mAsyncAcquireImportSupported; }
+
+    Result<void> resetTargetsForSurfaceChange() {
+        if (mTargetCache.empty()) return {};
+        if (!mDeviceWaitIdle) return Error() << "Vulkan device idle wait is unavailable";
+
+        const size_t targetCount = mTargetCache.size();
+        VkResult result = mDeviceWaitIdle(mDevice);
+        if (result != VK_SUCCESS) {
+            return Error() << "Failed to drain display targets for surface change: " << result;
+        }
+        for (auto& slot : mInFlightSlots) reclaimSlotAfterDeviceIdle(slot);
+        clearTargetCache();
+        LOG(INFO) << "Android display cleared " << targetCount
+                  << " cached targets for surface change";
+        return {};
+    }
 
     // acquireFenceFd is the release fence returned by ANativeWindow_dequeueBuffer. When
     // canImportAcquireFence() is true the caller passes it here for GPU-side waiting and blit()
@@ -1297,8 +1317,8 @@ private:
     // BufferQueue recycles a small fixed set of AHBs, so after warm-up this avoids the per-frame
     // vkCreateImage/vkAllocateMemory/vkImportAndroidHardwareBuffer/vkDestroy churn. The returned
     // pointer is stable across map growth (unordered_map guarantees reference stability). Cache
-    // entries are freed only on dimension change or teardown, both of which drain the device first,
-    // so an in-flight blit can never reference a destroyed target.
+    // Entries are freed only after draining the device: on dimension/surface change, cache-cap
+    // reset, or teardown. Therefore an in-flight blit can never reference a destroyed target.
     Result<TargetImage*> acquireTargetImage(AHardwareBuffer* ahb, uint32_t width, uint32_t height) {
         // A geometry change makes every cached AHB stale. Drain in-flight work, then rebuild.
         if (mTargetCacheWidth != width || mTargetCacheHeight != height) {
@@ -1516,9 +1536,10 @@ public:
         {
             std::lock_guard lk(mSurfaceMutex);
             LOG(INFO) << "display surface " << mName << " native window attached";
-            disconnectNativeWindowLocked();
+            clearNativeSurfaceLocked(true);
             mNativeSurface = std::make_unique<Surface>(surface->release());
             mNativeSurfaceNeedsConfiguring = true;
+            ++mNativeSurfaceGeneration;
             Surface* surface = mNativeSurface.get();
             if (!surface) {
                 return Error() << "Failed to get Surface";
@@ -1538,14 +1559,7 @@ public:
     void removeSurface() {
         {
             std::lock_guard lk(mSurfaceMutex);
-            disconnectNativeWindowLocked();
-            auto& sc = SurfaceControl::GetInstance();
-            if (mSurfaceControl) {
-                if (sc.IsSupported()) sc.ASurfaceControl_release(mSurfaceControl);
-                mSurfaceControl = nullptr;
-            }
-            mNativeSurface = nullptr;
-            mGpuUsageConfigured = false;
+            clearNativeSurfaceLocked(true);
         }
         mNativeSurfaceReady.notify_one();
     }
@@ -1620,6 +1634,12 @@ public:
             // backgrounded. Keep the source import alive and drop the frame in that interval.
             return -1;
         }
+        if (mVulkanTargetGeneration != mNativeSurfaceGeneration) {
+            if (auto ret = bridge.resetTargetsForSurfaceChange(); !ret.ok()) {
+                return Error() << ret.error();
+            }
+            mVulkanTargetGeneration = mNativeSurfaceGeneration;
+        }
         ANativeWindow* anw = surface->get();
         if (anw == nullptr) return Error() << "Failed to get ANativeWindow";
         {
@@ -1640,9 +1660,14 @@ public:
             ScopedTrace dequeueTrace("crosvm_display.dequeue_buffer");
             result = ANativeWindow_dequeueBuffer(anw, &buffer, &fenceFd);
         }
-        if (result != 0 || buffer == nullptr) {
+        if (result != 0) {
             if (fenceFd >= 0) close(fenceFd);
+            if (clearIfSurfaceUnavailableLocked("dequeueBuffer", result)) return -1;
             return Error() << "Failed to dequeue display buffer: " << result;
+        }
+        if (buffer == nullptr) {
+            if (fenceFd >= 0) close(fenceFd);
+            return Error() << "Failed to dequeue display buffer: null buffer";
         }
 
         // When the bridge can import the acquire fence as a GPU wait semaphore, hand the fence to
@@ -1715,6 +1740,9 @@ public:
             // failure skips that call, so close our still-owned fd after its duplicate signals.
             if (!queueCalled && targetCompletionFd >= 0) close(targetCompletionFd);
             ANativeWindow_cancelBuffer(anw, buffer, -1);
+            if (!injectQueueFailure && clearIfSurfaceUnavailableLocked("queueBuffer", result)) {
+                return -1;
+            }
             return Error() << (injectQueueFailure ? "Injected display queue failure: "
                                                   : "Failed to queue display buffer: ")
                            << result;
@@ -1811,6 +1839,39 @@ public:
     const std::string& name() const { return mName; }
 
 private:
+    void clearNativeSurfaceLocked(bool disconnect) {
+        const bool hadSurface = mNativeSurface != nullptr;
+        if (disconnect) {
+            disconnectNativeWindowLocked();
+        } else {
+            mConnectedNativeWindowApi = 0;
+            mGpuUsageConfigured = false;
+        }
+
+        auto& sc = SurfaceControl::GetInstance();
+        if (mSurfaceControl) {
+            if (sc.IsSupported()) sc.ASurfaceControl_release(mSurfaceControl);
+            mSurfaceControl = nullptr;
+        }
+        mNativeSurface = nullptr;
+        mNativeSurfaceNeedsConfiguring = true;
+        mGpuUsageConfigured = false;
+        mLastBufferValid = false;
+        if (hadSurface) ++mNativeSurfaceGeneration;
+    }
+
+    bool clearIfSurfaceUnavailableLocked(const char* operation, int status) {
+        if (!isSurfaceUnavailableStatus(status)) return false;
+        LOG(WARNING) << "display surface " << mName << " became unavailable during " << operation
+                     << " (" << status
+                     << "); keeping Vulkan path active and dropping frames until a replacement is "
+                        "attached";
+        // The producer is already disconnected or abandoned. Avoid another native-window call
+        // while releasing our stale Surface reference.
+        clearNativeSurfaceLocked(false);
+        return true;
+    }
+
     void disconnectNativeWindowLocked() {
         if (mConnectedNativeWindowApi == 0) return;
         Surface* surface = mNativeSurface.get();
@@ -1905,6 +1966,8 @@ private:
     bool mNativeSurfaceNeedsConfiguring = true;
     int mConnectedNativeWindowApi = 0;
     bool mGpuUsageConfigured = false;
+    uint64_t mNativeSurfaceGeneration = 0;
+    uint64_t mVulkanTargetGeneration = 0;
 
     // Buffer which crosvm uses when in background. This is just to not fail crosvm even when
     // Android-side Surface doesn't exist. The content drawn here is never displayed on the physical
@@ -2151,7 +2214,10 @@ extern "C" void set_android_surface_position(struct AndroidDisplayContext* ctx, 
     }
     auto fd = ctx->disp_service->getCursorStream().get();
     if (fd == -1) {
-        ctx->errorf("Invalid fd");
+        static std::atomic<bool> warned = false;
+        if (!warned.exchange(true, std::memory_order_relaxed)) {
+            LOG(WARNING) << "cursor position stream is not attached; dropping position updates";
+        }
         return;
     }
     uint32_t pos[] = {x, y};
