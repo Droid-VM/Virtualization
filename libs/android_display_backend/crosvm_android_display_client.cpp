@@ -1477,13 +1477,40 @@ private:
     std::vector<uint8_t> mBufferBits;
 };
 
-// crosvm always renders scanouts in B,G,R,X byte order (BGRA/BGRX — see SetScanoutBlob in
-// crosvm's devices/src/virtio/gpu/mod.rs). We advertise the Android buffer as RGBA_8888 (see
-// kFormat) instead of BGRA_8888 so the compositor imports it as a regular GL_TEXTURE_2D rather
-// than GL_TEXTURE_EXTERNAL_OES: some GPUs' Skia RenderEngine (observed on Adreno) abort with
-// "Unable to generate SkImage" when asked to sample an external-OES BGRA texture, which crashes
-// surfaceflinger and soft-reboots the device. To keep colors correct under the RGBA layout we
-// swap the R and B channels in place just before posting the buffer.
+// We advertise the Android buffer as RGBA_8888 (see kFormat) instead of BGRA_8888 so the
+// compositor imports it as a regular GL_TEXTURE_2D rather than GL_TEXTURE_EXTERNAL_OES: some GPUs'
+// Skia RenderEngine (observed on Adreno) abort with "Unable to generate SkImage" when asked to
+// sample an external-OES BGRA texture, which crashes surfaceflinger and soft-reboots the device.
+//
+// A guest scanout in B,G,R,X order (XR24/AR24) therefore needs its R and B channels swapped in
+// place before posting. A guest that scans out in R,G,B,X order (XB24/AB24) already matches
+// kFormat and must NOT be swapped — see needsRedBlueSwap().
+// DRM fourcc codes for the single-plane 8888 RGB formats a virtio-gpu scanout can use.
+static constexpr uint32_t drmFourcc(char a, char b, char c, char d) {
+    return static_cast<uint32_t>(a) | (static_cast<uint32_t>(b) << 8) |
+            (static_cast<uint32_t>(c) << 16) | (static_cast<uint32_t>(d) << 24);
+}
+static constexpr uint32_t kDrmFormatXrgb8888 = drmFourcc('X', 'R', '2', '4');
+static constexpr uint32_t kDrmFormatArgb8888 = drmFourcc('A', 'R', '2', '4');
+static constexpr uint32_t kDrmFormatXbgr8888 = drmFourcc('X', 'B', '2', '4');
+static constexpr uint32_t kDrmFormatAbgr8888 = drmFourcc('A', 'B', '2', '4');
+
+// kFormat is RGBA_8888, i.e. R,G,B,X bytes. XR24/AR24 are B,G,R,X and need swapping; XB24/AB24 are
+// already R,G,B,X and must be posted untouched. Unknown formats keep the historical BGRA
+// assumption, which is what every pre-XBGR guest emitted.
+static bool needsRedBlueSwap(uint32_t fourcc) {
+    switch (fourcc) {
+        case kDrmFormatXbgr8888:
+        case kDrmFormatAbgr8888:
+            return false;
+        case kDrmFormatXrgb8888:
+        case kDrmFormatArgb8888:
+            return true;
+        default:
+            return true;
+    }
+}
+
 static void swapRedBlueInPlace(const ANativeWindow_Buffer& buf) {
     uint8_t* base = static_cast<uint8_t*>(buf.bits);
     if (base == nullptr) return;
@@ -1765,13 +1792,24 @@ public:
             return Error() << "Failed to get ANativeWindow";
         }
 
-        // crosvm wrote B,G,R,X into the buffer; convert to R,G,B,X to match kFormat (RGBA_8888).
-        swapRedBlueInPlace(mLastBuffer);
+        // crosvm wrote the guest scanout's byte order into the buffer; convert to R,G,B,X to match
+        // kFormat (RGBA_8888) unless the guest already scanned out in that order.
+        if (needsRedBlueSwap(mBufferFourcc)) {
+            swapRedBlueInPlace(mLastBuffer);
+        }
 
         if (ANativeWindow_unlockAndPost(anw) != 0) {
             return Error() << "Failed to unlock and post window";
         }
         return {};
+    }
+
+    void setBufferFourcc(uint32_t fourcc) {
+        std::lock_guard lk(mSurfaceMutex);
+        if (mBufferFourcc == fourcc) return;
+        LOG(INFO) << "display surface " << mName << " scanout fourcc 0x" << std::hex << fourcc
+                  << std::dec << " red/blue swap=" << needsRedBlueSwap(fourcc);
+        mBufferFourcc = fourcc;
     }
 
     Result<void> setBuffer(AHardwareBuffer* ahb) {
@@ -1978,6 +2016,10 @@ private:
     // is what gets displayed on the physical screen.
     ANativeWindow_Buffer mLastBuffer;
     bool mLastBufferValid = false;
+
+    // DRM fourcc of the pixels crosvm writes into the CPU buffer. Defaults to the historical
+    // B,G,R,X assumption until the device layer reports the guest's actual scanout format.
+    uint32_t mBufferFourcc = kDrmFormatXrgb8888;
 
     // Copy of mLastBuffer made by the call saveFrameForSurface. This holds the last good (i.e.
     // non-blank) frame before the VM goes background. When the VM is brought up to foreground,
@@ -2237,6 +2279,15 @@ extern "C" void post_android_surface_buffer(struct AndroidDisplayContext* ctx,
                     ret.error().message().c_str());
     }
     return;
+}
+
+extern "C" void set_android_surface_buffer_format(struct AndroidDisplayContext* ctx,
+                                                  AndroidDisplaySurface* surface, uint32_t fourcc) {
+    if (surface == nullptr) {
+        if (ctx) ctx->errorf("Invalid AndroidDisplaySurface provided");
+        return;
+    }
+    surface->setBufferFourcc(fourcc);
 }
 
 extern "C" int64_t android_display_import_dmabuf(struct AndroidDisplayContext* ctx,
