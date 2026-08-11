@@ -1492,6 +1492,8 @@ static constexpr uint32_t drmFourcc(char a, char b, char c, char d) {
 }
 static constexpr uint32_t kDrmFormatXrgb8888 = drmFourcc('X', 'R', '2', '4');
 static constexpr uint32_t kDrmFormatArgb8888 = drmFourcc('A', 'R', '2', '4');
+static constexpr uint32_t kDrmFormatBgrx8888 = drmFourcc('B', 'X', '2', '4');
+static constexpr uint32_t kDrmFormatBgra8888 = drmFourcc('B', 'A', '2', '4');
 static constexpr uint32_t kDrmFormatXbgr8888 = drmFourcc('X', 'B', '2', '4');
 static constexpr uint32_t kDrmFormatAbgr8888 = drmFourcc('A', 'B', '2', '4');
 
@@ -1534,6 +1536,22 @@ static void swapRedBlueInPlace(const ANativeWindow_Buffer& buf) {
             uint8_t t = px[0];
             px[0] = px[2];
             px[2] = t;
+        }
+    }
+}
+
+// BX24/BA24 store pixels as X/A,R,G,B, while the Android RGBA_8888 buffer is R,G,B,X/A.
+static void rotateBgrxToRgbaInPlace(const ANativeWindow_Buffer& buf) {
+    uint8_t* base = static_cast<uint8_t*>(buf.bits);
+    if (base == nullptr) return;
+    for (int32_t y = 0; y < buf.height; y++) {
+        uint8_t* px = base + static_cast<size_t>(y) * static_cast<size_t>(buf.stride) * 4;
+        for (int32_t x = 0; x < buf.width; x++, px += 4) {
+            const uint8_t leading = px[0];
+            px[0] = px[1];
+            px[1] = px[2];
+            px[2] = px[3];
+            px[3] = leading;
         }
     }
 }
@@ -1794,7 +1812,9 @@ public:
 
         // crosvm wrote the guest scanout's byte order into the buffer; convert to R,G,B,X to match
         // kFormat (RGBA_8888) unless the guest already scanned out in that order.
-        if (needsRedBlueSwap(mBufferFourcc)) {
+        if (mBufferFourcc == kDrmFormatBgrx8888 || mBufferFourcc == kDrmFormatBgra8888) {
+            rotateBgrxToRgbaInPlace(mLastBuffer);
+        } else if (needsRedBlueSwap(mBufferFourcc)) {
             swapRedBlueInPlace(mLastBuffer);
         }
 
