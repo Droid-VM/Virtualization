@@ -2239,6 +2239,20 @@ extern "C" void post_android_surface_buffer(struct AndroidDisplayContext* ctx,
     return;
 }
 
+extern "C" void set_android_surface_buffer_format(struct AndroidDisplayContext* ctx,
+                                                  AndroidDisplaySurface* surface, uint32_t fourcc) {
+    if (ctx == nullptr || surface == nullptr) {
+        return;
+    }
+    // The app-side ANativeWindow is configured RGBA_8888 only (see configure()); until buffer
+    // reallocation plumbing exists app-side, the guest's scanout fourcc is diagnostic only.
+    static std::atomic<uint32_t> lastFourcc{0};
+    if (lastFourcc.exchange(fourcc, std::memory_order_relaxed) != fourcc) {
+        LOG(INFO) << "CROSVM_DISPLAY_FOURCC 0x" << std::hex << fourcc << std::dec
+                  << " for surface " << surface->name() << " (format switch not implemented)";
+    }
+}
+
 extern "C" int64_t android_display_import_dmabuf(struct AndroidDisplayContext* ctx,
                                                  AndroidDisplaySurface* surface, int fd,
                                                  uint32_t offset, uint32_t stride,
