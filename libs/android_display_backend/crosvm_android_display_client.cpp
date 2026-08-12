@@ -87,7 +87,11 @@ bool envFlagEnabled(const char* name, bool defaultValue) {
 }
 
 bool isSurfaceUnavailableStatus(int status) {
-    return status == -ENODEV || status == -EINVAL;
+    // -EPIPE is how BufferQueue surfaces DEAD_OBJECT: the consumer went away (the hosting activity
+    // was torn down, or SurfaceControl released the Surface) and every later producer call on this
+    // ANativeWindow will keep failing. Treat it like the other disconnect codes so the caller drops
+    // frames until a replacement Surface is attached, rather than reporting a hard flip error.
+    return status == -ENODEV || status == -EINVAL || status == -EPIPE;
 }
 
 enum class RuntimeFlipFailureStage {
