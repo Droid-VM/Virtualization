@@ -837,29 +837,33 @@ private:
     }
 
     bool initialize() {
-        const char* configuredPath = std::getenv("CROSVM_TURNIP_LIBRARY");
-        const char* paths[] = {
-                configuredPath,
-                "/data/local/tmp/turnip-v29/libvulkan_freedreno.so",
-        };
-        for (const char* path : paths) {
-            if (!path || !*path) continue;
-            mLibrary = dlopen(path, RTLD_NOW | RTLD_LOCAL);
-            if (mLibrary) {
-                LOG(INFO) << "Android display loading Turnip from " << path;
-                break;
-            }
-        }
-        if (!mLibrary) {
-            LOG(ERROR) << "failed to load Turnip: " << dlerror();
+        // The blit driver is any hwvulkan HAL that exposes the required extensions -- turnip, the
+        // SoC's vendor driver, PanVK, ... -- so this is not turnip-specific. The chooser (the app's
+        // GpuBlitProvider) names one via CROSVM_DISPLAY_VULKAN_LIBRARY; CROSVM_TURNIP_LIBRARY is the
+        // former name, still honoured. There is deliberately NO hardcoded fallback: dlopen'ing a
+        // fixed world-writable path (e.g. /data/local/tmp) would silently run untrusted native code,
+        // so the driver must be named explicitly by whoever launched crosvm. With none named we do
+        // not load anything and the caller drops to the CPU copy.
+        const char* configuredPath = std::getenv("CROSVM_DISPLAY_VULKAN_LIBRARY");
+        if (!configuredPath || !*configuredPath)
+            configuredPath = std::getenv("CROSVM_TURNIP_LIBRARY");
+        if (!configuredPath || !*configuredPath) {
+            LOG(INFO) << "no display Vulkan blit driver configured; using CPU copy";
             return false;
         }
+        mLibrary = dlopen(configuredPath, RTLD_NOW | RTLD_LOCAL);
+        if (!mLibrary) {
+            LOG(ERROR) << "failed to load display Vulkan blit driver from " << configuredPath << ": "
+                       << dlerror();
+            return false;
+        }
+        LOG(INFO) << "Android display loading Vulkan blit driver from " << configuredPath;
 
         auto* module = static_cast<HwModule*>(dlsym(mLibrary, "HMI"));
         if (!module || !module->methods || !module->methods->open ||
             module->methods->open(module, "vk0", reinterpret_cast<void**>(&mHal)) != 0 || !mHal ||
             !mHal->create_instance || !mHal->get_instance_proc_addr) {
-            LOG(ERROR) << "invalid Turnip hwvulkan HMI";
+            LOG(ERROR) << "invalid display Vulkan hwvulkan HMI";
             return false;
         }
 
