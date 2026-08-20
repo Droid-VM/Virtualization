@@ -1121,12 +1121,25 @@ private:
                 .drmFormatModifierPlaneCount = 1,
                 .pPlaneLayouts = &planeLayout,
         };
+        // Adreno's 2D blitter reads the LINEAR source through the texture pipe, which fetches whole
+        // rows at the image's PITCH. When the guest stride is padded (a width that is not 64px-
+        // aligned -- e.g. 1400 -> stride 5632 = 1408px, 8px of row padding) turnip's a7xx A2D
+        // texture fetch on a padded-pitch LINEAR source wedges the GPU, and because that blit shares
+        // the Adreno with gfxstream's render thread the whole VM hangs. Describe the source image at
+        // its natural unpadded width (stride/bpp) so the texture's WIDTH equals its PITCH/bpp; the
+        // blit below still samples only the real [0,width) sub-rectangle, so this is a no-op for
+        // unpadded widths (stride == width*bpp) and only widens the declared image for padded ones.
+        const uint32_t kBytesPerPixel = 4; // every fourcc vkFormatFromDrmFourcc accepts is 32-bpp
+        uint32_t sourceImageWidth = imported.width;
+        if ((stride % kBytesPerPixel) == 0 && stride / kBytesPerPixel > sourceImageWidth) {
+            sourceImageWidth = stride / kBytesPerPixel;
+        }
         VkImageCreateInfo imageInfo = {
                 .sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
                 .pNext = &modifierInfo,
                 .imageType = VK_IMAGE_TYPE_2D,
                 .format = format,
-                .extent = {imported.width, imported.height, 1},
+                .extent = {sourceImageWidth, imported.height, 1},
                 .mipLevels = 1,
                 .arrayLayers = 1,
                 .samples = VK_SAMPLE_COUNT_1_BIT,
