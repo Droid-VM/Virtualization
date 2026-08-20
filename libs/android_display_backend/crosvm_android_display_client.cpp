@@ -1677,6 +1677,20 @@ public:
             ScopedTrace dequeueTrace("crosvm_display.dequeue_buffer");
             result = ANativeWindow_dequeueBuffer(anw, &buffer, &fenceFd);
         }
+        if (result == -ETIMEDOUT || result == -EWOULDBLOCK) {
+            // Every buffer is queued to SurfaceFlinger and none has been released yet (the
+            // producer runs with a zero dequeue timeout, see prepareNativeWindowLocked). Drop
+            // this frame instead of stalling: nothing has touched the guest's source dmabuf, so
+            // returning without a completion fence lets the guest reuse it right away, and the
+            // next flush will present a newer frame.
+            if (fenceFd >= 0) close(fenceFd);
+            const uint64_t dropped = ++mDroppedFlips;
+            if ((dropped & 1023) == 1) {
+                LOG(INFO) << "display surface " << mName << " dropped " << dropped
+                          << " flip(s) so far: no free display buffer (panel-paced)";
+            }
+            return -1;
+        }
         if (result != 0) {
             if (fenceFd >= 0) close(fenceFd);
             if (clearIfSurfaceUnavailableLocked("dequeueBuffer", result)) return -1;
@@ -1863,6 +1877,7 @@ private:
         } else {
             mConnectedNativeWindowApi = 0;
             mGpuUsageConfigured = false;
+            mZeroDequeueTimeout = false;
         }
 
         auto& sc = SurfaceControl::GetInstance();
@@ -1903,6 +1918,7 @@ private:
         }
         mConnectedNativeWindowApi = 0;
         mGpuUsageConfigured = false;
+        mZeroDequeueTimeout = false;
     }
 
     static Result<void> waitForFence(int fenceFd) {
@@ -1937,6 +1953,26 @@ private:
             int result = native_window_api_connect(anw, requestedApi);
             if (result != 0) return Error() << "Failed to connect native window: " << result;
             mConnectedNativeWindowApi = requestedApi;
+        }
+
+        // The GPU (blit) producer must never block in dequeueBuffer. With the default timeout
+        // (-1) a flip stalls until SurfaceFlinger releases a buffer at its next vsync, and since
+        // the guest's RESOURCE_FLUSH fence is deferred to this blit's completion, the whole guest
+        // compositor ends up paced by the phone panel: on a 60 Hz ColorOS panel venus/drm2kgsl
+        // ran at 70-800 fps with the display attached and 4000-9000 fps without it. A timeout of
+        // 0 makes dequeueBuffer return TIMED_OUT when every buffer is queued; flip() drops that
+        // frame and the guest keeps its own pace, the display shows the newest frame it can.
+        // The CPU-copy producer keeps the blocking default so ANativeWindow_lock behaves as before.
+        const bool wantZeroTimeout = gpu;
+        if (mZeroDequeueTimeout != wantZeroTimeout) {
+            const int64_t timeout = wantZeroTimeout ? 0 : -1;
+            int result = anw->perform(anw, NATIVE_WINDOW_SET_DEQUEUE_TIMEOUT, timeout);
+            if (result != 0) {
+                LOG(WARNING) << "display surface " << mName << " set dequeue timeout " << timeout
+                             << " failed: " << result;
+            } else {
+                mZeroDequeueTimeout = wantZeroTimeout;
+            }
         }
 
         if (!mRequestedSurfaceDimensions) {
@@ -1983,6 +2019,10 @@ private:
     bool mNativeSurfaceNeedsConfiguring = true;
     int mConnectedNativeWindowApi = 0;
     bool mGpuUsageConfigured = false;
+    // Whether the connected producer currently runs with a zero dequeue timeout (GPU path).
+    bool mZeroDequeueTimeout = false;
+    // Flips dropped because no display buffer was free at the time (see flip()).
+    uint64_t mDroppedFlips = 0;
     uint64_t mNativeSurfaceGeneration = 0;
     uint64_t mVulkanTargetGeneration = 0;
 
