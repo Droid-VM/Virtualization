@@ -1494,6 +1494,40 @@ private:
     std::vector<uint8_t> mBufferBits;
 };
 
+// The acceptance instrument for a byte-identical refactor of the display pipeline (see the plan's
+// §6 step 4 and §9): the three CPU copy sites that feed this sink are being consolidated behind one
+// function, and "the sink receives the same bytes" is not an acceptance condition until something
+// measures it. This sits deliberately below everything that refactor touches, so the same number is
+// taken in both binaries and the two frame sequences can simply be compared.
+//
+// The hash covers exactly the visible pixels, row by row: the padding a gralloc stride leaves at
+// the end of each row is displayed by nobody and initialised by nothing, so hashing it would let
+// two identical frames disagree. Off unless CROSVM_DISPLAY_HASH_FRAMES=1, read once.
+static bool frameHashEnabled() {
+    static const bool enabled = envFlagEnabled("CROSVM_DISPLAY_HASH_FRAMES", false);
+    return enabled;
+}
+
+static uint64_t fnv1a64VisiblePixels(const ANativeWindow_Buffer& buf) {
+    uint64_t hash = 0xcbf29ce484222325ULL;
+    const uint8_t* base = static_cast<const uint8_t*>(buf.bits);
+    if (base == nullptr || buf.width <= 0 || buf.height <= 0) return hash;
+    const size_t rowBytes = static_cast<size_t>(buf.width) * 4;
+    for (int32_t y = 0; y < buf.height; y++) {
+        const uint8_t* px = base + static_cast<size_t>(y) * static_cast<size_t>(buf.stride) * 4;
+        for (size_t i = 0; i < rowBytes; i++) {
+            hash = (hash ^ px[i]) * 0x100000001b3ULL;
+        }
+    }
+    return hash;
+}
+
+static void logFrameHash(const std::string& surfaceName, const ANativeWindow_Buffer& buf) {
+    LOG(INFO) << "FRAMEHASH surface=" << surfaceName << " " << buf.width << "x" << buf.height
+              << " fnv1a64=0x" << std::hex << std::setw(16) << std::setfill('0')
+              << fnv1a64VisiblePixels(buf) << std::dec;
+}
+
 // crosvm always renders scanouts in B,G,R,X byte order (BGRA/BGRX — see SetScanoutBlob in
 // crosvm's devices/src/virtio/gpu/mod.rs). We advertise the Android buffer as RGBA_8888 (see
 // kFormat) instead of BGRA_8888 so the compositor imports it as a regular GL_TEXTURE_2D rather
@@ -1805,6 +1839,10 @@ public:
         if (anw == nullptr) {
             return Error() << "Failed to get ANativeWindow";
         }
+
+        // Before the swap, so the number describes what crosvm handed over rather than what this
+        // sink made of it. See frameHashEnabled().
+        if (frameHashEnabled()) logFrameHash(mName, mLastBuffer);
 
         // crosvm wrote B,G,R,X into the buffer; convert to R,G,B,X to match kFormat (RGBA_8888).
         swapRedBlueInPlace(mLastBuffer);
