@@ -1586,6 +1586,16 @@ public:
         return mNativeSurface.get();
     }
 
+    // Whether a native window is attached right now. This is the non-blocking read of the same
+    // field that waitForNativeSurface() parks on, and the distinction is the whole point: the
+    // caller is crosvm's simplefb bridge asking once per frame from its 30 fps timer thread, and
+    // waiting there would hold that thread -- input dispatch included -- until the user came back
+    // to the display view.
+    bool hasNativeSurface() {
+        std::lock_guard lk(mSurfaceMutex);
+        return mNativeSurface != nullptr;
+    }
+
     Result<void> configure(uint32_t width, uint32_t height) {
         std::unique_lock lk(mSurfaceMutex);
 
@@ -2338,6 +2348,23 @@ extern "C" int64_t android_display_import_dmabuf(struct AndroidDisplayContext* c
 
 extern "C" bool android_display_is_vulkan_blit_available(struct AndroidDisplayContext* ctx) {
     return ctx && ctx->getVulkanDisplay() != nullptr;
+}
+
+// Whether a frame posted now can reach a screen: the app attached a Surface to the scanout and has
+// not taken it back. Leaving the display view destroys the SurfaceView, and the removeSurface(false)
+// that follows drops the native window here; the same clearing happens when a producer is abandoned
+// under us (clearIfSurfaceUnavailableLocked). While there is none, lock() hands out the sink buffer
+// and unlockAndPost() returns without posting, so the frame is built and thrown away.
+//
+// Only the scanout counts. The cursor surface is a separate SurfaceView on its own lifecycle and may
+// never be attached at all (the app's display view does not always carry a cursor overlay), so it
+// answers a different question and would make this one wrong in both directions.
+//
+// A caller is entitled to skip building the frame on a false, so this must never block or wait: the
+// answer is the current state, and a consumer that arrives a moment later is seen by the next call.
+extern "C" bool android_display_has_consumer(struct AndroidDisplayContext* ctx) {
+    if (ctx == nullptr || ctx->disp_service == nullptr) return false;
+    return ctx->disp_service->getSurface(/* forCursor= */ false).hasNativeSurface();
 }
 
 extern "C" void android_display_release_import(struct AndroidDisplayContext* ctx,
