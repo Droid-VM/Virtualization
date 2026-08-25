@@ -52,6 +52,7 @@
 #include <arm_neon.h>
 #endif
 
+#include "media_codec_dl.h"
 #include "surface_control_dl.h"
 
 using aidl::android::crosvm::BnCrosvmAndroidDisplayService;
@@ -1504,14 +1505,36 @@ public:
 
     bool ready() const { return mBridge.ready(); }
 
+    // `exchangeRedBlue` picks which byte order the blits from this import land in, and it is a
+    // property of the import rather than of the blit because the only lever there is -- the source
+    // image's declared format -- is fixed when the image is created. Two consumers of the same
+    // guest scanout therefore need two imports of it: LibVNCServer wants B,G,R,X (exchange), the
+    // H.264 encoder reads its input as the RGBA_8888 gralloc says it is (no exchange). See
+    // blitSourceFourcc for the arithmetic.
     int64_t importDmabuf(int fd, uint32_t offset, uint32_t stride, uint64_t modifier,
-                         bool linearLayoutVerified, uint32_t width, uint32_t height,
-                         uint32_t fourcc) {
+                         bool linearLayoutVerified, uint32_t width, uint32_t height, uint32_t fourcc,
+                         bool exchangeRedBlue) {
         return mBridge.importDmabuf(fd, offset, stride, modifier, linearLayoutVerified, width,
-                                    height, blitSourceFourcc(fourcc));
+                                    height,
+                                    exchangeRedBlue ? blitSourceFourcc(fourcc) : fourcc);
     }
 
     void release(int64_t importId) { mBridge.release(importId); }
+
+    // Blit an import into a target somebody else owns, and hand back the completion fence.
+    //
+    // This is `blit` above with the two halves that are about *this* context's own buffer taken
+    // out: no ensureTarget, no unmap, and no wait. The caller supplies the AHardwareBuffer and
+    // decides what the fence is for -- the H.264 path passes it straight to queueBuffer, so the
+    // codec waits on the GPU instead of this thread doing it. -1 means the bridge already drained
+    // the queue and the target is ready now.
+    //
+    // The bridge's target cache is keyed by AHB pointer, so a foreign target costs one Vulkan
+    // import on first sight and nothing afterwards, exactly like a dequeued display buffer.
+    Result<int> blitInto(int64_t importId, AHardwareBuffer* ahb) {
+        if (!ahb) return Error() << "no target AHardwareBuffer to blit into";
+        return mBridge.blit(importId, ahb);
+    }
 
     // Blit an import into the target and wait, with a bound, for the GPU to be done with it.
     //
@@ -1677,6 +1700,541 @@ private:
     uint32_t mStrideBytes = 0;
     bool mMapped = false;
     void* mAddress = nullptr;
+};
+
+// The guest's hardware cursor, as one frame's worth of overlay.
+//
+// The classic VNC consumer blends this into its own outgoing framebuffer (blend_cursor, in
+// crosvm's vnc_server_bridge.c) and hands a copy to LibVNCServer as an RFB cursor so a client can
+// draw it itself. Neither of those reaches an H.264 decoder: a video stream is pixels and nothing
+// else, so for this consumer the pointer has to be IN the encoded picture or it is not there at
+// all. Same bytes, same straight-alpha convention, blended a second time into a different canvas.
+struct H264CursorOverlay {
+    const uint8_t* pixels = nullptr; // B,G,R,A with a meaningful alpha byte
+    int width = 0;
+    int height = 0;
+    int x = 0; // top-left of the image, hotspot already applied by the guest; may be negative
+    int y = 0;
+    bool visible = false;
+};
+
+// One H.264 encoder, fed through its own input Surface.
+//
+// Plan §6 step 13. The picture the VNC sink already has -- the same frame, at the same instant,
+// off the same bus offer -- goes into a MediaCodec input buffer instead of onto an RFB socket, and
+// the compressed result leaves by a side channel. RFB is untouched; a legacy client keeps being
+// served by the LibVNCServer consumer from the same offer, which is what the bus was split for.
+//
+// The input Surface is the whole reason this is worth doing. AMediaCodec_createInputSurface hands
+// back an ANativeWindow whose buffers are gralloc buffers, so the frame can be delivered to the
+// encoder the same way it is delivered to the app's display: dequeue a buffer, put the picture in
+// it, queue it. When the producer is on the GPU transport that "put the picture in it" is the
+// step-11 Vulkan blit with a different target, and the guest's pixels never touch the CPU on their
+// way into the codec. Plan §7 listed that as an unverified premise -- "createTargetImage takes any
+// AHardwareBuffer, mechanically it should work" -- and this class is where it is either true or
+// reported false.
+//
+// The CPU route beside it is not a second design. It exists because the offer does not always come
+// with a GPU source (a simplefb producer that fell back, a resource that failed to import), and
+// because a dequeued codec buffer has to be CPU-writable anyway for the cursor to be blended into
+// it. One dequeue/queue path, two ways to fill the buffer.
+class H264EncoderSession {
+public:
+    static std::unique_ptr<H264EncoderSession> Open(uint32_t width, uint32_t height,
+                                                    int32_t bitrateBps, int32_t frameRate,
+                                                    int32_t iFrameIntervalSecs) {
+        auto& media = MediaCodecLib::GetInstance();
+        if (!media.IsSupported()) {
+            LOG(ERROR) << "H.264 side channel: no media NDK on this device";
+            return nullptr;
+        }
+        if (!width || !height) {
+            LOG(ERROR) << "H.264 side channel: refusing a " << width << "x" << height << " screen";
+            return nullptr;
+        }
+
+        // MediaCodec is a binder client, and the buffers it hands back arrive on incoming binder
+        // transactions -- so this process needs threads to receive them on. The display path
+        // starts the pool before registering its service; a VNC-only crosvm never takes that path,
+        // and without this the codec comes up and then never returns a buffer. Idempotent, so the
+        // two callers do not have to know about each other.
+        ABinderProcess_setThreadPoolMaxThreadCount(4);
+        ABinderProcess_startThreadPool();
+
+        auto session = std::unique_ptr<H264EncoderSession>(new H264EncoderSession(width, height));
+
+        AMediaFormat* format = media.AMediaFormat_new();
+        if (!format) {
+            LOG(ERROR) << "H.264 side channel: AMediaFormat_new failed";
+            return nullptr;
+        }
+        auto formatGuard = android::base::make_scope_guard(
+                [&] { media.AMediaFormat_delete(format); });
+        media.AMediaFormat_setString(format, kFormatKeyMime, kMimeTypeAvc);
+        media.AMediaFormat_setInt32(format, kFormatKeyWidth, static_cast<int32_t>(width));
+        media.AMediaFormat_setInt32(format, kFormatKeyHeight, static_cast<int32_t>(height));
+        media.AMediaFormat_setInt32(format, kFormatKeyColorFormat, kColorFormatSurface);
+        media.AMediaFormat_setInt32(format, kFormatKeyBitRate, bitrateBps);
+        media.AMediaFormat_setInt32(format, kFormatKeyFrameRate, frameRate);
+        media.AMediaFormat_setInt32(format, kFormatKeyIFrameInterval, iFrameIntervalSecs);
+
+        session->mCodec = media.AMediaCodec_createEncoderByType(kMimeTypeAvc);
+        if (!session->mCodec) {
+            LOG(ERROR) << "H.264 side channel: no encoder for " << kMimeTypeAvc;
+            return nullptr;
+        }
+        media_status_t status = media.AMediaCodec_configure(session->mCodec, format,
+                                                            /* surface= */ nullptr,
+                                                            /* crypto= */ nullptr,
+                                                            AMEDIACODEC_CONFIGURE_FLAG_ENCODE);
+        if (status != AMEDIA_OK) {
+            LOG(ERROR) << "H.264 side channel: configure(" << width << "x" << height << " @"
+                       << bitrateBps << "bps) failed: " << status;
+            return nullptr;
+        }
+        status = media.AMediaCodec_createInputSurface(session->mCodec, &session->mWindow);
+        if (status != AMEDIA_OK || session->mWindow == nullptr) {
+            LOG(ERROR) << "H.264 side channel: createInputSurface failed: " << status;
+            return nullptr;
+        }
+        status = media.AMediaCodec_start(session->mCodec);
+        if (status != AMEDIA_OK) {
+            LOG(ERROR) << "H.264 side channel: start failed: " << status;
+            return nullptr;
+        }
+        if (auto ready = session->prepareWindow(); !ready.ok()) {
+            LOG(ERROR) << "H.264 side channel: " << ready.error().message();
+            return nullptr;
+        }
+
+        std::string codecName = "?";
+        if (media.AMediaCodec_getName && media.AMediaCodec_releaseName) {
+            char* name = nullptr;
+            if (media.AMediaCodec_getName(session->mCodec, &name) == AMEDIA_OK && name) {
+                codecName = name;
+                media.AMediaCodec_releaseName(session->mCodec, name);
+            }
+        }
+        LOG(INFO) << "H.264 side channel: encoder \"" << codecName << "\" up for " << width << "x"
+                  << height << " @ " << bitrateBps << " bps, " << frameRate << " fps, IDR every "
+                  << iFrameIntervalSecs << "s";
+        return session;
+    }
+
+    ~H264EncoderSession() {
+        auto& media = MediaCodecLib::GetInstance();
+        if (mCodec) {
+            if (mWindow) media.AMediaCodec_signalEndOfInputStream(mCodec);
+            media.AMediaCodec_stop(mCodec);
+            media.AMediaCodec_delete(mCodec);
+        }
+        if (mWindow) {
+            if (mConnectedApi) native_window_api_disconnect(mWindow, mConnectedApi);
+            ANativeWindow_release(mWindow);
+        }
+    }
+
+    H264EncoderSession(const H264EncoderSession&) = delete;
+    H264EncoderSession& operator=(const H264EncoderSession&) = delete;
+
+    uint32_t width() const { return mWidth; }
+    uint32_t height() const { return mHeight; }
+
+    // Ask the encoder for an IDR at the next opportunity.
+    //
+    // Called when a side-channel client connects, which is the case the i-frame interval cannot
+    // cover: a decoder that joins between two IDRs has no reference frame and shows nothing until
+    // the next one, up to a whole interval later. Cheap enough that there is no reason to be
+    // clever about it -- the encoder coalesces repeats itself.
+    void requestSyncFrame() {
+        auto& media = MediaCodecLib::GetInstance();
+        AMediaFormat* params = media.AMediaFormat_new();
+        if (!params) return;
+        media.AMediaFormat_setInt32(params, kFormatKeyRequestSync, 0);
+        media.AMediaCodec_setParameters(mCodec, params);
+        media.AMediaFormat_delete(params);
+    }
+
+    // Feed one picture into the codec's input surface.
+    //
+    // `importId` non-zero selects the GPU route: `blitCtx` blits that import straight into the
+    // dequeued gralloc buffer. Zero selects the CPU route, which uploads `pixels` (B,G,R,X, packed
+    // to `width`) into it. Either way the cursor is blended afterwards, in place, on the CPU.
+    Result<void> encodeFrame(HeadlessBlitContext* blitCtx, int64_t importId, const uint8_t* pixels,
+                             uint32_t pixelsSize, uint32_t width, uint32_t height,
+                             const H264CursorOverlay& cursor, int64_t ptsUs) {
+        if (width != mWidth || height != mHeight) {
+            return Error() << "encoder is " << mWidth << "x" << mHeight << " but the frame is "
+                           << width << "x" << height;
+        }
+        if (auto ready = prepareWindow(); !ready.ok()) return ready;
+
+        // The timestamp has to be set before the buffer is queued: it travels with the queue, not
+        // with the dequeue. A codec input surface reads it as the frame's presentation time.
+        ANativeWindow_setBuffersTimestamp(mWindow, ptsUs * 1000);
+
+        ANativeWindowBuffer* buffer = nullptr;
+        int fenceFd = -1;
+        int result = ANativeWindow_dequeueBuffer(mWindow, &buffer, &fenceFd);
+        if (result == -ETIMEDOUT || result == -EWOULDBLOCK) {
+            // Every input buffer is still with the encoder. Drop the frame rather than stall: this
+            // runs on the guest's own flush path (VncSurface::flip_to), so waiting here would put
+            // a video encoder into the guest's vblank loop -- the exact coupling step 11 measured
+            // its way out of. The next flush carries a newer picture anyway.
+            if (fenceFd >= 0) close(fenceFd);
+            ++mDroppedFrames;
+            return {};
+        }
+        if (result != 0 || buffer == nullptr) {
+            if (fenceFd >= 0) close(fenceFd);
+            return Error() << "dequeue from the codec input surface failed: " << result;
+        }
+
+        AHardwareBuffer* ahb = ANativeWindowBuffer_getHardwareBuffer(buffer);
+        if (ahb == nullptr) {
+            if (fenceFd >= 0) close(fenceFd);
+            ANativeWindow_cancelBuffer(mWindow, buffer, -1);
+            return Error() << "the codec input buffer has no AHardwareBuffer";
+        }
+
+        // The GPU route hands the acquire fence to the blit and gets a completion fence back; the
+        // CPU route has to wait for the acquire itself before it may touch the memory.
+        int queueFenceFd = -1;
+        Result<void> filled;
+        if (importId != 0 && blitCtx != nullptr) {
+            filled = fillByBlit(blitCtx, importId, ahb, fenceFd, &queueFenceFd);
+            fenceFd = -1; // fillByBlit owns it on every path
+        } else {
+            filled = waitFence(fenceFd);
+            fenceFd = -1; // waitFence closes it
+            if (filled.ok()) filled = fillByUpload(ahb, pixels, pixelsSize);
+        }
+        if (!filled.ok()) {
+            if (queueFenceFd >= 0) close(queueFenceFd);
+            ANativeWindow_cancelBuffer(mWindow, buffer, -1);
+            return filled;
+        }
+
+        if (cursor.visible && cursor.pixels && cursor.width > 0 && cursor.height > 0) {
+            // The blend reads and writes the target, so whatever is still writing it has to be
+            // finished. On the CPU route that fence was already waited on and this is a no-op.
+            if (auto ret = waitFence(queueFenceFd); !ret.ok()) {
+                queueFenceFd = -1;
+                ANativeWindow_cancelBuffer(mWindow, buffer, -1);
+                return ret;
+            }
+            queueFenceFd = -1;
+            if (auto ret = blendCursor(ahb, cursor); !ret.ok()) {
+                ANativeWindow_cancelBuffer(mWindow, buffer, -1);
+                return ret;
+            }
+        }
+
+        result = ANativeWindow_queueBuffer(mWindow, buffer, queueFenceFd);
+        if (result != 0) {
+            // queueBuffer consumes the fence even when it fails, so it is not ours to close.
+            ANativeWindow_cancelBuffer(mWindow, buffer, -1);
+            return Error() << "queue to the codec input surface failed: " << result;
+        }
+        ++mQueuedFrames;
+        return {};
+    }
+
+    // Drain one compressed buffer.
+    //
+    // Returns the number of bytes written to `out`, 0 when nothing was ready before the timeout,
+    // and a negative number on error. `kOutputTooSmall` means the buffer exists but did not fit;
+    // *outSize then holds what it needs and the encoded frame has NOT been dropped -- it is still
+    // owned by the codec, so a caller that grows and asks again gets the same one.
+    static constexpr int32_t kOutputTooSmall = -1;
+    static constexpr int32_t kOutputFailed = -2;
+    int32_t pollOutput(uint8_t* out, uint32_t cap, uint32_t* outSize, uint32_t* outFlags,
+                       int64_t* outPtsUs, int64_t timeoutUs) {
+        auto& media = MediaCodecLib::GetInstance();
+        AMediaCodecBufferInfo info{};
+        ssize_t index = media.AMediaCodec_dequeueOutputBuffer(mCodec, &info, timeoutUs);
+        if (index == AMEDIACODEC_INFO_TRY_AGAIN_LATER ||
+            index == AMEDIACODEC_INFO_OUTPUT_BUFFERS_CHANGED) {
+            return 0;
+        }
+        if (index == AMEDIACODEC_INFO_OUTPUT_FORMAT_CHANGED) {
+            captureCodecConfig();
+            return 0;
+        }
+        if (index < 0) return kOutputFailed;
+
+        size_t bufferSize = 0;
+        uint8_t* data = media.AMediaCodec_getOutputBuffer(mCodec, static_cast<size_t>(index),
+                                                          &bufferSize);
+        if (data == nullptr) {
+            media.AMediaCodec_releaseOutputBuffer(mCodec, static_cast<size_t>(index), false);
+            return kOutputFailed;
+        }
+        const uint32_t size = static_cast<uint32_t>(info.size < 0 ? 0 : info.size);
+        if (outSize) *outSize = size;
+        if (outFlags) *outFlags = info.flags;
+        if (outPtsUs) *outPtsUs = info.presentationTimeUs;
+        if (size > cap) {
+            // Left undrained on purpose: releasing it here would lose the frame, and the caller's
+            // answer to "it did not fit" is to come back with a bigger buffer.
+            return kOutputTooSmall;
+        }
+        memcpy(out, data + info.offset, size);
+        if ((info.flags & AMEDIACODEC_BUFFER_FLAG_CODEC_CONFIG) != 0) {
+            std::lock_guard lk(mCodecConfigMutex);
+            mCodecConfig.assign(out, out + size);
+        }
+        media.AMediaCodec_releaseOutputBuffer(mCodec, static_cast<size_t>(index), false);
+        return static_cast<int32_t>(size);
+    }
+
+    // The stream's SPS and PPS, as Annex-B, or nothing if the encoder has not produced them yet.
+    //
+    // Kept so a client that connects mid-stream can be handed them before its first IDR. The
+    // encoder emits them exactly once, in the first output buffer, which is fine for the client
+    // that was already connected and useless for every one after it.
+    size_t codecConfig(uint8_t* out, uint32_t cap) {
+        std::lock_guard lk(mCodecConfigMutex);
+        if (mCodecConfig.empty() || mCodecConfig.size() > cap) return mCodecConfig.size();
+        memcpy(out, mCodecConfig.data(), mCodecConfig.size());
+        return mCodecConfig.size();
+    }
+
+    uint64_t droppedFrames() const { return mDroppedFrames; }
+    uint64_t queuedFrames() const { return mQueuedFrames; }
+
+private:
+    H264EncoderSession(uint32_t width, uint32_t height) : mWidth(width), mHeight(height) {}
+
+    // What the input surface's buffers have to be for both fill routes to work.
+    //
+    // RGBA_8888 because it is what an encoder input surface is fed everywhere else in Android
+    // (SurfaceFlinger's own screen recording path) and the only 32-bit colour format Vulkan will
+    // import an AHardwareBuffer as. GPU_COLOR_OUTPUT is what makes gralloc give back something the
+    // blit can be a destination of; the CPU bits are for the cursor blend and the upload route.
+    // Asking for CPU access also tends to force a linear layout, which is what the Vulkan import
+    // wants anyway -- a compressed one would be refused.
+    Result<void> prepareWindow() {
+        if (mWindowReady) return {};
+        if (mWindow == nullptr) return Error() << "no codec input surface";
+        // CPU is the honest declaration -- this producer writes with the CPU on one route and with
+        // a Vulkan blit on the other, and neither is EGL. EGL is tried second only because it is
+        // what every other producer of a codec input surface in Android connects as, so a
+        // BufferQueue that turns CPU down is not out of the question and the failure would
+        // otherwise be a whole rung reported as unavailable.
+        mConnectedApi = NATIVE_WINDOW_API_CPU;
+        int connected = native_window_api_connect(mWindow, mConnectedApi);
+        if (connected != 0) {
+            LOG(WARNING) << "codec input surface refused a CPU producer (" << connected
+                         << "); trying EGL";
+            mConnectedApi = NATIVE_WINDOW_API_EGL;
+            connected = native_window_api_connect(mWindow, mConnectedApi);
+        }
+        if (connected != 0) {
+            mConnectedApi = 0;
+            return Error() << "failed to connect to the codec input surface: " << connected;
+        }
+        if (int result = ANativeWindow_setBuffersGeometry(mWindow, static_cast<int32_t>(mWidth),
+                                                          static_cast<int32_t>(mHeight),
+                                                          HAL_PIXEL_FORMAT_RGBA_8888);
+            result != 0) {
+            native_window_api_disconnect(mWindow, mConnectedApi);
+            mConnectedApi = 0;
+            return Error() << "failed to set codec input geometry: " << result;
+        }
+        constexpr uint64_t kUsage = AHARDWAREBUFFER_USAGE_GPU_COLOR_OUTPUT |
+                AHARDWAREBUFFER_USAGE_CPU_WRITE_OFTEN | AHARDWAREBUFFER_USAGE_CPU_READ_OFTEN;
+        if (int result = ANativeWindow_setUsage(mWindow, kUsage); result != 0) {
+            native_window_api_disconnect(mWindow, mConnectedApi);
+            mConnectedApi = 0;
+            return Error() << "failed to set codec input usage: " << result;
+        }
+        // Never block the producer. Same reason as the display sink's GPU path: the caller is on
+        // the guest's flush path and a full codec queue must cost a dropped frame, not a stalled
+        // guest.
+        if (int result = mWindow->perform(mWindow, NATIVE_WINDOW_SET_DEQUEUE_TIMEOUT, (int64_t)0);
+            result != 0) {
+            LOG(WARNING) << "H.264 side channel: zero dequeue timeout refused: " << result;
+        }
+        mWindowReady = true;
+        return {};
+    }
+
+    // Waits for a fence and closes it. -1 is "nothing to wait for" and succeeds.
+    static Result<void> waitFence(int fenceFd) {
+        if (fenceFd < 0) return {};
+        pollfd descriptor{.fd = fenceFd, .events = POLLIN, .revents = 0};
+        int ret;
+        do {
+            ret = poll(&descriptor, 1, kFenceTimeoutMs);
+        } while (ret < 0 && errno == EINTR);
+        const int pollErrno = errno;
+        close(fenceFd);
+        if (ret == 0) return Error() << "codec buffer fence unsignalled after " << kFenceTimeoutMs
+                                     << "ms";
+        if (ret < 0) return Error() << "poll on a codec buffer fence failed: " << pollErrno;
+        return {};
+    }
+
+    // The GPU route: the guest's own dmabuf, blitted into the encoder's buffer by the same Vulkan
+    // bridge that blits into the app's display buffer. This is the §7 premise; if it is going to
+    // fail it fails here, and the message says so.
+    Result<void> fillByBlit(HeadlessBlitContext* blitCtx, int64_t importId, AHardwareBuffer* ahb,
+                            int acquireFenceFd, int* outCompletionFd) {
+        // The bridge's blit does not take an acquire fence on this entry point, so the wait is
+        // ours. It is a display buffer coming back from the encoder rather than from a compositor,
+        // so in practice it is already signalled.
+        if (auto ret = waitFence(acquireFenceFd); !ret.ok()) return ret;
+        auto fence = blitCtx->blitInto(importId, ahb);
+        if (!fence.ok()) {
+            return Error() << "Vulkan blit into the MediaCodec input buffer failed: "
+                           << fence.error().message();
+        }
+        *outCompletionFd = *fence;
+        return {};
+    }
+
+    // The CPU route: the picture the sink already has, copied in with red and blue exchanged.
+    //
+    // The exchange is the same one swapRedBlueInPlace performs for the display sink and for the
+    // same reason -- everything upstream of here is B,G,R,X (plan §4.4) and the buffer is declared
+    // RGBA_8888 -- except that it happens during the copy rather than as a second pass over the
+    // frame, because unlike the display sink there is no earlier copy to piggyback on.
+    Result<void> fillByUpload(AHardwareBuffer* ahb, const uint8_t* pixels, uint32_t pixelsSize) {
+        if (pixels == nullptr) return Error() << "no pixels to upload and no GPU source either";
+        AHardwareBuffer_Desc desc{};
+        AHardwareBuffer_describe(ahb, &desc);
+        void* address = nullptr;
+        const int status = AHardwareBuffer_lock(ahb, AHARDWAREBUFFER_USAGE_CPU_WRITE_OFTEN,
+                                                /* fence= */ -1, /* rect= */ nullptr, &address);
+        if (status != 0 || address == nullptr) {
+            return Error() << "AHardwareBuffer_lock on a MediaCodec input buffer failed: "
+                           << status;
+        }
+        const size_t dstStride = static_cast<size_t>(desc.stride) * 4;
+        const size_t srcStride = static_cast<size_t>(mWidth) * 4;
+        uint8_t* dstBase = static_cast<uint8_t*>(address);
+        for (uint32_t y = 0; y < mHeight; y++) {
+            const size_t srcOff = static_cast<size_t>(y) * srcStride;
+            if (srcOff + srcStride > pixelsSize) break;
+            copyBgrxRowToRgba(dstBase + static_cast<size_t>(y) * dstStride, pixels + srcOff,
+                              mWidth);
+        }
+        AHardwareBuffer_unlock(ahb, /* fence= */ nullptr);
+        return {};
+    }
+
+    static void copyBgrxRowToRgba(uint8_t* dst, const uint8_t* src, uint32_t pixelCount) {
+        uint32_t x = 0;
+#if defined(__aarch64__)
+        for (; x + 16 <= pixelCount; x += 16, dst += 64, src += 64) {
+            uint8x16x4_t channels = vld4q_u8(src);
+            uint8x16_t tmp = channels.val[0];
+            channels.val[0] = channels.val[2];
+            channels.val[2] = tmp;
+            vst4q_u8(dst, channels);
+        }
+#endif
+        for (; x < pixelCount; x++, dst += 4, src += 4) {
+            dst[0] = src[2];
+            dst[1] = src[1];
+            dst[2] = src[0];
+            dst[3] = src[3];
+        }
+    }
+
+    // Alpha-blend the guest's pointer into the encoded picture, clipped to the screen.
+    //
+    // Straight (non-premultiplied) alpha, matching blend_cursor on the classic path exactly, so
+    // the two renderings of the same pointer agree. The source is B,G,R,A and the target is
+    // R,G,B,A, so the channel exchange happens here too.
+    Result<void> blendCursor(AHardwareBuffer* ahb, const H264CursorOverlay& cursor) {
+        const int screenW = static_cast<int>(mWidth);
+        const int screenH = static_cast<int>(mHeight);
+        const int x0 = cursor.x < 0 ? 0 : cursor.x;
+        const int y0 = cursor.y < 0 ? 0 : cursor.y;
+        const int x1 = std::min(cursor.x + cursor.width, screenW);
+        const int y1 = std::min(cursor.y + cursor.height, screenH);
+        if (x1 <= x0 || y1 <= y0) return {};
+
+        AHardwareBuffer_Desc desc{};
+        AHardwareBuffer_describe(ahb, &desc);
+        ARect rect{.left = x0, .top = y0, .right = x1, .bottom = y1};
+        void* address = nullptr;
+        const int status = AHardwareBuffer_lock(
+                ahb, AHARDWAREBUFFER_USAGE_CPU_WRITE_OFTEN | AHARDWAREBUFFER_USAGE_CPU_READ_OFTEN,
+                /* fence= */ -1, &rect, &address);
+        if (status != 0 || address == nullptr) {
+            return Error() << "AHardwareBuffer_lock for the cursor blend failed: " << status;
+        }
+        const size_t dstStride = static_cast<size_t>(desc.stride) * 4;
+        uint8_t* dstBase = static_cast<uint8_t*>(address);
+        for (int y = y0; y < y1; y++) {
+            const uint8_t* src =
+                    cursor.pixels + (((y - cursor.y) * cursor.width) + (x0 - cursor.x)) * 4;
+            uint8_t* dst = dstBase + static_cast<size_t>(y) * dstStride +
+                    static_cast<size_t>(x0) * 4;
+            for (int x = x0; x < x1; x++, src += 4, dst += 4) {
+                const uint32_t a = src[3];
+                if (a == 0) continue;
+                if (a == 255) {
+                    dst[0] = src[2];
+                    dst[1] = src[1];
+                    dst[2] = src[0];
+                    continue;
+                }
+                dst[0] = static_cast<uint8_t>((src[2] * a + dst[0] * (255 - a)) / 255);
+                dst[1] = static_cast<uint8_t>((src[1] * a + dst[1] * (255 - a)) / 255);
+                dst[2] = static_cast<uint8_t>((src[0] * a + dst[2] * (255 - a)) / 255);
+            }
+        }
+        AHardwareBuffer_unlock(ahb, /* fence= */ nullptr);
+        return {};
+    }
+
+    // SPS and PPS off the settled output format, concatenated in that order.
+    //
+    // Belt and braces with the CODEC_CONFIG output buffer pollOutput also caches: which of the two
+    // an encoder produces is not something every component agrees on, and both arrive before the
+    // first coded picture, so whichever lands first is the one a late client is handed.
+    void captureCodecConfig() {
+        auto& media = MediaCodecLib::GetInstance();
+        AMediaFormat* format = media.AMediaCodec_getOutputFormat(mCodec);
+        if (!format) return;
+        auto formatGuard =
+                android::base::make_scope_guard([&] { media.AMediaFormat_delete(format); });
+        std::vector<uint8_t> config;
+        for (const char* key : {kFormatKeyCsd0, kFormatKeyCsd1}) {
+            void* data = nullptr;
+            size_t size = 0;
+            if (media.AMediaFormat_getBuffer(format, key, &data, &size) && data && size) {
+                const uint8_t* bytes = static_cast<const uint8_t*>(data);
+                config.insert(config.end(), bytes, bytes + size);
+            }
+        }
+        if (config.empty()) return;
+        std::lock_guard lk(mCodecConfigMutex);
+        if (mCodecConfig.empty()) {
+            LOG(INFO) << "H.264 side channel: codec config is " << config.size()
+                      << " bytes of Annex-B";
+            mCodecConfig = std::move(config);
+        }
+    }
+
+    // Three vsyncs of a 120 Hz panel, the figure every other bounded fence wait in this file uses.
+    static constexpr int kFenceTimeoutMs = 25;
+
+    const uint32_t mWidth;
+    const uint32_t mHeight;
+    AMediaCodec* mCodec = nullptr;
+    ANativeWindow* mWindow = nullptr;
+    bool mWindowReady = false;
+    /// Which producer API the input surface is connected as, or 0 for not connected.
+    int mConnectedApi = 0;
+    uint64_t mDroppedFrames = 0;
+    uint64_t mQueuedFrames = 0;
+    std::mutex mCodecConfigMutex;
+    std::vector<uint8_t> mCodecConfig;
 };
 
 class SinkANativeWindow_Buffer {
@@ -2675,14 +3233,19 @@ extern "C" void android_blit_ctx_destroy(struct AndroidBlitContext* ctx) {
 // Imports a guest dmabuf as a blit source. Returns 0 if it cannot be imported. `fourcc` is the
 // GUEST's declaration; what the source image is actually created with is HeadlessBlitContext's
 // business (see blitSourceFourcc).
+//
+// `exchange_red_blue` says which byte order blits from this import must land in: true for the
+// CPU pipeline's canonical B,G,R,X (what LibVNCServer serves), false for the R,G,B,A an
+// RGBA_8888 gralloc buffer claims to hold (what a video encoder reads). One dmabuf can be
+// imported both ways at once; each import is one VkImage over the same guest pages.
 extern "C" int64_t android_blit_ctx_import_dmabuf(struct AndroidBlitContext* ctx, int fd,
                                                   uint32_t offset, uint32_t stride,
                                                   uint64_t modifier, bool linearLayoutVerified,
-                                                  uint32_t width, uint32_t height,
-                                                  uint32_t fourcc) {
+                                                  uint32_t width, uint32_t height, uint32_t fourcc,
+                                                  bool exchange_red_blue) {
     if (!ctx) return 0;
     return ctx->impl.importDmabuf(fd, offset, stride, modifier, linearLayoutVerified, width, height,
-                                  fourcc);
+                                  fourcc, exchange_red_blue);
 }
 
 extern "C" void android_blit_ctx_release_import(struct AndroidBlitContext* ctx, int64_t importId) {
@@ -2723,4 +3286,115 @@ extern "C" bool android_blit_ctx_map(struct AndroidBlitContext* ctx, const uint8
 extern "C" void android_blit_ctx_unmap(struct AndroidBlitContext* ctx) {
     if (!ctx) return;
     ctx->impl.unmap();
+}
+
+// ---------------------------------------------------------------------------------------------
+// The H.264 side channel's encoder half (plan §6 step 13).
+//
+// Deliberately shaped like the blit entry points above rather than folded into them: a caller can
+// have a blit context and no encoder (every VNC screen today) or, in principle, an encoder and no
+// blit context (a CPU-transport producer whose frames are uploaded). The one place the two meet is
+// android_h264_enc_encode_frame, which takes the blit context as an argument -- so the coupling is
+// per frame and visible in the signature, instead of a field somebody has to remember to set.
+//
+// Everything above the socket is here; nothing about the socket is. Which port the stream leaves
+// by, who is listening on it and what the framing looks like are crosvm's, and this side never
+// learns any of it.
+// ---------------------------------------------------------------------------------------------
+
+struct AndroidH264Encoder {
+    std::unique_ptr<H264EncoderSession> impl;
+};
+
+// Brings up a hardware H.264 encoder for a screen of this size, or returns null.
+//
+// Null is an ordinary answer with several ordinary causes -- no media NDK, no AVC encoder, a
+// geometry the component refuses -- and the caller's response to all of them is the same: serve
+// RFB and nothing else. The reason is logged here, once, because here is where it is known.
+extern "C" struct AndroidH264Encoder* android_h264_enc_create(uint32_t width, uint32_t height,
+                                                              int32_t bitrate_bps,
+                                                              int32_t frame_rate,
+                                                              int32_t iframe_interval_secs) {
+    auto session = H264EncoderSession::Open(width, height, bitrate_bps, frame_rate,
+                                            iframe_interval_secs);
+    if (!session) return nullptr;
+    auto ctx = std::make_unique<AndroidH264Encoder>();
+    ctx->impl = std::move(session);
+    return ctx.release();
+}
+
+extern "C" void android_h264_enc_destroy(struct AndroidH264Encoder* ctx) {
+    delete ctx;
+}
+
+// Asks for an IDR at the next opportunity. Called when a side-channel client connects.
+extern "C" void android_h264_enc_request_sync_frame(struct AndroidH264Encoder* ctx) {
+    if (!ctx) return;
+    ctx->impl->requestSyncFrame();
+}
+
+// Feeds one picture. `import_id` non-zero (with `blit_ctx`) takes the GPU route -- the guest's own
+// dmabuf blitted into the codec's input buffer -- and zero takes the CPU upload of `pixels`.
+//
+// False means the frame did not reach the encoder. `out_error` receives a NUL-terminated reason
+// when it did not, so the caller can report the first failure verbatim rather than "hw encode did
+// not work": on the GPU route that message IS the §7 verdict.
+extern "C" bool android_h264_enc_encode_frame(struct AndroidH264Encoder* ctx,
+                                              struct AndroidBlitContext* blit_ctx,
+                                              int64_t import_id, const uint8_t* pixels,
+                                              uint32_t pixels_size, uint32_t width, uint32_t height,
+                                              const uint8_t* cursor_bgra, int32_t cursor_w,
+                                              int32_t cursor_h, int32_t cursor_x, int32_t cursor_y,
+                                              bool cursor_visible, int64_t pts_us, char* out_error,
+                                              uint32_t error_cap) {
+    if (out_error && error_cap) out_error[0] = '\0';
+    if (!ctx) return false;
+    H264CursorOverlay cursor{
+            .pixels = cursor_bgra,
+            .width = cursor_w,
+            .height = cursor_h,
+            .x = cursor_x,
+            .y = cursor_y,
+            .visible = cursor_visible,
+    };
+    auto ret = ctx->impl->encodeFrame(blit_ctx ? &blit_ctx->impl : nullptr, import_id, pixels,
+                                      pixels_size, width, height, cursor, pts_us);
+    if (ret.ok()) return true;
+    if (out_error && error_cap) {
+        const std::string message = ret.error().message();
+        const size_t copied = std::min<size_t>(message.size(), error_cap - 1);
+        memcpy(out_error, message.data(), copied);
+        out_error[copied] = '\0';
+    }
+    return false;
+}
+
+// Drains one compressed buffer, blocking for at most `timeout_us`.
+//
+// Returns bytes written, 0 for "nothing was ready", -1 for "it did not fit" (with *out_size set to
+// what it needs; the frame is still queued), and -2 for a codec error.
+extern "C" int32_t android_h264_enc_poll_output(struct AndroidH264Encoder* ctx, uint8_t* out,
+                                                uint32_t cap, uint32_t* out_size,
+                                                uint32_t* out_flags, int64_t* out_pts_us,
+                                                int64_t timeout_us) {
+    if (!ctx || !out) return H264EncoderSession::kOutputFailed;
+    return ctx->impl->pollOutput(out, cap, out_size, out_flags, out_pts_us, timeout_us);
+}
+
+// Copies the cached SPS+PPS, and returns how many bytes they are. A return greater than `cap`
+// means nothing was written; zero means the encoder has not emitted them yet.
+extern "C" uint32_t android_h264_enc_codec_config(struct AndroidH264Encoder* ctx, uint8_t* out,
+                                                  uint32_t cap) {
+    if (!ctx || !out) return 0;
+    return static_cast<uint32_t>(ctx->impl->codecConfig(out, cap));
+}
+
+// How many frames were handed to the encoder, and how many were dropped because every input
+// buffer was still with it. Reported rather than logged per frame: the ratio is the only honest
+// way to read the stream's frame rate against the producer's offer rate.
+extern "C" void android_h264_enc_frame_counts(struct AndroidH264Encoder* ctx, uint64_t* out_queued,
+                                              uint64_t* out_dropped) {
+    if (!ctx) return;
+    if (out_queued) *out_queued = ctx->impl->queuedFrames();
+    if (out_dropped) *out_dropped = ctx->impl->droppedFrames();
 }
