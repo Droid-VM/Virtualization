@@ -1468,6 +1468,217 @@ private:
     PFN_vkGetAndroidHardwareBufferPropertiesANDROID mGetAhbProperties = nullptr;
 };
 
+// A Vulkan blit with nothing on the far side of it.
+//
+// VulkanDisplayBridge above never needed a screen. Its inputs are a dmabuf fd and an
+// AHardwareBuffer*, and everything screen-shaped -- the binder service, the app's Surface, the
+// BufferQueue those AHBs are dequeued from -- lives in AndroidDisplaySurface beside it, not in it.
+// This class is what is left of the flip path when those are taken away: the same bridge, the same
+// import, the same blit, into a buffer allocated here and readable by the CPU.
+//
+// That is the shape the VNC sink needs (plan §6 step 11). It cannot present an AHB -- it has to put
+// pixels on a socket -- so its GPU half is "let the GPU do the copy and the channel-order
+// conversion, then read the result back", and the readback is the point rather than a cost to be
+// engineered away. Step 13 wants the same machinery pointed at a MediaCodec input buffer instead;
+// `ensureTarget` is the only member that knows what the target is for.
+class HeadlessBlitContext {
+public:
+    // The geometry is where the target starts, not a contract: `blit` re-allocates when the source
+    // turns out to be a different size, which is how a guest resolution change is absorbed. Doing
+    // it here as well means a screen that never resizes pays for its buffer at open rather than on
+    // its first frame.
+    HeadlessBlitContext(uint32_t width, uint32_t height) {
+        if (mBridge.ready() && width && height) ensureTarget(width, height);
+    }
+
+    ~HeadlessBlitContext() {
+        unmap();
+        releaseTarget();
+        // mBridge is destroyed after this body and drains the device first, so the copy of our AHB
+        // reference it holds in its target cache outlives the one released just above -- which is
+        // also what stops a freshly allocated target from being handed back the same pointer.
+    }
+
+    HeadlessBlitContext(const HeadlessBlitContext&) = delete;
+    HeadlessBlitContext& operator=(const HeadlessBlitContext&) = delete;
+
+    bool ready() const { return mBridge.ready(); }
+
+    int64_t importDmabuf(int fd, uint32_t offset, uint32_t stride, uint64_t modifier,
+                         bool linearLayoutVerified, uint32_t width, uint32_t height,
+                         uint32_t fourcc) {
+        return mBridge.importDmabuf(fd, offset, stride, modifier, linearLayoutVerified, width,
+                                    height, blitSourceFourcc(fourcc));
+    }
+
+    void release(int64_t importId) { mBridge.release(importId); }
+
+    // Blit an import into the target and wait, with a bound, for the GPU to be done with it.
+    //
+    // Returning drops any CPU mapping first: AHardwareBuffer_lock is where the CPU's view of this
+    // memory is invalidated, so a mapping taken before this blit would go on showing the frame
+    // before it. The caller maps again afterwards.
+    Result<void> blit(int64_t importId, uint32_t width, uint32_t height, int timeoutMs) {
+        unmap();
+        if (!ensureTarget(width, height)) {
+            return Error() << "no CPU-readable blit target for " << width << "x" << height;
+        }
+        auto fence = mBridge.blit(importId, mAhb);
+        if (!fence.ok()) return fence.error();
+        int fenceFd = *fence;
+        // -1 is the bridge saying it already drained the queue itself, on either of the two paths
+        // that end there: async blit disabled, or the completion sync_fd could not be exported.
+        if (fenceFd < 0) return {};
+
+        pollfd descriptor{.fd = fenceFd, .events = POLLIN, .revents = 0};
+        int ret;
+        do {
+            ret = poll(&descriptor, 1, timeoutMs);
+        } while (ret < 0 && errno == EINTR);
+        const int pollErrno = errno;
+        close(fenceFd);
+        // Bounded, and a timeout is a hard error rather than "read it anyway". This is a readback,
+        // not a present: handing the CPU a target the GPU is still writing produces a torn frame
+        // with nothing anywhere to say so, which is exactly the class of failure that looks like a
+        // picture. The caller's answer to an error is the CPU copy, which is always available.
+        if (ret == 0) {
+            return Error() << "blit completion fence unsignalled after " << timeoutMs << "ms";
+        }
+        if (ret < 0) return Error() << "poll on blit completion fence failed: " << pollErrno;
+        return {};
+    }
+
+    // Map the target for CPU reading. The mapping stays valid until the next `blit` or until this
+    // context is destroyed, which is what lets a consumer keep referring to the last frame -- the
+    // VNC sink's cursor-only updates re-read the pixels the pointer used to cover.
+    Result<void> map(const uint8_t** outPixels, uint32_t* outStrideBytes, uint32_t* outWidth,
+                     uint32_t* outHeight, uint32_t* outSize) {
+        if (!mAhb) return Error() << "no blit target to map";
+        if (!mMapped) {
+            void* address = nullptr;
+            const int status = AHardwareBuffer_lock(mAhb, AHARDWAREBUFFER_USAGE_CPU_READ_OFTEN,
+                                                    /* fence= */ -1, /* rect= */ nullptr, &address);
+            if (status != 0 || address == nullptr) {
+                return Error() << "AHardwareBuffer_lock for CPU read failed: " << status;
+            }
+            mAddress = address;
+            mMapped = true;
+        }
+        *outPixels = static_cast<const uint8_t*>(mAddress);
+        *outStrideBytes = mStrideBytes;
+        *outWidth = mWidth;
+        *outHeight = mHeight;
+        *outSize = mStrideBytes * mHeight;
+        return {};
+    }
+
+    void unmap() {
+        if (!mMapped) return;
+        AHardwareBuffer_unlock(mAhb, /* fence= */ nullptr);
+        mMapped = false;
+        mAddress = nullptr;
+    }
+
+private:
+    static constexpr uint32_t fourccOf(char a, char b, char c, char d) {
+        return static_cast<uint32_t>(a) | (static_cast<uint32_t>(b) << 8) |
+                (static_cast<uint32_t>(c) << 16) | (static_cast<uint32_t>(d) << 24);
+    }
+
+    // The fourcc the SOURCE image is declared with, which is not the fourcc the guest declared.
+    //
+    // The only lever vkCmdBlitImage offers over channel order is the pair of formats it is given:
+    // it reads texels through the source format and writes them through the destination format, so
+    // naming a channel differently on one side moves it on the other. The destination here is
+    // AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM -- R,G,B,A in memory, and the only 32-bit colour format
+    // in the NDK's AHardwareBuffer enum at all, so it is not a choice. The consumer at the far end
+    // is LibVNCServer, whose serverFormat is red<<16 green<<8 blue<<0 little-endian: B,G,R,X in
+    // memory, the CPU pipeline's canonical order (plan §4.4). Those two disagree by exactly a
+    // red/blue exchange.
+    //
+    // The native sink pays for that exchange with swapRedBlueInPlace over the whole frame, on the
+    // CPU, after the copy. Here it costs nothing at all: declare the source with its red and blue
+    // names exchanged and the GPU performs the swap as part of the copy it was already doing. A
+    // guest AR24 scanout is B,G,R,A in memory; declared as AB24 the blit samples R := B_true and
+    // B := R_true, and writing that through an R8G8B8A8 destination puts B,G,R,A back in memory --
+    // which is what VNC reads. Exactly, not approximately: identical extents with VK_FILTER_NEAREST
+    // between two 8-bit UNORM formats is a texel copy.
+    //
+    // This is a deliberate misdeclaration in the one place §4.4 warns is silently fatal, so it is a
+    // named function with the arithmetic written out rather than a swapped constant at a call site.
+    // Backwards, it does not fail: it returns the whole picture with red and blue exchanged, with
+    // nothing in any log.
+    static uint32_t blitSourceFourcc(uint32_t guestFourcc) {
+        switch (guestFourcc) {
+            case fourccOf('A', 'R', '2', '4'):
+                return fourccOf('A', 'B', '2', '4');
+            case fourccOf('A', 'B', '2', '4'):
+                return fourccOf('A', 'R', '2', '4');
+            case fourccOf('X', 'R', '2', '4'):
+                return fourccOf('X', 'B', '2', '4');
+            case fourccOf('X', 'B', '2', '4'):
+                return fourccOf('X', 'R', '2', '4');
+            default:
+                // Not a format the bridge accepts either way; hand it through so the refusal names
+                // the fourcc the guest actually declared.
+                return guestFourcc;
+        }
+    }
+
+    bool ensureTarget(uint32_t width, uint32_t height) {
+        if (mAhb && mWidth == width && mHeight == height) return true;
+        unmap();
+        releaseTarget();
+        if (!width || !height) return false;
+
+        AHardwareBuffer_Desc request = {
+                .width = width,
+                .height = height,
+                .layers = 1,
+                .format = AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM,
+                // GPU_COLOR_OUTPUT is what makes gralloc give back something Vulkan will import as
+                // a blit destination; CPU_READ_OFTEN is what this buffer exists for.
+                .usage = AHARDWAREBUFFER_USAGE_CPU_READ_OFTEN |
+                        AHARDWAREBUFFER_USAGE_GPU_COLOR_OUTPUT,
+        };
+        AHardwareBuffer* ahb = nullptr;
+        const int status = AHardwareBuffer_allocate(&request, &ahb);
+        if (status != 0 || ahb == nullptr) {
+            LOG(ERROR) << "failed to allocate " << width << "x" << height
+                       << " CPU-readable blit target: " << status;
+            return false;
+        }
+        AHardwareBuffer_Desc actual{};
+        AHardwareBuffer_describe(ahb, &actual);
+        mAhb = ahb;
+        mWidth = width;
+        mHeight = height;
+        // AHardwareBuffer_describe reports the stride in PIXELS. gralloc is free to pad it past the
+        // width, and does; the consumer is told the real number rather than being assumed packed.
+        mStrideBytes = actual.stride * 4;
+        LOG(INFO) << "headless blit target " << width << "x" << height
+                  << " stride=" << actual.stride << "px";
+        return true;
+    }
+
+    void releaseTarget() {
+        if (!mAhb) return;
+        AHardwareBuffer_release(mAhb);
+        mAhb = nullptr;
+        mWidth = 0;
+        mHeight = 0;
+        mStrideBytes = 0;
+    }
+
+    VulkanDisplayBridge mBridge;
+    AHardwareBuffer* mAhb = nullptr;
+    uint32_t mWidth = 0;
+    uint32_t mHeight = 0;
+    uint32_t mStrideBytes = 0;
+    bool mMapped = false;
+    void* mAddress = nullptr;
+};
+
 class SinkANativeWindow_Buffer {
 public:
     Result<void> configure(uint32_t width, uint32_t height, int format) {
@@ -2428,4 +2639,88 @@ extern "C" bool android_display_flip_to(struct AndroidDisplayContext* ctx,
     }
     *outCompletionFenceFd = *ret;
     return true;
+}
+
+// ---------------------------------------------------------------------------------------------
+// The headless blit: the same Vulkan machinery, with a buffer we can read instead of a screen.
+//
+// Separate entry points rather than a flag on the display context above, because there is no
+// display: no service name, no binder registration, no Surface, no cursor. A caller that wants this
+// wants only the blit, and giving it the display context would mean it had to be told which half of
+// that object was real.
+// ---------------------------------------------------------------------------------------------
+
+struct AndroidBlitContext {
+    HeadlessBlitContext impl;
+    AndroidBlitContext(uint32_t width, uint32_t height) : impl(width, height) {}
+};
+
+// Creates a blit context, or returns null if this process has no Vulkan blit driver to load. Null
+// is a normal answer, not an error: it is what a machine with no CROSVM_DISPLAY_VULKAN_LIBRARY
+// named says, and every caller of this already has a CPU path to fall to.
+extern "C" struct AndroidBlitContext* android_blit_ctx_create(uint32_t width, uint32_t height) {
+    auto ctx = std::make_unique<AndroidBlitContext>(width, height);
+    if (!ctx->impl.ready()) {
+        LOG(INFO) << "headless blit context unavailable; caller stays on the CPU copy";
+        return nullptr;
+    }
+    LOG(INFO) << "headless blit context ready for " << width << "x" << height;
+    return ctx.release();
+}
+
+extern "C" void android_blit_ctx_destroy(struct AndroidBlitContext* ctx) {
+    delete ctx;
+}
+
+// Imports a guest dmabuf as a blit source. Returns 0 if it cannot be imported. `fourcc` is the
+// GUEST's declaration; what the source image is actually created with is HeadlessBlitContext's
+// business (see blitSourceFourcc).
+extern "C" int64_t android_blit_ctx_import_dmabuf(struct AndroidBlitContext* ctx, int fd,
+                                                  uint32_t offset, uint32_t stride,
+                                                  uint64_t modifier, bool linearLayoutVerified,
+                                                  uint32_t width, uint32_t height,
+                                                  uint32_t fourcc) {
+    if (!ctx) return 0;
+    return ctx->impl.importDmabuf(fd, offset, stride, modifier, linearLayoutVerified, width, height,
+                                  fourcc);
+}
+
+extern "C" void android_blit_ctx_release_import(struct AndroidBlitContext* ctx, int64_t importId) {
+    if (!ctx || !importId) return;
+    ctx->impl.release(importId);
+}
+
+// Blits an import into the context's target and waits, with a bound, for the GPU to finish. False
+// means the frame did not happen and the caller should fall back.
+extern "C" bool android_blit_ctx_blit(struct AndroidBlitContext* ctx, int64_t importId,
+                                      uint32_t width, uint32_t height, int timeout_ms) {
+    if (!ctx || !importId) return false;
+    auto ret = ctx->impl.blit(importId, width, height, timeout_ms);
+    if (!ret.ok()) {
+        LOG(WARNING) << "headless blit failed: " << ret.error().message();
+        return false;
+    }
+    return true;
+}
+
+// Maps the target for CPU reading. The mapping is valid until the next android_blit_ctx_blit or
+// android_blit_ctx_unmap on this context, or until it is destroyed. Out params are only written on
+// success.
+extern "C" bool android_blit_ctx_map(struct AndroidBlitContext* ctx, const uint8_t** out_pixels,
+                                     uint32_t* out_stride_bytes, uint32_t* out_width,
+                                     uint32_t* out_height, uint32_t* out_size) {
+    if (!ctx || !out_pixels || !out_stride_bytes || !out_width || !out_height || !out_size) {
+        return false;
+    }
+    auto ret = ctx->impl.map(out_pixels, out_stride_bytes, out_width, out_height, out_size);
+    if (!ret.ok()) {
+        LOG(WARNING) << "headless blit map failed: " << ret.error().message();
+        return false;
+    }
+    return true;
+}
+
+extern "C" void android_blit_ctx_unmap(struct AndroidBlitContext* ctx) {
+    if (!ctx) return;
+    ctx->impl.unmap();
 }
