@@ -86,6 +86,10 @@ bool envFlagEnabled(const char* name, bool defaultValue) {
     return defaultValue;
 }
 
+bool isSurfaceUnavailableStatus(int status) {
+    return status == -ENODEV || status == -EINVAL;
+}
+
 enum class RuntimeFlipFailureStage {
     kNone,
     kDequeue,
@@ -258,6 +262,22 @@ public:
     // Set when the async path can import an acquire fence as a GPU wait semaphore, letting the
     // caller skip the CPU poll on the dequeued release fence.
     bool canImportAcquireFence() const { return mAsyncBlitEnabled && mAsyncAcquireImportSupported; }
+
+    Result<void> resetTargetsForSurfaceChange() {
+        if (mTargetCache.empty()) return {};
+        if (!mDeviceWaitIdle) return Error() << "Vulkan device idle wait is unavailable";
+
+        const size_t targetCount = mTargetCache.size();
+        VkResult result = mDeviceWaitIdle(mDevice);
+        if (result != VK_SUCCESS) {
+            return Error() << "Failed to drain display targets for surface change: " << result;
+        }
+        for (auto& slot : mInFlightSlots) reclaimSlotAfterDeviceIdle(slot);
+        clearTargetCache();
+        LOG(INFO) << "Android display cleared " << targetCount
+                  << " cached targets for surface change";
+        return {};
+    }
 
     // acquireFenceFd is the release fence returned by ANativeWindow_dequeueBuffer. When
     // canImportAcquireFence() is true the caller passes it here for GPU-side waiting and blit()
@@ -1314,8 +1334,8 @@ private:
     // BufferQueue recycles a small fixed set of AHBs, so after warm-up this avoids the per-frame
     // vkCreateImage/vkAllocateMemory/vkImportAndroidHardwareBuffer/vkDestroy churn. The returned
     // pointer is stable across map growth (unordered_map guarantees reference stability). Cache
-    // entries are freed only on dimension change or teardown, both of which drain the device first,
-    // so an in-flight blit can never reference a destroyed target.
+    // Entries are freed only after draining the device: on dimension/surface change, cache-cap
+    // reset, or teardown. Therefore an in-flight blit can never reference a destroyed target.
     Result<TargetImage*> acquireTargetImage(AHardwareBuffer* ahb, uint32_t width, uint32_t height) {
         // A geometry change makes every cached AHB stale. Drain in-flight work, then rebuild.
         if (mTargetCacheWidth != width || mTargetCacheHeight != height) {
@@ -1448,6 +1468,217 @@ private:
     PFN_vkGetAndroidHardwareBufferPropertiesANDROID mGetAhbProperties = nullptr;
 };
 
+// A Vulkan blit with nothing on the far side of it.
+//
+// VulkanDisplayBridge above never needed a screen. Its inputs are a dmabuf fd and an
+// AHardwareBuffer*, and everything screen-shaped -- the binder service, the app's Surface, the
+// BufferQueue those AHBs are dequeued from -- lives in AndroidDisplaySurface beside it, not in it.
+// This class is what is left of the flip path when those are taken away: the same bridge, the same
+// import, the same blit, into a buffer allocated here and readable by the CPU.
+//
+// That is the shape the VNC sink needs (plan §6 step 11). It cannot present an AHB -- it has to put
+// pixels on a socket -- so its GPU half is "let the GPU do the copy and the channel-order
+// conversion, then read the result back", and the readback is the point rather than a cost to be
+// engineered away. Step 13 wants the same machinery pointed at a MediaCodec input buffer instead;
+// `ensureTarget` is the only member that knows what the target is for.
+class HeadlessBlitContext {
+public:
+    // The geometry is where the target starts, not a contract: `blit` re-allocates when the source
+    // turns out to be a different size, which is how a guest resolution change is absorbed. Doing
+    // it here as well means a screen that never resizes pays for its buffer at open rather than on
+    // its first frame.
+    HeadlessBlitContext(uint32_t width, uint32_t height) {
+        if (mBridge.ready() && width && height) ensureTarget(width, height);
+    }
+
+    ~HeadlessBlitContext() {
+        unmap();
+        releaseTarget();
+        // mBridge is destroyed after this body and drains the device first, so the copy of our AHB
+        // reference it holds in its target cache outlives the one released just above -- which is
+        // also what stops a freshly allocated target from being handed back the same pointer.
+    }
+
+    HeadlessBlitContext(const HeadlessBlitContext&) = delete;
+    HeadlessBlitContext& operator=(const HeadlessBlitContext&) = delete;
+
+    bool ready() const { return mBridge.ready(); }
+
+    int64_t importDmabuf(int fd, uint32_t offset, uint32_t stride, uint64_t modifier,
+                         bool linearLayoutVerified, uint32_t width, uint32_t height,
+                         uint32_t fourcc) {
+        return mBridge.importDmabuf(fd, offset, stride, modifier, linearLayoutVerified, width,
+                                    height, blitSourceFourcc(fourcc));
+    }
+
+    void release(int64_t importId) { mBridge.release(importId); }
+
+    // Blit an import into the target and wait, with a bound, for the GPU to be done with it.
+    //
+    // Returning drops any CPU mapping first: AHardwareBuffer_lock is where the CPU's view of this
+    // memory is invalidated, so a mapping taken before this blit would go on showing the frame
+    // before it. The caller maps again afterwards.
+    Result<void> blit(int64_t importId, uint32_t width, uint32_t height, int timeoutMs) {
+        unmap();
+        if (!ensureTarget(width, height)) {
+            return Error() << "no CPU-readable blit target for " << width << "x" << height;
+        }
+        auto fence = mBridge.blit(importId, mAhb);
+        if (!fence.ok()) return fence.error();
+        int fenceFd = *fence;
+        // -1 is the bridge saying it already drained the queue itself, on either of the two paths
+        // that end there: async blit disabled, or the completion sync_fd could not be exported.
+        if (fenceFd < 0) return {};
+
+        pollfd descriptor{.fd = fenceFd, .events = POLLIN, .revents = 0};
+        int ret;
+        do {
+            ret = poll(&descriptor, 1, timeoutMs);
+        } while (ret < 0 && errno == EINTR);
+        const int pollErrno = errno;
+        close(fenceFd);
+        // Bounded, and a timeout is a hard error rather than "read it anyway". This is a readback,
+        // not a present: handing the CPU a target the GPU is still writing produces a torn frame
+        // with nothing anywhere to say so, which is exactly the class of failure that looks like a
+        // picture. The caller's answer to an error is the CPU copy, which is always available.
+        if (ret == 0) {
+            return Error() << "blit completion fence unsignalled after " << timeoutMs << "ms";
+        }
+        if (ret < 0) return Error() << "poll on blit completion fence failed: " << pollErrno;
+        return {};
+    }
+
+    // Map the target for CPU reading. The mapping stays valid until the next `blit` or until this
+    // context is destroyed, which is what lets a consumer keep referring to the last frame -- the
+    // VNC sink's cursor-only updates re-read the pixels the pointer used to cover.
+    Result<void> map(const uint8_t** outPixels, uint32_t* outStrideBytes, uint32_t* outWidth,
+                     uint32_t* outHeight, uint32_t* outSize) {
+        if (!mAhb) return Error() << "no blit target to map";
+        if (!mMapped) {
+            void* address = nullptr;
+            const int status = AHardwareBuffer_lock(mAhb, AHARDWAREBUFFER_USAGE_CPU_READ_OFTEN,
+                                                    /* fence= */ -1, /* rect= */ nullptr, &address);
+            if (status != 0 || address == nullptr) {
+                return Error() << "AHardwareBuffer_lock for CPU read failed: " << status;
+            }
+            mAddress = address;
+            mMapped = true;
+        }
+        *outPixels = static_cast<const uint8_t*>(mAddress);
+        *outStrideBytes = mStrideBytes;
+        *outWidth = mWidth;
+        *outHeight = mHeight;
+        *outSize = mStrideBytes * mHeight;
+        return {};
+    }
+
+    void unmap() {
+        if (!mMapped) return;
+        AHardwareBuffer_unlock(mAhb, /* fence= */ nullptr);
+        mMapped = false;
+        mAddress = nullptr;
+    }
+
+private:
+    static constexpr uint32_t fourccOf(char a, char b, char c, char d) {
+        return static_cast<uint32_t>(a) | (static_cast<uint32_t>(b) << 8) |
+                (static_cast<uint32_t>(c) << 16) | (static_cast<uint32_t>(d) << 24);
+    }
+
+    // The fourcc the SOURCE image is declared with, which is not the fourcc the guest declared.
+    //
+    // The only lever vkCmdBlitImage offers over channel order is the pair of formats it is given:
+    // it reads texels through the source format and writes them through the destination format, so
+    // naming a channel differently on one side moves it on the other. The destination here is
+    // AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM -- R,G,B,A in memory, and the only 32-bit colour format
+    // in the NDK's AHardwareBuffer enum at all, so it is not a choice. The consumer at the far end
+    // is LibVNCServer, whose serverFormat is red<<16 green<<8 blue<<0 little-endian: B,G,R,X in
+    // memory, the VNC sink's declared target order. Those two disagree by exactly a red/blue
+    // exchange.
+    //
+    // The CPU path pays for that exchange at its producer-to-sink copy boundary. Here it costs
+    // nothing at all: declare the source with its red and blue names exchanged and the GPU performs
+    // the swap as part of the copy it was already doing. A guest AR24 scanout is B,G,R,A in memory;
+    // declared as AB24 the blit samples R := B_true and
+    // B := R_true, and writing that through an R8G8B8A8 destination puts B,G,R,A back in memory --
+    // which is what VNC reads. Exactly, not approximately: identical extents with VK_FILTER_NEAREST
+    // between two 8-bit UNORM formats is a texel copy.
+    //
+    // This is a deliberate misdeclaration in the one place §4.4 warns is silently fatal, so it is a
+    // named function with the arithmetic written out rather than a swapped constant at a call site.
+    // Backwards, it does not fail: it returns the whole picture with red and blue exchanged, with
+    // nothing in any log.
+    static uint32_t blitSourceFourcc(uint32_t guestFourcc) {
+        switch (guestFourcc) {
+            case fourccOf('A', 'R', '2', '4'):
+                return fourccOf('A', 'B', '2', '4');
+            case fourccOf('A', 'B', '2', '4'):
+                return fourccOf('A', 'R', '2', '4');
+            case fourccOf('X', 'R', '2', '4'):
+                return fourccOf('X', 'B', '2', '4');
+            case fourccOf('X', 'B', '2', '4'):
+                return fourccOf('X', 'R', '2', '4');
+            default:
+                // Not a format the bridge accepts either way; hand it through so the refusal names
+                // the fourcc the guest actually declared.
+                return guestFourcc;
+        }
+    }
+
+    bool ensureTarget(uint32_t width, uint32_t height) {
+        if (mAhb && mWidth == width && mHeight == height) return true;
+        unmap();
+        releaseTarget();
+        if (!width || !height) return false;
+
+        AHardwareBuffer_Desc request = {
+                .width = width,
+                .height = height,
+                .layers = 1,
+                .format = AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM,
+                // GPU_COLOR_OUTPUT is what makes gralloc give back something Vulkan will import as
+                // a blit destination; CPU_READ_OFTEN is what this buffer exists for.
+                .usage = AHARDWAREBUFFER_USAGE_CPU_READ_OFTEN |
+                        AHARDWAREBUFFER_USAGE_GPU_COLOR_OUTPUT,
+        };
+        AHardwareBuffer* ahb = nullptr;
+        const int status = AHardwareBuffer_allocate(&request, &ahb);
+        if (status != 0 || ahb == nullptr) {
+            LOG(ERROR) << "failed to allocate " << width << "x" << height
+                       << " CPU-readable blit target: " << status;
+            return false;
+        }
+        AHardwareBuffer_Desc actual{};
+        AHardwareBuffer_describe(ahb, &actual);
+        mAhb = ahb;
+        mWidth = width;
+        mHeight = height;
+        // AHardwareBuffer_describe reports the stride in PIXELS. gralloc is free to pad it past the
+        // width, and does; the consumer is told the real number rather than being assumed packed.
+        mStrideBytes = actual.stride * 4;
+        LOG(INFO) << "headless blit target " << width << "x" << height
+                  << " stride=" << actual.stride << "px";
+        return true;
+    }
+
+    void releaseTarget() {
+        if (!mAhb) return;
+        AHardwareBuffer_release(mAhb);
+        mAhb = nullptr;
+        mWidth = 0;
+        mHeight = 0;
+        mStrideBytes = 0;
+    }
+
+    VulkanDisplayBridge mBridge;
+    AHardwareBuffer* mAhb = nullptr;
+    uint32_t mWidth = 0;
+    uint32_t mHeight = 0;
+    uint32_t mStrideBytes = 0;
+    bool mMapped = false;
+    void* mAddress = nullptr;
+};
+
 class SinkANativeWindow_Buffer {
 public:
     Result<void> configure(uint32_t width, uint32_t height, int format) {
@@ -1474,6 +1705,40 @@ private:
     std::vector<uint8_t> mBufferBits;
 };
 
+// The acceptance instrument for a byte-identical refactor of the display pipeline (see the plan's
+// §6 step 4 and §9): the three CPU copy sites that feed this sink are being consolidated behind one
+// function, and "the sink receives the same bytes" is not an acceptance condition until something
+// measures it. This sits deliberately below everything that refactor touches, so the same number is
+// taken in both binaries and the two frame sequences can simply be compared.
+//
+// The hash covers exactly the visible pixels, row by row: the padding a gralloc stride leaves at
+// the end of each row is displayed by nobody and initialised by nothing, so hashing it would let
+// two identical frames disagree. Off unless CROSVM_DISPLAY_HASH_FRAMES=1, read once.
+static bool frameHashEnabled() {
+    static const bool enabled = envFlagEnabled("CROSVM_DISPLAY_HASH_FRAMES", false);
+    return enabled;
+}
+
+static uint64_t fnv1a64VisiblePixels(const ANativeWindow_Buffer& buf) {
+    uint64_t hash = 0xcbf29ce484222325ULL;
+    const uint8_t* base = static_cast<const uint8_t*>(buf.bits);
+    if (base == nullptr || buf.width <= 0 || buf.height <= 0) return hash;
+    const size_t rowBytes = static_cast<size_t>(buf.width) * 4;
+    for (int32_t y = 0; y < buf.height; y++) {
+        const uint8_t* px = base + static_cast<size_t>(y) * static_cast<size_t>(buf.stride) * 4;
+        for (size_t i = 0; i < rowBytes; i++) {
+            hash = (hash ^ px[i]) * 0x100000001b3ULL;
+        }
+    }
+    return hash;
+}
+
+static void logFrameHash(const std::string& surfaceName, const ANativeWindow_Buffer& buf) {
+    LOG(INFO) << "FRAMEHASH surface=" << surfaceName << " " << buf.width << "x" << buf.height
+              << " fnv1a64=0x" << std::hex << std::setw(16) << std::setfill('0')
+              << fnv1a64VisiblePixels(buf) << std::dec;
+}
+
 static Result<void> copyBuffer(ANativeWindow_Buffer& from, ANativeWindow_Buffer& to) {
     if (from.width != to.width || from.height != to.height) {
         return Error() << "dimension mismatch. from=(" << from.width << ", " << from.height << ") "
@@ -1499,9 +1764,10 @@ public:
         {
             std::lock_guard lk(mSurfaceMutex);
             LOG(INFO) << "display surface " << mName << " native window attached";
-            disconnectNativeWindowLocked();
+            clearNativeSurfaceLocked(true);
             mNativeSurface = std::make_unique<Surface>(surface->release());
             mNativeSurfaceNeedsConfiguring = true;
+            ++mNativeSurfaceGeneration;
             Surface* surface = mNativeSurface.get();
             if (!surface) {
                 return Error() << "Failed to get Surface";
@@ -1521,14 +1787,7 @@ public:
     void removeSurface() {
         {
             std::lock_guard lk(mSurfaceMutex);
-            disconnectNativeWindowLocked();
-            auto& sc = SurfaceControl::GetInstance();
-            if (mSurfaceControl) {
-                if (sc.IsSupported()) sc.ASurfaceControl_release(mSurfaceControl);
-                mSurfaceControl = nullptr;
-            }
-            mNativeSurface = nullptr;
-            mGpuUsageConfigured = false;
+            clearNativeSurfaceLocked(true);
         }
         mNativeSurfaceReady.notify_one();
     }
@@ -1536,6 +1795,16 @@ public:
     Surface* getSurface() {
         std::unique_lock lk(mSurfaceMutex);
         return mNativeSurface.get();
+    }
+
+    // Whether a native window is attached right now. This is the non-blocking read of the same
+    // field that waitForNativeSurface() parks on, and the distinction is the whole point: the
+    // caller is crosvm's simplefb bridge asking once per frame from its 30 fps timer thread, and
+    // waiting there would hold that thread -- input dispatch included -- until the user came back
+    // to the display view.
+    bool hasNativeSurface() {
+        std::lock_guard lk(mSurfaceMutex);
+        return mNativeSurface != nullptr;
     }
 
     Result<void> configure(uint32_t width, uint32_t height) {
@@ -1603,6 +1872,12 @@ public:
             // backgrounded. Keep the source import alive and drop the frame in that interval.
             return -1;
         }
+        if (mVulkanTargetGeneration != mNativeSurfaceGeneration) {
+            if (auto ret = bridge.resetTargetsForSurfaceChange(); !ret.ok()) {
+                return Error() << ret.error();
+            }
+            mVulkanTargetGeneration = mNativeSurfaceGeneration;
+        }
         ANativeWindow* anw = surface->get();
         if (anw == nullptr) return Error() << "Failed to get ANativeWindow";
         {
@@ -1637,9 +1912,14 @@ public:
             }
             return -1;
         }
-        if (result != 0 || buffer == nullptr) {
+        if (result != 0) {
             if (fenceFd >= 0) close(fenceFd);
+            if (clearIfSurfaceUnavailableLocked("dequeueBuffer", result)) return -1;
             return Error() << "Failed to dequeue display buffer: " << result;
+        }
+        if (buffer == nullptr) {
+            if (fenceFd >= 0) close(fenceFd);
+            return Error() << "Failed to dequeue display buffer: null buffer";
         }
 
         // When the bridge can import the acquire fence as a GPU wait semaphore, hand the fence to
@@ -1712,6 +1992,9 @@ public:
             // failure skips that call, so close our still-owned fd after its duplicate signals.
             if (!queueCalled && targetCompletionFd >= 0) close(targetCompletionFd);
             ANativeWindow_cancelBuffer(anw, buffer, -1);
+            if (!injectQueueFailure && clearIfSurfaceUnavailableLocked("queueBuffer", result)) {
+                return -1;
+            }
             return Error() << (injectQueueFailure ? "Injected display queue failure: "
                                                   : "Failed to queue display buffer: ")
                            << result;
@@ -1733,6 +2016,10 @@ public:
         if (anw == nullptr) {
             return Error() << "Failed to get ANativeWindow";
         }
+
+        // The CPU edge has already copied into the RGBA layout declared by this sink, so this hash
+        // is also exactly what SurfaceFlinger receives. See frameHashEnabled().
+        if (frameHashEnabled()) logFrameHash(mName, mLastBuffer);
 
         if (ANativeWindow_unlockAndPost(anw) != 0) {
             return Error() << "Failed to unlock and post window";
@@ -1805,6 +2092,40 @@ public:
     const std::string& name() const { return mName; }
 
 private:
+    void clearNativeSurfaceLocked(bool disconnect) {
+        const bool hadSurface = mNativeSurface != nullptr;
+        if (disconnect) {
+            disconnectNativeWindowLocked();
+        } else {
+            mConnectedNativeWindowApi = 0;
+            mGpuUsageConfigured = false;
+            mZeroDequeueTimeout = false;
+        }
+
+        auto& sc = SurfaceControl::GetInstance();
+        if (mSurfaceControl) {
+            if (sc.IsSupported()) sc.ASurfaceControl_release(mSurfaceControl);
+            mSurfaceControl = nullptr;
+        }
+        mNativeSurface = nullptr;
+        mNativeSurfaceNeedsConfiguring = true;
+        mGpuUsageConfigured = false;
+        mLastBufferValid = false;
+        if (hadSurface) ++mNativeSurfaceGeneration;
+    }
+
+    bool clearIfSurfaceUnavailableLocked(const char* operation, int status) {
+        if (!isSurfaceUnavailableStatus(status)) return false;
+        LOG(WARNING) << "display surface " << mName << " became unavailable during " << operation
+                     << " (" << status
+                     << "); keeping Vulkan path active and dropping frames until a replacement is "
+                        "attached";
+        // The producer is already disconnected or abandoned. Avoid another native-window call
+        // while releasing our stale Surface reference.
+        clearNativeSurfaceLocked(false);
+        return true;
+    }
+
     void disconnectNativeWindowLocked() {
         if (mConnectedNativeWindowApi == 0) return;
         Surface* surface = mNativeSurface.get();
@@ -1923,6 +2244,8 @@ private:
     bool mZeroDequeueTimeout = false;
     // Flips dropped because no display buffer was free at the time (see flip()).
     uint64_t mDroppedFlips = 0;
+    uint64_t mNativeSurfaceGeneration = 0;
+    uint64_t mVulkanTargetGeneration = 0;
 
     // Buffer which crosvm uses when in background. This is just to not fail crosvm even when
     // Android-side Surface doesn't exist. The content drawn here is never displayed on the physical
@@ -2169,7 +2492,10 @@ extern "C" void set_android_surface_position(struct AndroidDisplayContext* ctx, 
     }
     auto fd = ctx->disp_service->getCursorStream().get();
     if (fd == -1) {
-        ctx->errorf("Invalid fd");
+        static std::atomic<bool> warned = false;
+        if (!warned.exchange(true, std::memory_order_relaxed)) {
+            LOG(WARNING) << "cursor position stream is not attached; dropping position updates";
+        }
         return;
     }
     uint32_t pos[] = {x, y};
@@ -2235,6 +2561,23 @@ extern "C" bool android_display_is_vulkan_blit_available(struct AndroidDisplayCo
     return ctx && ctx->getVulkanDisplay() != nullptr;
 }
 
+// Whether a frame posted now can reach a screen: the app attached a Surface to the scanout and has
+// not taken it back. Leaving the display view destroys the SurfaceView, and the removeSurface(false)
+// that follows drops the native window here; the same clearing happens when a producer is abandoned
+// under us (clearIfSurfaceUnavailableLocked). While there is none, lock() hands out the sink buffer
+// and unlockAndPost() returns without posting, so the frame is built and thrown away.
+//
+// Only the scanout counts. The cursor surface is a separate SurfaceView on its own lifecycle and may
+// never be attached at all (the app's display view does not always carry a cursor overlay), so it
+// answers a different question and would make this one wrong in both directions.
+//
+// A caller is entitled to skip building the frame on a false, so this must never block or wait: the
+// answer is the current state, and a consumer that arrives a moment later is seen by the next call.
+extern "C" bool android_display_has_consumer(struct AndroidDisplayContext* ctx) {
+    if (ctx == nullptr || ctx->disp_service == nullptr) return false;
+    return ctx->disp_service->getSurface(/* forCursor= */ false).hasNativeSurface();
+}
+
 extern "C" void android_display_release_import(struct AndroidDisplayContext* ctx,
                                                int64_t rawHandle) {
     if (!ctx || !ctx->vulkan_display || !rawHandle) return;
@@ -2258,4 +2601,88 @@ extern "C" bool android_display_flip_to(struct AndroidDisplayContext* ctx,
     }
     *outCompletionFenceFd = *ret;
     return true;
+}
+
+// ---------------------------------------------------------------------------------------------
+// The headless blit: the same Vulkan machinery, with a buffer we can read instead of a screen.
+//
+// Separate entry points rather than a flag on the display context above, because there is no
+// display: no service name, no binder registration, no Surface, no cursor. A caller that wants this
+// wants only the blit, and giving it the display context would mean it had to be told which half of
+// that object was real.
+// ---------------------------------------------------------------------------------------------
+
+struct AndroidBlitContext {
+    HeadlessBlitContext impl;
+    AndroidBlitContext(uint32_t width, uint32_t height) : impl(width, height) {}
+};
+
+// Creates a blit context, or returns null if this process has no Vulkan blit driver to load. Null
+// is a normal answer, not an error: it is what a machine with no CROSVM_DISPLAY_VULKAN_LIBRARY
+// named says, and every caller of this already has a CPU path to fall to.
+extern "C" struct AndroidBlitContext* android_blit_ctx_create(uint32_t width, uint32_t height) {
+    auto ctx = std::make_unique<AndroidBlitContext>(width, height);
+    if (!ctx->impl.ready()) {
+        LOG(INFO) << "headless blit context unavailable; caller stays on the CPU copy";
+        return nullptr;
+    }
+    LOG(INFO) << "headless blit context ready for " << width << "x" << height;
+    return ctx.release();
+}
+
+extern "C" void android_blit_ctx_destroy(struct AndroidBlitContext* ctx) {
+    delete ctx;
+}
+
+// Imports a guest dmabuf as a blit source. Returns 0 if it cannot be imported. `fourcc` is the
+// GUEST's declaration; what the source image is actually created with is HeadlessBlitContext's
+// business (see blitSourceFourcc).
+extern "C" int64_t android_blit_ctx_import_dmabuf(struct AndroidBlitContext* ctx, int fd,
+                                                  uint32_t offset, uint32_t stride,
+                                                  uint64_t modifier, bool linearLayoutVerified,
+                                                  uint32_t width, uint32_t height,
+                                                  uint32_t fourcc) {
+    if (!ctx) return 0;
+    return ctx->impl.importDmabuf(fd, offset, stride, modifier, linearLayoutVerified, width, height,
+                                  fourcc);
+}
+
+extern "C" void android_blit_ctx_release_import(struct AndroidBlitContext* ctx, int64_t importId) {
+    if (!ctx || !importId) return;
+    ctx->impl.release(importId);
+}
+
+// Blits an import into the context's target and waits, with a bound, for the GPU to finish. False
+// means the frame did not happen and the caller should fall back.
+extern "C" bool android_blit_ctx_blit(struct AndroidBlitContext* ctx, int64_t importId,
+                                      uint32_t width, uint32_t height, int timeout_ms) {
+    if (!ctx || !importId) return false;
+    auto ret = ctx->impl.blit(importId, width, height, timeout_ms);
+    if (!ret.ok()) {
+        LOG(WARNING) << "headless blit failed: " << ret.error().message();
+        return false;
+    }
+    return true;
+}
+
+// Maps the target for CPU reading. The mapping is valid until the next android_blit_ctx_blit or
+// android_blit_ctx_unmap on this context, or until it is destroyed. Out params are only written on
+// success.
+extern "C" bool android_blit_ctx_map(struct AndroidBlitContext* ctx, const uint8_t** out_pixels,
+                                     uint32_t* out_stride_bytes, uint32_t* out_width,
+                                     uint32_t* out_height, uint32_t* out_size) {
+    if (!ctx || !out_pixels || !out_stride_bytes || !out_width || !out_height || !out_size) {
+        return false;
+    }
+    auto ret = ctx->impl.map(out_pixels, out_stride_bytes, out_width, out_height, out_size);
+    if (!ret.ok()) {
+        LOG(WARNING) << "headless blit map failed: " << ret.error().message();
+        return false;
+    }
+    return true;
+}
+
+extern "C" void android_blit_ctx_unmap(struct AndroidBlitContext* ctx) {
+    if (!ctx) return;
+    ctx->impl.unmap();
 }
