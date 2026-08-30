@@ -48,8 +48,14 @@ cc_library_static {
     static_libs: [
         "libbase",
     ],
+    header_libs: [
+        "libcutils_headers",
+        "libgfxstream_thirdparty_vulkan_headers",
+    ],
     shared_libs: [
         "libbinder_ndk",
+        "libcutils",
+        "libdl",
         "libnativewindow",
     ],
     apex_available: [
