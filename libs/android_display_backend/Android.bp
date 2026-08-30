@@ -40,6 +40,9 @@ cc_library_static {
     name: "libcrosvm_android_display_client",
     srcs: [
         "crosvm_android_display_client.cpp",
+        // libmediandk is dlopen'd rather than linked (see media_codec_abi.h), so the H.264
+        // encoder adds a source file and no dependency.
+        "media_codec_dl.cpp",
         "surface_control_dl.cpp",
     ],
     whole_static_libs: [
