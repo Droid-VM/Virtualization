@@ -1616,13 +1616,13 @@ private:
     // AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM -- R,G,B,A in memory, and the only 32-bit colour format
     // in the NDK's AHardwareBuffer enum at all, so it is not a choice. The consumer at the far end
     // is LibVNCServer, whose serverFormat is red<<16 green<<8 blue<<0 little-endian: B,G,R,X in
-    // memory, the CPU pipeline's canonical order (plan §4.4). Those two disagree by exactly a
-    // red/blue exchange.
+    // memory, the VNC sink's declared target order. Those two disagree by exactly a red/blue
+    // exchange.
     //
-    // The native sink pays for that exchange with swapRedBlueInPlace over the whole frame, on the
-    // CPU, after the copy. Here it costs nothing at all: declare the source with its red and blue
-    // names exchanged and the GPU performs the swap as part of the copy it was already doing. A
-    // guest AR24 scanout is B,G,R,A in memory; declared as AB24 the blit samples R := B_true and
+    // The CPU path pays for that exchange at its producer-to-sink copy boundary. Here it costs
+    // nothing at all: declare the source with its red and blue names exchanged and the GPU performs
+    // the swap as part of the copy it was already doing. A guest AR24 scanout is B,G,R,A in memory;
+    // declared as AB24 the blit samples R := B_true and
     // B := R_true, and writing that through an R8G8B8A8 destination puts B,G,R,A back in memory --
     // which is what VNC reads. Exactly, not approximately: identical extents with VK_FILTER_NEAREST
     // between two 8-bit UNORM formats is a texel copy.
@@ -2096,10 +2096,9 @@ private:
 
     // The CPU route: the picture the sink already has, copied in with red and blue exchanged.
     //
-    // The exchange is the same one swapRedBlueInPlace performs for the display sink and for the
-    // same reason -- everything upstream of here is B,G,R,X (plan §4.4) and the buffer is declared
-    // RGBA_8888 -- except that it happens during the copy rather than as a second pass over the
-    // frame, because unlike the display sink there is no earlier copy to piggyback on.
+    // `pixels` is the VNC sink's B,G,R,X framebuffer and the MediaCodec input buffer is declared
+    // RGBA_8888. Convert while uploading, matching the producer-to-sink edge rule used by the
+    // crosvm CPU display path.
     Result<void> fillByUpload(AHardwareBuffer* ahb, const uint8_t* pixels, uint32_t pixelsSize) {
         if (pixels == nullptr) return Error() << "no pixels to upload and no GPU source either";
         AHardwareBuffer_Desc desc{};
@@ -2295,40 +2294,6 @@ static void logFrameHash(const std::string& surfaceName, const ANativeWindow_Buf
     LOG(INFO) << "FRAMEHASH surface=" << surfaceName << " " << buf.width << "x" << buf.height
               << " fnv1a64=0x" << std::hex << std::setw(16) << std::setfill('0')
               << fnv1a64VisiblePixels(buf) << std::dec;
-}
-
-// crosvm always renders scanouts in B,G,R,X byte order (BGRA/BGRX — see SetScanoutBlob in
-// crosvm's devices/src/virtio/gpu/mod.rs). We advertise the Android buffer as RGBA_8888 (see
-// kFormat) instead of BGRA_8888 so the compositor imports it as a regular GL_TEXTURE_2D rather
-// than GL_TEXTURE_EXTERNAL_OES: some GPUs' Skia RenderEngine (observed on Adreno) abort with
-// "Unable to generate SkImage" when asked to sample an external-OES BGRA texture, which crashes
-// surfaceflinger and soft-reboots the device. To keep colors correct under the RGBA layout we
-// swap the R and B channels in place just before posting the buffer.
-static void swapRedBlueInPlace(const ANativeWindow_Buffer& buf) {
-    uint8_t* base = static_cast<uint8_t*>(buf.bits);
-    if (base == nullptr) return;
-    for (int32_t y = 0; y < buf.height; y++) {
-        uint8_t* px = base + static_cast<size_t>(y) * static_cast<size_t>(buf.stride) * 4;
-#if defined(__aarch64__)
-        int32_t x = 0;
-        // Process 16 interleaved RGBA pixels at once. The scanout is BGRA/BGRX,
-        // so only the first and third byte lanes need to be exchanged.
-        for (; x + 16 <= buf.width; x += 16, px += 64) {
-            uint8x16x4_t channels = vld4q_u8(px);
-            uint8x16_t tmp = channels.val[0];
-            channels.val[0] = channels.val[2];
-            channels.val[2] = tmp;
-            vst4q_u8(px, channels);
-        }
-        for (; x < buf.width; x++, px += 4) {
-#else
-        for (int32_t x = 0; x < buf.width; x++, px += 4) {
-#endif
-            uint8_t t = px[0];
-            px[0] = px[2];
-            px[2] = t;
-        }
-    }
 }
 
 static Result<void> copyBuffer(ANativeWindow_Buffer& from, ANativeWindow_Buffer& to) {
@@ -2609,12 +2574,9 @@ public:
             return Error() << "Failed to get ANativeWindow";
         }
 
-        // Before the swap, so the number describes what crosvm handed over rather than what this
-        // sink made of it. See frameHashEnabled().
+        // The CPU edge has already copied into the RGBA layout declared by this sink, so this hash
+        // is also exactly what SurfaceFlinger receives. See frameHashEnabled().
         if (frameHashEnabled()) logFrameHash(mName, mLastBuffer);
-
-        // crosvm wrote B,G,R,X into the buffer; convert to R,G,B,X to match kFormat (RGBA_8888).
-        swapRedBlueInPlace(mLastBuffer);
 
         if (ANativeWindow_unlockAndPost(anw) != 0) {
             return Error() << "Failed to unlock and post window";
@@ -2818,13 +2780,12 @@ private:
         return {};
     }
 
-    // Note: crosvm always uses BGRA8888 or BGRX8888. See devices/src/virtio/gpu/mod.rs in
-    // crosvm where the SetScanoutBlob command is handled. We advertise the buffer as RGBA_8888
-    // (not BGRA_8888) so it imports as a regular GL_TEXTURE_2D — a BGRA buffer can be imported as
-    // GL_TEXTURE_EXTERNAL_OES on some GPUs (Adreno) whose Skia RenderEngine then aborts in
-    // makeImage ("Unable to generate SkImage"), crashing surfaceflinger. crosvm's B,G,R,X pixels
-    // are converted to R,G,B,X by swapRedBlueInPlace() before each post. RGBA keeps the alpha
-    // channel (used for cursor blending), matching the old BGRA behavior.
+    // Keep the Android buffer RGBA_8888 (not BGRA_8888) so it imports as a regular GL_TEXTURE_2D.
+    // A BGRA buffer can become GL_TEXTURE_EXTERNAL_OES on some Adreno devices, whose Skia
+    // RenderEngine then aborts in makeImage ("Unable to generate SkImage"), crashing
+    // surfaceflinger. crosvm now declares this RGBA layout as the CPU sink format and performs any
+    // required R/B exchange while copying into the buffer; no post-process is needed here. RGBA
+    // also preserves the alpha channel used for cursor blending.
     static constexpr const int kFormat = HAL_PIXEL_FORMAT_RGBA_8888;
 
     std::string mName;
