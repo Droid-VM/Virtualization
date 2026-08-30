@@ -16,6 +16,7 @@
 
 package android.crosvm;
 
+import android.crosvm.DisplayConfig;
 import android.os.ParcelFileDescriptor;
 import android.view.Surface;
 
@@ -29,4 +30,12 @@ interface ICrosvmAndroidDisplayService {
     void removeSurface(boolean forCursor);
     void saveFrameForSurface(boolean forCursor);
     void drawSavedFrameForSurface(boolean forCursor);
+
+    /**
+     * Current guest scanout configuration (single source of truth for the display size, updated on
+     * every resolution change: UEFI modeset, guest boot, and guest runtime xrandr all flow through
+     * the same configure() path). The app polls this to follow a mid-session resolution change.
+     * MUST stay the last method so its binder transaction code matches the app's copy of the AIDL.
+     */
+    DisplayConfig getDisplayConfig();
 }
