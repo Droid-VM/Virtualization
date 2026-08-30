@@ -15,6 +15,8 @@
  */
 
 #include <aidl/android/crosvm/BnCrosvmAndroidDisplayService.h>
+#include <aidl/android/crosvm/DisplayConfig.h>
+#include <android-base/logging.h>
 #include <android-base/result.h>
 #include <android/binder_manager.h>
 #include <android/binder_process.h>
@@ -104,6 +106,7 @@ public:
     Result<void> setNativeSurface(Surface* surface) {
         {
             std::lock_guard lk(mSurfaceMutex);
+            LOG(INFO) << "display surface " << mName << " native window attached";
             mNativeSurface = std::make_unique<Surface>(surface->release());
             mNativeSurfaceNeedsConfiguring = true;
             Surface* surface = mNativeSurface.get();
@@ -146,10 +149,15 @@ public:
     Result<void> configure(uint32_t width, uint32_t height) {
         std::unique_lock lk(mSurfaceMutex);
 
+        LOG(INFO) << "display surface " << mName << " configure " << width << "x" << height;
         mRequestedSurfaceDimensions = Rect{
                 .width = width,
                 .height = height,
         };
+        // The buffer geometry must follow: if a native window is already attached, its buffers
+        // were sized for the previous dimensions and the next lock() has to re-apply them, or
+        // frames of the new size get scaled into stale-geometry buffers (squashed display).
+        mNativeSurfaceNeedsConfiguring = true;
 
         if (auto ret = mSinkBuffer.configure(width, height, kFormat); !ret.ok()) {
             return Error() << "Failed to configure sink buffer: " << ret.error();
@@ -187,6 +195,8 @@ public:
             }
             const auto& dims = *mRequestedSurfaceDimensions;
 
+            LOG(INFO) << "display surface " << mName << " set buffer geometry " << dims.width
+                      << "x" << dims.height;
             // Ensure locked buffers have our desired format.
             if (ANativeWindow_setBuffersGeometry(anw, dims.width, dims.height, kFormat) != 0) {
                 return Error() << "Failed to set buffer geometry.";
@@ -337,6 +347,14 @@ private:
         uint32_t height = 0;
     };
     std::optional<Rect> mRequestedSurfaceDimensions;
+
+public:
+    // Current scanout size (0x0 until the first configure()). Read by getDisplayConfig so the app
+    // can follow guest resolution changes; configure() is the single writer for every cause.
+    Rect dimensions() {
+        std::lock_guard lk(mSurfaceMutex);
+        return mRequestedSurfaceDimensions.value_or(Rect{});
+    }
 };
 
 class DisplayService : public BnCrosvmAndroidDisplayService {
@@ -375,6 +393,17 @@ public:
             return ::ndk::ScopedAStatus(
                     AStatus_fromServiceSpecificErrorWithMessage(-1, msg.c_str()));
         }
+        return ::ndk::ScopedAStatus::ok();
+    }
+
+    ndk::ScopedAStatus getDisplayConfig(
+            ::aidl::android::crosvm::DisplayConfig* _aidl_return) override {
+        auto dims = mScanout.dimensions();
+        _aidl_return->width = static_cast<int32_t>(dims.width);
+        _aidl_return->height = static_cast<int32_t>(dims.height);
+        // dpi/refreshRate aren't tracked here; the app only consumes width/height for letterboxing.
+        _aidl_return->dpi = 0;
+        _aidl_return->refreshRate = 0;
         return ::ndk::ScopedAStatus::ok();
     }
 
