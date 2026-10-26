@@ -49,6 +49,7 @@ bool SurfaceControl::LoadFunctions() {
     LOAD_FUNCTION(lib, ASurfaceControl_release);
     LOAD_FUNCTION(lib, ASurfaceTransaction_create);
     LOAD_FUNCTION(lib, ASurfaceTransaction_setBuffer);
+    LOAD_FUNCTION(lib, ASurfaceTransaction_setBufferTransform);
     LOAD_FUNCTION(lib, ASurfaceTransaction_apply);
     LOAD_FUNCTION(lib, ASurfaceTransaction_delete);
 
@@ -73,6 +74,12 @@ void SurfaceControl::ASurfaceTransaction_setBuffer(ASurfaceTransaction* transact
                                                    AHardwareBuffer* buffer,
                                                    int32_t acquire_fence_fd) {
     ASurfaceTransaction_setBuffer_(transaction, surface_control, buffer, acquire_fence_fd);
+}
+
+void SurfaceControl::ASurfaceTransaction_setBufferTransform(ASurfaceTransaction* transaction,
+                                                            ASurfaceControl* surface_control,
+                                                            int32_t transform) {
+    ASurfaceTransaction_setBufferTransform_(transaction, surface_control, transform);
 }
 
 void SurfaceControl::ASurfaceTransaction_apply(ASurfaceTransaction* transaction) {

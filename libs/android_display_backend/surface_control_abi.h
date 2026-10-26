@@ -36,6 +36,10 @@ using pASurfaceTransaction_setBuffer = void (*)(ASurfaceTransaction* transaction
                                                 ASurfaceControl* surface_control,
                                                 AHardwareBuffer* buffer, int32_t acquire_fence_fd);
 
+using pASurfaceTransaction_setBufferTransform = void (*)(ASurfaceTransaction* transaction,
+                                                         ASurfaceControl* surface_control,
+                                                         int32_t transform);
+
 using pASurfaceTransaction_apply = void (*)(ASurfaceTransaction* transaction);
 
 using pASurfaceTransaction_delete = void (*)(ASurfaceTransaction* transaction);

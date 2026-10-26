@@ -35,7 +35,16 @@ interface ICrosvmAndroidDisplayService {
      * Current guest scanout configuration (single source of truth for the display size, updated on
      * every resolution change: UEFI modeset, guest boot, and guest runtime xrandr all flow through
      * the same configure() path). The app polls this to follow a mid-session resolution change.
-     * MUST stay the last method so its binder transaction code matches the app's copy of the AIDL.
+     * Methods are only ever appended, so every binder transaction code matches the app's copy.
      */
     DisplayConfig getDisplayConfig();
+
+    /**
+     * Rotate or flip the pictures queued to a surface: an ANATIVEWINDOW_TRANSFORM_* value, applied
+     * with ANativeWindow_setBuffersTransform (0, the default, is none). The guest's buffers keep
+     * their size and the compositor turns them, so with a 90 or 270 degree transform the picture is
+     * as wide as the buffers are tall, and the size the presenter asks of its Surface must follow.
+     * It holds across setSurface. A backend without it fails the call (unknown transaction).
+     */
+    void setSurfaceTransform(int transform, boolean forCursor);
 }

@@ -35,6 +35,9 @@ public:
     void ASurfaceTransaction_setBuffer(ASurfaceTransaction* transaction,
                                        ASurfaceControl* surface_control, AHardwareBuffer* buffer,
                                        int32_t acquire_fence_fd);
+    void ASurfaceTransaction_setBufferTransform(ASurfaceTransaction* transaction,
+                                                ASurfaceControl* surface_control,
+                                                int32_t transform);
     void ASurfaceTransaction_apply(ASurfaceTransaction* transaction);
     void ASurfaceTransaction_delete(ASurfaceTransaction* transaction);
 
@@ -52,6 +55,7 @@ private:
     pASurfaceControl_release ASurfaceControl_release_ = nullptr;
     pASurfaceTransaction_create ASurfaceTransaction_create_ = nullptr;
     pASurfaceTransaction_setBuffer ASurfaceTransaction_setBuffer_ = nullptr;
+    pASurfaceTransaction_setBufferTransform ASurfaceTransaction_setBufferTransform_ = nullptr;
     pASurfaceTransaction_apply ASurfaceTransaction_apply_ = nullptr;
     pASurfaceTransaction_delete ASurfaceTransaction_delete_ = nullptr;
 };

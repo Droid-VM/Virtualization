@@ -2364,6 +2364,26 @@ public:
         return mNativeSurface != nullptr;
     }
 
+    // How the compositor is to turn every picture queued from now on (an ANATIVEWINDOW_TRANSFORM_*
+    // value, 0 for none): the presenter rotates the guest's display without the guest knowing. The
+    // buffers keep the guest's size; a 90/270 degree transform makes the picture as wide as they
+    // are tall, so the presenter sizes its Surface that way. Held across windows; each new window
+    // gets it in prepareNativeWindowLocked().
+    Result<void> setBufferTransform(int32_t transform) {
+        // Any combination of the horizontal and vertical flips and the 90 degree rotation.
+        if (transform < 0 || transform > 7) {
+            return Error() << "invalid buffer transform " << transform;
+        }
+        std::lock_guard lk(mSurfaceMutex);
+        if (mBufferTransform != transform) {
+            LOG(INFO) << "display surface " << mName << " buffer transform " << mBufferTransform
+                      << " -> " << transform;
+            mBufferTransform = transform;
+            mAppliedBufferTransform = -1;
+        }
+        return {};
+    }
+
     Result<void> configure(uint32_t width, uint32_t height) {
         std::unique_lock lk(mSurfaceMutex);
 
@@ -2599,6 +2619,7 @@ public:
         }
         sc.ASurfaceTransaction_setBuffer(transaction, mSurfaceControl, ahb,
                                          -1 /* acquire_fence_fd */);
+        sc.ASurfaceTransaction_setBufferTransform(transaction, mSurfaceControl, mBufferTransform);
         sc.ASurfaceTransaction_apply(transaction);
         sc.ASurfaceTransaction_delete(transaction);
         return {};
@@ -2667,6 +2688,7 @@ private:
         mNativeSurface = nullptr;
         mNativeSurfaceNeedsConfiguring = true;
         mGpuUsageConfigured = false;
+        mAppliedBufferTransform = -1;
         mLastBufferValid = false;
         if (hadSurface) ++mNativeSurfaceGeneration;
     }
@@ -2767,6 +2789,13 @@ private:
             mNativeSurfaceNeedsConfiguring = false;
         }
 
+        if (mAppliedBufferTransform != mBufferTransform) {
+            if (ANativeWindow_setBuffersTransform(anw, mBufferTransform) != 0) {
+                return Error() << "Failed to set buffer transform " << mBufferTransform;
+            }
+            mAppliedBufferTransform = mBufferTransform;
+        }
+
         if (gpu && !mGpuUsageConfigured) {
             constexpr uint64_t kGpuUsage = AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE |
                     AHARDWAREBUFFER_USAGE_GPU_FRAMEBUFFER | AHARDWAREBUFFER_USAGE_COMPOSER_OVERLAY;
@@ -2795,6 +2824,10 @@ private:
     ASurfaceControl* mSurfaceControl = nullptr;
     std::condition_variable mNativeSurfaceReady;
     bool mNativeSurfaceNeedsConfiguring = true;
+    // The transform the presenter asked for (setBufferTransform), and the one the current window
+    // carries (-1: none set on it yet).
+    int32_t mBufferTransform = 0;
+    int32_t mAppliedBufferTransform = -1;
     int mConnectedNativeWindowApi = 0;
     bool mGpuUsageConfigured = false;
     // Whether the connected producer currently runs with a zero dequeue timeout (GPU path).
@@ -2847,6 +2880,14 @@ public:
 
     ndk::ScopedAStatus removeSurface(bool forCursor) override {
         getSurface(forCursor).removeSurface();
+        return ::ndk::ScopedAStatus::ok();
+    }
+
+    ndk::ScopedAStatus setSurfaceTransform(int32_t transform, bool forCursor) override {
+        if (auto ret = getSurface(forCursor).setBufferTransform(transform); !ret.ok()) {
+            return ::ndk::ScopedAStatus::fromExceptionCodeWithMessage(EX_ILLEGAL_ARGUMENT,
+                                                                      ret.error().message().c_str());
+        }
         return ::ndk::ScopedAStatus::ok();
     }
 
