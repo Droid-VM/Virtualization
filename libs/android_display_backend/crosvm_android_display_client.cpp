@@ -2789,6 +2789,10 @@ private:
             mConnectedNativeWindowApi = 0;
             mGpuUsageConfigured = false;
             mNativeSurfaceNeedsConfiguring = true;
+            // Surface::disconnect drops the buffer transform with the geometry: without this, the
+            // first switch between the blit and the CPU copy left a turned picture unturned (a
+            // portrait guest buffer stretched over the landscape Surface the presenter sized).
+            mAppliedBufferTransform = -1;
         }
         if (mConnectedNativeWindowApi == 0) {
             int result = native_window_api_connect(anw, requestedApi);
