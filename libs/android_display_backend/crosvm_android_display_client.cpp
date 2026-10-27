@@ -837,6 +837,23 @@ private:
                 VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT) != 0;
     }
 
+    bool deviceHasExtension(PFN_vkEnumerateDeviceExtensionProperties enumerateDeviceExtensionProperties,
+                            const char* name) {
+        uint32_t extensionCount = 0;
+        if (enumerateDeviceExtensionProperties(mPhysicalDevice, nullptr, &extensionCount, nullptr) !=
+            VK_SUCCESS) {
+            return false;
+        }
+        std::vector<VkExtensionProperties> extensions(extensionCount);
+        if (enumerateDeviceExtensionProperties(mPhysicalDevice, nullptr, &extensionCount,
+                                               extensions.data()) != VK_SUCCESS) {
+            return false;
+        }
+        return std::any_of(extensions.begin(), extensions.end(), [name](const auto& extension) {
+            return std::strcmp(extension.extensionName, name) == 0;
+        });
+    }
+
     bool initialize() {
         // The blit driver is any hwvulkan HAL that exposes the required extensions -- turnip, the
         // SoC's vendor driver, PanVK, ... -- so this is not turnip-specific. The chooser (the app's
@@ -958,6 +975,20 @@ private:
             extensions.push_back(VK_KHR_EXTERNAL_SEMAPHORE_EXTENSION_NAME);
             extensions.push_back(VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME);
         }
+        // The blit is the display's scanout, so its queue asks for a high global priority where the
+        // driver offers one: on a GPU that runs the guest's rendering too, a default-priority blit
+        // waited in the same ringbuffer behind whatever the guest had queued since its frame (a
+        // benchmark's next 6 ms frame), and the frame was shown that much later. A driver that
+        // refuses the priority (VK_ERROR_NOT_PERMITTED) gets the queue without it.
+        VkDeviceQueueGlobalPriorityCreateInfoEXT globalPriority = {
+                .sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT,
+                .globalPriority = VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT,
+        };
+        if (deviceHasExtension(enumerateDeviceExtensionProperties,
+                               VK_EXT_GLOBAL_PRIORITY_EXTENSION_NAME)) {
+            queueInfo.pNext = &globalPriority;
+            extensions.push_back(VK_EXT_GLOBAL_PRIORITY_EXTENSION_NAME);
+        }
         VkDeviceCreateInfo deviceInfo = {
                 .sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
                 .queueCreateInfoCount = 1,
@@ -965,8 +996,17 @@ private:
                 .enabledExtensionCount = static_cast<uint32_t>(extensions.size()),
                 .ppEnabledExtensionNames = extensions.data(),
         };
-        if (createDevice(mPhysicalDevice, &deviceInfo, nullptr, &mDevice) != VK_SUCCESS)
-            return false;
+        VkResult created = createDevice(mPhysicalDevice, &deviceInfo, nullptr, &mDevice);
+        if (created != VK_SUCCESS && queueInfo.pNext) {
+            LOG(WARNING) << "Android display blit queue without a high priority (" << created << ")";
+            queueInfo.pNext = nullptr;
+            extensions.pop_back();
+            deviceInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
+            created = createDevice(mPhysicalDevice, &deviceInfo, nullptr, &mDevice);
+        } else if (created == VK_SUCCESS && queueInfo.pNext) {
+            LOG(INFO) << "Android display blit queue at high global priority";
+        }
+        if (created != VK_SUCCESS) return false;
 
 #define LOAD_DEVICE_PROC(member, name) member = deviceProc<decltype(member)>(name)
         LOAD_DEVICE_PROC(mDestroyDevice, "vkDestroyDevice");
