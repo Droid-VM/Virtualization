@@ -44,6 +44,7 @@
 #include <iomanip>
 #include <iterator>
 #include <memory>
+#include <functional>
 #include <mutex>
 #include <unordered_map>
 #include <vector>
@@ -2482,6 +2483,7 @@ public:
     Result<int> flip(VulkanDisplayBridge& bridge, int64_t importId) {
         ScopedTrace trace("crosvm_display.flip");
         std::unique_lock lk(mSurfaceMutex);
+        mLastFlipImport = importId;
 
         Surface* surface = mNativeSurface.get();
         if (surface == nullptr) {
@@ -2663,6 +2665,23 @@ public:
         sc.ASurfaceTransaction_apply(transaction);
         sc.ASurfaceTransaction_delete(transaction);
         return {};
+    }
+
+    // The source of the last flip (a VulkanDisplayBridge import), for redrawing it into a Surface
+    // the app attaches later; 0 once that import is released.
+    int64_t lastFlipImport() {
+        std::lock_guard lk(mSurfaceMutex);
+        return mLastFlipImport;
+    }
+
+    void forgetFlipImport(int64_t importId) {
+        std::lock_guard lk(mSurfaceMutex);
+        if (mLastFlipImport == importId) mLastFlipImport = 0;
+    }
+
+    bool hasSavedFrame() {
+        std::lock_guard lk(mSurfaceMutex);
+        return mSavedFrameValid;
     }
 
     // Saves the last frame drawn
@@ -2896,6 +2915,7 @@ private:
     // this is drawn to the physical screen until the VM starts to emit actual frames.
     SinkANativeWindow_Buffer mSavedFrameBuffer;
     bool mSavedFrameValid = false;
+    int64_t mLastFlipImport = 0;
 
     struct Rect {
         uint32_t width = 0;
@@ -2951,6 +2971,14 @@ public:
     }
 
     ndk::ScopedAStatus drawSavedFrameForSurface(bool forCursor) override {
+        // A Vulkan blit (flip) writes the window's buffers itself and leaves no CPU frame to save:
+        // the app brought back from the background showed black until the guest drew again, which
+        // a guest that redraws only what changes may not do for a long while. Its last source is
+        // drawn again instead.
+        if (!getSurface(forCursor).hasSavedFrame() && mRedrawLastFlip) {
+            mRedrawLastFlip(forCursor);
+            return ::ndk::ScopedAStatus::ok();
+        }
         if (auto ret = getSurface(forCursor).drawSavedFrame(); !ret.ok()) {
             std::string msg = std::format("Failed to draw saved frame: {}", ret.error().message());
             return ::ndk::ScopedAStatus(
@@ -2978,10 +3006,13 @@ public:
         }
     }
 
+    void setRedrawLastFlip(std::function<void(bool)> redraw) { mRedrawLastFlip = std::move(redraw); }
+
 private:
     AndroidDisplaySurface mScanout{"scanout"};
     AndroidDisplaySurface mCursor{"cursor"};
     ndk::ScopedFileDescriptor mCursorStream;
+    std::function<void(bool)> mRedrawLastFlip;
 };
 
 } // namespace
@@ -2999,6 +3030,11 @@ struct AndroidDisplayContext {
     ErrorCallback error_callback;
     DisplayPath display_path = DisplayPath::kUnknown;
     std::unique_ptr<VulkanDisplayBridge> vulkan_display;
+    // crosvm's display thread makes, imports into, flips and releases the bridge; a binder thread
+    // redraws the last flip into a Surface the app attaches (drawSavedFrameForSurface), and a
+    // failed flip destroys the bridge (fallbackToCpu). Recursive: a flip that fails falls back
+    // with the lock held.
+    std::recursive_mutex bridge_mutex;
 
     AndroidDisplayContext(const char* service_name, ErrorCallback cb) : error_callback(cb) {
         if (!envFlagEnabled("CROSVM_ANDROID_DISPLAY_VULKAN_BLIT", true)) {
@@ -3027,11 +3063,30 @@ struct AndroidDisplayContext {
         }
 
         this->disp_service = disp_service;
+        disp_service->setRedrawLastFlip([this](bool forCursor) { redrawLastFlip(forCursor); });
+    }
+
+    // drawSavedFrameForSurface on the Vulkan path: the last flipped source into the Surface the app
+    // has just attached. A failure is only logged: the next guest frame draws as before.
+    void redrawLastFlip(bool forCursor) {
+        std::lock_guard lk(bridge_mutex);
+        AndroidDisplaySurface& surface = disp_service->getSurface(forCursor);
+        const int64_t importId = surface.lastFlipImport();
+        if (!importId || !vulkan_display || !vulkanDisplayActive()) return;
+        auto ret = surface.flip(*vulkan_display, importId);
+        if (!ret.ok()) {
+            LOG(WARNING) << "display surface " << surface.name()
+                         << " could not redraw its last frame: " << ret.error();
+            return;
+        }
+        if (*ret >= 0) close(*ret);
+        LOG(INFO) << "display surface " << surface.name() << " redrew its last frame";
     }
 
     ~AndroidDisplayContext() = default;
 
     VulkanDisplayBridge* getVulkanDisplay() {
+        std::lock_guard lk(bridge_mutex);
         if (display_path == DisplayPath::kCpu) return nullptr;
         if (display_path == DisplayPath::kUnknown) {
             vulkan_display = std::make_unique<VulkanDisplayBridge>();
@@ -3049,6 +3104,7 @@ struct AndroidDisplayContext {
     bool vulkanDisplayActive() const { return display_path == DisplayPath::kVulkanBlit; }
 
     void fallbackToCpu(const char* reason) {
+        std::lock_guard lk(bridge_mutex);
         if (display_path == DisplayPath::kCpu) return;
         display_path = DisplayPath::kCpu;
         LOG(WARNING) << "Android display falling back to CPU for this process: " << reason;
@@ -3187,6 +3243,7 @@ extern "C" int64_t android_display_import_dmabuf(struct AndroidDisplayContext* c
                   << std::dec << " linear_verified=" << linearLayoutVerified << " size=" << width
                   << "x" << height;
     }
+    std::lock_guard lk(ctx->bridge_mutex);
     VulkanDisplayBridge* bridge = ctx->getVulkanDisplay();
     if (!bridge) return 0;
     int64_t importId = bridge->importDmabuf(fd, offset, stride, modifier, linearLayoutVerified,
@@ -3222,7 +3279,13 @@ extern "C" bool android_display_has_consumer(struct AndroidDisplayContext* ctx) 
 
 extern "C" void android_display_release_import(struct AndroidDisplayContext* ctx,
                                                int64_t rawHandle) {
-    if (!ctx || !ctx->vulkan_display || !rawHandle) return;
+    if (!ctx || !rawHandle) return;
+    std::lock_guard lk(ctx->bridge_mutex);
+    if (ctx->disp_service) {
+        ctx->disp_service->getSurface(false).forgetFlipImport(rawHandle);
+        ctx->disp_service->getSurface(true).forgetFlipImport(rawHandle);
+    }
+    if (!ctx->vulkan_display) return;
     ctx->vulkan_display->release(rawHandle);
 }
 
@@ -3230,10 +3293,9 @@ extern "C" bool android_display_flip_to(struct AndroidDisplayContext* ctx,
                                         AndroidDisplaySurface* surface, int64_t rawHandle,
                                         int* outCompletionFenceFd) {
     if (outCompletionFenceFd) *outCompletionFenceFd = -1;
-    if (!ctx || !surface || !rawHandle || !outCompletionFenceFd || !ctx->vulkan_display ||
-        !ctx->vulkanDisplayActive()) {
-        return false;
-    }
+    if (!ctx || !surface || !rawHandle || !outCompletionFenceFd) return false;
+    std::lock_guard lk(ctx->bridge_mutex);
+    if (!ctx->vulkan_display || !ctx->vulkanDisplayActive()) return false;
     auto ret = surface->flip(*ctx->vulkan_display, rawHandle);
     if (!ret.ok()) {
         ctx->errorf("Failed to flip imported buffer for surface %s: %s", surface->name().c_str(),
