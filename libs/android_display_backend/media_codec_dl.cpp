@@ -71,6 +71,7 @@ bool MediaCodecLib::LoadFunctions() {
 
     LOAD_OPTIONAL(lib, AMediaCodec_getName);
     LOAD_OPTIONAL(lib, AMediaCodec_releaseName);
+    LOAD_OPTIONAL(lib, AMediaFormat_setInt64);
 
     return true;
 }

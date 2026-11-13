@@ -1779,11 +1779,28 @@ struct H264CursorOverlay {
 // with a GPU source (a simplefb producer that fell back, a resource that failed to import), and
 // because a dequeued codec buffer has to be CPU-writable anyway for the cursor to be blended into
 // it. One dequeue/queue path, two ways to fill the buffer.
+// What an encoder is made with beyond its geometry and rate (android_video_enc_create). The
+// defaults are the VNC rung's encoder: AVC, every other key left to the component.
+struct VideoEncoderOptions {
+    const char* mime = kMimeTypeAvc;
+    // A MediaCodecInfo.CodecProfileLevel value; 0 leaves the component's default.
+    int32_t profile = 0;
+    // Microseconds after which the codec encodes the last frame again when no new one came; 0, never.
+    int64_t repeatPreviousFrameAfterUs = 0;
+    // -1 leaves the component's default; 0 is a stream without B-frames.
+    int32_t maxBFrames = -1;
+    // Hold no frames back: realtime priority, a latency of one frame, the vendor's low-latency mode.
+    bool lowLatency = false;
+    // The codec's top operating point rather than clocks planned for the declared frame rate.
+    bool maxOperatingRate = false;
+};
+
 class H264EncoderSession {
 public:
     static std::unique_ptr<H264EncoderSession> Open(uint32_t width, uint32_t height,
                                                     int32_t bitrateBps, int32_t frameRate,
-                                                    int32_t iFrameIntervalSecs) {
+                                                    int32_t iFrameIntervalSecs,
+                                                    const VideoEncoderOptions& options = {}) {
         auto& media = MediaCodecLib::GetInstance();
         if (!media.IsSupported()) {
             LOG(ERROR) << "H.264 side channel: no media NDK on this device";
@@ -1811,17 +1828,31 @@ public:
         }
         auto formatGuard = android::base::make_scope_guard(
                 [&] { media.AMediaFormat_delete(format); });
-        media.AMediaFormat_setString(format, kFormatKeyMime, kMimeTypeAvc);
+        media.AMediaFormat_setString(format, kFormatKeyMime, options.mime);
         media.AMediaFormat_setInt32(format, kFormatKeyWidth, static_cast<int32_t>(width));
         media.AMediaFormat_setInt32(format, kFormatKeyHeight, static_cast<int32_t>(height));
         media.AMediaFormat_setInt32(format, kFormatKeyColorFormat, kColorFormatSurface);
         media.AMediaFormat_setInt32(format, kFormatKeyBitRate, bitrateBps);
         media.AMediaFormat_setInt32(format, kFormatKeyFrameRate, frameRate);
         media.AMediaFormat_setInt32(format, kFormatKeyIFrameInterval, iFrameIntervalSecs);
+        if (options.profile) media.AMediaFormat_setInt32(format, kFormatKeyProfile, options.profile);
+        if (options.maxBFrames >= 0)
+            media.AMediaFormat_setInt32(format, kFormatKeyMaxBFrames, options.maxBFrames);
+        if (options.repeatPreviousFrameAfterUs > 0 && media.AMediaFormat_setInt64)
+            media.AMediaFormat_setInt64(format, kFormatKeyRepeatPreviousFrameAfter,
+                                        options.repeatPreviousFrameAfterUs);
+        if (options.lowLatency) {
+            media.AMediaFormat_setInt32(format, kFormatKeyPriority, 0);  // realtime
+            media.AMediaFormat_setInt32(format, kFormatKeyLatency, 1);
+            media.AMediaFormat_setInt32(format, kFormatKeyQtiEncLowLatency, 1);
+        }
+        // MediaFormat.KEY_OPERATING_RATE: Short.MAX_VALUE asks for the fastest the codec runs.
+        if (options.maxOperatingRate)
+            media.AMediaFormat_setInt32(format, kFormatKeyOperatingRate, 32767);
 
-        session->mCodec = media.AMediaCodec_createEncoderByType(kMimeTypeAvc);
+        session->mCodec = media.AMediaCodec_createEncoderByType(options.mime);
         if (!session->mCodec) {
-            LOG(ERROR) << "H.264 side channel: no encoder for " << kMimeTypeAvc;
+            LOG(ERROR) << "H.264 side channel: no encoder for " << options.mime;
             return nullptr;
         }
         media_status_t status = media.AMediaCodec_configure(session->mCodec, format,
@@ -1856,9 +1887,10 @@ public:
                 media.AMediaCodec_releaseName(session->mCodec, name);
             }
         }
-        LOG(INFO) << "H.264 side channel: encoder \"" << codecName << "\" up for " << width << "x"
-                  << height << " @ " << bitrateBps << " bps, " << frameRate << " fps, IDR every "
-                  << iFrameIntervalSecs << "s";
+        session->mCodecName = codecName;
+        LOG(INFO) << "H.264 side channel: encoder \"" << codecName << "\" (" << options.mime
+                  << ") up for " << width << "x" << height << " @ " << bitrateBps << " bps, "
+                  << frameRate << " fps, IDR every " << iFrameIntervalSecs << "s";
         return session;
     }
 
@@ -1880,6 +1912,20 @@ public:
 
     uint32_t width() const { return mWidth; }
     uint32_t height() const { return mHeight; }
+
+    // The component's name, or "?" where the platform could not say.
+    const std::string& codecName() const { return mCodecName; }
+
+    // Retarget the running encoder. False where the component refused.
+    bool setBitrate(int32_t bitrateBps) {
+        auto& media = MediaCodecLib::GetInstance();
+        AMediaFormat* params = media.AMediaFormat_new();
+        if (!params) return false;
+        media.AMediaFormat_setInt32(params, kFormatKeyVideoBitrate, bitrateBps);
+        media_status_t status = media.AMediaCodec_setParameters(mCodec, params);
+        media.AMediaFormat_delete(params);
+        return status == AMEDIA_OK;
+    }
 
     // Ask the encoder for an IDR at the next opportunity.
     //
@@ -2275,6 +2321,7 @@ private:
     uint64_t mQueuedFrames = 0;
     std::mutex mCodecConfigMutex;
     std::vector<uint8_t> mCodecConfig;
+    std::string mCodecName = "?";
 };
 
 class SinkANativeWindow_Buffer {
@@ -3429,6 +3476,45 @@ extern "C" struct AndroidH264Encoder* android_h264_enc_create(uint32_t width, ui
     auto ctx = std::make_unique<AndroidH264Encoder>();
     ctx->impl = std::move(session);
     return ctx.release();
+}
+
+// An encoder of `mime` with more said about it than android_h264_enc_create says (crosvm's
+// gpu_display/src/video_encoder.rs, EncoderConfig): the same session, so every other
+// android_h264_enc_* call takes what this returns.
+extern "C" struct AndroidH264Encoder* android_video_enc_create(
+        const char* mime, uint32_t width, uint32_t height, int32_t bitrate_bps, int32_t frame_rate,
+        int32_t iframe_interval_secs, int32_t profile, int64_t repeat_previous_frame_after_us,
+        int32_t max_bframes, bool low_latency, bool max_operating_rate) {
+    VideoEncoderOptions options;
+    if (mime && mime[0]) options.mime = mime;
+    options.profile = profile;
+    options.repeatPreviousFrameAfterUs = repeat_previous_frame_after_us;
+    options.maxBFrames = max_bframes;
+    options.lowLatency = low_latency;
+    options.maxOperatingRate = max_operating_rate;
+    auto session = H264EncoderSession::Open(width, height, bitrate_bps, frame_rate,
+                                            iframe_interval_secs, options);
+    if (!session) return nullptr;
+    auto ctx = std::make_unique<AndroidH264Encoder>();
+    ctx->impl = std::move(session);
+    return ctx.release();
+}
+
+// Retargets a running encoder's bitrate. False where the component refused.
+extern "C" bool android_video_enc_set_bitrate(struct AndroidH264Encoder* ctx, int32_t bitrate_bps) {
+    if (!ctx) return false;
+    return ctx->impl->setBitrate(bitrate_bps);
+}
+
+// The component's name, NUL-terminated, into `buf`. Returns its length as written, 0 for none.
+extern "C" size_t android_video_enc_get_name(struct AndroidH264Encoder* ctx, char* buf,
+                                             size_t size) {
+    if (!ctx || !buf || !size) return 0;
+    const std::string& name = ctx->impl->codecName();
+    const size_t copied = std::min(name.size(), size - 1);
+    memcpy(buf, name.data(), copied);
+    buf[copied] = '\0';
+    return copied;
 }
 
 extern "C" void android_h264_enc_destroy(struct AndroidH264Encoder* ctx) {

@@ -54,6 +54,9 @@ public:
     pAMediaFormat_delete AMediaFormat_delete = nullptr;
     pAMediaFormat_setString AMediaFormat_setString = nullptr;
     pAMediaFormat_setInt32 AMediaFormat_setInt32 = nullptr;
+    // Optional: only repeat-previous-frame-after is a 64-bit key, and an encoder without it is
+    // one that does not repeat.
+    pAMediaFormat_setInt64 AMediaFormat_setInt64 = nullptr;
     pAMediaFormat_getBuffer AMediaFormat_getBuffer = nullptr;
     pAMediaFormat_toString AMediaFormat_toString = nullptr;
 

@@ -82,6 +82,19 @@ constexpr const char* kFormatKeyRequestSync = "request-sync";
 constexpr const char* kFormatKeyCsd0 = "csd-0";
 constexpr const char* kFormatKeyCsd1 = "csd-1";
 
+// What an encoder made with android_video_enc_create may be given beyond the keys above
+// (MediaFormat.KEY_PROFILE, KEY_MAX_B_FRAMES, KEY_REPEAT_PREVIOUS_FRAME_AFTER, KEY_PRIORITY,
+// KEY_LATENCY, KEY_OPERATING_RATE), Qualcomm's own low-latency switch, which other components
+// ignore, and MediaCodec.PARAMETER_KEY_VIDEO_BITRATE for a running encoder.
+constexpr const char* kFormatKeyProfile = "profile";
+constexpr const char* kFormatKeyMaxBFrames = "max-bframes";
+constexpr const char* kFormatKeyRepeatPreviousFrameAfter = "repeat-previous-frame-after";
+constexpr const char* kFormatKeyPriority = "priority";
+constexpr const char* kFormatKeyLatency = "latency";
+constexpr const char* kFormatKeyOperatingRate = "operating-rate";
+constexpr const char* kFormatKeyQtiEncLowLatency = "vendor.qti-ext-enc-low-latency.enable";
+constexpr const char* kFormatKeyVideoBitrate = "video-bitrate";
+
 constexpr const char* kMimeTypeAvc = "video/avc";
 
 // MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface: the input comes from a Surface, not from
@@ -110,6 +123,7 @@ using pAMediaFormat_new = AMediaFormat* (*)(void);
 using pAMediaFormat_delete = media_status_t (*)(AMediaFormat*);
 using pAMediaFormat_setString = void (*)(AMediaFormat*, const char* name, const char* value);
 using pAMediaFormat_setInt32 = void (*)(AMediaFormat*, const char* name, int32_t value);
+using pAMediaFormat_setInt64 = void (*)(AMediaFormat*, const char* name, int64_t value);
 using pAMediaFormat_getBuffer = bool (*)(AMediaFormat*, const char* name, void** data,
                                          size_t* size);
 using pAMediaFormat_toString = const char* (*)(AMediaFormat*);
