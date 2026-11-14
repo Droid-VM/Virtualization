@@ -219,8 +219,10 @@ public:
     int64_t importDmabuf(int fd, uint32_t offset, uint32_t stride, uint64_t modifier,
                          bool linearLayoutVerified, uint32_t width, uint32_t height,
                          uint32_t fourcc) {
+        const VkFormat sourceFormat = vkFormatFromDrmFourcc(fourcc);
         if (!mReady || fd < 0 || !width || !height ||
-            static_cast<uint64_t>(stride) < static_cast<uint64_t>(width) * 4) {
+            static_cast<uint64_t>(stride) <
+                    static_cast<uint64_t>(width) * bytesPerPixel(sourceFormat)) {
             return 0;
         }
         if (!linearLayoutVerified) {
@@ -233,7 +235,6 @@ public:
             return 0;
         }
 
-        VkFormat sourceFormat = vkFormatFromDrmFourcc(fourcc);
         if (sourceFormat == VK_FORMAT_UNDEFINED) {
             LOG(ERROR) << "unsupported display DRM fourcc 0x" << std::hex << fourcc;
             return 0;
@@ -625,9 +626,21 @@ private:
             case fourcc('X', 'B', '2', '4'):
             case fourcc('A', 'B', '2', '4'):
                 return VK_FORMAT_R8G8B8A8_UNORM;
+            // Half-float R, G, B, A: a macOS guest's WindowServer composes into 'RGhA' (the
+            // virtio-gpu format crosvm gives DRM_FORMAT_ABGR16161616F). The blit into the 8-bit
+            // destination converts it, values clamped to [0, 1] as the guest's own CPU copy
+            // (DroidVMDisplay's half-to-byte table) does. There is no 16-bit float format with red
+            // and blue exchanged, so blitSourceFourcc cannot swap it for the VNC sink.
+            case fourcc('X', 'B', '4', 'H'):
+            case fourcc('A', 'B', '4', 'H'):
+                return VK_FORMAT_R16G16B16A16_SFLOAT;
             default:
                 return VK_FORMAT_UNDEFINED;
         }
+    }
+
+    static uint32_t bytesPerPixel(VkFormat format) {
+        return format == VK_FORMAT_R16G16B16A16_SFLOAT ? 8 : 4;
     }
 
     static uint32_t firstMemoryType(uint32_t bits) {
@@ -1171,7 +1184,7 @@ private:
         // its natural unpadded width (stride/bpp) so the texture's WIDTH equals its PITCH/bpp; the
         // blit below still samples only the real [0,width) sub-rectangle, so this is a no-op for
         // unpadded widths (stride == width*bpp) and only widens the declared image for padded ones.
-        const uint32_t kBytesPerPixel = 4; // every fourcc vkFormatFromDrmFourcc accepts is 32-bpp
+        const uint32_t kBytesPerPixel = bytesPerPixel(format);
         uint32_t sourceImageWidth = imported.width;
         if ((stride % kBytesPerPixel) == 0 && stride / kBytesPerPixel > sourceImageWidth) {
             sourceImageWidth = stride / kBytesPerPixel;
